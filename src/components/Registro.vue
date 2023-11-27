@@ -1,154 +1,151 @@
 <template>
+  <div>
     <div class="row justify-center">
-    <div class="col-4">
-        <h4>Registro de datos</h4>
-        <i class="fa-regular fa-circle-user" id="img"></i>
-        <img src="" alt="">
-        <div>
-          <q-btn label="Subir foto" type="submit" color="primary"/>
-        </div>
+      <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
+        <q-card-section>
+          <h4>Registro de datos</h4>
+        </q-card-section>
+
+        <q-card-section style="border: none;">
+          <div class="img">
+            <!-- Add your image source here -->
+            <img src="" alt="">
+          </div>
+
+          <q-btn label="Subir foto" color="primary" @click="inception = true" />
+        </q-card-section>
+      </q-card>
+
+      <q-card class="col-4" style="max-width: 900px; border-radius: 0 20px 20px 0;">
+        <q-card-section>
+          <h4>Digite sus datos</h4>
+        </q-card-section>
+
+        <q-card-section style="border: none;">
+          <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+            <q-input filled v-model="nombre" label="Escriba su nombre *" lazy-rules
+              :rules="[val => val && val.length > 0 || 'Este campo es requerido']" />
+
+            <q-input filled v-model="apellido" label="Escriba su apellido *" lazy-rules
+              :rules="[val => val && val.length > 0 || 'Este campo es requerido']" />
+
+            <q-input filled type="number" v-model="documento" label="DIgite el numero de su documento *" lazy-rules
+              :rules="[
+                val => val !== null && val !== '' || 'Please type your age',
+                val => val > 0 && val < 100 || 'Please type a real age'
+              ]" />
+
+            <q-input filled v-model="departamento" label="Digite el departamento de residencia *" lazy-rules
+              :rules="[val => val && val.length > 0 || 'Este campo es requerido']" />
+
+            <q-input filled v-model="ciudad" label="Digite la ciudad de residencia *" lazy-rules
+              :rules="[val => val && val.length > 0 || 'Este campo es requerido']" />
+
+            <q-input filled v-model="direccion" label="Escriba su direccion *" lazy-rules
+              :rules="[val => val && val.length > 0 || 'Este campo es requerido']" />
+
+            <q-input filled type="tel" v-model="telefono" label="DIgite el numero de su documento *" lazy-rules :rules="[
+              val => val !== null && val !== '' || 'Please type your age',
+              val => val > 0 && val < 100 || 'Please type a real age'
+            ]" />
+
+            <q-input filled type="email" v-model="email" label="Digite su email *" lazy-rules :rules="[
+              val => val !== null && val !== '' || 'Please type your age',
+              val => val > 0 && val < 100 || 'Please type a real age'
+            ]" />
+
+            <div>
+              <q-btn label="Crear cuenta" type="submit" color="primary" />
+            </div>
+          </q-form>
+        </q-card-section>
+      </q-card>
     </div>
 
-    <div class="col-4">
-    <h4>Digite sus datos</h4>
-      <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        class="q-gutter-md"
-      >
-        <q-input
-          filled
-          v-model="nombre"
-          label="Escriba su nombre *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
+    <q-dialog v-model="inception">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Foto de perfil</div>
+        </q-card-section>
+          
+        <q-card-section class="q-pt-none">
+          <q-btn label="Tomar foto" color="primary" @click="tomarFoto" />
+          <q-btn label="Subir desde tu equipo" color="primary" @click="subirDesdeEquipo" style="margin-left: 10px;"/>
+        </q-card-section>
 
-        <q-input
-          filled
-          v-model="apellido"
-          label="Escriba su apellido *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-  
-        <q-input
-          filled
-          type="number"
-          v-model="documento"
-          label="DIgite el numero de su documento *"
-          lazy-rules
-          :rules="[
-            val => val !== null && val !== '' || 'Please type your age',
-            val => val > 0 && val < 100 || 'Please type a real age'
-          ]"
-        />
-
-        <q-input
-          filled
-          v-model="departamento"
-          label="Digite el departamento de residencia *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-  
-        <q-input
-          filled
-          v-model="ciudad"
-          label="Digite la ciudad de residencia *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-  
-        <q-input
-          filled
-          v-model="direccion"
-          label="Escriba su direccion *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
-  
-        <q-input
-          filled
-          type="tel"
-          v-model="telefono"
-          label="DIgite el numero de su documento *"
-          lazy-rules
-          :rules="[
-            val => val !== null && val !== '' || 'Please type your age',
-            val => val > 0 && val < 100 || 'Please type a real age'
-          ]"
-        />
-
-        <q-input
-          filled
-          type="email"
-          v-model="email"
-          label="Digite su email *"
-          lazy-rules
-          :rules="[
-            val => val !== null && val !== '' || 'Please type your age',
-            val => val > 0 && val < 100 || 'Please type a real age'
-          ]"
-        />
-  
-        <div>
-          <q-btn label="Crear cuenta" type="submit" color="primary"/>
-        </div>
-      </q-form>
-  
-    </div>
-</div>
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cerrar" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
-  
-  <script>
-  import { useQuasar } from 'quasar'
-  import { ref } from 'vue'
-  
-  export default {
-    setup () {
-      const $q = useQuasar()
-  
-      const name = ref(null)
-      const age = ref(null)
-      const accept = ref(false)
-  
-      return {
-        name,
-        age,
-        accept,
-  
-        onSubmit () {
-          if (accept.value !== true) {
-            $q.notify({
-              color: 'red-5',
-              textColor: 'white',
-              icon: 'warning',
-              message: 'You need to accept the license and terms first'
-            })
-          }
-          else {
-            $q.notify({
-              color: 'green-4',
-              textColor: 'white',
-              icon: 'cloud_done',
-              message: 'Submitted'
-            })
-          }
-        },
-  
-        onReset () {
-          name.value = null
-          age.value = null
-          accept.value = false
+
+<script>
+import { useQuasar } from 'quasar'
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const $q = useQuasar()
+
+    const name = ref(null)
+    const age = ref(null)
+    const accept = ref(false)
+
+    return {
+      name,
+      age,
+      accept,
+      inception: ref(false),
+      secondDialog: ref(false),
+
+      onSubmit() {
+        if (accept.value !== true) {
+          $q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: 'You need to accept the license and terms first'
+          })
         }
+        else {
+          $q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Submitted'
+          })
+        }
+      },
+
+      onReset() {
+        name.value = null
+        age.value = null
+        accept.value = false
       }
     }
+  },
+  methods: {
+
+    tomarFoto() {
+      console.log("Tomar foto");
+    },
+
+    subirDesdeEquipo() {
+      console.log("Subir desde tu equipo");
+    },
   }
-  </script>
-  
+
+}
+</script>
+
 <style>
-  #img {
-    font-size: 200px;
+body {
+  background: rgba(162, 211, 162, 0.774);
+}
+
+#img {
+  font-size: 200px;
 }
 </style>
