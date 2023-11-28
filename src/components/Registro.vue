@@ -7,13 +7,11 @@
         </q-card-section>
 
         <q-card-section style="border: none;">
-          <div class="img">
-            <!-- Add your image source here -->
-            <img src="" alt="">
-          </div>
-
-          <q-btn label="Subir foto" color="primary" @click="inception = true" />
+          <img src="../assets/user.jpg" alt="">
         </q-card-section>
+        <div class="row justify-center" style="margin-top: 100px;">
+          <q-btn label="Subir foto" color="secondary" @click="inception = true" />
+        </div>
       </q-card>
 
       <q-card class="col-4" style="max-width: 900px; border-radius: 0 20px 20px 0;">
@@ -54,8 +52,8 @@
               val => val > 0 && val < 100 || 'Please type a real age'
             ]" />
 
-            <div>
-              <q-btn label="Crear cuenta" type="submit" color="primary" />
+            <div class="row justify-center">
+              <q-btn label="Crear cuenta" type="submit" color="secondary" />
             </div>
           </q-form>
         </q-card-section>
@@ -67,14 +65,14 @@
         <q-card-section>
           <div class="text-h6">Foto de perfil</div>
         </q-card-section>
-          
+
         <q-card-section class="q-pt-none">
-          <q-btn label="Tomar foto" color="primary" @click="tomarFoto" />
-          <q-btn label="Subir desde tu equipo" color="primary" @click="subirDesdeEquipo" style="margin-left: 10px;"/>
+          <q-btn label="Tomar foto" color="secondary" @click="tomarFoto" />
+          <q-btn label="Subir desde tu equipo" color="secondary" @click="subirDesdeEquipo" style="margin-left: 10px;" />
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cerrar" v-close-popup />
+          <q-btn flat label="Cerrar" v-close-popup color="secondary" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -141,11 +139,16 @@ export default {
 </script>
 
 <style>
+*{
+  color: black;
+}
 body {
-  background: rgba(162, 211, 162, 0.774);
+  background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 
-#img {
-  font-size: 200px;
+img {
+  border-radius: 50%;
+  height: 400px;
+  width: 400px;
 }
 </style>
