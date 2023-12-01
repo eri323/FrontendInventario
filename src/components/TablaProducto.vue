@@ -10,7 +10,7 @@
         <h1>Tabla productos</h1>
   
         <div class="b-b">
-          <q-input class="bbuscar" v-model="searchCedula" label="Buscar por Cedula" style="width: 300px" @input="filtrarClientes"/>
+          <q-input class="bbuscar" v-model="searchCedula" label="Buscar por id" style="width: 300px" @input="filtrarClientes"/>
           <q-btn class="btnbuscar" color="primary" label="Buscar" @click="filtrarClientes"/>
         </div>
   
@@ -18,7 +18,7 @@
           <q-btn color="secondary" label="Agregar ➕" @click="agregarCliente()" />
         </div>
   
-        <q-table title="Clientes" :rows="rows" :columns="columns" row-key="name">
+        <q-table title="Productos" :rows="rows" :columns="columns" row-key="name">
           <template v-slot:body-cell-estado="props">
             <q-td :props="props">
               <label for="" v-if="props.row.estado == 1" style="color: green">Activo</label>
