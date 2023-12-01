@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>Ingreso</h1>
+        <h1>Log in</h1>
         <div class="row justify-center  ">
             <q-card class="col-4" style="max-width: 600px; border-radius: 20px 0 0 20px; border: 0;">
                 <q-card-section>
@@ -25,6 +25,8 @@
                             :rules="[
                                 val => val !== null && val !== '' || 'Este campo es requerido'
                             ]" />
+                        
+                            <a class="link" href="">¿Olvidaste tu Contraseña?</a>
 
                         <div class="row justify-center">
                             <q-btn label="Ingresar" type="submit" color="secondary" />
@@ -103,6 +105,10 @@ export default {
 body {
     background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
     height: 100vh;
+}
+
+.link{
+    text-align: center;
 }
 
 h1{
