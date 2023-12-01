@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-    <q-header class="bg-primary text-white">
+    <q-header class="custom-header">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
@@ -41,7 +41,7 @@ import { ref } from 'vue'
 
 
 export default {
-  
+
   setup() {
     const leftDrawerOpen = ref(false)
 
@@ -54,3 +54,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.custom-header {
+  background-color: rgba(0, 173, 0, 1);
+}
+</style>
