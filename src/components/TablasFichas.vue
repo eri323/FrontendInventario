@@ -40,7 +40,6 @@
         <div class="btn">
             <q-btn class="btns2" color="secondary" label="Ayuda" />
             <q-btn class="btns2" color="secondary" label="Ver lotes" />
-            <q-btn class="btns2" color="secondary" label="Guardar cambios" />
         </div>
     </div>
 </template>

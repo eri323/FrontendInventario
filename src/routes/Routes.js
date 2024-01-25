@@ -4,8 +4,8 @@ import RecuContrasena from "../components/RecuContrasena.vue";
 import Registro from "../components/Registro.vue";
 import Perfil from "../components/Perfil.vue";
 import TablaProductos from "../components/TablaProducto.vue";
-import Presupuesto from "../components/Presupuesto.vue";
-
+import TablaFichas from "../components/TablasFichas.vue";
+import RolDeCuenta from "../components/RolDeCuenta.vue";
 
 
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -19,7 +19,8 @@ const routes = [
     { path: "/Registro", component: Registro },
     { path: "/Perfil", component: Perfil },
     { path: "/TablaProductos", component: TablaProductos },
-    { path: "/Presupuesto", component: Presupuesto }
+    { path: "/TablaFichas", component: TablaFichas },
+    { path: "/RolDeCuenta", component: RolDeCuenta }
 
 
 ];
