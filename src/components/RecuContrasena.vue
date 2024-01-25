@@ -2,9 +2,7 @@
     <div class="body">
         <div class="container">
             <h2>Restablecer la Contraseña</h2>
-            <p class="texto1" >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores aliquid, suscipit iste repudiandae
-                placeat, accusamus voluptatum molestiae labore sint aliquam eum rerum, dignissimos deserunt sit ducimus
-                delectus culpa nihil iusto?</p>
+            <p class="texto1" >Por favor, introduce la dirección de correo electrónico o numero de telefono asociada a tu cuenta. Te enviaremos un enlace seguro para restablecer tu contraseña.</p>
             <form>
                 <div class="contenedor_input">
                     <q-input class="input1" filled v-model="text" label="Escriba su numero telefonico o E-mail" />

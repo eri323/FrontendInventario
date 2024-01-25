@@ -25,7 +25,13 @@
                                 <i class="fa-solid fa-file-signature"></i>
                             </template>
                         </q-input>
-                        <a class="link" href="">Olvidaste tu Contraseña</a>
+                        <router-link to="./RecuContrasena" class="link">
+                             <p>¿Olvidaste tu Contraseña?</p>
+                        </router-link>
+                        <router-link to="./Registro" class="link">
+                            <p>Registrate</p>
+                        </router-link>
+                       
                     </q-card-actions>
                 </div>
                 <!-- <div class="containerError" v-if="mostrarError">
@@ -170,8 +176,10 @@ const showDefault = () => {
     padding: 2%;
 }
 .link{
-    color: blue;
+ /*    color: blue; */
     margin: 0;
+    text-decoration: none;
+
 }
 #inputpasswors{
     margin: 0;
@@ -186,7 +194,7 @@ const showDefault = () => {
 
 .texto {
     display: flex;
-    gap: 20px;
+    gap: 5px;
     align-items: center;
     flex-direction: column;
     text-align: center;
@@ -264,7 +272,7 @@ const showDefault = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+  
 }
 #icon{
     font-size: 150px;
