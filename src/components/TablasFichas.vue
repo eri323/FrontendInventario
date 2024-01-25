@@ -4,13 +4,16 @@
         <q-dialog v-model="fixed" class="modal-container">
             <!-- ... (código del modal) ... -->
         </q-dialog>
+      
 
         <!-- Tabla -->
         <div class="container-table" style="height: 90vh; overflow-y: auto; width: 80%">
+
             <h1>Tabla Fichas</h1>
 
+
             <div class="b-b">
-                <q-input class="bbuscar te"  v-model.lazy="searchCedula" label="Buscar por Cedula" style="width: 300px" />
+                <q-input class="bbuscar te" v-model.lazy="searchCedula" label="Buscar por Codigo de ficha " style="width: 300px" />
             </div>
 
             <div class="btn-agregar">
@@ -66,29 +69,45 @@ function filtrarvendedores() {
 </script>
   
 <style scoped>
+* {
+    color: black;
+}
+
+body {
+    background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
+
+}
+
+
+
+
 .btn {
     display: flex;
     border: none;
     gap: 20px;
     cursor: pointer;
- 
 }
 
 
-.btns2{
+.btns2 {
     width: 120px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+
 
 }
 
 
+
 .container {
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items:    flex-end;
+    align-items: flex-end;
     flex-direction: row-reverse;
 }
 
@@ -97,7 +116,8 @@ function filtrarvendedores() {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    margin-right: 250px;
+    margin-right: 300px;
+    margin-bottom: 100px;
 }
 
 .modal-container {
@@ -131,7 +151,7 @@ function filtrarvendedores() {
     flex-direction: row;
     justify-content: center;
     margin-top: 20px;
-    
+
 
 }
 
@@ -142,7 +162,7 @@ function filtrarvendedores() {
     border-radius: 9px;
     position: relative;
     top: 6px;
-   
+
 
 }
 
@@ -177,5 +197,4 @@ function filtrarvendedores() {
 .action-button {
     margin-left: 10px;
 }
-
 </style>
