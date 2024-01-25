@@ -142,6 +142,7 @@ export default {
 *{
   color: black;
 }
+
 body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }

@@ -4,6 +4,7 @@ import RecuContraseña from "../components/RecuContraseña.vue";
 import Registro from "../components/Registro.vue";
 import Perfil from "../components/Perfil.vue";
 import TablaProductos from "../components/TablaProducto.vue";
+import Presupuesto from "../components/Presupuesto.vue";
 
 
 
@@ -17,7 +18,8 @@ const routes = [
     { path: "/RecuContraseña", component: RecuContraseña },
     { path: "/Registro", component: Registro },
     { path: "/Perfil", component: Perfil },
-    { path: "/TablaProductos", component: TablaProductos }
+    { path: "/TablaProductos", component: TablaProductos },
+    { path: "/Presupuesto", component: Presupuesto }
 
 
 ];
