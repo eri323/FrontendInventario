@@ -67,21 +67,6 @@ export default {
     };
     
   },
-  methods: {
-    redirectToPage() {
-      switch (this.selectedOption) {
-        case "cambio-cuenta":
-          window.location.href = "/cambio-cuenta"; 
-          break;
-        case "ver-perfil":
-          window.location.href = ""; 
-          break;
-        case "configuracion":
-          window.location.href = "/configuracion"; 
-          break;
-      }
-    },
-  },
 };
 </script>
 
