@@ -58,7 +58,7 @@
             </q-item-section>
 
             <q-item-section>
-              <router-link to="/Presupuesto">Presupuesto</router-link>
+              <router-link to="/Home">Home</router-link>
             </q-item-section>
           </q-item>
 

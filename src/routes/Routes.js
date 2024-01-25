@@ -6,7 +6,7 @@ import Perfil from "../components/Perfil.vue";
 import TablaProductos from "../components/TablaProducto.vue";
 import TablaFichas from "../components/TablasFichas.vue";
 import RolDeCuenta from "../components/RolDeCuenta.vue";
-import Presupuesto from "../components/Presupuesto.vue";
+import Home from "../components/Home.vue";
 import Menu from "../layout/Menu.vue";
 
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -17,7 +17,7 @@ const routes = [
     path: "/Menu",
     component: Menu,
     children: [
-      { path: "/Presupuesto", component: Presupuesto },
+      { path: "/Home", component: Home },
       { path: "/InfoPerfil", component: InfoPerfil },
       { path: "/RecuContrasena", component: RecuContrasena },
       { path: "/Registro", component: Registro },
