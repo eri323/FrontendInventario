@@ -53,7 +53,9 @@
             ]" />
 
             <div class="row justify-center">
-              <q-btn label="Crear cuenta" type="submit" color="secondary" />
+              <router-link to="./RolDeCuenta">
+                <q-btn label="Crear cuenta" type="submit" color="secondary" />
+              </router-link>
             </div>
           </q-form>
         </q-card-section>
@@ -139,9 +141,10 @@ export default {
 </script>
 
 <style>
-*{
+* {
   color: black;
 }
+
 body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
