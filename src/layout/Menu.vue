@@ -91,7 +91,7 @@
               <router-link to="">Configuracion</router-link>
             </q-item-section>
           </q-item>
-          >
+          
         </q-list>
       </q-scroll-area>
       <q-img
