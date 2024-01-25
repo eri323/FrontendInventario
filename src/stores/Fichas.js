@@ -33,25 +33,25 @@ export const usefichastore = defineStore('ficha', () => {
         }
     };
 
-    const putinactivar = async (id)=>{
+    const putinactivarficha = async (id)=>{
         try {
-            let r = await axios.put(conductor/conductorinac/${id})
+            let r = await axios.put(`ficha/fichainac/${id}`)
             return r
         } catch (error) {
-            console.log(error, "Error al cambiar el estado el conductor");
+            console.log(error, "Error al cambiar el estado el ficha");
         }
     }
-    const putActivarConductor = async (id)=>{
+    const putactivarficha = async (id)=>{
         try {
-            let r = await axios.put(conductor/conductoract/${id})
+            let r = await axios.put(`ficha/fichaact/${id}`)
             return r
         } catch (error) {
-            console.log(error, "Error al cambiar el estado el conductor");
+            console.log(error, "Error al cambiar el estado el ficha");
         }
     }
 
     return{
         ficha,
-        obtenerinfoficha, postinfoficha, puteditarficha, putInactivarConductor, putActivarConductor
+        obtenerinfoficha, postinfoficha, puteditarficha, putinactivarficha, putactivarficha
     };
 });
