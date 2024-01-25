@@ -1,13 +1,10 @@
 <template>
     <div class="container">
-        <!-- Modal -->
-        <q-dialog v-model="fixed" class="modal-container">
-            <!-- ... (código del modal) ... -->
-        </q-dialog>
+   
       
 
         <!-- Tabla -->
-        <div class="container-table" style="height: 90vh; overflow-y: auto; width: 80%">
+        <div class="container-table" style="height: 90vh; width: 80%">
 
             <h1>Tabla Fichas</h1>
 
@@ -45,15 +42,16 @@
 </template>
   
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
-
+import {usefichastore} from "../stores/Fichas.js";
+import { useQuasar } from "quasar";
 const $q = useQuasar();
-
+const fichastore = usefichastore();
 let rows = ref([]);
 let fixed = ref(false);
 let searchCedula = ref("");
-
+let fichas = ref([]);
 // Filtrar Clientes
 function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -65,6 +63,39 @@ function filtrarvendedores() {
         );
     }
 }
+
+const columns = [
+    { name: "CodigoFicha", label: "CodigoFicha", field: "CodigoFicha", sortable: true },
+    { name: "Nombre", label: "Nombre", field: "Nombre" },
+    { name: "NivelFormacion", label: "Nivel de formacion", field: "NivelFormacion" },
+    { name: "FechaInicio", label: "FechaInicio", field: "FechaInicio" },
+    { name: "FechaFin", label: "Fecha De Fin", field: "FechaFin" },
+    {
+        name: "estado",
+        label: "Estado",
+        field: "estado",
+        sortable: true,
+        format: (val) => (val ? "Activo" : "Inactivo"),
+    },
+    {
+        name: "opciones",
+        label: "Opciones",
+        field: (row) => null,
+        sortable: false,
+    },
+];
+async function obtenerInfo() {
+    try {
+        await fichastore.obtenerinfoficha();
+        fichas.value = fichastore.ficha;
+        rows.value = fichastore.ficha;
+    } catch (error) {
+        console.log(error);
+    }
+}
+onMounted(async () => {
+    obtenerInfo();
+});
 </script>
   
 <style scoped>
