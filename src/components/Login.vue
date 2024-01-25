@@ -25,7 +25,7 @@
                                 <i class="fa-solid fa-file-signature"></i>
                             </template>
                         </q-input>
-                        <router-link to="./RecuContraseña" class="link">
+                        <router-link to="./RecuContrasena" class="link">
                              <p>¿Olvidaste tu Contraseña?</p>
                         </router-link>
                         <router-link to="./Registro" class="link">

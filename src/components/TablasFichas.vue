@@ -81,6 +81,7 @@ function filtrarvendedores() {
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 
