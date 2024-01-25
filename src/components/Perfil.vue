@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 style="text-align: center;">Perfil</h1>
+    <h3 style="text-align: center;">Perfil</h3>
     <div class="row justify-center">
       <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
         <q-card-section>

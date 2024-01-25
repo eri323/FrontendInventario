@@ -1,59 +1,4 @@
 <template>
-  <div class="q-pa-md">
-    <q-toolbar class="bg-secondary text-white q-my-md shadow-2">
-      <q-select
-        filled
-        v-model="selectedOption"
-        options-dense
-        label="Rol: User"
-        emit-value
-        map-options
-        :options="selectOptions"
-        behavior="menu"
-        input-debounce="0"
-      >
-        <template v-slot:prepend>
-          <q-icon name="person" />
-        </template>
-
-        <template v-slot:option="slotProps">
-          <q-item class="bg-secondary" :props="slotProps.itemProps">
-            <q-item-section avatar>
-              <q-icon :name="slotProps.opt.icon" />
-            </q-item-section>
-            <q-item-section>{{ slotProps.opt.label }}</q-item-section>
-          </q-item>
-        </template>
-      </q-select>
-
-      <q-space />
-      <q-space />
-
-      <q-btn-toggle
-        v-model="model"
-        flat
-        stretch
-        toggle-color="yellow"
-        :options="options"
-      />
-
-      <div class="q-ml-sm" style="display: flex; gap: 1rem">
-        <q-input
-          filled
-          v-model="search1"
-          dense
-          placeholder=" Busqueda de presupuesto"
-          ><template v-slot:prepend> <q-icon name="search" /> </template
-        ></q-input>
-        <q-input filled v-model="search2" dense placeholder="Busqueda avanzada"
-          ><template v-slot:prepend> <q-icon name="search" /> </template
-        ></q-input>
-      </div>
-
-      <q-space />
-    </q-toolbar>
-  </div>
-
   <div>
     <h3 class="text-center">Presupuesto de programa</h3>
   </div>
@@ -115,25 +60,30 @@ export default {
       model: ref("one"),
       search1: ref(""),
       search2: ref(""),
-      selectedOption: null,
-
-      selectOptions: [
-        {
-          label: "Cambio de cuenta",
-          value: "cambio-cuenta",
-          icon: "account_circle",
-        },
-        { label: "Ver perfil", value: "ver-perfil", icon: "person" },
-        { label: "Configuración", value: "configuracion", icon: "settings" },
-      ],
-
       options: [
         { label: "Descargar datos en pdf", value: "Descargarpdf" },
         { label: "Descargar datos CSV o EXEL", value: "two" },
       ],
     };
+    
+  },
+  methods: {
+    redirectToPage() {
+      switch (this.selectedOption) {
+        case "cambio-cuenta":
+          window.location.href = "/cambio-cuenta"; 
+          break;
+        case "ver-perfil":
+          window.location.href = ""; 
+          break;
+        case "configuracion":
+          window.location.href = "/configuracion"; 
+          break;
+      }
+    },
   },
 };
 </script>
 
 <style scoped></style>
+

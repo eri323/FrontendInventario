@@ -7,26 +7,29 @@ import TablaProductos from "../components/TablaProducto.vue";
 import TablaFichas from "../components/TablasFichas.vue";
 import RolDeCuenta from "../components/RolDeCuenta.vue";
 import Presupuesto from "../components/Presupuesto.vue";
-
+import Menu from "../layout/Menu.vue";
 
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
-    { path: "/", component: Login },
-
-
-    { path: "/InfoPerfil", component: InfoPerfil },
-    { path: "/RecuContrasena", component: RecuContrasena },
-    { path: "/Registro", component: Registro },
-    { path: "/Perfil", component: Perfil },
-    { path: "/TablaProductos", component: TablaProductos },
-    { path: "/TablaFichas", component: TablaFichas },
-    { path: "/RolDeCuenta", component: RolDeCuenta },
-    { path: "/Presupuesto", component: Presupuesto },
-
+  { path: "/", component: Login },
+  {
+    path: "/Menu",
+    component: Menu,
+    children: [
+      { path: "/Presupuesto", component: Presupuesto },
+      { path: "/InfoPerfil", component: InfoPerfil },
+      { path: "/RecuContrasena", component: RecuContrasena },
+      { path: "/Registro", component: Registro },
+      { path: "/Perfil", component: Perfil },
+      { path: "/TablaProductos", component: TablaProductos },
+      { path: "/TablaFichas", component: TablaFichas },
+      { path: "/RolDeCuenta", component: RolDeCuenta },
+    ],
+  },
 ];
 
 export const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
+  history: createWebHashHistory(),
+  routes,
 });
