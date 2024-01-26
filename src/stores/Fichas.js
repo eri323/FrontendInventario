@@ -4,12 +4,12 @@ import { ref } from 'vue';
 
 
 export const usefichastore = defineStore('ficha', () => {
-    const ficha = ref([]);
+    const fichas = ref([]);
 
     const obtenerinfoficha = async () => {
         try {
             let responseficha = await axios.get('ficha/fichabusca');
-            ficha.value = responseficha.data.ficha; 
+            fichas.value = responseficha.data.ficha; 
         } catch (error) {
             throw error
         }
@@ -51,7 +51,7 @@ export const usefichastore = defineStore('ficha', () => {
     }
 
     return{
-        ficha,
+        fichas,
         obtenerinfoficha, postinfoficha, puteditarficha, putinactivarficha, putactivarficha
     };
 });

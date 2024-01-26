@@ -17,7 +17,10 @@ app.use(Quasar, {
         Notify,
     }
 })
-app.use(router)
 
 app.use(pinia)
+
+app.use(router)
+axios.defaults.baseURL ="http://localhost:4000/api/"
+
 app.mount('#app')
