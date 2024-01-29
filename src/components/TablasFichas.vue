@@ -16,47 +16,21 @@
       <div class="btn-agregar">
         <q-btn color="secondary" label="Agregar ➕" @click="agregarCliente()" />
       </div>
-      <div class="q-pa-md">
-        <q-table
-          flat
-          bordered
-          title="Treats"
-          :rows="rows"
-          :columns="columns"
-          row-key="index"
-          virtual-scroll
-          :rows-per-page-options="[0]"
-        >
+      <div class="q-pa-md">q-pa-md
+        <q-table flat bordered title="Treats" :rows="rows" :columns="columns" row-key="index" virtual-scroll
+          :rows-per-page-options="[0]">
           <template v-slot:body-cell-Estado="props">
             <q-td :props="props">
-              <label for="" v-if="props.row.Estado == 1" style="color: green"
-                >Activo</label
-              >
+              <label for="" v-if="props.row.Estado == 1" style="color: green">Activo</label>
               <label for="" v-else style="color: red">Inactivo</label>
             </q-td>
           </template>
           <template v-slot:body-cell-opciones="props">
-            <q-td :props="props" class="botones">
-              <q-btn
-                color="white"
-                text-color="black"
-                label="🖋️"
-                @click="editarCliente(props.row._id)"
-              />
-              <q-btn
-                color="white"
-                text-color="black"
-                label="❌"
-                @click="inactivarCliente(props.row._id)"
-                v-if="props.row.estado == 1"
-              />
-              <q-btn
-                color="white"
-                text-color="black"
-                label="✅"
-                @click="activarCliente(props.row._id)"
-                v-else
-              />
+            <q-td :props="props">
+              <q-btn color="white" text-color="black" label="🖋️" @click="editarCliente(props.row._id)" />
+              <q-btn color="white" text-color="black" label="❌" @click="inactivarficha(props.row._id)"
+                v-if="props.row.Estado == 1" />
+              <q-btn color="white" text-color="black" label="✅" @click="activarficha(props.row._id)" v-else />
             </q-td>
           </template>
         </q-table>
@@ -73,24 +47,22 @@
 import { ref } from "vue";
 import { onMounted } from "vue";
 import { useQuasar } from "quasar";
+import { format } from "date-fns";
 import { usefichastore } from "../stores/Fichas.js";
-/* const $q = useQuasar(); */
+
 const fichastore = usefichastore();
+
+const fichas = (usefichastore);
+const $q = useQuasar();
+let notification;
+
+
 let rows = ref([]);
-/* let fixed = ref(false); */
-let searchCedula = ref("");
 let ficha = ref([]);
-// Filtrar Clientes
-/* function filtrarvendedores() {
-    if (searchCedula.value.trim() === "") {
-        rows.value = vendedores.value;
-    } else {
-        const searchTerm = searchCedula.value.trim().toLowerCase();
-        rows.value = vendedores.value.filter((cliente) =>
-            cliente.cedula.toString().toLowerCase().includes(searchTerm)
-        );
-    }
-} */
+
+
+
+
 
 const columns = [
   {
@@ -105,8 +77,9 @@ const columns = [
     label: "Nivel de formacion",
     field: "NivelFormacion",
   },
-  { name: "FechaInicio", label: "Fecha De Inicio", field: "FechaInicio" },
-  { name: "FechaFin", label: "Fecha De Fin", field: "FechaFin" },
+
+  { name: "FechaInicio", label: "Fecha De Inicio", field: "FechaInicio", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center" },
+  { name: "FechaFin", label: "Fecha De Fin", field: "FechaFin", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center" },
   {
     name: "Estado",
     label: "Estado",
@@ -131,9 +104,106 @@ async function obtenerInfo() {
     console.log(error);
   }
 }
+
+
 onMounted(async () => {
   obtenerInfo();
 });
+
+
+// Inactivar ficha
+async function inactivarficha(id) {
+  try {
+    showDefault();
+    await fichastore.putinactivarficha(id);
+    cancelShow();
+    greatMessage.value = "ficha Inactivado";
+    showGreat();
+    obtenerInfo();
+  } catch (error) {
+    cancelShow();
+    badMessage.value = error.response.data.error.errors[0].msg;
+    showBad();
+  }
+}
+
+// Activar ficha
+async function activarficha(id) {
+  try {
+    showDefault();
+    await fichastore.putactivarficha(id);
+    cancelShow();
+    greatMessage.value = "ficha Activado";
+    showGreat();
+    obtenerInfo();
+  } catch (error) {
+    cancelShow();
+    badMessage.value = error.response.data.error.errors[0].msg;
+    showBad();
+  }
+}
+
+let greatMessage = ref("");
+let badMessage = ref("");
+
+// Notificacion Buena
+const showGreat = () => {
+  notification = $q.notify({
+    spinner: false,
+    message: greatMessage,
+    timeout: 2000,
+    type: "positive",
+  });
+};
+
+// Notificacion Mala 
+const showBad = () => {
+  notification = $q.notify({
+    spinner: false,
+    message: badMessage,
+    timeout: 2000,
+    type: "negative",
+  });
+};
+
+// Notificacion de Carga
+const showDefault = () => {
+  notification = $q.notify({
+    spinner: true,
+    message: "Please wait...",
+    timeout: 0,
+  });
+};
+
+// Cancelar Notificacion
+const cancelShow = () => {
+  if (notification) {
+    notification();
+  };
+};
+
+
+
+
+
+
+
+/* let fixed = ref(false); */
+// let searchCedula = ref("");
+
+
+// Filtrar Clientes
+/* function filtrarvendedores() {
+    if (searchCedula.value.trim() === "") {
+        rows.value = vendedores.value;
+    } else {
+        const searchTerm = searchCedula.value.trim().toLowerCase();
+        rows.value = vendedores.value.filter((cliente) =>
+            cliente.cedula.toString().toLowerCase().includes(searchTerm)
+        );
+    }
+} */
+
 </script>
 
 <style scoped>
@@ -143,6 +213,11 @@ onMounted(async () => {
 
 body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
+}
+
+
+.q-pa-md{
+  border-radius: 50px;
 }
 
 .btn {
