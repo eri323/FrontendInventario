@@ -2,7 +2,7 @@
   <div class="container">
     <!-- Tabla -->
     <div class="container-table" style="height: 90vh; width: 80%">
-      <h1>Tabla Fichas</h1>
+
 
       <!-- <div class="b-b">
         <q-input
@@ -16,9 +16,9 @@
       <div class="btn-agregar">
         <q-btn color="secondary" label="Agregar ➕" @click="agregarCliente()" />
       </div>
-      <div class="q-pa-md">q-pa-md
-        <q-table flat bordered title="Treats" :rows="rows" :columns="columns" row-key="index" virtual-scroll
-          :rows-per-page-options="[0]">
+      <div class="q-pa-md">
+        <q-table class="tabla" flat bordered title="Tabla fichas" :rows="rows" :columns="columns" row-key="index"
+          virtual-scroll :rows-per-page-options="[0]">
           <template v-slot:body-cell-Estado="props">
             <q-td :props="props">
               <label for="" v-if="props.row.Estado == 1" style="color: green">Activo</label>
@@ -26,7 +26,7 @@
             </q-td>
           </template>
           <template v-slot:body-cell-opciones="props">
-            <q-td :props="props">
+            <q-td  class="opciones" :props="props">
               <q-btn color="white" text-color="black" label="🖋️" @click="editarCliente(props.row._id)" />
               <q-btn color="white" text-color="black" label="❌" @click="inactivarficha(props.row._id)"
                 v-if="props.row.Estado == 1" />
@@ -70,28 +70,69 @@ const columns = [
     label: "Codigo De Ficha",
     field: "CodigoFicha",
     sortable: true,
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px',
+    },
+    align: "center",
   },
-  { name: "Nombre", label: "Nombre", field: "Nombre" },
+  {
+    name: "Nombre", label: "Nombre", field: "Nombre",
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px'
+    },
+    align: "center",
+  },
   {
     name: "NivelFormacion",
     label: "Nivel de formacion",
     field: "NivelFormacion",
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px'
+    },
+    align: "center",
   },
 
-  { name: "FechaInicio", label: "Fecha De Inicio", field: "FechaInicio", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center" },
-  { name: "FechaFin", label: "Fecha De Fin", field: "FechaFin", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center" },
+  {
+    name: "FechaInicio", label: "Fecha De Inicio", field: "FechaInicio", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center",
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px'
+    },
+    align: "center",
+  },
+  {
+    name: "FechaFin", label: "Fecha De Fin", field: "FechaFin", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center",
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px'
+    },
+    align: "center",
+  },
   {
     name: "Estado",
     label: "Estado",
     field: "Estado",
     sortable: true,
     format: (val) => (val ? "Activo" : "Inactivo"),
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px'
+    },
+    align: "center",
   },
   {
     name: "opciones",
     label: "Opciones",
     field: (row) => null,
     sortable: false,
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '15px'
+    },
+    align: "center",
   },
 ];
 async function obtenerInfo() {
@@ -216,14 +257,18 @@ body {
 }
 
 
-.q-pa-md{
-  border-radius: 50px;
+.opciones{display: flex;
+  gap: 6px;
+}
+
+.tabla {
+  border-radius: 30px;
+
 }
 
 .btn {
   display: flex;
   border: none;
-  gap: 20px;
   cursor: pointer;
 }
 
