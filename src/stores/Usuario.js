@@ -55,7 +55,7 @@ export const useusuariostore = defineStore('usuario', () => {
         try {
 
             let r = await axios.post(`usuario/login`, data)
-            console.log(r);
+            
             usuarios.value = r.data.usuario
             return r.status
         } catch (error) {

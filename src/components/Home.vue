@@ -27,7 +27,7 @@
           />
         </q-card-section>
         <q-card-section>
-          <div class="text-h6 text-center">Senova</div>
+          <div class="text-h6 text-center">"Senova"</div>
         </q-card-section>
       </q-card>
 
@@ -70,5 +70,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
 

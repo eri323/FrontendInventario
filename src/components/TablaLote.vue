@@ -2,22 +2,13 @@
     <div class="container">
         <!-- Tabla -->
         <div class="container-table" style="height: 90vh; width: 80%">
-            <h1>Lotes</h1>
 
-            <!-- <div class="b-b">
-        <q-input
-          class="bbuscar te"
-          v-model.lazy="searchCedula"
-          label="Buscar por Codigo de ficha "
-          style="width: 300px"
-        />
-      </div> -->
 
             <div class="btn-agregar">
                 <q-btn color="secondary" label="Agregar ➕" @click="agregarLote()" />
             </div>
             <div class="q-pa-md">
-                <q-table flat bordered title="Treats" :rows="rows" :columns="columns" row-key="index" virtual-scroll
+                <q-table flat bordered title="Lotes"  class="tabla" :rows="rows" :columns="columns" row-key="index" virtual-scroll
                     :rows-per-page-options="[0]">
                     <template v-slot:body-cell-Estado="props">
                         <q-td :props="props">
@@ -67,20 +58,44 @@ let lotes = ref([]);
 } */
 
 const columns = [
-    { name: "Nombre", label: "Nombre", field: "Nombre" },
-    { name: "Presupuesto", label: "Presupuesto", field: "Presupuesto" },
+    {
+        name: "Nombre", label: "Nombre", field: "Nombre",
+        sortable: true,
+        headerStyle: {
+            fontWeight: 'bold',
+            fontSize: '15px',
+        },
+        align: "center",
+    },
+    { name: "Presupuesto", label: "Presupuesto", field: "Presupuesto" ,
+        headerStyle: {
+            fontWeight: 'bold',
+            fontSize: '15px'
+        },
+        align: "center",
+    },
     {
         name: "Estado",
         label: "Estado",
         field: "Estado",
         sortable: true,
         format: (val) => (val ? "Activo" : "Inactivo"),
+        headerStyle: {
+            fontWeight: 'bold',
+            fontSize: '15px'
+        },
+        align: "center",
     },
     {
         name: "opciones",
         label: "Opciones",
         field: (row) => null,
         sortable: false,
+         headerStyle: {
+            fontWeight: 'bold',
+            fontSize: '15px'
+        },
+        align: "center",
     },
 ];
 async function obtenerInfo() {
@@ -156,7 +171,10 @@ body {
 .botones button {
     margin: 2px;
 }
+.tabla {
+  border-radius: 30px;
 
+}
 .btn-agregar {
     width: 100%;
     margin-bottom: 5px;

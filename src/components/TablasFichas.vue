@@ -28,9 +28,9 @@
           <template v-slot:body-cell-opciones="props">
             <q-td  class="opciones" :props="props">
               <q-btn color="white" text-color="black" label="🖋️" @click="editarCliente(props.row._id)" />
-              <q-btn color="white" text-color="black" label="❌" @click="inactivarficha(props.row._id)"
-                v-if="props.row.Estado == 1" />
-              <q-btn color="white" text-color="black" label="✅" @click="activarficha(props.row._id)" v-else />
+              <q-btn class="btninac"  @click="inactivarficha(props.row._id)"
+                v-if="props.row.Estado == 1" ><i class="fa-solid fa-x fa-beat" style="color: #ff0000;"></i></q-btn>
+              <q-btn class="btnact" @click="activarficha(props.row._id)" v-else > <i class="fa-solid fa-check fa-beat" style="color: #006110;"></i></q-btn>
             </q-td>
           </template>
         </q-table>
@@ -260,7 +260,16 @@ body {
 .opciones{display: flex;
   gap: 6px;
 }
-
+.btninac{
+    background-color: rgb(255, 186, 186);
+    font-size: 13px;
+    width: 45px;
+}
+.btnact{
+    background-color: rgb(167, 255, 167);
+    font-size: 13px;
+    width: 45px;
+}
 .tabla {
   border-radius: 30px;
 

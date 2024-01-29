@@ -14,13 +14,13 @@
                 </div>
                 <div class="containerData" >
                     <q-card-actions class="texto">
-                        <q-input color="green" v-model="data.Nombre" label="Nombre">
+                        <q-input color="green" v-model="data.Identificacion" label="Identificacion">
                             <template v-slot:prepend>
                                 <i class="fa-solid fa-user-lock"></i>
                             </template>
                         </q-input>
 
-                        <q-input color="green" v-model="data.password" label="Contraseña" type="password" id="inputpasswors"> 
+                        <q-input color="green" v-model="data.Contraseña" label="Contraseña" type="password" id="inputpasswors"> 
                             <template v-slot:prepend>
                                 <i class="fa-solid fa-file-signature"></i>
                             </template>
@@ -49,28 +49,29 @@
 </template>
 <script setup>
 import { ref } from "vue";
-
+import { useusuariostore } from "../stores/Usuario.js";
 import { useRouter } from "vue-router";
 const data = ref({
-    Nombre: "",
-    password: "",
+    Identificacion: "",
+    Contraseña: "",
 }); 
-/* let mostrarError = ref(false);
+ let mostrarError = ref(false);
 let MostrarData = ref(true);
 let error2 = ref(false);
 let error = ref("melo");
 let msj = ref("");
+let usuariostore = useusuariostore()
 const router = useRouter();
 
-const data = ref({
+/* const data = ref({
     Nombre: "",
-    password: "",
-}); 
+    Contraseña: "",
+});  */
 
 
-/* async function Login() {
+ async function Login() {
 
-    if (data.value.Nombre == "" && data.value.password == "") {
+    if (data.value.Identificacion == "" && data.value.Contraseña == "") {
         mostrarError.value = true;
         setTimeout(() => {
             mostrarError.value = false;
@@ -79,7 +80,7 @@ const data = ref({
         return
     } else {
         try {
-            const res = await useVendedor.login(data.value);
+            const res = await usuariostore.login(data.value);
             console.log(res);
             if (res != 200) {
                 error2.value = true;
@@ -98,12 +99,12 @@ const data = ref({
     }
     console.log(data.value);
 
-} */
+} 
 
 
 
 
-/* function validar(){
+ function validar(){
   let validation = true;
   if(data.Nombre.value.trim() == ""){
     error.value="paila"
@@ -111,7 +112,7 @@ const data = ref({
   }
  
   return validation
-} */
+} 
 
 let greatMessage = ref("");
 let badMessage = ref("");
