@@ -9,7 +9,8 @@ export const useproductostore = defineStore('producto', () => {
     const obtenerinfoproducto = async () => {
         try {
             let responseproducto = await axios.get('producto/productobusca');
-            producto.value = responseproducto.data.producto;
+            console.log(responseproducto);
+            producto.value = responseproducto.data.productos;
         } catch (error) {
             throw error
         }

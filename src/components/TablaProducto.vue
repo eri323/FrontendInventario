@@ -1,84 +1,157 @@
 <template>
-    <div class="container">
-      <!-- Modal -->
-      <q-dialog v-model="fixed" class="modal-container">
-        <!-- ... (código del modal) ... -->
-      </q-dialog>
-  
-      <!-- Tabla -->
-      <div class="container-table" style="height: 90vh; overflow-y: auto; width: 80%">
-        <h1>Tabla productos</h1>
-  
-        <div class="b-b">
-          <q-input class="bbuscar" v-model="searchCedula" label="Buscar por id" style="width: 300px" @input="filtrarClientes"/>
-          <q-btn class="btnbuscar" color="primary" label="Buscar" @click="filtrarClientes"/>
-        </div>
-  
-        <div class="btn-agregar">
-          <q-btn color="secondary" label="Agregar ➕" @click="agregarCliente()" />
-        </div>
-  
-        <q-table title="Productos" :rows="rows" :columns="columns" row-key="name">
-          <template v-slot:body-cell-estado="props">
+  <div class="container">
+    <!-- Tabla -->
+    <div class="container-table" style="height: 90vh; width: 80%">
+      <h1>Productos</h1>
+
+      <!-- <div class="b-b">
+        <q-input
+          class="bbuscar te"
+          v-model.lazy="searchCedula"
+          label="Buscar por Codigo de ficha "
+          style="width: 300px"
+        />
+      </div> -->
+
+      <div class="btn-agregar">
+        <q-btn class="btnagre" label="Agregar ➕" @click="agregarProducto()" />
+      </div>
+      <div class="q-pa-md">
+        <q-table flat bordered title="Treats" :rows="rows" :columns="columns" row-key="index" virtual-scroll
+          :rows-per-page-options="[0]">
+          <template v-slot:body-cell-Estado="props">
             <q-td :props="props">
-              <label for="" v-if="props.row.estado == 1" style="color: green">Activo</label>
+              <label for="" v-if="props.row.Estado == 1" style="color: green">Activo</label>
               <label for="" v-else style="color: red">Inactivo</label>
             </q-td>
           </template>
           <template v-slot:body-cell-opciones="props">
             <q-td :props="props" class="botones">
-              <q-btn color="white" text-color="black" label="🖋️" @click="editarCliente(props.row._id)"/>
-              <q-btn color="white" text-color="black" label="❌" @click="inactivarCliente(props.row._id)" v-if="props.row.estado == 1"/>
-              <q-btn color="white" text-color="black" label="✅" @click="activarCliente(props.row._id)" v-else />
+              <q-btn color="white" text-color="black" label="🖋️" @click="editarProducto(props.row._id)" />
+              <q-btn color="white" text-color="black" label="❌" @click="inactivarProducto(props.row._id)"
+                v-if="props.row.estado == 1" />
+              <q-btn color="white" text-color="black" label="✅" @click="activarProducto(props.row._id)" v-else />
             </q-td>
           </template>
         </q-table>
       </div>
+      <div class="btn">
+        <q-btn class="btns2"  label="Ayuda" />
+        <q-btn class="btns2"  label="Ver lotes" />
+      </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref } from "vue";
-  import { useQuasar } from "quasar";
-  
-  const $q = useQuasar();
-  
-  let rows = ref([]);
-  let fixed = ref(false);
-  let text = ref("");
-  let cedula = ref();
-  let nombre = ref();
-  let telefono = ref("");
-  let cambio = ref(0);
-  let searchCedula = ref("");
-  
-  // Filtrar Clientes
-  function filtrarClientes() {
+    
+  </div>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { onMounted } from "vue";
+import { useQuasar } from "quasar";
+import { useproductostore } from "../stores/Producto.js";
+/* const $q = useQuasar(); */
+const productostore = useproductostore();
+let rows = ref([]);
+/* let fixed = ref(false); */
+let searchCedula = ref("");
+let productos = ref([]);
+// Filtrar lotes
+/* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
-      rows.value = clientes.value; 
+        rows.value = vendedores.value;
     } else {
-      rows.value = clientes.value.filter((cliente) =>cliente.cedula.toString().includes(searchCedula.value.toString()));
+        const searchTerm = searchCedula.value.trim().toLowerCase();
+        rows.value = vendedores.value.filter((cliente) =>
+            cliente.cedula.toString().toLowerCase().includes(searchTerm)
+        );
     }
+} */
+
+const columns = [
+  { name: "Codigo", label: "Codigo", field: "Codigo" },
+  { name: "Nombre", label: "Nombre", field: "Nombre" },
+  { name: "Descripcion", label: "Descripcion", field: "Descripcion" },
+  { name: "UnidadMedida", label: "Unidad de medida", field: "UnidadMedida" },
+  { name: "PrecioUnitario", label: "Precio unitario", field: "PrecioUnitario" },
+  { name: "Iva", label: "Iva", field: "Iva" },
+  { name: "Tipo", label: "Tipo", field: "Tipo" },
+  {
+    name: "Estado",
+    label: "Estado",
+    field: "Estado",
+    sortable: true,
+    format: (val) => (val ? "Activo" : "Inactivo"),
+  },
+  {
+    name: "opciones",
+    label: "Opciones",
+    field: (row) => null,
+    sortable: false,
+  },
+];
+async function obtenerInfo() {
+  try {
+    const response = await productostore.obtenerinfoproducto();
+    console.log(response);
+    productos.value = productostore.producto;
+    rows.value = productostore.producto;
+  } catch (error) {
+    console.log(error);
   }
-
-  </script>
-  
-  <style scoped>
-
-.container {
-  display: flex;
-  justify-content: center;
 }
-.modal-container {
+onMounted(async () => {
+  obtenerInfo();
+});
+</script>
+
+<style scoped>
+* {
+  color: black;
+}
+
+body {
+  background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
+}
+
+.btn {
+  display: flex;
+  border: none;
+  gap: 20px;
+  cursor: pointer;
+ 
+}
+
+.btns2 {
+  background-color: #07F769;
+  width: 120px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  color: black;
 }
+
+.container {
+  
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+}
+
 .container-table {
   display: flex;
   justify-content: center;
   text-align: center;
   flex-direction: column;
+  
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container-table h1 {
@@ -87,12 +160,11 @@
   margin: 0;
 }
 
-.modal-content {
-  width: 400px;
-}
-
-.botones button {
-  margin: 2px;
+.botones  {
+  display: flex;
+  gap: 25px;
+  text-align: center;
+  justify-content: right;
 }
 
 .btn-agregar {
@@ -101,58 +173,8 @@
   display: flex;
   justify-content: flex-end;
 }
-
-.b-b {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 5px;
+.btnagre{
+   background-color: #07F769;
 }
 
-.btnbuscar {
-  width: 170px;
-  height: 53px;
-  position: relative;
-  top: 7px;
-}
-.bbuscar {
-  width: 170px;
-  font-size: 18px;
-  background-color: rgba(5, 177, 245, 0.204);
-  border-radius: 5px;
-  position: relative;
-  top: 6px;
-}
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #3498db;
-  color: #fff;
-}
-
-.close-button {
-  color: #fff;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.modal-input {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.modal-footer {
-  padding: 10px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.action-button {
-  margin-left: 10px;
-}
 </style>

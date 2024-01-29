@@ -9,7 +9,8 @@ export const useusuariostore = defineStore('usuario', () => {
     const obtenerinfousuario = async () => {
         try {
             let responseusuario = await axios.get('usuario/usuariobusca');
-            usuario.value = responseusuario.data.usuario;
+            console.log(responseusuario);
+            usuario.value = responseusuario.data.usuarios;
         } catch (error) {
             throw error
         }

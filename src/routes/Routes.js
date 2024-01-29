@@ -5,6 +5,9 @@ import Registro from "../components/Registro.vue";
 import Perfil from "../components/Perfil.vue";
 import TablaProductos from "../components/TablaProducto.vue";
 import TablaFichas from "../components/TablasFichas.vue";
+import TablaArea from "../components/TablaArea.vue";
+import TablaLotes from "../components/TablaLote.vue";
+import TablaUsuarios from "../components/TablaUsuarios.vue";
 import RolDeCuenta from "../components/RolDeCuenta.vue";
 import Home from "../components/Home.vue";
 import Menu from "../layout/Menu.vue";
@@ -24,6 +27,9 @@ const routes = [
       { path: "/Perfil", component: Perfil },
       { path: "/TablaProductos", component: TablaProductos },
       { path: "/TablaFichas", component: TablaFichas },
+      { path: "/TablaArea", component: TablaArea },
+      { path: "/TablaUsuarios", component: TablaUsuarios },
+      { path: "/TablaLotes", component: TablaLotes },
       { path: "/RolDeCuenta", component: RolDeCuenta },
     ],
   },

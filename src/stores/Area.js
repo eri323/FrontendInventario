@@ -9,7 +9,8 @@ export const useareastore = defineStore('area', () => {
     const obtenerinfoarea = async () => {
         try {
             let responsearea = await axios.get('area/areabusca');
-            area.value = responsearea.data.area; 
+            console.log(responsearea);
+            area.value = responsearea.data.areaList; 
         } catch (error) {
             throw error
         }
