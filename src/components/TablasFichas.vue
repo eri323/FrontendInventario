@@ -123,7 +123,8 @@ const columns = [
 ];
 async function obtenerInfo() {
   try {
-    await fichastore.obtenerinfoficha();
+    const response = await fichastore.obtenerinfoficha();
+    console.log(response);
     ficha.value = fichastore.fichas;
     rows.value = fichastore.fichas;
   } catch (error) {
