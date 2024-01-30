@@ -51,47 +51,82 @@
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay behavior="mobile">
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
-        <q-list padding>
-          <q-item active clickable v-ripple>
+        <q-list padding class="list">
+          <div class="div">
             <q-item-section avatar>
-              <q-icon name="home" />
+              <i class="fa-solid fa-house"></i>
             </q-item-section>
 
             <q-item-section>
               <router-link to="/Home">Home</router-link>
             </q-item-section>
-          </q-item>
+          </div>
 
-          <q-item active clickable v-ripple>
+          <div>
             <q-item-section avatar>
-              <q-icon name="account_circle" />
+              <i class="fa-solid fa-users-line"></i>
             </q-item-section>
 
             <q-item-section>
-              <router-link to="">Cambio de cuenta</router-link>
+              <router-link to="./TablaFichas">Fichas</router-link>
             </q-item-section>
-          </q-item>
-
-          <q-item active clickable v-ripple>
+          </div>
+          <div>
             <q-item-section avatar>
-              <q-icon name="person" />
+              <i class="fa-solid fa-boxes-packing"></i>
+            </q-item-section>
+
+            <q-item-section>
+              <router-link to="./TablaProductos">Productos</router-link>
+            </q-item-section>
+          </div>
+          <div>
+            <q-item-section avatar>
+              <i class="fa-solid fa-address-card"></i>
+            </q-item-section>
+
+            <q-item-section>
+              <router-link to="./TablaUsuarios">Usuarios</router-link>
+            </q-item-section>
+          </div>
+          <div>
+            <q-item-section avatar>
+              <i class="fa-solid fa-network-wired"></i>
+            </q-item-section>
+
+            <q-item-section>
+              <router-link to="./TablaArea">Areas</router-link>
+            </q-item-section>
+          </div>
+          <div>
+            <q-item-section avatar>
+              <i class="fa-solid fa-layer-group"></i>
+            </q-item-section>
+
+            <q-item-section>
+              <router-link to="./TablaLotes">Lotes</router-link>
+            </q-item-section>
+          </div>
+
+          <div>
+            <q-item-section avatar>
+              <i class="fa-solid fa-user"></i>
             </q-item-section>
 
             <q-item-section>
               <router-link to="/Perfil">Ver perfil</router-link>
             </q-item-section>
-          </q-item>
+          </div>
 
-          <q-item active clickable v-ripple>
+          <div>
             <q-item-section avatar>
-              <q-icon name="settings" />
+              <i class="fa-solid fa-gear"></i>
             </q-item-section>
 
             <q-item-section>
               <router-link to="">Configuracion</router-link>
             </q-item-section>
-          </q-item>
-          
+          </div>
         </q-list>
       </q-scroll-area>
       <q-img
@@ -113,7 +148,7 @@
       <router-view />
     </q-page-container>
 
-  <!--   <q-footer class="bg-grey-8 text-white">
+    <!--   <q-footer class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title> </q-toolbar-title>
       </q-toolbar>
@@ -138,8 +173,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .custom-header {
   background-color: rgba(0, 173, 0, 1);
+}
+.list div {
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  color: black;
+}
+.div:hover{
+background-color: gray;
+}
+.list div a{
+  text-decoration: none;
 }
 </style>

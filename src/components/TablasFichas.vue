@@ -273,7 +273,7 @@ const columns = [
   {
   name: "Area_id",
   label: "Area",
-  field: (row) => row.Area_Id?.Nombre || "Sin nombre",
+  field: (row) => `${row.Area_Id.Nombre}`,
   align: "center",
   headerStyle: {
     fontWeight: "bold",
