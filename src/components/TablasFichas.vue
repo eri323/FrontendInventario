@@ -13,47 +13,23 @@
 
       <div class="container2">
         <div class="q-pa-md">
-          <q-table
-            class="tabla"
-            flat
-            bordered
-            title="Fichas"
-            :rows="rows"
-            :columns="columns"
-            row-key="index"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-          >
+          <q-table class="tabla" flat bordered title="Fichas" :rows="rows" :columns="columns" row-key="index"
+            virtual-scroll :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label
-                  for=""
-                  v-if="props.row.Estado == 1"
-                  style="color: green; font-weight: bold"
-                  >Activo</label
-                >
-                <label for="" v-else style="color: red; font-weight: bold"
-                  >Inactivo</label
-                >
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
               <q-td class="opciones" :props="props">
-                <button class="btnedit" @click="editarCliente(props.row._id)">
+                <button class="btnedit" @click="editarficha(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button
-                  class="btninac"
-                  @click="inactivarficha(props.row._id)"
-                  v-if="props.row.Estado == 1"
-                >
+                <button class="btninac" @click="inactivarficha(props.row._id)" v-if="props.row.Estado == 1">
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button
-                  class="btnact"
-                  @click="activarficha(props.row._id)"
-                  v-else
-                >
+                <button class="btnact" @click="activarficha(props.row._id)" v-else>
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
@@ -62,81 +38,44 @@
         </div>
         <div class="form">
           <div class="q-pa-md" style="max-width: 400px">
-            <h5 style="margin:0; padding:0px 0px 18px 0px">Agregar Ficha</h5>
+            <h5 style="margin:0; padding:0px 0px 18px 0px">{{text}}</h5>
             <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input
-                filled
-                v-model="codigodeficha"
-                label="Codigo de ficha"
-                type="number"
-                lazy-rules
-                :rules="[
-                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-                ]"
-              />
+              <q-input filled v-model="codigodeficha" label="Codigo de ficha" type="number" lazy-rules :rules="[
+                (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+              ]" />
 
-              <q-input
-                filled
-                v-model="nombre"
-                label="Nombre de la ficha *"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa el nombre de la ficha',
-                ]"
-              />
-              <q-input
-                filled
-                v-model="niveldeformacion"
-                label="NIvel de formacion *"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa el nivel de formacion de la ficha',
-                ]"
-              />
-              <q-input
-                filled
-                v-model="fechainicio"
-                label="Fecha de inicio *"
-                type="date"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa la fecha de inicio de la ficha ',
-                ]"
-              />
-              <q-input
-                filled
-                v-model="fechafin"
-                label="Fecha fin *"
-                type="date"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa la fecha de finalizacion de la ficha ',
-                ]"
-              />
-              <q-select
-                filled
-                v-model="area_id"
-                label="Area *"
-                :options="options"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor seleccione un area ', 
-                ]"
-              />
+              <q-input filled v-model="nombre" label="Nombre de la ficha *" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa el nombre de la ficha',
+              ]" />
+              <q-input filled v-model="niveldeformacion" label="NIvel de formacion *" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa el nivel de formacion de la ficha',
+              ]" />
+              <q-input filled v-model="fechainicio" label="Fecha de inicio *" type="date" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa la fecha de inicio de la ficha ',
+              ]" />
+              <q-input filled v-model="fechafin" label="Fecha fin *" type="date" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa la fecha de finalizacion de la ficha ',
+              ]" />
+              <q-select filled v-model="area_id" label="Area *" :options="options" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor seleccione un area ',
+              ]" />
 
               <div class="btn-agregar">
-                <button class="btnagregar" @click="agregarficha()">
+                <button class="btnagregar" @click="agregarficha()" v-if="btnagregar"> 
                   Agregar
+                </button>
+                <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
+                  Aceptar
                 </button>
               </div>
               <!--  <div>
@@ -167,7 +106,7 @@ import { onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { format } from "date-fns";
 import { usefichastore } from "../stores/Fichas.js";
-import {useareastore} from "../stores/Area.js"
+import { useareastore } from "../stores/Area.js"
 const fichastore = usefichastore();
 const areastore = useareastore();
 const options = ref([]);
@@ -179,8 +118,9 @@ let niveldeformacion = ref("")
 let fechainicio = ref("")
 let fechafin = ref("")
 let area_id = ref("")
-
-
+let text = ref("Agregar Ficha")
+let btnaceptar = ref(false)
+let btnagregar = ref(true)
 /* const state = reactive({
   name: null,
   age: null,
@@ -212,6 +152,7 @@ const onReset = () => {
 }; */
 let rows = ref([]);
 let ficha = ref([]);
+let xd = ref(0)
 let Area_id = ref("");
 const columns = [
   {
@@ -271,15 +212,15 @@ const columns = [
     align: "center",
   },
   {
-  name: "Area_id",
-  label: "Area",
-  field: (row) => `${row.Area_Id.Nombre}`,
-  align: "center",
-  headerStyle: {
-    fontWeight: "bold",
-    fontSize: "15px",
+    name: "Area_id",
+    label: "Area",
+    field: (row) => `${row.Area_Id.Nombre}`,
+    align: "center",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
   },
-},
   {
     name: "Estado",
     label: "Estado",
@@ -303,45 +244,113 @@ const columns = [
     align: "center",
   },
 ];
-function limpiar(){
+function limpiar() {
   codigodeficha.value = "";
-  nombre.value="";
+  nombre.value = "";
   niveldeformacion.value = "";
   fechafin.value = "";
   fechainicio.value = "";
 }
-async function agregarficha(){
-  try {
-    showDefault();
-    await fichastore.postinfoficha({
-      CodigoFicha:codigodeficha.value,
-      Nombre:nombre.value,
-      NivelFormacion:niveldeformacion.value,
-      FechaInicio:fechainicio.value,
-      FechaFin:fechafin.value,
-      Area_Id:area_id.value,
-    });
-    if (notification) {
+async function agregarficha() {
+  if (xd.value == 0) {
+    try {
+      showDefault();
+      await fichastore.postinfoficha({
+        CodigoFicha: codigodeficha.value,
+        Nombre: nombre.value,
+        NivelFormacion: niveldeformacion.value,
+        FechaInicio: fechainicio.value,
+        FechaFin: fechafin.value,
+        Area_Id: area_id._rawValue.value,
+      });
+      obtenerInfo();
+      if (notification) {
+        notification();
+      }
+      limpiar();
+      $q.notify({
+        spinner: false,
+        message: "Ficha Agregada",
+        timeout: 2000,
+        type: "positive",
+      });
+
+    } catch (error) {
+      if (notification) {
+        notification();
+      }
+      $q.notify({
+        spinner: false,
+        message: `${error.response.data.error.errors[0].msg}`,
+        timeout: 2000,
+        type: "negative",
+      });
+    }
+  } else {
+    let id = idficha.value;
+    if (id) {
+      try {
+        showDefault();
+        await fichastore.puteditarficha(id, {
+          CodigoFicha: codigodeficha.value,
+          Nombre: nombre.value,
+          NivelFormacion: niveldeformacion.value,
+          FechaInicio: fechainicio.value,
+          FechaFin: fechafin.value,
+          Area_Id: area_id._rawValue.value,
+          
+        });
+        btnagregar.value = true
+        btnaceptar.value=false
+        if (notification) {
           notification();
         }
         limpiar();
         $q.notify({
           spinner: false,
-          message: "Ficha Agregada",
+          message: "Ficha Actualizada",
           timeout: 2000,
           type: "positive",
         });
         obtenerInfo();
-  } catch (error) {
-    if(notification){
-      notification();
-    }
-    $q.notify({
+        fixed.value = false;
+      } catch (error) {
+        if (notification) {
+          notification();
+        }
+        $q.notify({
           spinner: false,
           message: `${error.response.data.error.errors[0].msg}`,
           timeout: 2000,
           type: "negative",
         });
+      }
+    }
+  }
+
+}
+
+let idficha = ref("")
+async function editarficha(id) {
+  obtenerarea();
+  xd.value = 1;
+  const fichaseleccionada = ficha.value.find(
+    (transporte) => transporte._id === id
+  );
+  if (fichaseleccionada) {
+    idficha.value = String(fichaseleccionada._id);
+    btnagregar.value = false;
+    btnaceptar.value= true;
+    text.value = "Editar Ficha";
+    codigodeficha.value = fichaseleccionada.CodigoFicha;
+    nombre.value = fichaseleccionada.Nombre;
+    niveldeformacion.value = fichaseleccionada.NivelFormacion;
+    area_id.value = {
+      label: `${fichaseleccionada.Area_Id.Nombre}`,
+      value: String(fichaseleccionada.Area_Id._id),
+    }
+    fechafin.value = format(new Date(fichaseleccionada.FechaFin), "yyyy-MM-dd");
+    fechainicio.value = format(new Date(fichaseleccionada.FechaInicio), "yyyy-MM-dd")
   }
 }
 async function obtenerInfo() {
@@ -471,6 +480,7 @@ body {
   display: flex;
   gap: 6px;
 }
+
 .btninac {
   background-color: rgb(255, 186, 186);
   font-size: 23px;
@@ -480,6 +490,7 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+
 .btnedit {
   font-size: 20px;
   width: 40px;
@@ -488,6 +499,7 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+
 .container2 {
   display: flex;
   flex-wrap: wrap;
@@ -495,6 +507,7 @@ body {
   align-items: center;
   gap: 25px;
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -504,6 +517,7 @@ body {
   border-radius: 15px;
   padding: 10px;
 }
+
 .btnact {
   background-color: rgb(167, 255, 167);
   font-size: 20px;
@@ -513,25 +527,30 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+
 .btnact:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
   background-color: rgb(179, 239, 179);
 }
+
 .btninac:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
   background-color: rgb(237, 179, 179);
 }
+
 .btnedit:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
   background-color: rgb(209, 209, 209);
 }
+
 .btnact i {
   margin: 0;
   padding: 0;
 }
+
 .tabla {
   border-radius: 15px;
   height: 400px;
@@ -567,6 +586,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .btnagregar {
   border: 0;
   cursor: pointer;
@@ -576,6 +596,7 @@ body {
   font-weight: bold;
   width: 85px;
 }
+
 .btnagregar:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
