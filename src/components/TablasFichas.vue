@@ -1,9 +1,7 @@
 <template>
   <div class="container">
     <!-- Tabla -->
-    <div class="container-table" style="height: 90vh; width: 80%">
-
-
+    <div class="container-table">
       <!-- <div class="b-b">
         <q-input
           class="bbuscar te"
@@ -13,33 +11,153 @@
         />
       </div> -->
 
-      <div class="btn-agregar">
-        <q-btn color="secondary" label="Agregar ➕" @click="agregarCliente()" />
-      </div>
-      <div class="q-pa-md">
-        <q-table class="tabla" flat bordered title="Tabla fichas" :rows="rows" :columns="columns" row-key="index"
-          virtual-scroll :rows-per-page-options="[0]">
-          <template v-slot:body-cell-Estado="props">
-            <q-td :props="props">
-              <label for="" v-if="props.row.Estado == 1" style="color: green">Activo</label>
-              <label for="" v-else style="color: red">Inactivo</label>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-opciones="props">
-            <q-td  class="opciones" :props="props">
-              <q-btn color="white" text-color="black" label="🖋️" @click="editarCliente(props.row._id)" />
-              <q-btn class="btninac"  @click="inactivarficha(props.row._id)"
-                v-if="props.row.Estado == 1" ><i class="fa-solid fa-x fa-beat" style="color: #ff0000;"></i></q-btn>
-              <q-btn class="btnact" @click="activarficha(props.row._id)" v-else > <i class="fa-solid fa-check fa-beat" style="color: #006110;"></i></q-btn>
-            </q-td>
-          </template>
-        </q-table>
+      <div class="container2">
+        <div class="q-pa-md">
+          <q-table
+            class="tabla"
+            flat
+            bordered
+            title="Fichas"
+            :rows="rows"
+            :columns="columns"
+            row-key="index"
+            virtual-scroll
+            :rows-per-page-options="[0]"
+          >
+            <template v-slot:body-cell-Estado="props">
+              <q-td :props="props">
+                <label
+                  for=""
+                  v-if="props.row.Estado == 1"
+                  style="color: green; font-weight: bold"
+                  >Activo</label
+                >
+                <label for="" v-else style="color: red; font-weight: bold"
+                  >Inactivo</label
+                >
+              </q-td>
+            </template>
+            <template v-slot:body-cell-opciones="props">
+              <q-td class="opciones" :props="props">
+                <button class="btnedit" @click="editarCliente(props.row._id)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button
+                  class="btninac"
+                  @click="inactivarficha(props.row._id)"
+                  v-if="props.row.Estado == 1"
+                >
+                  <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
+                </button>
+                <button
+                  class="btnact"
+                  @click="activarficha(props.row._id)"
+                  v-else
+                >
+                  <i class="fa-solid fa-check" style="color: #006110"></i>
+                </button>
+              </q-td>
+            </template>
+          </q-table>
+        </div>
+        <div class="form">
+          <div class="q-pa-md" style="max-width: 400px">
+            <h5 style="margin:0; padding:0px 0px 18px 0px">Agregar Ficha</h5>
+            <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+              <q-input
+                filled
+                v-model="codigodeficha"
+                label="Codigo de ficha"
+                type="number"
+                lazy-rules
+                :rules="[
+                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+                ]"
+              />
+
+              <q-input
+                filled
+                v-model="nombre"
+                label="Nombre de la ficha *"
+                lazy-rules
+                :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa el nombre de la ficha',
+                ]"
+              />
+              <q-input
+                filled
+                v-model="niveldeformacion"
+                label="NIvel de formacion *"
+                lazy-rules
+                :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa el nivel de formacion de la ficha',
+                ]"
+              />
+              <q-input
+                filled
+                v-model="fechainicio"
+                label="Fecha de inicio *"
+                type="date"
+                lazy-rules
+                :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa la fecha de inicio de la ficha ',
+                ]"
+              />
+              <q-input
+                filled
+                v-model="fechafin"
+                label="Fecha fin *"
+                type="date"
+                lazy-rules
+                :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa la fecha de finalizacion de la ficha ',
+                ]"
+              />
+              <q-select
+                filled
+                v-model="area_id"
+                label="Area *"
+                :options="options"
+                lazy-rules
+                :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor seleccione un area ', 
+                ]"
+              />
+
+              <div class="btn-agregar">
+                <button class="btnagregar" @click="agregarficha()">
+                  Agregar
+                </button>
+              </div>
+              <!--  <div>
+                <q-btn label="Submit" type="submit" color="primary" />
+                <q-btn
+                  label="Reset"
+                  type="reset"
+                  color="primary"
+                  flat
+                  class="q-ml-sm"
+                />
+              </div> -->
+            </q-form>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="btn">
+    <!--    <div class="btn">
       <q-btn class="btns2" color="secondary" label="Ayuda" />
       <q-btn class="btns2" color="secondary" label="Ver lotes" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -49,21 +167,52 @@ import { onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { format } from "date-fns";
 import { usefichastore } from "../stores/Fichas.js";
-
+import {useareastore} from "../stores/Area.js"
 const fichastore = usefichastore();
-
-const fichas = (usefichastore);
+const areastore = useareastore();
+const options = ref([]);
 const $q = useQuasar();
 let notification;
+let codigodeficha = ref("")
+let nombre = ref("")
+let niveldeformacion = ref("")
+let fechainicio = ref("")
+let fechafin = ref("")
+let area_id = ref("")
 
 
+/* const state = reactive({
+  name: null,
+  age: null,
+  accept: false,
+});
+
+const onSubmit = () => {
+  if (state.accept !== true) {
+    $q.notify({
+      color: "red-5",
+      textColor: "white",
+      icon: "warning",
+      message: "You need to accept the license and terms first",
+    });
+  } else {
+    $q.notify({
+      color: "green-4",
+      textColor: "white",
+      icon: "cloud_done",
+      message: "Submitted",
+    });
+  }
+};
+
+const onReset = () => {
+  state.name = null;
+  state.age = null;
+  state.accept = false;
+}; */
 let rows = ref([]);
 let ficha = ref([]);
-
-
-
-
-
+let Area_id = ref("");
 const columns = [
   {
     name: "CodigoFicha",
@@ -71,16 +220,18 @@ const columns = [
     field: "CodigoFicha",
     sortable: true,
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px',
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
   {
-    name: "Nombre", label: "Nombre", field: "Nombre",
+    name: "Nombre",
+    label: "Nombre",
+    field: "Nombre",
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px'
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
@@ -89,37 +240,54 @@ const columns = [
     label: "Nivel de formacion",
     field: "NivelFormacion",
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px'
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
 
   {
-    name: "FechaInicio", label: "Fecha De Inicio", field: "FechaInicio", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center",
+    name: "FechaInicio",
+    label: "Fecha De Inicio",
+    field: "FechaInicio",
+    format: (val) => format(new Date(val), "yyyy-MM-dd"),
+    align: "center",
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px'
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
   {
-    name: "FechaFin", label: "Fecha De Fin", field: "FechaFin", format: (val) => format(new Date(val), "yyyy-MM-dd"), align: "center",
+    name: "FechaFin",
+    label: "Fecha De Fin",
+    field: "FechaFin",
+    format: (val) => format(new Date(val), "yyyy-MM-dd"),
+    align: "center",
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px'
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
+  {
+  name: "Area_id",
+  label: "Area",
+  field: (row) => row.Area_Id?.Nombre || "Sin nombre",
+  align: "center",
+  headerStyle: {
+    fontWeight: "bold",
+    fontSize: "15px",
+  },
+},
   {
     name: "Estado",
     label: "Estado",
     field: "Estado",
-    sortable: true,
     format: (val) => (val ? "Activo" : "Inactivo"),
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px'
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
@@ -129,28 +297,79 @@ const columns = [
     field: (row) => null,
     sortable: false,
     headerStyle: {
-      fontWeight: 'bold',
-      fontSize: '15px'
+      fontWeight: "bold",
+      fontSize: "15px",
     },
     align: "center",
   },
 ];
+function limpiar(){
+  codigodeficha.value = "";
+  nombre.value="";
+  niveldeformacion.value = "";
+  fechafin.value = "";
+  fechainicio.value = "";
+}
+async function agregarficha(){
+  try {
+    showDefault();
+    await fichastore.postinfoficha({
+      CodigoFicha:codigodeficha.value,
+      Nombre:nombre.value,
+      NivelFormacion:niveldeformacion.value,
+      FechaInicio:fechainicio.value,
+      FechaFin:fechafin.value,
+      Area_Id:area_id.value,
+    });
+    if (notification) {
+          notification();
+        }
+        limpiar();
+        $q.notify({
+          spinner: false,
+          message: "Ficha Agregada",
+          timeout: 2000,
+          type: "positive",
+        });
+        obtenerInfo();
+  } catch (error) {
+    if(notification){
+      notification();
+    }
+    $q.notify({
+          spinner: false,
+          message: `${error.response.data.error.errors[0].msg}`,
+          timeout: 2000,
+          type: "negative",
+        });
+  }
+}
 async function obtenerInfo() {
   try {
     const response = await fichastore.obtenerinfoficha();
     console.log(response);
     ficha.value = fichastore.fichas;
     rows.value = fichastore.fichas;
+    obtenerarea()
   } catch (error) {
     console.log(error);
   }
 }
 
-
+async function obtenerarea() {
+  try {
+    await areastore.obtenerinfoarea();
+    options.value = areastore.area.map((area) => ({
+      label: `${area.Nombre} `,
+      value: String(area._id),
+    }));
+  } catch (error) {
+    console.log(error);
+  }
+}
 onMounted(async () => {
   obtenerInfo();
 });
-
 
 // Inactivar ficha
 async function inactivarficha(id) {
@@ -158,7 +377,7 @@ async function inactivarficha(id) {
     showDefault();
     await fichastore.putinactivarficha(id);
     cancelShow();
-    greatMessage.value = "ficha Inactivado";
+    greatMessage.value = "Ficha Inactiva";
     showGreat();
     obtenerInfo();
   } catch (error) {
@@ -174,7 +393,7 @@ async function activarficha(id) {
     showDefault();
     await fichastore.putactivarficha(id);
     cancelShow();
-    greatMessage.value = "ficha Activado";
+    greatMessage.value = "Ficha Activa";
     showGreat();
     obtenerInfo();
   } catch (error) {
@@ -197,7 +416,7 @@ const showGreat = () => {
   });
 };
 
-// Notificacion Mala 
+// Notificacion Mala
 const showBad = () => {
   notification = $q.notify({
     spinner: false,
@@ -220,18 +439,11 @@ const showDefault = () => {
 const cancelShow = () => {
   if (notification) {
     notification();
-  };
+  }
 };
-
-
-
-
-
-
 
 /* let fixed = ref(false); */
 // let searchCedula = ref("");
-
 
 // Filtrar Clientes
 /* function filtrarvendedores() {
@@ -244,7 +456,6 @@ const cancelShow = () => {
         );
     }
 } */
-
 </script>
 
 <style scoped>
@@ -256,23 +467,74 @@ body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 
-
-.opciones{display: flex;
+.opciones {
+  display: flex;
   gap: 6px;
 }
-.btninac{
-    background-color: rgb(255, 186, 186);
-    font-size: 13px;
-    width: 45px;
+.btninac {
+  background-color: rgb(255, 186, 186);
+  font-size: 23px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
 }
-.btnact{
-    background-color: rgb(167, 255, 167);
-    font-size: 13px;
-    width: 45px;
+.btnedit {
+  font-size: 20px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+}
+.btnact {
+  background-color: rgb(167, 255, 167);
+  font-size: 20px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.btnact:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(179, 239, 179);
+}
+.btninac:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(237, 179, 179);
+}
+.btnedit:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(209, 209, 209);
+}
+.btnact i {
+  margin: 0;
+  padding: 0;
 }
 .tabla {
-  border-radius: 30px;
-
+  border-radius: 15px;
+  height: 400px;
 }
 
 .btn {
@@ -281,22 +543,10 @@ body {
   cursor: pointer;
 }
 
-.btns2 {
-  width: 120px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
-
 .container {
-  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  flex-direction: row-reverse;
+  align-items: center;
 }
 
 .container-table {
@@ -304,14 +554,7 @@ body {
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  margin-right: 300px;
-  margin-bottom: 100px;
-}
 
-.modal-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .container-table h1 {
@@ -320,15 +563,23 @@ body {
   margin: 0;
 }
 
-.botones button {
-  margin: 2px;
-}
-
 .btn-agregar {
-  width: 100%;
-  margin-bottom: 5px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+}
+.btnagregar {
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+  background-color: rgb(227, 227, 227);
+  font-weight: bold;
+  width: 85px;
+}
+.btnagregar:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(209, 209, 209);
 }
 
 .b-b {

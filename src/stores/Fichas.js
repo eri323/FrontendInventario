@@ -19,6 +19,8 @@ export const usefichastore = defineStore('ficha', () => {
     const postinfoficha = async (data) =>{
         try {
             let res = await axios.post('ficha/fichacrear', data);
+            console.log(res);
+            console.log(data);
             return res
         } catch (error) {
             throw error
