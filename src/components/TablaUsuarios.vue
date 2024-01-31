@@ -184,11 +184,12 @@ async function obtenerInfo() {
   }
 }
 
-
+//Inactivar Usuario
 async function inactivarusuario(id) {
   try {
     showDefault();
     await usuariostore.putInactivarusuario(id);
+
     cancelShow();
     greatMessage.value = "Usuario Inactivo";
     showGreat();

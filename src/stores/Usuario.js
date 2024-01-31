@@ -5,7 +5,6 @@ import { ref } from 'vue';
 
 export const useusuariostore = defineStore('usuario', () => {
     const usuario = ref([]);
-
     const obtenerinfousuario = async () => {
         try {
             let responseusuario = await axios.get('usuario/usuariobusca');
@@ -37,21 +36,23 @@ export const useusuariostore = defineStore('usuario', () => {
 
     const putInactivarusuario = async (id) => {
         try {
-            let responseusuario = await axios.put(`usuario /usuarioinac/ ${id}`)
+            let responseusuario = await axios.put(`/usuario/usuarioinac/${id}`)
             console.log(responseusuario);
             return responseusuario
         } catch (error) {
             console.log(error, "Error al cambiar el estado del usuario");
         }
     };
+    
     const putActivarusuario = async (id) => {
         try {
-            let responseusuario = await axios.put(`usuario / usuarioact / ${id}`)
+            let responseusuario = await axios.put(`/usuario/usuarioact/${id}`)
             return responseusuario
         } catch (error) {
             console.log(error, "Error al cambiar el estado del usuario");
         }
     };
+    
     const usuarios = ref([])
     const login = async (data) => {
         try {
