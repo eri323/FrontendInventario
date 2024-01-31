@@ -1,3 +1,4 @@
+
 <template>
   <div class="container">
     <!-- Tabla -->
@@ -13,28 +14,12 @@
 
       <div class="container2">
         <div class="tabladiv">
-          <q-table
-            class="tabla"
-            flat
-            bordered
-            title="Fichas"
-            :rows="rows"
-            :columns="columns"
-            row-key="index"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-          >
+          <q-table class="tabla" flat bordered title="Fichas" :rows="rows" :columns="columns" row-key="index"
+            virtual-scroll :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label
-                  for=""
-                  v-if="props.row.Estado == 1"
-                  style="color: green; font-weight: bold"
-                  >Activo</label
-                >
-                <label for="" v-else style="color: red; font-weight: bold"
-                  >Inactivo</label
-                >
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -42,18 +27,10 @@
                 <button class="btnedit" @click="editarficha(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button
-                  class="btninac"
-                  @click="inactivarficha(props.row._id)"
-                  v-if="props.row.Estado == 1"
-                >
+                <button class="btninac" @click="inactivarficha(props.row._id)" v-if="props.row.Estado == 1">
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button
-                  class="btnact"
-                  @click="activarficha(props.row._id)"
-                  v-else
-                >
+                <button class="btnact" @click="activarficha(props.row._id)" v-else>
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
@@ -66,89 +43,41 @@
               {{ text }}
             </h5>
             <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input
-                filled
-                v-model="codigodeficha"
-                label="Codigo de ficha"
-                type="number"
-                lazy-rules
-                :rules="[
-                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-                ]"
-              />
+              <q-input filled v-model="codigodeficha" label="Codigo de ficha" type="number" lazy-rules :rules="[
+                (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+              ]" />
 
-              <q-input
-                filled
-                v-model="nombre"
-                label="Nombre de la ficha *"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa el nombre de la ficha',
-                ]"
-              />
-              <q-input
-                filled
-                v-model="niveldeformacion"
-                label="NIvel de formacion *"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa el nivel de formacion de la ficha',
-                ]"
-              />
-              <q-input
-                filled
-                v-model="fechainicio"
-                label="Fecha de inicio *"
-                type="date"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa la fecha de inicio de la ficha ',
-                ]"
-              />
-              <q-input
-                filled
-                v-model="fechafin"
-                label="Fecha fin *"
-                type="date"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa la fecha de finalizacion de la ficha ',
-                ]"
-              />
-              <q-select
-                filled
-                v-model="area_id"
-                label="Area *"
-                :options="options"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor seleccione un area ',
-                ]"
-              />
+              <q-input filled v-model="nombre" label="Nombre de la ficha *" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa el nombre de la ficha',
+              ]" />
+              <q-input filled v-model="niveldeformacion" label="NIvel de formacion *" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa el nivel de formacion de la ficha',
+              ]" />
+              <q-input filled v-model="fechainicio" label="Fecha de inicio *" type="date" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa la fecha de inicio de la ficha ',
+              ]" />
+              <q-input filled v-model="fechafin" label="Fecha fin *" type="date" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa la fecha de finalizacion de la ficha ',
+              ]" />
+              <q-select filled v-model="area_id" label="Area *" :options="options" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor seleccione un area ',
+              ]" />
 
               <div class="btn-agregar">
-                <button
-                  class="btnagregar"
-                  @click="agregarficha()"
-                  v-if="btnagregar"
-                >
+                <button class="btnagregar" @click="agregarficha()" v-if="btnagregar">
                   Agregar
                 </button>
-                <button
-                  class="btnagregar"
-                  @click="agregarficha()"
-                  v-if="btnaceptar"
-                >
+                <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
                   Aceptar
                 </button>
               </div>
@@ -195,6 +124,7 @@ let area_id = ref("");
 let text = ref("Agregar Ficha");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
+
 /* const state = reactive({
   name: null,
   age: null,
@@ -375,7 +305,7 @@ async function agregarficha() {
         });
         btnagregar.value = true;
         btnaceptar.value = false;
-        text.value="Agregar ficha"
+        text.value = "Agregar ficha"
         if (notification) {
           notification();
         }
@@ -627,12 +557,14 @@ body {
   margin: 0;
   padding: 0;
 }
-.tabladiv{
+
+.tabladiv {
   width: 60%;
 }
+
 .tabla {
   border-radius: 15px;
-  
+
 }
 
 

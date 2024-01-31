@@ -31,6 +31,7 @@
                                 <button class="btninac" @click="inactivararea(props.row._id)" v-if="props.row.Estado == 1">
                                     <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                                 </button>
+
                                 <button class="btnact" @click="activararea(props.row._id)" v-else>
                                     <i class="fa-solid fa-check" style="color: #006110"></i>
                                 </button>
@@ -44,41 +45,17 @@
                             {{ text }}
                         </h5>
                         <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-                            <q-input filled v-model="codigodeficha" label="Codigo de ficha" type="number" lazy-rules :rules="[
+                            <q-input filled v-model="Nombre" label="Nombre" type="text" lazy-rules :rules="[
                                 (val) => (val && val.length > 0) || 'Porfavor escribe algo',
                             ]" />
 
-                            <q-input filled v-model="nombre" label="Nombre de la ficha *" lazy-rules :rules="[
-                                (val) =>
-                                    (val !== null && val !== '') ||
-                                    'Porfavor ingresa el nombre de la ficha',
-                            ]" />
-                            <q-input filled v-model="niveldeformacion" label="NIvel de formacion *" lazy-rules :rules="[
-                                (val) =>
-                                    (val !== null && val !== '') ||
-                                    'Porfavor ingresa el nivel de formacion de la ficha',
-                            ]" />
-                            <q-input filled v-model="fechainicio" label="Fecha de inicio *" type="date" lazy-rules :rules="[
-                                (val) =>
-                                    (val !== null && val !== '') ||
-                                    'Porfavor ingresa la fecha de inicio de la ficha ',
-                            ]" />
-                            <q-input filled v-model="fechafin" label="Fecha fin *" type="date" lazy-rules :rules="[
-                                (val) =>
-                                    (val !== null && val !== '') ||
-                                    'Porfavor ingresa la fecha de finalizacion de la ficha ',
-                            ]" />
-                            <q-select filled v-model="area_id" label="Area *" :options="options" lazy-rules :rules="[
-                                (val) =>
-                                    (val !== null && val !== '') ||
-                                    'Porfavor seleccione un area ',
-                            ]" />
+
 
                             <div class="btn-agregar">
-                                <button class="btnagregar" @click="agregarficha()" v-if="btnagregar">
+                                <button class="btnagregar" @click="agregararea()" v-if="btnagregar">
                                     Agregar
                                 </button>
-                                <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
+                                <button class="btnagregar" @click="agregararea()" v-if="btnaceptar">
                                     Aceptar
                                 </button>
                             </div>
@@ -113,9 +90,12 @@ import { useareastore } from "../stores/Area.js";
 /* const $q = useQuasar(); */
 const areastore = useareastore();
 let rows = ref([]);
+let xd = ref(0);
 /* let fixed = ref(false); */
 let searchCedula = ref("");
+let Nombre = ref("");
 let areas = ref([]);
+let text = ref("Agregar area");
 // Filtrar Areas
 /* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -127,19 +107,21 @@ let areas = ref([]);
         );
     }
 } */
-
+let notification;
 const columns = [
-    { name: "Nombre", label: "Nombre", field: "Nombre",
-    headerStyle: {
-        fontWeight: "bold",
-        fontSize: "15px",
+    {
+        name: "Nombre", label: "Nombre", field: "Nombre",
+        headerStyle: {
+            fontWeight: "bold",
+            fontSize: "15px",
+        },
+        align: "center",
     },
-    align: "center", },
     {
         name: "Estado",
         label: "Estado",
         field: "Estado",
-        sortable: true,
+
         format: (val) => (val ? "Activo" : "Inactivo"),
         headerStyle: {
             fontWeight: "bold",
@@ -159,16 +141,186 @@ const columns = [
         align: "center",
     },
 ];
+function limpiar() {
+    Nombre.value = "";
+}
+async function  agregararea() {
+    if (xd.value == 0) {
+        try {
+            showDefault();
+            await areastore.postinfoarea({
+
+                Nombre: Nombre.value,
+
+            });
+            obtenerInfo();
+            if (notification) {
+                notification();
+            }
+            limpiar();
+            $q.notify({
+                spinner: false,
+                message: "Area Agregada",
+                timeout: 2000,
+                type: "positive",
+            });
+        } catch (error) {
+            if (notification) {
+                notification();
+            }
+            $q.notify({
+                spinner: false,
+                message: `${error.response.data.error.errors[0].msg}`,
+                timeout: 2000,
+                type: "negative",
+            });
+        }
+    } else {
+        let id = idficha.value;
+        if (id) {
+            try {
+                showDefault();
+                await fichastore.puteditarficha(id, {
+
+                    Nombre: Nombre.value,
+
+                });
+                btnagregar.value = true;
+                btnaceptar.value = false;
+                text.value = "Agregar area"
+                if (notification) {
+                    notification();
+                }
+                limpiar();
+                $q.notify({
+                    spinner: false,
+                    message: "Area Actualizada",
+                    timeout: 2000,
+                    type: "positive",
+                });
+                obtenerInfo();
+                fixed.value = false;
+            } catch (error) {
+                if (notification) {
+                    notification();
+                }
+                $q.notify({
+                    spinner: false,
+                    message: `${error.response.data.error.errors[0].msg}`,
+                    timeout: 2000,
+                    type: "negative",
+                });
+            }
+        }
+    }
+}
+
+let idarea = ref("");
+async function editararea(id) {
+    obtenerarea();
+    xd.value = 1;
+    const areaseleccionada = areas.value.find(
+        (area) => area._id === id
+    );
+    if (areaseleccionada) {
+        idarea.value = String(areaseleccionada._id);
+        btnagregar.value = false;
+        btnaceptar.value = true;
+        text.value = "Editar Area";
+        Nombre.value = fichaseleccionada.Nombre;
+        /* nombre.value = fichaseleccionada.Nombre;
+        niveldeformacion.value = fichaseleccionada.NivelFormacion;
+        area_id.value = {
+            label: `${fichaseleccionada.Area_Id.Nombre}`,
+            value: String(fichaseleccionada.Area_Id._id),
+        };
+        fechafin.value = format(new Date(fichaseleccionada.FechaFin), "yyyy-MM-dd");
+        fechainicio.value = format(
+            new Date(fichaseleccionada.FechaInicio),
+            "yyyy-MM-dd"
+        ); */
+    }
+}
 async function obtenerInfo() {
     try {
         const response = await areastore.obtenerinfoarea();
         console.log(response);
         areas.value = areastore.area;
         rows.value = areastore.area;
+        agregararea();
     } catch (error) {
         console.log(error);
     }
 }
+async function inactivararea(id) {
+    try {
+        showDefault();
+        await areastore.putinactivararea(id);
+        cancelShow();
+        greatMessage.value = "area Inactiva";
+        showGreat();
+        obtenerInfo();
+    } catch (error) {
+        cancelShow();
+        badMessage.value = error.response.data.error.errors[0].msg;
+        showBad();
+    }
+}
+
+// Activar area
+async function activararea(id) {
+    try {
+        showDefault();
+        await areastore.putactivararea(id);
+        cancelShow();
+        greatMessage.value = "area Activa";
+        showGreat();
+        obtenerInfo();
+    } catch (error) {
+        cancelShow();
+        badMessage.value = error.response.data.error.errors[0].msg;
+        showBad();
+    }
+}
+let greatMessage = ref("");
+let badMessage = ref("");
+
+// Notificacion Buena
+const showGreat = () => {
+    notification = $q.notify({
+        spinner: false,
+        message: greatMessage,
+        timeout: 2000,
+        type: "positive",
+    });
+};
+
+// Notificacion Mala
+const showBad = () => {
+    notification = $q.notify({
+        spinner: false,
+        message: badMessage,
+        timeout: 2000,
+        type: "negative",
+    });
+};
+
+// Notificacion de Carga
+const showDefault = () => {
+    notification = $q.notify({
+        spinner: true,
+        message: "Please wait...",
+        timeout: 0,
+    });
+};
+
+// Cancelar Notificacion
+const cancelShow = () => {
+    if (notification) {
+        notification();
+    }
+};
+
 onMounted(async () => {
     obtenerInfo();
 });
@@ -192,6 +344,7 @@ body {
 
 .opciones {
     display: flex;
+    justify-content: center;
     gap: 6px;
 }
 
