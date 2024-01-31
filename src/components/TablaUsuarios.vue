@@ -1,10 +1,8 @@
 <template>
-    <div class="container">
-        <!-- Tabla -->
-        <div class="container-table" style="height: 90vh; width: 80%">
-            <h1>Usuarios</h1>
-
-            <!-- <div class="b-b">
+  <div class="container">
+    <!-- Tabla -->
+    <div class="container-table">
+      <!-- <div class="b-b">
         <q-input
           class="bbuscar te"
           v-model.lazy="searchCedula"
@@ -12,36 +10,57 @@
           style="width: 300px"
         />
       </div> -->
-
-            <div class="btn-agregar">
-                <q-btn color="secondary" label="Agregar ➕" @click="agregarUsuario()" />
-            </div>
-            <div class="q-pa-md">
-                <q-table flat bordered title="Treats" :rows="rows" :columns="columns" row-key="index" virtual-scroll
-                    :rows-per-page-options="[0]">
-                    <template v-slot:body-cell-Estado="props">
-                        <q-td :props="props">
-                            <label for="" v-if="props.row.Estado == 1" style="color: green">Activo</label>
-                            <label for="" v-else style="color: red">Inactivo</label>
-                        </q-td>
-                    </template>
-                    <template v-slot:body-cell-opciones="props">
-                        <q-td :props="props" class="botones">
-                            <q-btn color="white" text-color="black" label="🖋️" @click="editarUsuario(props.row._id)" />
-                            <q-btn color="white" text-color="black" label="❌" @click="inactivarUsuario(props.row._id)"
-                                v-if="props.row.estado == 1" />
-                            <q-btn color="white" text-color="black" label="✅" @click="activarUsuario(props.row._id)"
-                                v-else />
-                        </q-td>
-                    </template>
-                </q-table>
-            </div>
+      <div class="container2">
+        <div class="tabladiv">
+          <q-table
+            class="tabla"
+            flat
+            bordered
+            title="Usuarios"
+            :rows="rows"
+            :columns="columns"
+            row-key="index"
+            virtual-scroll
+            :rows-per-page-options="[0]"
+          >
+            <template v-slot:body-cell-Estado="props">
+              <q-td :props="props">
+                <label for="" v-if="props.row.Estado == 1" style="color: green"
+                  >Activo</label
+                >
+                <label for="" v-else style="color: red">Inactivo</label>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-opciones="props">
+              <q-td :props="props" class="opciones">
+                <button class="btnedit" @click="editarusuario(props.row._id)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button
+                  class="btninac"
+                  @click="inactivarusuario(props.row._id)"
+                  v-if="props.row.Estado == 1"
+                >
+                  <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
+                </button>
+                <button
+                  class="btnact"
+                  @click="activarusuario(props.row._id)"
+                  v-else
+                >
+                  <i class="fa-solid fa-check" style="color: #006110"></i>
+                </button>
+              </q-td>
+            </template>
+          </q-table>
         </div>
-        <div class="btn">
+      </div>
+    </div>
+    <!-- <div class="btn">
             <q-btn class="btns2" color="secondary" label="Ayuda" />
             <q-btn class="btns2" color="secondary" label="Ver lotes" />
-        </div>
-    </div>
+        </div> -->
+  </div>
 </template>
 
 <script setup>
@@ -68,153 +87,194 @@ let usuarios = ref([]);
 } */
 
 const columns = [
-    { name: "Nombre", label: "Nombre", field: "Nombre" },
-    { name: "Identificacion", label: "Descripcion", field: "Descripcion" },
-    { name: "Telefono", label: "Telefono", field: "Telefono" },
-    { name: "PrecioUnitario", label: "Precio unitario", field: "PrecioUnitario" },
-    { name: "Correo", label: "Correo", field: "Correo" },
-    { name: "Contraseña", label: "Contraseña", field: "Contraseña" },
-    { name: "Rol", label: "Rol", field: "Rol" },
-    {
-        name: "Estado",
-        label: "Estado",
-        field: "Estado",
-        sortable: true,
-        format: (val) => (val ? "Activo" : "Inactivo"),
+  {
+    name: "Nombre",
+    label: "Nombre",
+    field: "Nombre",
+    sortable: true,
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
     },
-    {
-        name: "opciones",
-        label: "Opciones",
-        field: (row) => null,
-        sortable: false,
+    align: "center",
+  },
+  {
+    name: "Identificacion",
+    label: "Descripcion",
+    field: "Descripcion",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
     },
+    align: "center",
+  },
+  {
+    name: "Telefono",
+    label: "Telefono",
+    field: "Telefono",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Correo",
+    label: "Correo",
+    field: "Correo",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Contraseña",
+    label: "Contraseña",
+    field: "Contraseña",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Rol",
+    label: "Rol",
+    field: "Rol",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Estado",
+    label: "Estado",
+    field: "Estado",
+    sortable: true,
+    format: (val) => (val ? "Activo" : "Inactivo"),
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "opciones",
+    label: "Opciones",
+    field: (row) => null,
+    sortable: false,
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
 ];
 async function obtenerInfo() {
-    try {
-        const response = await usuariostore.obtenerinfousuario();
-        console.log(response);
-        usuarios.value = usuariostore.usuario;
-        rows.value = usuariostore.usuario;
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const response = await usuariostore.obtenerinfousuario();
+    console.log(response);
+    usuarios.value = usuariostore.usuario;
+    rows.value = usuariostore.usuario;
+  } catch (error) {
+    console.log(error);
+  }
 }
 onMounted(async () => {
-    obtenerInfo();
+  obtenerInfo();
 });
 </script>
 
 <style scoped>
 * {
-    color: black;
+  color: black;
 }
 
 body {
-    background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
-}
-
-.btn {
-    display: flex;
-    border: none;
-    gap: 20px;
-    cursor: pointer;
-}
-
-.btns2 {
-    width: 120px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-left: 20px;
+  background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 
 .container {
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tabla {
+  border-radius: 15px;
+  margin-top: 25px;
+
+}
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tabladiv{
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    flex-direction: row-reverse;
+   padding: 50px ;
+}
+.opciones {
+  display: flex;
+  gap: 6px;
 }
 
+.btninac {
+  background-color: rgb(255, 186, 186);
+  font-size: 23px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.btnedit {
+  font-size: 20px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.btnact {
+  background-color: rgb(167, 255, 167);
+  font-size: 20px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.btnact:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(179, 239, 179);
+}
+
+.btninac:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(237, 179, 179);
+}
+
+.btnedit:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(209, 209, 209);
+}
 .container-table {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    margin-right: 300px;
-    margin-bottom: 100px;
-}
-
-.modal-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .container-table h1 {
-    font-family: "Gabarito", sans-serif;
-    padding: 0;
-    margin: 0;
-}
-
-.botones button {
-    margin: 2px;
-}
-
-.btn-agregar {
-    width: 100%;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.b-b {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.bbuscar {
-    width: 170px;
-    font-size: 18px;
-    background-color: rgba(5, 245, 5, 0.432);
-    border-radius: 9px;
-    position: relative;
-    top: 6px;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #3498db;
-    color: #fff;
-}
-
-.close-button {
-    color: #fff;
-}
-
-.modal-body {
-    padding: 20px;
-}
-
-.modal-input {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.modal-footer {
-    padding: 10px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.action-button {
-    margin-left: 10px;
+  font-family: "Gabarito", sans-serif;
+  padding: 0;
+  margin: 0;
 }
 </style>
