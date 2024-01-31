@@ -6,7 +6,7 @@
         <q-input
           class="bbuscar te"
           v-model.lazy="searchCedula"
-          label="Buscar por Codigo de ficha "
+          label="Buscar por Codigo de usuario "
           style="width: 300px"
         />
       </div> -->
@@ -68,6 +68,7 @@ import { ref } from "vue";
 import { onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { useusuariostore } from "../stores/Usuario.js";
+const $q = useQuasar();
 /* const $q = useQuasar(); */
 const usuariostore = useusuariostore();
 let rows = ref([]);
@@ -182,6 +183,77 @@ async function obtenerInfo() {
     console.log(error);
   }
 }
+
+
+async function inactivarusuario(id) {
+  try {
+    showDefault();
+    await usuariostore.putInactivarusuario(id);
+    cancelShow();
+    greatMessage.value = "Usuario Inactivo";
+    showGreat();
+    obtenerInfo();
+  } catch (error) {
+    cancelShow();
+    badMessage.value = error.response.data.error.errors[0].msg;
+    showBad();
+  }
+}
+
+// Activar usuario
+async function activarusuario(id) {
+  try {
+    showDefault();
+    await usuariostore.putActivarusuario(id);
+    cancelShow();
+    greatMessage.value = "Usuario Activo";
+    showGreat();
+    obtenerInfo();
+  } catch (error) {
+    cancelShow();
+    badMessage.value = error.response.data.error.errors[0].msg;
+    showBad();
+  }
+}
+let notification;
+let greatMessage = ref("");
+let badMessage = ref("");
+
+// Notificacion Buena
+const showGreat = () => {
+  notification = $q.notify({
+    spinner: false,
+    message: greatMessage,
+    timeout: 2000,
+    type: "positive",
+  });
+};
+
+// Notificacion Mala
+const showBad = () => {
+  notification = $q.notify({
+    spinner: false,
+    message: badMessage,
+    timeout: 2000,
+    type: "negative",
+  });
+};
+
+// Notificacion de Carga
+const showDefault = () => {
+  notification = $q.notify({
+    spinner: true,
+    message: "Please wait...",
+    timeout: 0,
+  });
+};
+
+// Cancelar Notificacion
+const cancelShow = () => {
+  if (notification) {
+    notification();
+  }
+};
 onMounted(async () => {
   obtenerInfo();
 });

@@ -29,6 +29,7 @@ export const useusuariostore = defineStore('usuario', () => {
         try {
             let responseusuario = await axios.put(`usuario/usuariomodificar/${id}`, data);
             return responseusuario
+         
         } catch (error) {
             throw error;
         }
@@ -37,6 +38,7 @@ export const useusuariostore = defineStore('usuario', () => {
     const putInactivarusuario = async (id) => {
         try {
             let responseusuario = await axios.put(`usuario /usuarioinac/ ${id}`)
+            console.log(responseusuario);
             return responseusuario
         } catch (error) {
             console.log(error, "Error al cambiar el estado del usuario");
