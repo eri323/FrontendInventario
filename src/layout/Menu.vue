@@ -46,6 +46,15 @@
           class="q-ml-md"
           >Imprimir Excel</q-btn
         >
+
+        <q-btn
+          dense
+          flat
+          src="/"
+          icon="login"
+          @click="goToHome"
+          class="q-ml-md"
+        />
       </q-toolbar>
     </q-header>
 
@@ -158,15 +167,21 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const leftDrawerOpen = ref(false);
+    const router = useRouter();
 
     return {
       leftDrawerOpen,
+      router,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+      goToHome() {
+        router.push("/");
       },
     };
   },
@@ -183,10 +198,10 @@ export default {
   justify-content: center;
   color: black;
 }
-.div:hover{
-background-color: gray;
+.div:hover {
+  background-color: gray;
 }
-.list div a{
+.list div a {
   text-decoration: none;
 }
 </style>
