@@ -51,7 +51,7 @@
           dense
           flat
           src="/"
-          icon="login"
+          icon="logout"
           @click="goToHome"
           class="q-ml-md"
         />
