@@ -72,8 +72,8 @@ import { useRouter } from "vue-router";
 const loading = ref(false);
 
 const data = ref({
-  Identificacion: "",
-  Contraseña: "",
+  Identificacion: "1101622995",
+  Contraseña: "Erick#12",
 });
 let mostrarError = ref(false);
 let MostrarData = ref(true);
