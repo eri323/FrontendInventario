@@ -305,7 +305,8 @@ async function agregarficha() {
         });
         btnagregar.value = true;
         btnaceptar.value = false;
-        text.value = "Agregar ficha"
+        text.value = "Agregar ficha";
+        xd.value = 0;
         if (notification) {
           notification();
         }
@@ -338,7 +339,7 @@ async function editarficha(id) {
   obtenerarea();
   xd.value = 1;
   const fichaseleccionada = ficha.value.find(
-    (transporte) => transporte._id === id
+    (ficha) => ficha._id === id
   );
   if (fichaseleccionada) {
     idficha.value = String(fichaseleccionada._id);
@@ -357,6 +358,7 @@ async function editarficha(id) {
       new Date(fichaseleccionada.FechaInicio),
       "yyyy-MM-dd"
     );
+   
   }
 }
 async function obtenerInfo() {
@@ -384,6 +386,7 @@ async function obtenerarea() {
 }
 onMounted(async () => {
   obtenerInfo();
+  console.log(xd);
 });
 
 // Inactivar ficha
