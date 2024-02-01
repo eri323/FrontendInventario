@@ -308,7 +308,8 @@ async function inactivarlote(id) {
   try {
     console.log("Inactivando lote con ID:", id);
     showDefault();
-    await lotestore.putInactivarlote(id);
+    const res = await lotestore.putInactivarlote(id);
+    console.log(res);
     cancelShow();
     greatMessage.value = "Lote Inactivo";
     showGreat();
