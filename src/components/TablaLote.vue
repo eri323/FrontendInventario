@@ -4,28 +4,12 @@
     <div class="container-table">
       <div class="container2">
         <div class="tabladiv">
-          <q-table
-            flat
-            bordered
-            title="Lotes"
-            class="tabla"
-            :rows="rows"
-            :columns="columns"
-            row-key="index"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-          >
+          <q-table flat bordered title="Lotes" class="tabla" :rows="rows" :columns="columns" row-key="index"
+            virtual-scroll :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label
-                  for=""
-                  v-if="props.row.Estado == 1"
-                  style="color: green; font-weight: bold"
-                  >Activo</label
-                >
-                <label for="" v-else style="color: red; font-weight: bold"
-                  >Inactivo</label
-                >
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -33,18 +17,10 @@
                 <button class="btnedit" @click="editarlote(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button
-                  class="btninac"
-                  @click="inactivarlote(props.row._id)"
-                  v-if="props.row.Estado == 1"
-                >
+                <button class="btninac" @click="inactivarlote(props.row._id)" v-if="props.row.Estado == 1">
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button
-                  class="btnact"
-                  @click="activarlote(props.row._id)"
-                  v-else
-                >
+                <button class="btnact" @click="activarlote(props.row._id)" v-else>
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
@@ -57,43 +33,21 @@
               {{ text }}
             </h5>
             <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input
-                filled
-                v-model="Nombre"
-                label="Nombre"
-                type="text"
-                lazy-rules
-                :rules="[
-                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-                ]"
-              />
+              <q-input filled v-model="Nombre" label="Nombre" type="text" lazy-rules :rules="[
+                (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+              ]" />
 
-              <q-input
-                filled
-                v-model="Presupuesto"
-                label="Presupuesto *"
-                type="number"
-                lazy-rules
-                :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Porfavor ingresa el presupuesto de el lote',
-                ]"
-              />
+              <q-input filled v-model="Presupuesto" label="Presupuesto *" type="number" lazy-rules :rules="[
+                (val) =>
+                  (val !== null && val !== '') ||
+                  'Porfavor ingresa el presupuesto de el lote',
+              ]" />
 
               <div class="btn-agregar">
-                <button
-                  class="btnagregar"
-                  @click="agregarlote()"
-                  v-if="btnagregar"
-                >
+                <button class="btnagregar" @click="agregarlote()" v-if="btnagregar">
                   Agregar
                 </button>
-                <button
-                  class="btnagregar"
-                  @click="agregarlote()"
-                  v-if="btnaceptar"
-                >
+                <button class="btnagregar" @click="agregarlote()" v-if="btnaceptar">
                   Aceptar
                 </button>
               </div>
@@ -241,7 +195,7 @@ async function agregarlote() {
         btnagregar.value = true;
         btnaceptar.value = false;
         text.value = "Agregar lote";
-        xd.value= 0;
+        xd.value = 0;
         if (notification) {
           notification();
         }
@@ -399,6 +353,7 @@ body {
   gap: 20px;
   cursor: pointer;
 }
+
 .opciones {
   display: flex;
   gap: 6px;
@@ -422,6 +377,7 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+
 .container2 {
   display: flex;
   flex-wrap: wrap;
@@ -477,6 +433,7 @@ body {
 .tabladiv {
   width: 60%;
 }
+
 .btns2 {
   width: 120px;
   height: 40px;
@@ -509,9 +466,11 @@ body {
 .botones button {
   margin: 2px;
 }
+
 .tabla {
   border-radius: 30px;
 }
+
 .btn-agregar {
   display: flex;
   justify-content: center;
@@ -526,6 +485,7 @@ body {
   font-weight: bold;
   width: 85px;
 }
+
 .btnagregar:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;

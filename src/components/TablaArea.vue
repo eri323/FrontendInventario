@@ -13,26 +13,21 @@
 
       <div class="container2">
         <div class="tabladiv">
-          <q-table
-            flat
-            bordered
-            title="Areas"
-            class="tabla"
-            :rows="rows"
-            :columns="columns"
-            row-key="index"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-          >
+          <div class="header">
+            <h5 class="title">
+              Areas
+            </h5>
+            <button class="btnag" @click="prompt = true">
+              <h5>Agregar</h5>
+              <i class="fa-regular fa-square-plus"></i>
+            </button>
+          </div>
+          <q-table flat bordered class="tabla" :rows="rows" :columns="columns" row-key="index" virtual-scroll
+            :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label
-                  for=""
-                  v-if="props.row.Estado == 1"
-                  style="color: green; font-weight: bold"
-                  >Activo</label
-                >
-                <label for="" v-else style="color: red">Inactivo</label>
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -40,70 +35,39 @@
                 <button class="btnedit" @click="editararea(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button
-                  class="btninac"
-                  @click="inactivararea(props.row._id)"
-                  v-if="props.row.Estado == 1"
-                >
+                <button class="btninac" @click="inactivararea(props.row._id)" v-if="props.row.Estado == 1">
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
 
-                <button
-                  class="btnact"
-                  @click="activararea(props.row._id)"
-                  v-else
-                >
+                <button class="btnact" @click="activararea(props.row._id)" v-else>
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
             </template>
           </q-table>
-        </div>
-        <div class="form">
-          <div class="q-pa-md" style="max-width: 400px">
-            <h5 style="margin: 0; padding: 0px 0px 18px 0px; font-weight: bold">
-              {{ text }}
-            </h5>
-            <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input
-                filled
-                v-model="Nombre"
-                label="Nombre"
-                type="text"
-                lazy-rules
-                :rules="[
-                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-                ]"
-              />
+          <q-dialog v-model="prompt" persistent class="containermodal">
+            <q-card class="modal">
+              <q-card-section class="titledialog">
+                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">{{ text }}</h5>
+              </q-card-section>
 
-              <div class="btn-agregar">
-                <button
-                  class="btnagregar"
-                  @click="agregararea()"
-                  v-if="btnagregar"
-                >
+              <q-card-section>
+                <q-input filled v-model="Nombre" label="Nombre" type="text" lazy-rules :rules="[
+                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+                ]" />
+              </q-card-section>
+
+              <q-card-actions align="right" class="text-primary">
+                <q-btn flat label="Cancel" v-close-popup />
+                <button class="btnagregar" @click="agregarficha()" v-if="btnagregar">
                   Agregar
                 </button>
-                <button
-                  class="btnagregar"
-                  @click="agregararea()"
-                  v-if="btnaceptar"
-                >
+                <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
                   Aceptar
                 </button>
-              </div>
-              <!--  <div>
-                <q-btn label="Submit" type="submit" color="primary" />
-                <q-btn
-                  label="Reset"
-                  type="reset"
-                  color="primary"
-                  flat
-                  class="q-ml-sm"
-                />
-              </div> -->
-            </q-form>
-          </div>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
       </div>
     </div>
@@ -206,7 +170,7 @@ async function agregararea() {
         spinner: false,
         message: `${error.response.data.error.errors[0].msg}`,
         timeout: 2000,
-        type: "negative",  
+        type: "negative",
       });
     }
   } else {
@@ -362,7 +326,33 @@ onMounted(async () => {
 body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.title{
+  margin: 0;
+  font-weight: bold;
+  padding-left: 15px;
+}
+.btnag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 25px;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
 
+.btnag h5 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -471,6 +461,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .btnagregar {
   border: 0;
   cursor: pointer;

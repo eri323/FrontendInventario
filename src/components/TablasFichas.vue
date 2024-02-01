@@ -14,8 +14,24 @@
 
       <div class="container2">
         <div class="tabladiv">
-          <q-table class="tabla" flat bordered title="Fichas" :rows="rows" :columns="columns" row-key="index"
-            virtual-scroll :rows-per-page-options="[0]">
+          <!--  <q-card>
+            <button class="btnag" @click="prompt = true">
+              <i class="fa-regular fa-square-plus"></i>
+            </button>
+          </q-card> -->
+          <div class="header">
+            <h5 class="title">
+              Fichas
+            </h5>
+            <button class="btnag" @click="prompt = true">
+              <h5>Agregar</h5>
+              <i class="fa-regular fa-square-plus"></i>
+            </button>
+          </div>
+
+          <q-table class="tabla" flat bordered :rows="rows" :columns="columns"  row-key="index" virtual-scroll
+            :rows-per-page-options="[0]">
+
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
                 <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
@@ -24,6 +40,7 @@
             </template>
             <template v-slot:body-cell-opciones="props">
               <q-td class="opciones" :props="props">
+
                 <button class="btnedit" @click="editarficha(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
@@ -36,64 +53,56 @@
               </q-td>
             </template>
           </q-table>
-        </div>
-        <div class="form">
-          <div class="q-pa-md" style="max-width: 400px">
-            <h5 style="margin: 0; padding: 0px 0px 18px 0px; font-weight: bold">
-              {{ text }}
-            </h5>
-            <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input filled v-model="codigodeficha" label="Codigo de ficha" type="number" lazy-rules :rules="[
-                (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-              ]" />
+          <q-dialog v-model="prompt" persistent class="containermodal">
+            <q-card class="modal">
+              <q-card-section class="titledialog">
+                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">{{ text }}</h5>
+              </q-card-section>
 
-              <q-input filled v-model="nombre" label="Nombre de la ficha *" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Porfavor ingresa el nombre de la ficha',
-              ]" />
-              <q-input filled v-model="niveldeformacion" label="NIvel de formacion *" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Porfavor ingresa el nivel de formacion de la ficha',
-              ]" />
-              <q-input filled v-model="fechainicio" label="Fecha de inicio *" type="date" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Porfavor ingresa la fecha de inicio de la ficha ',
-              ]" />
-              <q-input filled v-model="fechafin" label="Fecha fin *" type="date" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Porfavor ingresa la fecha de finalizacion de la ficha ',
-              ]" />
-              <q-select filled v-model="area_id" label="Area *" :options="options" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Porfavor seleccione un area ',
-              ]" />
+              <q-card-section >
+                <q-input filled v-model="codigodeficha" label="Codigo de ficha" type="number" lazy-rules :rules="[
+                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+                ]" />
+                <q-input filled v-model="nombre" label="Nombre de la ficha *" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa el nombre de la ficha',
+                ]" />
+                <q-input filled v-model="niveldeformacion" label="NIvel de formacion *" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa el nivel de formacion de la ficha',
+                ]" />
+                <q-input filled v-model="fechainicio" label="Fecha de inicio *" type="date" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa la fecha de inicio de la ficha ',
+                ]" />
+                <q-input filled v-model="fechafin" label="Fecha fin *" type="date" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa la fecha de finalizacion de la ficha ',
+                ]" />
+                <q-select filled v-model="area_id" label="Area *" :options="options" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor seleccione un area ',
+                ]" />
+              </q-card-section>
 
-              <div class="btn-agregar">
-                <button class="btnagregar" @click="agregarficha()" v-if="btnagregar">
-                  Agregar
-                </button>
-                <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
-                  Aceptar
-                </button>
-              </div>
-              <!--  <div>
-                <q-btn label="Submit" type="submit" color="primary" />
-                <q-btn
-                  label="Reset"
-                  type="reset"
-                  color="primary"
-                  flat
-                  class="q-ml-sm"
-                />
-              </div> -->
-            </q-form>
-          </div>
+              <q-card-actions align="right" class="text-primary">
+                <q-btn flat label="Cancel" v-close-popup />
+                 <button class="btnagregar" @click="agregarficha()" v-if="btnagregar">
+                    Agregar
+                  </button>
+                  <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
+                    Aceptar
+                  </button>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
+        
       </div>
     </div>
     <!--    <div class="btn">
@@ -124,7 +133,8 @@ let area_id = ref("");
 let text = ref("Agregar Ficha");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
-
+let prompt = ref(false);
+let address = ref("");
 /* const state = reactive({
   name: null,
   age: null,
@@ -318,7 +328,7 @@ async function agregarficha() {
           type: "positive",
         });
         obtenerInfo();
-        fixed.value = false;
+        prompt.value = false;
       } catch (error) {
         if (notification) {
           notification();
@@ -336,6 +346,7 @@ async function agregarficha() {
 
 let idficha = ref("");
 async function editarficha(id) {
+  prompt.value= true;
   obtenerarea();
   xd.value = 1;
   const fichaseleccionada = ficha.value.find(
@@ -358,7 +369,7 @@ async function editarficha(id) {
       new Date(fichaseleccionada.FechaInicio),
       "yyyy-MM-dd"
     );
-   
+
   }
 }
 async function obtenerInfo() {
@@ -482,9 +493,19 @@ const cancelShow = () => {
 }
 
 body {
-  background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
+  background-image: url("../assets/fondo.jpg");
+  background-attachment: fixed;
+  background-size: cover;
 }
-
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.title{
+  margin: 0;
+  font-weight: bold;
+  padding-left: 15px;
+}
 .opciones {
   display: flex;
   gap: 6px;
@@ -515,6 +536,7 @@ body {
   justify-content: space-around;
   align-items: center;
   gap: 25px;
+  margin-top: 95px;
 }
 
 .form {
@@ -550,6 +572,32 @@ body {
   background-color: rgb(237, 179, 179);
 }
 
+.btnag:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(209, 209, 209);
+}
+
+.btnag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 25px;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btnag h5 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  
+} 
+
 .btnedit:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
@@ -561,8 +609,14 @@ body {
   padding: 0;
 }
 
-.tabladiv {
-  width: 60%;
+.modal{
+
+  width: 550px;
+  border-radius: 15px;
+  text-align: center;
+}
+.titledialog{
+  border-bottom: 3px solid green;
 }
 
 .tabla {
