@@ -1,4 +1,3 @@
-
 <template>
   <div class="container">
     <!-- Tabla -->
@@ -124,7 +123,6 @@ let area_id = ref("");
 let text = ref("Agregar Ficha");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
-
 /* const state = reactive({
   name: null,
   age: null,
@@ -305,8 +303,7 @@ async function agregarficha() {
         });
         btnagregar.value = true;
         btnaceptar.value = false;
-        text.value = "Agregar ficha";
-        xd.value = 0;
+        text.value = "Agregar ficha"
         if (notification) {
           notification();
         }
@@ -339,7 +336,7 @@ async function editarficha(id) {
   obtenerarea();
   xd.value = 1;
   const fichaseleccionada = ficha.value.find(
-    (ficha) => ficha._id === id
+    (transporte) => transporte._id === id
   );
   if (fichaseleccionada) {
     idficha.value = String(fichaseleccionada._id);
@@ -358,7 +355,6 @@ async function editarficha(id) {
       new Date(fichaseleccionada.FechaInicio),
       "yyyy-MM-dd"
     );
-   
   }
 }
 async function obtenerInfo() {
@@ -386,7 +382,6 @@ async function obtenerarea() {
 }
 onMounted(async () => {
   obtenerInfo();
-  console.log(xd);
 });
 
 // Inactivar ficha

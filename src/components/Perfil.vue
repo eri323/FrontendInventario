@@ -59,22 +59,24 @@
                       (val) => (val && val.length > 0) || 'Porfavor escribe tu nuevo numero de telefono',
                     ]" />
                     <!--  -->
-                    <q-select filled v-model="Correo" label="Ingrese su nuevo gmail" :options="options" lazy-rules
-                      :rules="[
+                    <q-input filled v-model="Correo" label="Ingrese su nuevo gmail" :options="options" lazy-rules :rules="[
+                      (val) =>
+                        (val !== null && val !== '') || 'Porfavor Ingrese su nuevo correo ',
+                    ]" />
+                    <!--  -->
+                    <q-input filled v-model="Contraseña" label="Ingrese su nueva contraseña" :options="options"
+                      lazy-rules :rules="[
                         (val) =>
-                          (val !== null && val !== '') || 'Porfavor Ingrese su nuevo correo ',
-                      ]" />
-                      <!--  -->
-                      <q-select filled v-model="Contraseña" label="Ingrese su nueva contraseña" :options="options" lazy-rules
-                      :rules="[
-                        (val) =>
-                          (val !== null && val !== '') || 'Porfavor ingrese su nuevo correo ',
+                          (val !== null && val !== '') || 'Porfavor ingrese su nueva contraseña ',
                       ]" />
 
-                    <button class="btnagregar" @click="agregarperfil()" v-if="btnagregar">
-                      Aceptar datos
-                    </button>
-
+                    <div class="btn-agregar">
+                      <button class="btnagregar" @click="agregaryediperfil()" v-if="btnagregar">
+                        Aceptar
+                      </button>
+                      <button class="btnagregar" @click="closeProfileDialog">Cerrar</button>
+       
+                    </div>
                   </q-form>
                 </div>
               </div>
@@ -91,24 +93,46 @@
 
 <script setup>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
+import { useusuariostore } from "../stores/Usuario.js";
+let btnagregar = ref(true); // Inicializa según tus necesidades
+let btnaceptar = ref(false); // Inicializa según tus necesidades
+const $q = useQuasar();
+let idusuario = ref("");
 let xd = ref(0);
 let notification;
-let perfilstore
+let Perfil = ref([]);
 let nombre = ref("")
 let identificacion = ref("")
 let Telefono = ref("")
 let Correo = ref("")
-let Contraseña = ref ("")
+let Contraseña = ref("")
 const options = ref([]);
+const usuariostore = useusuariostore();
 
+async function obtenerInfo() {
+  try {
+    const response = await usuariostore.obtenerinfousuario();
+    console.log(response);
+    Perfil.value = usuariostore.usuario;
+    rows.value = usuariostore.usuario;
+  } catch (error) {
+    console.log(error);
+  }
+}
+function limpiar() {
+  nombre.value = "";
+  identificacion.value = "";
+  Telefono.value = "";
+  Correo.value = "";
+  Contraseña.value = "";
+}
 
-
-
-async function agregarperfil() {
+async function agregaryediperfil() {
   if (xd.value == 0) {
     try {
       showDefault();
-      await perfilstore.postinfoproducto({
+      await usuariostore.postinfousuario({
         Nombre: nombre.value,
         Identificacion: identificacion.value,
         Telefono: Telefono.value,
@@ -124,10 +148,10 @@ async function agregarperfil() {
       limpiar();
       $q.notify({
         spinner: false,
-        message: "Ficha Agregada",
+        message: "Datos actualizados",
         timeout: 2000,
         type: "positive",
-      });
+      }); 
     } catch (error) {
       if (notification) {
         notification();
@@ -140,17 +164,17 @@ async function agregarperfil() {
       });
     }
   } else {
-    let id = idficha.value;
+    let id = idusuario.value;
     if (id) {
       try {
         showDefault();
-        await fichastore.puteditarficha(id, {
-          CodigoFicha: codigodeficha.value,
+        await usuariostore.puteditarusuario(id, {
           Nombre: nombre.value,
-          NivelFormacion: niveldeformacion.value,
-          FechaInicio: fechainicio.value,
-          FechaFin: fechafin.value,
-          Area_Id: area_id._rawValue.value,
+          Identificacion: identificacion.value,
+          Telefono: Telefono.value,
+          Correo: Correo.value,
+          Contraseña: Contraseña.value
+
         });
         btnagregar.value = true;
         btnaceptar.value = false;
@@ -185,37 +209,7 @@ async function agregarperfil() {
 
 
 
-// Inactivar ficha
-async function inactivarficha(id) {
-  try {
-    showDefault();
-    await fichastore.putinactivarficha(id);
-    cancelShow();
-    greatMessage.value = "Ficha Inactiva";
-    showGreat();
-    obtenerInfo();
-  } catch (error) {
-    cancelShow();
-    badMessage.value = error.response.data.error.errors[0].msg;
-    showBad();
-  }
-}
 
-// Activar ficha
-async function activarficha(id) {
-  try {
-    showDefault();
-    await fichastore.putactivarficha(id);
-    cancelShow();
-    greatMessage.value = "Ficha Activa";
-    showGreat();
-    obtenerInfo();
-  } catch (error) {
-    cancelShow();
-    badMessage.value = error.response.data.error.errors[0].msg;
-    showBad();
-  }
-}
 
 let greatMessage = ref("");
 let badMessage = ref("");
@@ -272,6 +266,10 @@ const profileDialog = ref(false);
 const showProfileDialog = () => {
   profileDialog.value = true;
 };
+//Cerrar modal
+function closeProfileDialog() {
+  profileDialog.value = false;
+}
 
 
 </script>
@@ -310,7 +308,8 @@ span {
   height: 550px;
   width: 350px;
 }
-.q-gutter-md{
+
+.q-gutter-md {
   width: 335px;
 }
 </style>
