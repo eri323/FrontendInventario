@@ -95,7 +95,7 @@
             </q-item-section>
           </div>
 
-          <div v-if="data && data.Rol && data.Rol !== 'instructor'" class="div">
+          <div class="div">
             <q-item-section>
               <i class="fa-solid fa-address-card"></i>
             </q-item-section>

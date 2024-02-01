@@ -67,14 +67,11 @@ export const useusuariostore = defineStore("usuario", () => {
     }
   };
 
-  function setUser(userData) {
-    user.value = userData;
-  }
+
 
   return {
     usuario,
     usuarios,
-    setUser,
     obtenerinfousuario,
     login,
     postinfousuario,

@@ -100,7 +100,7 @@ async function Login() {
       return;
     } else {
       const res = await usuariostore.login(data.value);
-      // console.log(res);
+      console.log(res);
       if (res != 200) {
         error2.value = true;
         msj.value = res.msg;
