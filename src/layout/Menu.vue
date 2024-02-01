@@ -12,7 +12,11 @@
         />
 
         <q-toolbar-title class="text-white">
-          <q-icon name="business" style="font-size: 2rem; color: white" />
+          <q-icon
+            name="business"
+            class="q-mr-md"
+            style="font-size: 2rem; color: white"
+          />
           Inventario
         </q-toolbar-title>
 
@@ -62,17 +66,17 @@
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
         <q-list padding class="list">
           <div class="div">
-            <q-item-section avatar>
+            <q-item-section>
               <i class="fa-solid fa-house"></i>
             </q-item-section>
 
             <q-item-section>
-              <router-link to="/Home">Home</router-link>
+              <router-link to="/Home">Inicio</router-link>
             </q-item-section>
           </div>
 
-          <div>
-            <q-item-section avatar>
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-users-line"></i>
             </q-item-section>
 
@@ -80,8 +84,9 @@
               <router-link to="./TablaFichas">Fichas</router-link>
             </q-item-section>
           </div>
-          <div>
-            <q-item-section avatar>
+
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-boxes-packing"></i>
             </q-item-section>
 
@@ -89,8 +94,9 @@
               <router-link to="./TablaProductos">Productos</router-link>
             </q-item-section>
           </div>
-          <div>
-            <q-item-section avatar>
+
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-address-card"></i>
             </q-item-section>
 
@@ -98,8 +104,9 @@
               <router-link to="./TablaUsuarios">Usuarios</router-link>
             </q-item-section>
           </div>
-          <div>
-            <q-item-section avatar>
+
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-network-wired"></i>
             </q-item-section>
 
@@ -107,8 +114,9 @@
               <router-link to="./TablaArea">Areas</router-link>
             </q-item-section>
           </div>
-          <div>
-            <q-item-section avatar>
+
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-layer-group"></i>
             </q-item-section>
 
@@ -117,8 +125,8 @@
             </q-item-section>
           </div>
 
-          <div>
-            <q-item-section avatar>
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-user"></i>
             </q-item-section>
 
@@ -127,8 +135,8 @@
             </q-item-section>
           </div>
 
-          <div>
-            <q-item-section avatar>
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-gear"></i>
             </q-item-section>
 
@@ -138,6 +146,7 @@
           </div>
         </q-list>
       </q-scroll-area>
+
       <q-img
         class="absolute-top"
         src="https://cdn.quasar.dev/img/material.png"
@@ -192,16 +201,27 @@ export default {
 .custom-header {
   background-color: rgba(0, 173, 0, 1);
 }
+
 .list div {
   display: flex;
-  padding: 5px;
-  justify-content: center;
-  color: black;
+  padding: 10px;
+  padding-left: 0;
+  color: #000; /* Color de texto para los elementos del menú */
+  transition: background-color 0.3s ease;
 }
 .div:hover {
-  background-color: gray;
+  background-color: rgba(61, 153, 61, 0.453);
 }
+
 .list div a {
   text-decoration: none;
+  color: #333; /* Color de texto para los enlaces */
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.list div i {
+  font-size: 1.5rem;
+  padding-left: 40px;
 }
 </style>
