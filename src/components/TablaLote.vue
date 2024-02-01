@@ -306,13 +306,15 @@ async function obtenerInfo() {
 }
 async function inactivarlote(id) {
   try {
+    console.log("Inactivando lote con ID:", id);
     showDefault();
     await lotestore.putInactivarlote(id);
     cancelShow();
-    greatMessage.value = "lote Inactivo";
+    greatMessage.value = "Lote Inactivo";
     showGreat();
     obtenerInfo();
   } catch (error) {
+    console.error("Error al inactivar lote:", error);
     cancelShow();
     badMessage.value = error.response.data.error.errors[0].msg;
     showBad();
@@ -322,18 +324,21 @@ async function inactivarlote(id) {
 // Activar lote
 async function activarlote(id) {
   try {
+    console.log("Activando lote con ID:", id);
     showDefault();
     await lotestore.putActivarlote(id);
     cancelShow();
-    greatMessage.value = "lote Activo";
+    greatMessage.value = "Lote Activo";
     showGreat();
     obtenerInfo();
   } catch (error) {
+    console.error("Error al activar lote:", error);
     cancelShow();
     badMessage.value = error.response.data.error.errors[0].msg;
     showBad();
   }
 }
+
 
 let greatMessage = ref("");
 let badMessage = ref("");
