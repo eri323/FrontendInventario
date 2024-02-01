@@ -132,7 +132,7 @@ let area_id = ref("");
 let text = ref("Agregar Ficha");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
-
+let prompt = ref(false);
 /* const state = reactive({
   name: null,
   age: null,

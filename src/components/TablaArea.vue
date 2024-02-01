@@ -58,11 +58,11 @@
               </q-card-section>
 
               <q-card-actions align="right" class="text-primary">
-                <q-btn flat label="Cancel" v-close-popup />
-                <button class="btnagregar" @click="agregarficha()" v-if="btnagregar">
+                <button  v-close-popup class="btncamcel" @click="limpiar()"></button>
+                <button class="btnagregar" @click="agregararea()" v-if="btnagregar">
                   Agregar
                 </button>
-                <button class="btnagregar" @click="agregarficha()" v-if="btnaceptar">
+                <button class="btnagregar" @click="agregararea()" v-if="btnaceptar">
                   Aceptar
                 </button>
               </q-card-actions>
@@ -94,6 +94,7 @@ let areas = ref([]);
 let text = ref("Agregar area");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
+let prompt = ref(false)
 // Filtrar Areas
 /* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -143,6 +144,7 @@ const columns = [
 ];
 function limpiar() {
   Nombre.value = "";
+  prompt.value = false;
 }
 async function agregararea() {
   if (xd.value == 0) {
@@ -214,6 +216,7 @@ async function agregararea() {
 
 let idarea = ref("");
 async function editararea(id) {
+  prompt.value = true
   xd.value = 1;
   const areaseleccionada = areas.value.find((area) => area._id === id);
   if (areaseleccionada) {
