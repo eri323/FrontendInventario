@@ -5,30 +5,36 @@
       <h1>Productos</h1>
 
 
+      <div class="container2">
+        <div class="tabladiv">
 
-      <div class="q-pa-md">
-        <q-table flat bordered title="Datos de productos" :rows="rows" :columns="columns" row-key="index" virtual-scroll
-          :rows-per-page-options="[0]">
-          <template v-slot:body-cell-Estado="props">
-              <q-td :props="props">
-                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
-                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
-              </q-td>
-            </template>
-            <template v-slot:body-cell-opciones="props">
-              <q-td class="opciones" :props="props">
-                <button class="btnedit" @click="editarficha(props.row._id)">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button class="btninac" @click="inactivarProducto(props.row._id)" v-if="props.row.Estado == 1">
-                  <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
-                </button>
-                <button class="btnact" @click="activarProducto(props.row._id)" v-else>
-                  <i class="fa-solid fa-check" style="color: #006110"></i>
-                </button>
-              </q-td>
-            </template>
-        </q-table>
+
+
+          <div class="q-pa-md">
+            <q-table class="tabla" flat bordered title="Datos de productos" :rows="rows" :columns="columns"
+              row-key="index" virtual-scroll :rows-per-page-options="[0]">
+              <template v-slot:body-cell-Estado="props">
+                <q-td :props="props">
+                  <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                  <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
+                </q-td>
+              </template>
+              <template v-slot:body-cell-opciones="props">
+                <q-td class="opciones" :props="props">
+                  <button class="btnedit" @click="editarficha(props.row._id)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="btninac" @click="inactivarProducto(props.row._id)" v-if="props.row.Estado == 1">
+                    <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
+                  </button>
+                  <button class="btnact" @click="activarProducto(props.row._id)" v-else>
+                    <i class="fa-solid fa-check" style="color: #006110"></i>
+                  </button>
+                </q-td>
+              </template>
+            </q-table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -56,9 +62,10 @@ const columns = [
   { name: "PrecioUnitario", label: "Precio unitario", align: "center", field: "PrecioUnitario" },
   { name: "Iva", label: "Iva", align: "center", field: "Iva" },
   { name: "Tipo", label: "Tipo", align: "center", field: "Tipo" },
-  { name: "Estado", label: "Estado", align: "center", field: "Estado", sortable: true, format: (val) => (val ? "Activo" : "Inactivo"),
+  {
+    name: "Estado", label: "Estado", align: "center", field: "Estado", sortable: true, format: (val) => (val ? "Activo" : "Inactivo"),
   },
-  { name: "opciones", label: "Opciones", align: "center", field: (row) => null, sortable: false,},];
+  { name: "opciones", label: "Opciones", align: "center", field: (row) => null, sortable: false, },];
 
 
 
@@ -154,7 +161,6 @@ onMounted(async () => {
 
 
 <style scoped>
-
 * {
   color: black;
 }
@@ -168,6 +174,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 25px;
+  margin-top: 95px;
 }
 
 .container {
@@ -193,6 +208,10 @@ body {
   cursor: pointer;
 }
 
+.tabla {
+  border-radius: 15px;
+}
+
 .btninac {
   background-color: rgb(255, 186, 186);
   font-size: 23px;
@@ -202,8 +221,6 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
-
-
 
 .btninac:hover {
   transform: scale(1.1);
@@ -232,5 +249,4 @@ body {
   padding: 0;
   margin: 0;
 }
-
 </style>
