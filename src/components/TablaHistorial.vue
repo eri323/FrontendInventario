@@ -54,17 +54,6 @@ import { useQuasar } from "quasar";
 import { format } from "date-fns";
 import { usefichastore } from "../stores/Fichas.js";
 import { useareastore } from "../stores/Area.js";
-const fichastore = usefichastore();
-const areastore = useareastore();
-const options = ref([]);
-const $q = useQuasar();
-let notification;
-let codigodeficha = ref("");
-let nombre = ref("");
-let niveldeformacion = ref("");
-let fechainicio = ref("");
-let fechafin = ref("");
-let area_id = ref("");
 let text = ref("Agregar Ficha");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
@@ -79,9 +68,8 @@ function agregar() {
   btnagregar.value = true;
 }
 let rows = ref([]);
-let ficha = ref([]);
 let xd = ref(0);
-let Area_Id = ref("");
+
 const columns = [
   {
     name: "CodigoFicha",
