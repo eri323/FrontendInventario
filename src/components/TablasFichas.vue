@@ -165,10 +165,7 @@
         </div>
       </div>
     </div>
-    <!--    <div class="btn">
-      <q-btn class="btns2" color="secondary" label="Ayuda" />
-      <q-btn class="btns2" color="secondary" label="Ver lotes" />
-    </div> -->
+
   </div>
 </template>
 
@@ -203,35 +200,6 @@ function agregar() {
   btnaceptar.value = false;
   btnagregar.value = true;
 }
-/* const state = reactive({
-  name: null,
-  age: null,
-  accept: false,
-});
-
-const onSubmit = () => {
-  if (state.accept !== true) {
-    $q.notify({
-      color: "red-5",
-      textColor: "white",
-      icon: "warning",
-      message: "You need to accept the license and terms first",
-    });
-  } else {
-    $q.notify({
-      color: "green-4",
-      textColor: "white",
-      icon: "cloud_done",
-      message: "Submitted",
-    });
-  }
-};
-
-const onReset = () => {
-  state.name = null;
-  state.age = null;
-  state.accept = false;
-}; */
 let rows = ref([]);
 let ficha = ref([]);
 let xd = ref(0);
@@ -539,20 +507,6 @@ const cancelShow = () => {
   }
 };
 
-/* let fixed = ref(false); */
-// let searchCedula = ref("");
-
-// Filtrar Clientes
-/* function filtrarvendedores() {
-    if (searchCedula.value.trim() === "") {
-        rows.value = vendedores.value;
-    } else {
-        const searchTerm = searchCedula.value.trim().toLowerCase();
-        rows.value = vendedores.value.filter((cliente) =>
-            cliente.cedula.toString().toLowerCase().includes(searchTerm)
-        );
-    }
-} */
 </script>
 
 <style scoped>
@@ -728,62 +682,5 @@ body {
   font-family: "Gabarito", sans-serif;
   padding: 0;
   margin: 0;
-}
-
-.btn-agregar {
-  display: flex;
-  justify-content: center;
-}
-
-
-
-
-
-.b-b {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.bbuscar {
-  width: 170px;
-  font-size: 18px;
-  background-color: rgba(5, 245, 5, 0.432);
-  border-radius: 9px;
-  position: relative;
-  top: 6px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #3498db;
-  color: #fff;
-}
-
-.close-button {
-  color: #fff;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.modal-input {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.modal-footer {
-  padding: 10px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.action-button {
-  margin-left: 10px;
 }
 </style>
