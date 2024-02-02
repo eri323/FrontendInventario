@@ -56,7 +56,7 @@
           <button @click="Login()" class="btn" :disabled="loading">
             <span v-if="!loading">Aceptar</span>
             <span v-else>
-              <i class="fas fa-spinner fa-spin"></i> 
+              <i class="fas fa-spinner fa-spin"></i>
             </span>
           </button>
         </div>
@@ -101,14 +101,14 @@ async function Login() {
     } else {
       const res = await usuariostore.login(data.value);
       console.log(res);
-      if (res != 200) {
+      if (res.status === 200 && res.token) {
+        router.push("./home");
+      } else {
         error2.value = true;
         msj.value = res.msg;
         setTimeout(() => {
           error2.value = false;
         }, 2200);
-      } else {
-        router.push("./home");
       }
     }
   } catch (error) {
@@ -117,6 +117,7 @@ async function Login() {
     loading.value = false;
   }
 }
+
 console.log(data.value);
 
 function validar() {
