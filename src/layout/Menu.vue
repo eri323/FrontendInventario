@@ -137,6 +137,16 @@
 
           <div class="div">
             <q-item-section>
+              <i class="fa-solid fa-book-bookmark"></i>
+            </q-item-section>
+
+            <q-item-section>
+              <router-link to="./TablaHistorial">Historial de compras</router-link>
+            </q-item-section>
+          </div>
+
+          <div class="div">
+            <q-item-section>
               <i class="fa-solid fa-gear"></i>
             </q-item-section>
 

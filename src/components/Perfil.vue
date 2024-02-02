@@ -19,13 +19,7 @@
           </q-card-section>
         </q-card-section>
       </q-card>
-      <q-card class="col-4" style="max-width: 900px; border-radius: 0 20px 20px 0;">
-        <q-card-section>
-          <h4>Historial</h4>
-        </q-card-section>
-        <q-card-section style="border: none;">
-        </q-card-section>
-      </q-card>
+
 
     </div>
     <div>
