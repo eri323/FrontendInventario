@@ -102,6 +102,8 @@ async function Login() {
       const res = await usuariostore.login(data.value);
       console.log(res);
       if (res.status === 200 && res.token) {
+        await usuariostore.obtenerinfousuario();
+        console.log(usuariostore.usuario);
         router.push("./home");
       } else {
         error2.value = true;

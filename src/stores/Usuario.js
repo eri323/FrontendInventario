@@ -54,6 +54,7 @@ export const useusuariostore = defineStore("usuario", () => {
     }
   };
 
+  const tokenRef = ref(localStorage.getItem("token") || null);
   const usuarios = ref([]);
   const login = async (data) => {
     try {
@@ -62,6 +63,7 @@ export const useusuariostore = defineStore("usuario", () => {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
+        tokenRef.value = token;
         const usuario = response.data.usuarios;
         usuarios.value = usuario;
         return { status: response.status, token };
@@ -74,11 +76,17 @@ export const useusuariostore = defineStore("usuario", () => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    token.value = null; 
+  };
+
   return {
     usuario,
     usuarios,
     obtenerinfousuario,
     login,
+    logout,
     postinfousuario,
     puteditarusuario,
     putInactivarusuario,

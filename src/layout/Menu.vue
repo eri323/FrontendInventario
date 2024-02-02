@@ -141,7 +141,9 @@
             </q-item-section>
 
             <q-item-section>
-              <router-link to="./TablaHistorial">Historial de compras</router-link>
+              <router-link to="./TablaHistorial"
+                >Historial de compras</router-link
+              >
             </q-item-section>
           </div>
 
@@ -200,6 +202,8 @@ export default {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       goToHome() {
+        localStorage.removeItem("token");
+        console.log("Sesión cerrada. Redirigiendo a la página de inicio...");
         router.push("/");
       },
     };
