@@ -17,28 +17,12 @@
             </button>
           </div>
 
-          <q-table
-            flat
-            bordered
-            title=""
-            class="tabla"
-            :rows="rows"
-            :columns="columns"
-            row-key="index"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-          >
+          <q-table flat bordered title="" class="tabla" :rows="rows" :columns="columns" row-key="index" virtual-scroll
+            :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label
-                  for=""
-                  v-if="props.row.Estado == 1"
-                  style="color: green; font-weight: bold"
-                  >Activo</label
-                >
-                <label for="" v-else style="color: red; font-weight: bold"
-                  >Inactivo</label
-                >
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -46,18 +30,10 @@
                 <button class="btnedit" @click="editarProducto(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button
-                  class="btninac"
-                  @click="inactivarProducto(props.row._id)"
-                  v-if="props.row.Estado == 1"
-                >
+                <button class="btninac" @click="inactivarProducto(props.row._id)" v-if="props.row.Estado == 1">
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button
-                  class="btnact"
-                  @click="activarProducto(props.row._id)"
-                  v-else
-                >
+                <button class="btnact" @click="activarProducto(props.row._id)" v-else>
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
@@ -66,126 +42,72 @@
           <q-dialog v-model="prompt" persistent class="containermodal">
             <q-card class="modal">
               <q-card-section class="titledialog">
-                <h5
-                  style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold"
-                >
+                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">
                   {{ text }}
                 </h5>
               </q-card-section>
 
               <q-card-section>
-                <q-input
-                  filled
-                  v-model="Codigo"
-                  label="Codigo de ficha"
-                  type="number"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val && val.length > 0) || 'Por favor ingrese un codigo',
-                  ]"
-                />
+                <q-input filled v-model="Codigo" label="Codigo de ficha" type="number" lazy-rules :rules="[
+                  (val) =>
+                    (val && val.length > 0) || 'Por favor ingrese un codigo',
+                ]" />
 
                 <!------------------------------->
 
-                <q-input
-                  filled
-                  v-model="Nombre"
-                  label="Nombre del Producto"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val !== null && val !== '') ||
-                      'Por favor ingresar el nombre del producto',
-                  ]"
-                />
+                <q-input filled v-model="Nombre" label="Nombre del Producto" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Por favor ingresar el nombre del producto',
+                ]" />
 
                 <!------------------------------->
 
-                <q-input
-                  filled
-                  v-model="Descripcion"
-                  label="Descripcion del producto"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val !== null && val !== '') ||
-                      'Por favor ingresar el producto',
-                  ]"
-                />
+                <q-input filled v-model="Descripcion" label="Descripcion del producto" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Por favor ingresar el producto',
+                ]" />
 
                 <!------------------------------->
 
-                <q-input
-                  filled
-                  v-model="UnidadMedida"
-                  label="Unidad de medida"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val && val.length > 0) ||
-                      'Por favor ingresar la unidad de medida ',
-                  ]"
-                />
+                <q-input filled v-model="UnidadMedida" label="Unidad de medida" lazy-rules :rules="[
+                  (val) =>
+                    (val && val.length > 0) ||
+                    'Por favor ingresar la unidad de medida ',
+                ]" />
 
                 <!------------------------------->
 
-                <q-input
-                  filled
-                  v-model="PrecioUnitario"
-                  label="Precio de unidad "
-                  type="number"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val !== null && val !== '') ||
-                      'Por favor ingresar el precio',
-                  ]"
-                />
+                <q-input filled v-model="PrecioUnitario" label="Precio de unidad " type="number" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Por favor ingresar el precio',
+                ]" />
 
                 <!------------------------------->
 
-                <q-input
-                  filled
-                  v-model="Iva"
-                  label="Iva"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val !== null && val !== '') ||
-                      'Por favor ingresar el iva ',
-                  ]"
-                />
+                <q-input filled v-model="Iva" label="Iva" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Por favor ingresar el iva ',
+                ]" />
 
                 <!------------------------------->
 
-                <q-input
-                  filled
-                  v-model="Tipo"
-                  label="Tipo"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val !== null && val !== '') ||
-                      'Por favor ingresar el tipo de producto ',
-                  ]"
-                />
+                <q-input filled v-model="Tipo" label="Tipo" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Por favor ingresar el tipo de producto ',
+                ]" />
               </q-card-section>
 
               <q-card-actions align="right" class="containerbtnmodal">
                 <button flat v-close-popup class="btnagregar">Cancelar</button>
-                <button
-                  class="btnagregar"
-                  @click="agregarProducto()"
-                  v-if="btnagregar"
-                >
+                <button class="btnagregar" @click="agregarProducto()" v-if="btnagregar">
                   Agregar
                 </button>
-                <button
-                  class="btnagregar"
-                  @click="agregarProducto()"
-                  v-if="btnaceptar"
-                >
+                <button class="btnagregar" @click="agregarProducto()" v-if="btnaceptar">
                   Aceptar
                 </button>
               </q-card-actions>
@@ -595,11 +517,13 @@ body {
   font-weight: bold;
   width: 85px;
 }
+
 .containerbtnmodal {
   display: flex;
   border-top: 3px solid green;
   padding: 0;
 }
+
 .title {
   display: flex;
   align-items: center;
@@ -645,11 +569,13 @@ body {
   cursor: pointer;
   background-color: rgb(227, 227, 227);
 }
+
 .btninac:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
   background-color: rgb(237, 179, 179);
 }
+
 .btnag h5 {
   margin: 0;
   font-size: 15px;
