@@ -57,17 +57,22 @@ export const useusuariostore = defineStore("usuario", () => {
   const usuarios = ref([]);
   const login = async (data) => {
     try {
-      let r = await axios.post(`usuario/login`, data);
+      let response = await axios.post(`usuario/login`, data);
 
-      usuarios.value = r.data.usuario;
-      return r.status;
+      if (response.status === 200) {
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        const usuario = response.data.usuarios;
+        usuarios.value = usuario;
+        return { status: response.status, token };
+      } else {
+        return { status: response.status, token: null };
+      }
     } catch (error) {
-      console.log(error);
-      return error.response.data;
+      console.error("Error en el inicio de sesión:", error);
+      return { status: error.response.status, token: null };
     }
   };
-
-
 
   return {
     usuario,
