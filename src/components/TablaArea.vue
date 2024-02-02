@@ -1,17 +1,12 @@
 <template>
   <div class="container">
     <!-- Tabla -->
-    <div class="container-table" style="height: 90vh; width: 80%">
-      <!-- <div class="b-b">
-        <q-input
-          class="bbuscar te"
-          v-model.lazy="searchCedula"
-          label="Buscar por Codigo de area "
-          style="width: 300px"
-        />
-      </div> -->
-
-      <div class="container2">
+    <div class="container-table" >
+      <div class="spinner-container" v-if="cargando">
+        <q-spinner-hourglass size="100px" color="light-green" />
+        <p class="p-carga">Cargando...</p>
+      </div>
+      <div class="container2" v-else>
         <div class="tabladiv">
           <div class="header">
             <h5 class="title">
@@ -57,8 +52,8 @@
                 ]" />
               </q-card-section>
 
-              <q-card-actions align="right" class="text-primary">
-                <button  v-close-popup class="btncamcel" @click="limpiar()"></button>
+              <q-card-actions align="right" class="containerbtnmodal">
+                <button  v-close-popup class="btnagregar" > Cancelar</button>
                 <button class="btnagregar" @click="agregararea()" v-if="btnagregar">
                   Agregar
                 </button>
@@ -86,6 +81,15 @@ import { useareastore } from "../stores/Area.js";
 /* const $q = useQuasar(); */
 const areastore = useareastore();
 let rows = ref([]);
+const cargando = ref(false);
+function agregar() {
+  prompt.value = true;
+  xd.value = 0;
+  limpiar();
+  text.value = "Agregar producto";
+  btnaceptar.value = false;
+  btnagregar.value = true;
+}
 let xd = ref(0);
 /* let fixed = ref(false); */
 const $q = useQuasar();
@@ -240,12 +244,15 @@ async function editararea(id) {
 }
 async function obtenerInfo() {
   try {
+    cargando.value = true;
     const response = await areastore.obtenerinfoarea();
     console.log(response);
     areas.value = areastore.area;
     rows.value = areastore.area;
   } catch (error) {
     console.log(error);
+  } finally{
+    cargando.value = false;
   }
 }
 async function inactivararea(id) {
@@ -331,24 +338,20 @@ body {
 }
 .header {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-end;
 }
-.title{
-  margin: 0;
-  font-weight: bold;
-  padding-left: 15px;
-}
+
 .btnag {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   font-size: 25px;
-  padding: 10px;
+  height: 45px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 0px 7px 0px 0px;
   cursor: pointer;
-  margin-bottom: 10px;
+  background-color: rgb(227, 227, 227);
 }
 
 .btnag h5 {
@@ -393,18 +396,10 @@ body {
   justify-content: space-around;
   align-items: center;
   gap: 25px;
+  margin-top: 95px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 15px;
-  margin-top: 25px;
-  width: 20%;
-}
+
 
 .btnact {
   background-color: rgb(167, 255, 167);
@@ -415,7 +410,15 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+.titledialog {
+  border-bottom: 3px solid green;
+}
 
+.modal {
+  width: 550px;
+  border-radius: 15px;
+  text-align: center;
+}
 .btnact:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
@@ -439,12 +442,40 @@ body {
   padding: 0;
 }
 
-.tabladiv {
-  width: 60%;
+
+
+
+.btnagregar {
+  border: 0;
+  cursor: pointer;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  background-color: transparent;
+  font-weight: bold;
+  width: 85px;
+}
+.containerbtnmodal {
+  display: flex;
+  border-top: 3px solid green;
+  padding: 0;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  margin: 0;
+  padding: 16px 0px;
+  background-color: #21ba45;
+  font-weight: bold;
+  width: 20%;
+  margin-left: 0px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .tabla {
-  border-radius: 15px;
+  border-radius: 0px 15px 15px 15px;
 }
 
 .container-table {
@@ -460,24 +491,6 @@ body {
   margin: 0;
 }
 
-.btn-agregar {
-  display: flex;
-  justify-content: center;
-}
 
-.btnagregar {
-  border: 0;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 12px;
-  background-color: rgb(227, 227, 227);
-  font-weight: bold;
-  width: 85px;
-}
 
-.btnagregar:hover {
-  transform: scale(1.1);
-  transition: ease-in-out 0.4s;
-  background-color: rgb(209, 209, 209);
-}
 </style>

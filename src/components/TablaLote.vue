@@ -2,14 +2,40 @@
   <div class="container">
     <!-- Tabla -->
     <div class="container-table">
-      <div class="container2">
+      <div class="spinner-container" v-if="cargando">
+        <q-spinner-hourglass size="100px" color="light-green" />
+        <p class="p-carga">Cargando...</p>
+      </div>
+      <div class="container2" v-else>
         <div class="tabladiv">
-          <q-table flat bordered title="Lotes" class="tabla" :rows="rows" :columns="columns" row-key="index"
-            virtual-scroll :rows-per-page-options="[0]">
+          <div class="header">
+            <h5 class="title">Lotes</h5>
+            <button class="btnag" @click="agregar()">
+              <h5>Agregar</h5>
+              <i class="fa-regular fa-square-plus"></i>
+            </button>
+          </div>
+          <q-table
+            flat
+            bordered
+            class="tabla"
+            :rows="rows"
+            :columns="columns"
+            row-key="index"
+            virtual-scroll
+            :rows-per-page-options="[0]"
+          >
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
-                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
+                <label
+                  for=""
+                  v-if="props.row.Estado == 1"
+                  style="color: green; font-weight: bold"
+                  >Activo</label
+                >
+                <label for="" v-else style="color: red; font-weight: bold"
+                  >Inactivo</label
+                >
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -17,52 +43,78 @@
                 <button class="btnedit" @click="editarlote(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button class="btninac" @click="inactivarlote(props.row._id)" v-if="props.row.Estado == 1">
+                <button
+                  class="btninac"
+                  @click="inactivarlote(props.row._id)"
+                  v-if="props.row.Estado == 1"
+                >
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button class="btnact" @click="activarlote(props.row._id)" v-else>
+                <button
+                  class="btnact"
+                  @click="activarlote(props.row._id)"
+                  v-else
+                >
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
             </template>
           </q-table>
-        </div>
-        <div class="form">
-          <div class="q-pa-md" style="max-width: 400px">
-            <h5 style="margin: 0; padding: 0px 0px 18px 0px; font-weight: bold">
-              {{ text }}
-            </h5>
-            <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-              <q-input filled v-model="Nombre" label="Nombre" type="text" lazy-rules :rules="[
-                (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-              ]" />
+          <q-dialog v-model="prompt" persistent class="containermodal">
+            <q-card class="modal">
+              <q-card-section class="titledialog">
+                <h5
+                  style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold"
+                >
+                  {{ text }}
+                </h5>
+              </q-card-section>
 
-              <q-input filled v-model="Presupuesto" label="Presupuesto *" type="number" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Porfavor ingresa el presupuesto de el lote',
-              ]" />
+              <q-card-section>
+                <q-input
+                  filled
+                  v-model="Nombre"
+                  label="Nombre"
+                  type="text"
+                  lazy-rules
+                  :rules="[
+                    (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+                  ]"
+                />
 
-              <div class="btn-agregar">
-                <button class="btnagregar" @click="agregarlote()" v-if="btnagregar">
+                <q-input
+                  filled
+                  v-model="Presupuesto"
+                  label="Presupuesto *"
+                  type="number"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val !== null && val !== '') ||
+                      'Porfavor ingresa el presupuesto de el lote',
+                  ]"
+                />
+              </q-card-section>
+
+              <q-card-actions align="right" class="containerbtnmodal">
+                <button flat v-close-popup class="btnagregar">Cancelar</button>
+                <button
+                  class="btnagregar"
+                  @click="agregarlote()"
+                  v-if="btnagregar"
+                >
                   Agregar
                 </button>
-                <button class="btnagregar" @click="agregarlote()" v-if="btnaceptar">
+                <button
+                  class="btnagregar"
+                  @click="agregarlote()"
+                  v-if="btnaceptar"
+                >
                   Aceptar
                 </button>
-              </div>
-              <!--  <div>
-                        <q-btn label="Submit" type="submit" color="primary" />
-                        <q-btn
-                          label="Reset"
-                          type="reset"
-                          color="primary"
-                          flat
-                          class="q-ml-sm"
-                        />
-                      </div> -->
-            </q-form>
-          </div>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
       </div>
     </div>
@@ -82,12 +134,23 @@ import { uselotestore } from "../stores/Lote.js";
 const lotestore = uselotestore();
 let rows = ref([]);
 let xd = ref(0);
+let prompt = ref(false);
 /* let fixed = ref(false); */
 const $q = useQuasar();
 let lotes = ref([]);
 let text = ref("Agregar Lote");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
+
+const cargando = ref(false);
+function agregar() {
+  prompt.value = true;
+  xd.value = 0;
+  limpiar();
+  text.value = "Agregar lote";
+  btnaceptar.value = false;
+  btnagregar.value = true;
+}
 let notification;
 let Nombre = ref("");
 let Presupuesto = ref("");
@@ -207,7 +270,6 @@ async function agregarlote() {
           type: "positive",
         });
         obtenerInfo();
-        fixed.value = false;
       } catch (error) {
         if (notification) {
           notification();
@@ -225,6 +287,7 @@ async function agregarlote() {
 
 let idlote = ref("");
 async function editarlote(id) {
+  prompt.value = true;
   xd.value = 1;
   const loteseleccionada = lotes.value.find((lote) => lote._id === id);
   if (loteseleccionada) {
@@ -250,12 +313,15 @@ async function editarlote(id) {
 
 async function obtenerInfo() {
   try {
+    cargando.value = true;
     const response = await lotestore.obtenerinfolote();
     console.log(response);
     lotes.value = lotestore.lote;
     rows.value = lotestore.lote;
   } catch (error) {
     console.log(error);
+  } finally {
+    cargando.value = false;
   }
 }
 async function inactivarlote(id) {
@@ -293,7 +359,6 @@ async function activarlote(id) {
     showBad();
   }
 }
-
 
 let greatMessage = ref("");
 let badMessage = ref("");
@@ -368,7 +433,58 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
-
+.titledialog {
+  border-bottom: 3px solid green;
+}
+.btnagregar {
+  border: 0;
+  cursor: pointer;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  background-color: transparent;
+  font-weight: bold;
+  width: 85px;
+}
+.modal {
+  width: 550px;
+  border-radius: 15px;
+  text-align: center;
+}
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  margin: 0;
+  padding: 16px 0px;
+  background-color: #21ba45;
+  font-weight: bold;
+  width: 20%;
+  margin-left: 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+.btnag {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+  font-size: 25px;
+  height: 45px;
+  border: 0;
+  border-radius: 0px 7px 0px 0px;
+  cursor: pointer;
+  background-color: rgb(227, 227, 227);
+}
+.btnag h5 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
 .btnedit {
   font-size: 20px;
   width: 40px;
@@ -384,17 +500,7 @@ body {
   justify-content: space-around;
   align-items: center;
   gap: 25px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 15px;
-  margin-top: 25px;
-  width: 20%;
+  margin-top: 95px;
 }
 
 .btnact {
@@ -430,20 +536,6 @@ body {
   padding: 0;
 }
 
-.tabladiv {
-  width: 60%;
-}
-
-.btns2 {
-  width: 120px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
-
 .container {
   display: flex;
   justify-content: center;
@@ -468,27 +560,17 @@ body {
 }
 
 .tabla {
-  border-radius: 30px;
+  border-radius: 0px 15px 15px 15px;
 }
 
 .btn-agregar {
   display: flex;
   justify-content: center;
 }
-
-.btnagregar {
-  border: 0;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 12px;
-  background-color: rgb(227, 227, 227);
-  font-weight: bold;
-  width: 85px;
+.containerbtnmodal {
+  display: flex;
+  border-top: 3px solid green;
+  padding: 0;
 }
 
-.btnagregar:hover {
-  transform: scale(1.1);
-  transition: ease-in-out 0.4s;
-  background-color: rgb(209, 209, 209);
-}
 </style>
