@@ -2,21 +2,24 @@
   <div class="container">
     <!-- Tabla -->
     <div class="container-table">
-      <!-- <div class="b-b">
-        <q-input
-          class="bbuscar te"
-          v-model.lazy="searchCedula"
-          label="Buscar por Codigo de usuario "
-          style="width: 300px"
-        />
-      </div> -->
-      <div class="container2">
+      <div class="spinner-container" v-if="cargando">
+        <q-spinner-hourglass size="100px" color="light-green" />
+        <p class="p-carga">Cargando...</p>
+      </div>
+
+      <div class="container2" v-else>
         <div class="tabladiv">
+          <div class="header">
+            <h5 class="title">Usuarios</h5>
+            <!--   <button class="btnag" @click="agregar()">
+              <h5>Agregar</h5>
+              <i class="fa-regular fa-square-plus"></i>
+            </button> -->
+          </div>
           <q-table
             class="tabla"
             flat
             bordered
-            title="Usuarios"
             :rows="rows"
             :columns="columns"
             row-key="index"
@@ -25,10 +28,15 @@
           >
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label for="" v-if="props.row.Estado == 1" style="color: green"
+                <label
+                  for=""
+                  v-if="props.row.Estado == 1"
+                  style="color: green; font-weight: bold"
                   >Activo</label
                 >
-                <label for="" v-else style="color: red">Inactivo</label>
+                <label for="" v-else style="color: red; font-weight: bold"
+                  >Inactivo</label
+                >
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -75,6 +83,7 @@ let rows = ref([]);
 /* let fixed = ref(false); */
 let searchCedula = ref("");
 let usuarios = ref([]);
+const cargando = ref(false);
 // Filtrar lotes
 /* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -101,8 +110,8 @@ const columns = [
   },
   {
     name: "Identificacion",
-    label: "Descripcion",
-    field: "Descripcion",
+    label: "Identificacion",
+    field: "Identificacion",
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -175,12 +184,15 @@ const columns = [
 ];
 async function obtenerInfo() {
   try {
+    cargando.value = true;
     const response = await usuariostore.obtenerinfousuario();
     console.log(response);
     usuarios.value = usuariostore.usuario;
     rows.value = usuariostore.usuario;
   } catch (error) {
     console.log(error);
+  } finally {
+    cargando.value = false;
   }
 }
 
@@ -189,7 +201,6 @@ async function inactivarusuario(id) {
   try {
     showDefault();
     await usuariostore.putInactivarusuario(id);
-
     cancelShow();
     greatMessage.value = "Usuario Inactivo";
     showGreat();
@@ -275,19 +286,31 @@ body {
   align-items: center;
 }
 .tabla {
-  border-radius: 15px;
-  margin-top: 25px;
-
+  border-radius: 0px 15px 15px 15px;
 }
+
 .container2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-.tabladiv{
-    display: flex;
-    justify-content: center;
-   padding: 50px ;
+
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  margin: 0;
+  padding: 16px 0px;
+  background-color: #21ba45;
+  font-weight: bold;
+  width: 20%;
+  margin-left: 0px;
+  border-radius: 10px 10px 0px 0px;
 }
 .opciones {
   display: flex;
@@ -342,9 +365,17 @@ body {
 .container-table {
   display: flex;
   justify-content: center;
+  text-align: center;
   flex-direction: column;
 }
-
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 25px;
+  margin-top: 95px;
+}
 .container-table h1 {
   font-family: "Gabarito", sans-serif;
   padding: 0;

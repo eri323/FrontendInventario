@@ -1,36 +1,44 @@
 <template>
   <div class="container">
     <!-- Tabla -->
-    <div class="container-table" style="height: 90vh; width: 80%">
-
+    <div class="container-table">
       <div class="spinner-container" v-if="cargando">
         <q-spinner-hourglass size="100px" color="light-green" />
         <p class="p-carga">Cargando...</p>
       </div>
 
-
-      <div class="container2" v-else >
+      <div class="container2" v-else>
         <div class="tabladiv">
-
           <div class="header">
-            <h5 class="title">
-              Productos
-            </h5>
-            <button class="btnag" @click="prompt = true">
+            <h5 class="title">Productos</h5>
+            <button class="btnag" @click="agregar()">
               <h5>Agregar</h5>
               <i class="fa-regular fa-square-plus"></i>
             </button>
           </div>
 
-
-
-          <q-table flat bordered title="" class="tabla" :rows="rows" :columns="columns" row-key="index"
-            virtual-scroll :rows-per-page-options="[0]">
-
+          <q-table
+            flat
+            bordered
+            title=""
+            class="tabla"
+            :rows="rows"
+            :columns="columns"
+            row-key="index"
+            virtual-scroll
+            :rows-per-page-options="[0]"
+          >
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
-                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
+                <label
+                  for=""
+                  v-if="props.row.Estado == 1"
+                  style="color: green; font-weight: bold"
+                  >Activo</label
+                >
+                <label for="" v-else style="color: red; font-weight: bold"
+                  >Inactivo</label
+                >
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -38,10 +46,18 @@
                 <button class="btnedit" @click="editarProducto(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button class="btninac" @click="inactivarProducto(props.row._id)" v-if="props.row.Estado == 1">
+                <button
+                  class="btninac"
+                  @click="inactivarProducto(props.row._id)"
+                  v-if="props.row.Estado == 1"
+                >
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button class="btnact" @click="activarProducto(props.row._id)" v-else>
+                <button
+                  class="btnact"
+                  @click="activarProducto(props.row._id)"
+                  v-else
+                >
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
@@ -50,70 +66,126 @@
           <q-dialog v-model="prompt" persistent class="containermodal">
             <q-card class="modal">
               <q-card-section class="titledialog">
-                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">{{ text }}</h5>
+                <h5
+                  style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold"
+                >
+                  {{ text }}
+                </h5>
               </q-card-section>
 
               <q-card-section>
-                <q-input filled v-model="Codigo" label="Codigo de ficha" type="number" lazy-rules :rules="[
-                  (val) => (val && val.length > 0) || 'Por favor ingrese un codigo',
-                ]" />
+                <q-input
+                  filled
+                  v-model="Codigo"
+                  label="Codigo de ficha"
+                  type="number"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Por favor ingrese un codigo',
+                  ]"
+                />
 
                 <!------------------------------->
 
-                <q-input filled v-model="Nombre" label="Nombre del Producto" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el nombre del producto',
-                ]" />
+                <q-input
+                  filled
+                  v-model="Nombre"
+                  label="Nombre del Producto"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val !== null && val !== '') ||
+                      'Por favor ingresar el nombre del producto',
+                  ]"
+                />
 
                 <!------------------------------->
 
-                <q-input filled v-model="Descripcion" label="Descripcion del producto" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el producto',
-                ]" />
+                <q-input
+                  filled
+                  v-model="Descripcion"
+                  label="Descripcion del producto"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val !== null && val !== '') ||
+                      'Por favor ingresar el producto',
+                  ]"
+                />
 
                 <!------------------------------->
 
-                <q-input filled v-model="UnidadMedida" label="Unidad de medida" lazy-rules :rules="[
-                  (val) =>
-                    (val && val.length > 0) ||
-                    'Por favor ingresar la unidad de medida ',
-                ]" />
+                <q-input
+                  filled
+                  v-model="UnidadMedida"
+                  label="Unidad de medida"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) ||
+                      'Por favor ingresar la unidad de medida ',
+                  ]"
+                />
 
                 <!------------------------------->
 
-                <q-input filled v-model="PrecioUnitario" label="Precio de unidad " type="number" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el precio',
-                ]" />
+                <q-input
+                  filled
+                  v-model="PrecioUnitario"
+                  label="Precio de unidad "
+                  type="number"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val !== null && val !== '') ||
+                      'Por favor ingresar el precio',
+                  ]"
+                />
 
                 <!------------------------------->
 
-                <q-input filled v-model="Iva" label="Iva" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el iva ',
-                ]" />
+                <q-input
+                  filled
+                  v-model="Iva"
+                  label="Iva"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val !== null && val !== '') ||
+                      'Por favor ingresar el iva ',
+                  ]"
+                />
 
                 <!------------------------------->
 
-                <q-input filled v-model="Tipo" label="Tipo" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el tipo de producto ',
-                ]" />
-
+                <q-input
+                  filled
+                  v-model="Tipo"
+                  label="Tipo"
+                  lazy-rules
+                  :rules="[
+                    (val) =>
+                      (val !== null && val !== '') ||
+                      'Por favor ingresar el tipo de producto ',
+                  ]"
+                />
               </q-card-section>
 
-              <q-card-actions align="right" class="text-primary">
-                <q-btn flat label="Cancel" v-close-popup />
-                <button class="btnagregar" @click="agregarProducto()" v-if="btnagregar">
+              <q-card-actions align="right" class="containerbtnmodal">
+                <button flat v-close-popup class="btnagregar">Cancelar</button>
+                <button
+                  class="btnagregar"
+                  @click="agregarProducto()"
+                  v-if="btnagregar"
+                >
                   Agregar
                 </button>
-                <button class="btnagregar" @click="agregarProducto()" v-if="btnaceptar">
+                <button
+                  class="btnagregar"
+                  @click="agregarProducto()"
+                  v-if="btnaceptar"
+                >
                   Aceptar
                 </button>
               </q-card-actions>
@@ -151,22 +223,120 @@ let text = ref("Agregar producto");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
 let xd = ref(0);
+function agregar() {
+  prompt.value = true;
+  xd.value = 0;
+  limpiar();
+  text.value = "Agregar producto";
+  btnaceptar.value = false;
+  btnagregar.value = true;
+}
 const cargando = ref(false);
 
-
-
 const columns = [
-  { name: "Codigo", label: "Codigo", align: "center", field: "Codigo" },
-  { name: "Nombre", label: "Nombre", align: "center", field: "Nombre" },
-  { name: "Descripcion", label: "Descripcion", align: "center", field: "Descripcion" },
-  { name: "UnidadMedida", label: "Unidad de medida", align: "center", field: "UnidadMedida" },
-  { name: "PrecioUnitario", label: "Precio unitario", align: "center", field: "PrecioUnitario" },
-  { name: "Iva", label: "Iva", align: "center", field: "Iva" },
-  { name: "Tipo", label: "Tipo", align: "center", field: "Tipo" },
-  { name: "Estado", label: "Estado", align: "center", field: "Estado", sortable: true, format: (val) => (val ? "Activo" : "Inactivo") },
-  { name: "opciones", label: "Opciones", align: "center", field: (row) => null, sortable: false, },];
-
-
+  {
+    name: "Codigo",
+    label: "Codigo",
+    align: "center",
+    field: "Codigo",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Nombre",
+    label: "Nombre",
+    align: "center",
+    field: "Nombre",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Descripcion",
+    label: "Descripcion",
+    align: "center",
+    field: "Descripcion",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "UnidadMedida",
+    label: "Unidad de medida",
+    align: "center",
+    field: "UnidadMedida",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "PrecioUnitario",
+    label: "Precio unitario",
+    align: "center",
+    field: "PrecioUnitario",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Iva",
+    label: "Iva",
+    align: "center",
+    field: "Iva",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Tipo",
+    label: "Tipo",
+    align: "center",
+    field: "Tipo",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Estado",
+    label: "Estado",
+    align: "center",
+    field: "Estado",
+    sortable: true,
+    format: (val) => (val ? "Activo" : "Inactivo"),
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "opciones",
+    label: "Opciones",
+    align: "center",
+    field: (row) => null,
+    sortable: false,
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+];
 
 async function obtenerInfo() {
   try {
@@ -181,7 +351,6 @@ async function obtenerInfo() {
   }
 }
 
-
 async function agregarProducto() {
   if (xd.value == 0) {
     try {
@@ -194,7 +363,6 @@ async function agregarProducto() {
         PrecioUnitario: PrecioUnitario.value,
         Iva: Iva.value,
         Tipo: Tipo.value,
-
       });
       obtenerInfo();
       if (notification) {
@@ -234,7 +402,8 @@ async function agregarProducto() {
         });
         btnagregar.value = true;
         btnaceptar.value = false;
-        text.value = "Agregar Producto"
+        text.value = "Agregar Producto";
+
         if (notification) {
           notification();
         }
@@ -269,9 +438,8 @@ function limpiar() {
   UnidadMedida.value = "";
   PrecioUnitario.value = "";
   Iva.value = "";
-  Tipo = "";
+  Tipo.value = "";
 }
-
 
 async function editarProducto(id) {
   prompt.value = true;
@@ -284,7 +452,6 @@ async function editarProducto(id) {
     btnagregar.value = false;
     btnaceptar.value = true;
     text.value = "Editar producto";
-
     Codigo.value = selecProducto.Codigo;
     Nombre.value = selecProducto.Nombre;
     Descripcion.value = selecProducto.Descripcion;
@@ -292,10 +459,8 @@ async function editarProducto(id) {
     PrecioUnitario.value = selecProducto.PrecioUnitario;
     Iva.value = selecProducto.Iva;
     Tipo.value = selecProducto.Tipo;
-
   }
 }
-
 
 // Inactivar producto
 async function inactivarProducto(id) {
@@ -399,7 +564,6 @@ onMounted(async () => {
     scroll-margin-top: 48px
 </style>
 
-
 <style scoped>
 * {
   color: black;
@@ -407,10 +571,6 @@ onMounted(async () => {
 
 body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
-}
-
-.q-table thead tr, .q-table tbody td {
-    height: 48px;
 }
 
 .opciones {
@@ -422,29 +582,35 @@ body {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .btnagregar {
   border: 0;
   cursor: pointer;
-  padding: 8px;
+  padding: 14px;
   border-radius: 12px;
-  background-color: rgb(227, 227, 227);
+  font-size: 15px;
+  background-color: transparent;
   font-weight: bold;
   width: 85px;
 }
-
+.containerbtnmodal {
+  display: flex;
+  border-top: 3px solid green;
+  padding: 0;
+}
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
   color: whitesmoke;
   margin: 0;
+  padding: 16px 0px;
   background-color: #21ba45;
   font-weight: bold;
   width: 20%;
-  margin-left: 10px;
+  margin-left: 0px;
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -453,8 +619,7 @@ body {
 }
 
 .btnag:hover {
-  transform: scale(1.1);
-  transition: ease-in-out 0.4s;
+  transition: ease-in-out 0.5s;
   background-color: rgb(209, 209, 209);
 }
 
@@ -470,22 +635,25 @@ body {
 
 .btnag {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   font-size: 25px;
-  padding: 10px;
+  height: 45px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 0px 7px 0px 0px;
   cursor: pointer;
-  margin-bottom: 10px;
+  background-color: rgb(227, 227, 227);
 }
-
+.btninac:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(237, 179, 179);
+}
 .btnag h5 {
   margin: 0;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
-
 }
 
 .container {
@@ -537,7 +705,7 @@ body {
 
 .btnact {
   background-color: rgb(167, 255, 167);
-  font-size: 20px;
+  font-size: 23px;
   width: 40px;
   padding: 0;
   border: 0;
