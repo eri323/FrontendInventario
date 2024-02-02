@@ -36,7 +36,7 @@ export const useproductostore = defineStore('producto', () => {
 
     const putInactivarproducto = async (id) => {
         try {
-            let responseproducto = await axios.put(`producto /productoinac/ ${id}`)
+            let responseproducto = await axios.put(`producto/productoinac/${id}`)
             return responseproducto
         } catch (error) {
             console.log(error, "Error al cambiar el estado del producto");
@@ -44,7 +44,7 @@ export const useproductostore = defineStore('producto', () => {
     };
     const putActivarproducto = async (id) => {
         try {
-            let responseproducto = await axios.put(`producto / productoact / ${id}`)
+            let responseproducto = await axios.put(`producto/productoact/${id}`)
             return responseproducto
         } catch (error) {
             console.log(error, "Error al cambiar el estado del producto");
