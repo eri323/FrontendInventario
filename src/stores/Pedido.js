@@ -9,7 +9,7 @@ export const usepedidostore = defineStore('pedido', () => {
     const obtenerinfopedido = async () => {
         try {
             let responsepedido = await axios.get('pedido/pedidobusca');
-            pedido.value = responsepedido.data.pedido; 
+            pedido.value = responsepedido.data.pedidos; 
         } catch (error) {
             throw error
         }

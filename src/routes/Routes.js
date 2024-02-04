@@ -12,7 +12,7 @@ import RolDeCuenta from "../components/RolDeCuenta.vue";
 import Home from "../components/Home.vue";
 import TablaHistorial from "../components/TablaHistorial.vue";
 import Menu from "../layout/Menu.vue";
-
+import TablaPedidos from "../components/TablaPedidos.vue";
 
 import { createRouter, createWebHashHistory } from "vue-router";
 
@@ -34,6 +34,7 @@ const routes = [
       { path: "/TablaLotes", component: TablaLotes },
       { path: "/TablaHistorial", component: TablaHistorial },
       { path: "/RolDeCuenta", component: RolDeCuenta },
+      { path: "/TablaPedidos", component: TablaPedidos },
     ],
   },
 ];

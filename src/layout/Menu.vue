@@ -65,97 +65,111 @@
     <q-drawer v-model="leftDrawerOpen" side="left" overlay behavior="mobile">
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
         <q-list padding class="list">
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-house"></i>
-            </q-item-section>
+          <router-link to="/Home">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-house"></i>
+              </q-item-section>
+              <q-item-section>
+                <h6>Inicio</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaFichas">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-users-line"></i>
+              </q-item-section>
 
-            <q-item-section>
-              <router-link to="/Home">Inicio</router-link>
-            </q-item-section>
-          </div>
+              <q-item-section>
+                <h6>Fichas</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaProductos">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-boxes-packing"></i>
+              </q-item-section>
 
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-users-line"></i>
-            </q-item-section>
+              <q-item-section>
+                <h6>Productos</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaUsuarios">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-address-card"></i>
+              </q-item-section>
 
-            <q-item-section>
-              <router-link to="./TablaFichas">Fichas</router-link>
-            </q-item-section>
-          </div>
+              <q-item-section> <h6>Usuarios</h6> </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaArea">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-network-wired"></i>
+              </q-item-section>
 
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-boxes-packing"></i>
-            </q-item-section>
+              <q-item-section>
+                <h6>Areas</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaLotes">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-layer-group"></i>
+              </q-item-section>
 
-            <q-item-section>
-              <router-link to="./TablaProductos">Productos</router-link>
-            </q-item-section>
-          </div>
+              <q-item-section> <h6>Lotes</h6> </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaPedidos">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-truck-ramp-box"></i>
+              </q-item-section>
 
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-address-card"></i>
-            </q-item-section>
+              <q-item-section>
+                <h6>Pedidos</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="/Perfil">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-user"></i>
+              </q-item-section>
 
-            <q-item-section>
-              <router-link to="./TablaUsuarios">Usuarios</router-link>
-            </q-item-section>
-          </div>
+              <q-item-section>
+                <h6>Perfil</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="./TablaHistorial">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-book-bookmark"></i>
+              </q-item-section>
 
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-network-wired"></i>
-            </q-item-section>
+              <q-item-section>
+                <h6>Historial</h6>
+              </q-item-section>
+            </div>
+          </router-link>
+          <router-link to="">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-gear"></i>
+              </q-item-section>
 
-            <q-item-section>
-              <router-link to="./TablaArea">Areas</router-link>
-            </q-item-section>
-          </div>
-
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-layer-group"></i>
-            </q-item-section>
-
-            <q-item-section>
-              <router-link to="./TablaLotes">Lotes</router-link>
-            </q-item-section>
-          </div>
-
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-user"></i>
-            </q-item-section>
-
-            <q-item-section>
-              <router-link to="/Perfil">Ver perfil</router-link>
-            </q-item-section>
-          </div>
-
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-book-bookmark"></i>
-            </q-item-section>
-
-            <q-item-section>
-              <router-link to="./TablaHistorial"
-                >Historial de compras</router-link
-              >
-            </q-item-section>
-          </div>
-
-          <div class="div">
-            <q-item-section>
-              <i class="fa-solid fa-gear"></i>
-            </q-item-section>
-
-            <q-item-section>
-              <router-link to="">Configuracion</router-link>
-            </q-item-section>
-          </div>
+              <q-item-section>
+                <h6>Configuracion</h6>
+              </q-item-section>
+            </div>
+          </router-link>
         </q-list>
       </q-scroll-area>
 
@@ -215,27 +229,45 @@ export default {
 .custom-header {
   background-color: rgba(0, 173, 0, 1);
 }
-
-.list div {
+.list {
   display: flex;
-  padding: 10px;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: "save";
+  src: url("../fonts/Anta-Regular.ttf");
+}
+.list div {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  padding: 5px 0px;
   padding-left: 0;
   color: #000; /* Color de texto para los elementos del menú */
   transition: background-color 0.3s ease;
+  align-items: center;
 }
 .div:hover {
   background-color: rgba(61, 153, 61, 0.453);
 }
 
-.list div a {
+.list a {
   text-decoration: none;
   color: #333; /* Color de texto para los enlaces */
-  font-size: 1rem;
+}
+.list div h6 {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
   font-weight: bold;
+  font-size: 1rem;
+  font-family: "save";
 }
 
 .list div i {
   font-size: 1.5rem;
-  padding-left: 40px;
+  padding-left: 20px;
+  
 }
 </style>

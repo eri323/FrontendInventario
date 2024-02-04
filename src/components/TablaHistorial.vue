@@ -11,10 +11,10 @@
           <div class="tabladiv">
             <div class="header">
               <h5 class="title">Historial</h5>
-              <button class="btnag" @click="agregar()">
+       <!--        <button class="btnag" @click="agregar()">
                 <h5>Agregar</h5>
                 <i class="fa-regular fa-square-plus"></i>
-              </button>
+              </button> -->
             </div>
   
             <q-table
