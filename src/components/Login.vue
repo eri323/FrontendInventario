@@ -47,12 +47,7 @@
               </router-link>
             </q-card-actions>
           </div>
-          <!-- <div class="containerError" v-if="mostrarError">
-                    <h4>Por favor digite el Nombre o Contraseña</h4>
-                </div>
-                <div class="containerError" v-if="error2">
-                    <h4>{{ msj }}</h4>
-                </div> -->
+           
           <button @click="Login()" class="btn" :disabled="loading">
             <span v-if="!loading">Aceptar</span>
             <span v-else>
@@ -183,7 +178,9 @@ const showDefault = () => {
     font-family: "Letra";
     src: url("../fonts/Anta-Regular.ttf");
 } */
-
+*{
+  font-family: "save";
+}
 .contenedor {
   display: flex;
   background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
@@ -211,12 +208,12 @@ const showDefault = () => {
 
 .texto {
   display: flex;
-  gap: 5px;
+ 
   align-items: center;
   flex-direction: column;
   text-align: center;
 }
-
+.t
 .bg-teal text-white {
   background-color: transparent;
 }
@@ -301,7 +298,10 @@ const showDefault = () => {
 #img {
   font-size: 200px;
 }
-
+@font-face {
+  font-family: "save";
+  src: url("../fonts/Anta-Regular.ttf");
+}
 .btn {
   width: 100px;
   font-size: 18px;
