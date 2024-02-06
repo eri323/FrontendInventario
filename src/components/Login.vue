@@ -1,20 +1,14 @@
 <template>
   <div class="body">
     <div class="contenedor">
-      <q-card class="my-card" id="My-card">
-        <div class="Container1">
-          <i
-            class="fa-solid fa-boxes-stacked fa-2xl"
-            id="icon"
-            style="color: #24d600"
-          ></i>
-          <!--           <h1>SDS</h1> -->
-        </div>
+      <div>
+        <h2>Bienvenido</h2>
+      </div>
 
-        <div class="Container2">
+      <div class="conte">
+        <div class="Container1">
           <div id="card-title">
             <h2 class="log">Login</h2>
-            <i class="fa-regular fa-circle-user" id="img"></i>
           </div>
           <div class="containerData">
             <q-card-actions class="texto">
@@ -42,12 +36,9 @@
               <router-link to="./RecuContrasena" class="link">
                 <p>¿Olvidaste tu Contraseña?</p>
               </router-link>
-              <router-link to="./Registro" class="link">
-                <p>Registrate</p>
-              </router-link>
             </q-card-actions>
           </div>
-           
+
           <button @click="Login()" class="btn" :disabled="loading">
             <span v-if="!loading">Aceptar</span>
             <span v-else>
@@ -55,7 +46,20 @@
             </span>
           </button>
         </div>
-      </q-card>
+
+        <div class="Container2">
+          <div id="card-title">
+            <h2 class="reg">No tienes cuenta</h2>
+          </div>
+
+          <button @click="Login()" class="btnr" :disabled="loading">
+            <span v-if="!loading">Registarte</span>
+            <span v-else>
+              <i class="fas fa-spinner fa-spin"></i>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -160,61 +164,42 @@ const showDefault = () => {
   font-family: "Ubuntu", sans-serif;
 }
 
-.body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../assets/fondo.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  font-family: "Ubuntu", sans-serif;
-}
-
-/* 
-@font-face {
-    font-family: "Letra";
-    src: url("../fonts/Anta-Regular.ttf");
-} */
-*{
+* {
   font-family: "save";
 }
+.conte{
+  display: flex;
+  gap: 150px;
+}
+
 .contenedor {
   display: flex;
+  flex-direction: column;
   background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
   background-repeat: no-repeat;
   align-items: center;
   justify-content: center;
-  border-radius: 4%;
-  padding: 2%;
+  height: 100vh;
+  gap: 20px;
 }
 .link {
   /*    color: blue; */
   margin: 0;
   text-decoration: none;
+  color: black;
 }
 #inputpasswors {
   margin: 0;
 }
-#My-card {
-  align-items: center;
-  padding: 10px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .texto {
   display: flex;
- 
+
   align-items: center;
   flex-direction: column;
   text-align: center;
 }
-.t
-.bg-teal text-white {
+.t .bg-teal text-white {
   background-color: transparent;
 }
 
@@ -231,16 +216,20 @@ const showDefault = () => {
   gap: 25px;
 }
 .Container1 {
+  width: 250px;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 65px;
 }
 .Container2 {
-  padding: 15px 65px;
-  border-left: solid 3px green;
-  border-radius: 0;
+  width: 250px;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -261,7 +250,7 @@ const showDefault = () => {
   font-family: "Raleway SemiBold", sans-serif;
 
   margin: 0;
-  font-family: "Letra";
+  font-family: "save";
   transition: 0.25s;
 }
 
@@ -272,11 +261,18 @@ const showDefault = () => {
   width: 95px;
   display: flex;
   justify-content: center;
-  font-family: "Letra";
+  font-family: "save";
   padding: 8px;
-  font-family: "Ubuntu", sans-serif;
 }
-
+.reg {
+  border-bottom: 3px solid rgb(45, 189, 110);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  font-family: "save";
+  padding: 8px;
+}
 #submit-btn:hover {
   box-shadow: 0px 1px 10px #24c64f;
 }
@@ -311,12 +307,23 @@ const showDefault = () => {
   cursor: pointer;
   background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
 }
+.btnr{
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
 
+}
 .btn:hover {
   transition: ease-in-out 0.5s;
   transform: scale(1.1);
 }
-
+.btnr:hover{
+  transition: ease-in-out 0.5s;
+  transform: scale(1.1);
+}
 .containerError {
   background-color: rgba(255, 0, 0, 0.36);
   width: 200px;

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh LpR fFf">
+  <q-layout view="hHh LpR fFf" class="body">
     <q-header class="custom-header">
       <q-toolbar class="bg-positive">
         <q-btn
@@ -269,5 +269,8 @@ export default {
   font-size: 1.5rem;
   padding-left: 20px;
   
+}
+.body{
+  background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 </style>
