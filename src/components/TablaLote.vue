@@ -15,27 +15,12 @@
               <i class="fa-regular fa-square-plus"></i>
             </button>
           </div>
-          <q-table
-            flat
-            bordered
-            class="tabla"
-            :rows="rows"
-            :columns="columns"
-            row-key="index"
-            virtual-scroll
-            :rows-per-page-options="[0]"
-          >
+          <q-table flat bordered class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index" virtual-scroll
+            :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label
-                  for=""
-                  v-if="props.row.Estado == 1"
-                  style="color: green; font-weight: bold"
-                  >Activo</label
-                >
-                <label for="" v-else style="color: red; font-weight: bold"
-                  >Inactivo</label
-                >
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -43,73 +28,50 @@
                 <button class="btnedit" @click="editarlote(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button
-                  class="btninac"
-                  @click="inactivarlote(props.row._id)"
-                  v-if="props.row.Estado == 1"
-                >
+                <button class="btninac" @click="inactivarlote(props.row._id)" v-if="props.row.Estado == 1">
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button
-                  class="btnact"
-                  @click="activarlote(props.row._id)"
-                  v-else
-                >
+                <button class="btnact" @click="activarlote(props.row._id)" v-else>
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
             </template>
+            <template v-slot:top-right>
+              <q-input borderless dense debounce="300" color="primary" v-model="filter" class="buscar"
+                placeholder="Buscar cualquier campo" id="boxBuscar">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+            
           </q-table>
           <q-dialog v-model="prompt" persistent class="containermodal">
             <q-card class="modal">
               <q-card-section class="titledialog">
-                <h5
-                  style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold"
-                >
+                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">
                   {{ text }}
                 </h5>
               </q-card-section>
 
               <q-card-section>
-                <q-input
-                  filled
-                  v-model="Nombre"
-                  label="Nombre"
-                  type="text"
-                  lazy-rules
-                  :rules="[
-                    (val) => (val && val.length > 0) || 'Porfavor escribe algo',
-                  ]"
-                />
+                <q-input filled v-model="Nombre" label="Nombre" type="text" lazy-rules :rules="[
+                  (val) => (val && val.length > 0) || 'Porfavor escribe algo',
+                ]" />
 
-                <q-input
-                  filled
-                  v-model="Presupuesto"
-                  label="Presupuesto *"
-                  type="number"
-                  lazy-rules
-                  :rules="[
-                    (val) =>
-                      (val !== null && val !== '') ||
-                      'Porfavor ingresa el presupuesto de el lote',
-                  ]"
-                />
+                <q-input filled v-model="Presupuesto" label="Presupuesto *" type="number" lazy-rules :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Porfavor ingresa el presupuesto de el lote',
+                ]" />
               </q-card-section>
 
               <q-card-actions align="right" class="containerbtnmodal">
                 <button flat v-close-popup class="btnagregar">Cancelar</button>
-                <button
-                  class="btnagregar"
-                  @click="agregarlote()"
-                  v-if="btnagregar"
-                >
+                <button class="btnagregar" @click="agregarlote()" v-if="btnagregar">
                   Agregar
                 </button>
-                <button
-                  class="btnagregar"
-                  @click="agregarlote()"
-                  v-if="btnaceptar"
-                >
+                <button class="btnagregar" @click="agregarlote()" v-if="btnaceptar">
                   Aceptar
                 </button>
               </q-card-actions>
@@ -138,6 +100,7 @@ let prompt = ref(false);
 /* let fixed = ref(false); */
 const $q = useQuasar();
 let lotes = ref([]);
+const filter = ref("")
 let text = ref("Agregar Lote");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
@@ -433,9 +396,11 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+
 .titledialog {
   border-bottom: 3px solid green;
 }
+
 .btnagregar {
   border: 0;
   cursor: pointer;
@@ -446,15 +411,18 @@ body {
   font-weight: bold;
   width: 85px;
 }
+
 .modal {
   width: 550px;
   border-radius: 15px;
   text-align: center;
 }
+
 .header {
   display: flex;
   align-items: flex-end;
 }
+
 .title {
   display: flex;
   align-items: center;
@@ -468,6 +436,7 @@ body {
   margin-left: 0px;
   border-radius: 10px 10px 0px 0px;
 }
+
 .btnag {
   display: flex;
   justify-content: left;
@@ -480,11 +449,13 @@ body {
   cursor: pointer;
   background-color: rgb(227, 227, 227);
 }
+
 .btnag h5 {
   margin: 0;
   font-size: 15px;
   font-weight: bold;
 }
+
 .btnedit {
   font-size: 20px;
   width: 40px;
@@ -495,12 +466,8 @@ body {
 }
 
 .container2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  gap: 25px;
   margin-top: 95px;
+  width: 100%;
 }
 
 .btnact {
@@ -567,12 +534,12 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .containerbtnmodal {
   display: flex;
   border-top: 3px solid green;
   padding: 0;
 }
-
 </style>
 <style lang="sass">
 .my-sticky-virtscroll-table

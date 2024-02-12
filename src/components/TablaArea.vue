@@ -15,7 +15,7 @@
               <i class="fa-regular fa-square-plus"></i>
             </button>
           </div>
-          <q-table flat bordered class="tabla" :rows="rows" :columns="columns" row-key="index" virtual-scroll
+          <q-table flat bordered class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index" virtual-scroll
             :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
@@ -36,6 +36,14 @@
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
+            </template>
+            <template v-slot:top-right>
+              <q-input borderless dense debounce="300" color="primary" v-model="filter" class="buscar"
+                placeholder="Buscar cualquier campo" id="boxBuscar">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </template>
           </q-table>
           <q-dialog v-model="prompt" persistent class="containermodal">
@@ -83,6 +91,7 @@ let xd = ref(0);
 /* let fixed = ref(false); */
 const $q = useQuasar();
 let Nombre = ref("");
+const filter = ref("")
 let areas = ref([]);
 let text = ref("Agregar area");
 let btnaceptar = ref(false);
@@ -409,14 +418,7 @@ body {
   text-align: center;
 }
 
-.container2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  gap: 25px;
-  margin-top: 95px;
-}
+
 
 .form {
   display: flex;
@@ -465,14 +467,20 @@ body {
 
 .tabla {
   border-radius: 0px 15px 15px 15px;
+  width: 100%;
+}
+
+.container2 {
+  margin-top: 95px;
+  width: 100%;
 }
 
 .container-table {
   display: flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-  flex-direction: column;
 }
+
 
 .container-table h1 {
   font-family: "Gabarito", sans-serif;

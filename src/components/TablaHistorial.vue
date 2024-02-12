@@ -1,52 +1,37 @@
 <template>
-    <div class="container">
-      <!-- Tabla -->
-      <div class="container-table">
-        <div class="spinner-container" v-if="cargando">
-          <q-spinner-hourglass size="100px" color="light-green" />
-          <p class="p-carga">Cargando...</p>
-        </div>
-  
-        <div class="container2" v-else>
-          <div class="tabladiv">
-            <div class="header">
-              <h5 class="title">Historial</h5>
-       <!--        <button class="btnag" @click="agregar()">
+  <div class="container">
+    <!-- Tabla -->
+    <div class="container-table">
+      <div class="spinner-container" v-if="cargando">
+        <q-spinner-hourglass size="100px" color="light-green" />
+        <p class="p-carga">Cargando...</p>
+      </div>
+
+      <div class="container2" v-else>
+        <div class="tabladiv">
+          <div class="header">
+            <h5 class="title">Historial</h5>
+            <!--        <button class="btnag" @click="agregar()">
                 <h5>Agregar</h5>
                 <i class="fa-regular fa-square-plus"></i>
               </button> -->
-            </div>
-  
-            <q-table
-              class="tabla"
-              flat
-              bordered
-              :rows="rows"
-              :columns="columns"
-              row-key="index"
-              virtual-scroll
-              :rows-per-page-options="[0]"
-            >
-              <template v-slot:body-cell-Estado="props">
-                <q-td :props="props">
-                  <label
-                    for=""
-                    v-if="props.row.Estado == 1"
-                    style="color: green; font-weight: bold"
-                    >Activo</label
-                  >
-                  <label for="" v-else style="color: red; font-weight: bold"
-                    >Inactivo</label
-                  >
-                </q-td>
-              </template>
-            </q-table>
           </div>
+
+          <q-table class="tabla" flat bordered :rows="rows" :columns="columns" row-key="index" virtual-scroll
+            :rows-per-page-options="[0]">
+            <template v-slot:body-cell-Estado="props">
+              <q-td :props="props">
+                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
+                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
+              </q-td>
+            </template>
+          </q-table>
         </div>
       </div>
-   
     </div>
-  </template>
+
+  </div>
+</template>
 <script setup>
 import { ref } from "vue";
 import { onMounted } from "vue";
@@ -151,13 +136,11 @@ const columns = [
 
 ];
 
-  
+
 
 </script>
 
 <style scoped>
-
-
 * {
   color: black;
 }
@@ -167,10 +150,12 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
 .header {
   display: flex;
   align-items: flex-end;
 }
+
 .title {
   display: flex;
   align-items: center;
@@ -184,10 +169,12 @@ body {
   margin-left: 0px;
   border-radius: 10px 10px 0px 0px;
 }
+
 .opciones {
   display: flex;
   gap: 6px;
 }
+
 .btnagregar {
   border: 0;
   cursor: pointer;
@@ -198,11 +185,13 @@ body {
   font-weight: bold;
   width: 85px;
 }
+
 .containerbtnmodal {
   display: flex;
   border-top: 3px solid green;
   padding: 0;
 }
+
 .btninac {
   background-color: rgb(255, 186, 186);
   font-size: 23px;
@@ -305,6 +294,7 @@ body {
   border-radius: 15px;
   text-align: center;
 }
+
 .titledialog {
   border-bottom: 3px solid green;
 }
@@ -331,5 +321,4 @@ body {
   padding: 0;
   margin: 0;
 }
-
 </style>

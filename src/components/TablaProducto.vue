@@ -17,7 +17,7 @@
             </button>
           </div>
 
-          <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
+          <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter"  :columns="columns" row-key="index"
             virtual-scroll :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
@@ -38,6 +38,7 @@
                 </button>
               </q-td>
             </template>
+
             <template v-slot:top-right>
               <q-input borderless dense debounce="300" color="primary" v-model="filter" class="buscar"
                 placeholder="Buscar cualquier campo" id="boxBuscar">
@@ -508,12 +509,6 @@ body {
   padding: 0;
 }
 
-.buscar{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .title {
   display: flex;
   align-items: center;
@@ -527,7 +522,6 @@ body {
   margin-left: 0px;
   border-radius: 10px 10px 0px 0px;
 }
-
 
 
 .btnag:hover {
@@ -571,7 +565,6 @@ body {
 }
 
 
-
 .tabla {
   border-radius: 0px 15px 15px 15px;
   width: 100%;
@@ -586,8 +579,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
-
 }
 
 .btnedit {
