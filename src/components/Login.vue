@@ -46,7 +46,7 @@
             </span>
           </button>
         </div>
-
+<!-- 
         <div class="Container2">
           <div id="card-title">
             <h2 class="reg">No tienes cuenta</h2>
@@ -58,7 +58,7 @@
               <i class="fas fa-spinner fa-spin"></i>
             </span>
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
