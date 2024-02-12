@@ -2,37 +2,21 @@
   <q-layout view="hHh LpR fFf" class="body">
     <q-header class="custom-header">
       <q-toolbar class="bg-positive">
-        <q-btn
-          dense
-          flat
-          round
-          icon="menu"
-          @click="toggleLeftDrawer"
-          text-color="white"
-        />
+        <button dense flat @click="toggleLeftDrawer" class="btnmenu"> <i class="fa-solid fa-bars"></i>
+        </button>
 
         <q-toolbar-title class="text-white">
-          <q-icon
-            name="business"
-            class="q-mr-md"
-            style="font-size: 2rem; color: white"
-          />
+          <i class="fa-solid fa-city"></i>
           Inventario
         </q-toolbar-title>
 
-        <q-input
-          filled
-          v-model="searchQuery"
-          dense
-          placeholder="Buscar..."
-          style="max-width: 250px"
-        >
+        <q-input filled v-model="searchQuery" dense placeholder="Buscar..." style="max-width: 250px">
           <template v-slot:prepend>
             <q-icon name="search" />
           </template>
         </q-input>
 
-        <q-btn
+        <!--  <q-btn
           dense
           flat
           icon="picture_as_pdf"
@@ -49,16 +33,10 @@
           @click="exportToExcel"
           class="q-ml-md"
           >Imprimir Excel</q-btn
-        >
+        > -->
 
-        <q-btn
-          dense
-          flat
-          src="/"
-          icon="logout"
-          @click="goToHome"
-          class="q-ml-md"
-        />
+        <button dense flat src="/" @click="goToHome" class="btnlogout"> <i
+            class="fa-solid fa-right-from-bracket"></i></button>
       </q-toolbar>
     </q-header>
 
@@ -103,7 +81,9 @@
                 <i class="fa-solid fa-address-card"></i>
               </q-item-section>
 
-              <q-item-section> <h6>Usuarios</h6> </q-item-section>
+              <q-item-section>
+                <h6>Usuarios</h6>
+              </q-item-section>
             </div>
           </router-link>
           <router-link to="./TablaArea">
@@ -123,7 +103,9 @@
                 <i class="fa-solid fa-layer-group"></i>
               </q-item-section>
 
-              <q-item-section> <h6>Lotes</h6> </q-item-section>
+              <q-item-section>
+                <h6>Lotes</h6>
+              </q-item-section>
             </div>
           </router-link>
           <router-link to="./TablaPedidos">
@@ -159,6 +141,17 @@
               </q-item-section>
             </div>
           </router-link>
+           <router-link to="./ItemPresupuesto">
+              <div class="div">
+                <q-item-section>
+                 <i class="fa-solid fa-money-check-dollar"></i>
+                </q-item-section>
+
+                <q-item-section>
+                  <h6>Item Presupuesto</h6>
+                </q-item-section>
+              </div>
+            </router-link>
           <router-link to="">
             <div class="div">
               <q-item-section>
@@ -173,11 +166,7 @@
         </q-list>
       </q-scroll-area>
 
-      <q-img
-        class="absolute-top"
-        src="https://cdn.quasar.dev/img/material.png"
-        style="height: 150px"
-      >
+      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
         <div class="absolute-bottom bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -229,33 +218,75 @@ export default {
 .custom-header {
   background-color: rgba(0, 173, 0, 1);
 }
+
+.btnlogout {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0px 10px;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.btnlogout:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+}
+
+.btnmenu:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+}
+
+.btnmenu {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0px 10px;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.btnmenu i {
+  margin: 0;
+  padding: 0;
+}
+
 .list {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
 }
+
 @font-face {
   font-family: "save";
   src: url("../fonts/Anta-Regular.ttf");
 }
+
 .list div {
   display: grid;
   grid-template-columns: 25% 75%;
   padding: 5px 0px;
   padding-left: 0;
-  color: #000; /* Color de texto para los elementos del menú */
+  color: #000;
+  /* Color de texto para los elementos del menú */
   transition: background-color 0.3s ease;
   align-items: center;
 }
+
 .div:hover {
   background-color: rgba(61, 153, 61, 0.453);
 }
 
 .list a {
   text-decoration: none;
-  color: #333; /* Color de texto para los enlaces */
+  color: #333;
+  /* Color de texto para los enlaces */
 }
+
 .list div h6 {
   margin: 0;
   padding: 0;
@@ -268,9 +299,9 @@ export default {
 .list div i {
   font-size: 1.5rem;
   padding-left: 20px;
-  
+
 }
-.body{
+
+.body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
-}
-</style>
+}</style>
