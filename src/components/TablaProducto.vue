@@ -17,8 +17,8 @@
             </button>
           </div>
 
-          <q-table flat bordered title="" class="tabla" :rows="rows" :columns="columns" row-key="index" virtual-scroll
-            :rows-per-page-options="[0]">
+          <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
+            virtual-scroll :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
                 <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
@@ -37,6 +37,14 @@
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
+            </template>
+            <template v-slot:top-right>
+              <q-input borderless dense debounce="300" color="primary" v-model="filter" class="buscar"
+                placeholder="Buscar cualquier campo" id="boxBuscar">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </template>
           </q-table>
           <q-dialog v-model="prompt" persistent class="containermodal">
@@ -140,6 +148,7 @@ let UnidadMedida = ref("");
 let PrecioUnitario = ref("");
 let Iva = ref("");
 let Tipo = ref("");
+const filter = ref("")
 let idProducto = ref("");
 let text = ref("Agregar producto");
 let btnaceptar = ref(false);
@@ -460,31 +469,6 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="sass">
-.my-sticky-virtscroll-table
-  /* height or max-height is important */
-  height: 410px
-
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th /* bg color is important for th; just specify one */
-    background-color: #00b4ff
-
-  thead tr th
-    position: sticky
-    z-index: 1
-  /* this will be the loading indicator */
-  thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-  thead tr:first-child th
-    top: 0
-
-  /* prevent scrolling behind sticky top row on focus */
-  tbody
-    /* height of all previous header rows */
-    scroll-margin-top: 48px
-</style>
 
 <style scoped>
 * {
@@ -524,6 +508,12 @@ body {
   padding: 0;
 }
 
+.buscar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -538,9 +528,7 @@ body {
   border-radius: 10px 10px 0px 0px;
 }
 
-.tabla {
-  border-radius: 0px 15px 15px 15px;
-}
+
 
 .btnag:hover {
   transition: ease-in-out 0.5s;
@@ -582,26 +570,24 @@ body {
   font-weight: bold;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+
+.tabla {
+  border-radius: 0px 15px 15px 15px;
+  width: 100%;
 }
 
 .container2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  gap: 25px;
   margin-top: 95px;
+  width: 80%;
 }
 
 .container-table {
   display: flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-  flex-direction: column;
+
+
 }
 
 .btnedit {
