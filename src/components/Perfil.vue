@@ -5,7 +5,16 @@
       <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
         <q-card-section>
           <h4>Nombre</h4>
-          <img src="../assets/user.jpg" alt="">
+          <img v-if="usuario && usuario.Imagen && usuario.Imagen.contentType && usuario.Imagen.data"
+            :src="`${usuario.Imagen.contentType};base64,${usuario.Imagen.data.toString('base64')}`"
+            :alt="usuario.Imagen.nombre">
+          <img v-else :src="imageUrl" alt="Imagen predeterminada">
+
+
+          <div>
+            <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
+            <q-btn @click="openFileExplorer" color="primary">Seleccionar Imagen</q-btn>
+          </div>
         </q-card-section>
       </q-card>
       <q-card class="Medio" style="max-width: 900px; border-radius: 0 ;">
@@ -58,8 +67,8 @@
                         (val !== null && val !== '') || 'Porfavor Ingrese su nuevo correo ',
                     ]" />
                     <!--  -->
-                    <q-input filled v-model="Contraseña" label="Ingrese su nueva contraseña" :options="options"
-                      lazy-rules :rules="[
+                    <q-input filled v-model="Contraseña" label="Ingrese su nueva contraseña" :options="options" lazy-rules
+                      :rules="[
                         (val) =>
                           (val !== null && val !== '') || 'Porfavor ingrese su nueva contraseña ',
                       ]" />
@@ -69,7 +78,7 @@
                         Aceptar
                       </button>
                       <button class="btnagregar" @click="closeProfileDialog">Cerrar</button>
-       
+
                     </div>
                   </q-form>
                 </div>
@@ -86,7 +95,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { useusuariostore } from "../stores/Usuario.js";
 let btnagregar = ref(true); // Inicializa según tus necesidades
@@ -101,8 +110,45 @@ let identificacion = ref("")
 let Telefono = ref("")
 let Correo = ref("")
 let Contraseña = ref("")
+let Imagen = ref("")
 const options = ref([]);
 const usuariostore = useusuariostore();
+const usuario = ref(null);
+const fileInput = ref(null);
+const imageUrl = ref("../assets/user.jpg");
+
+
+
+
+
+const openFileExplorer = () => {
+  fileInput.value.click();
+};
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    imageUrl.value = e.target.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+};
+
+onMounted(async () => {
+  try {
+    const response = await usuariostore.obtenerinfousuario();
+    console.log(response);
+    usuario.value = usuariostore.usuario;
+    // ... Otras lógicas relacionadas con la obtención de datos
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 
 async function obtenerInfo() {
   try {
@@ -132,6 +178,7 @@ async function agregaryediperfil() {
         Telefono: Telefono.value,
         Correo: Correo.value,
         Contraseña: Contraseña.value,
+        Imagen: Imagen.value,
 
 
       });
@@ -145,7 +192,7 @@ async function agregaryediperfil() {
         message: "Datos actualizados",
         timeout: 2000,
         type: "positive",
-      }); 
+      });
     } catch (error) {
       if (notification) {
         notification();
@@ -167,7 +214,8 @@ async function agregaryediperfil() {
           Identificacion: identificacion.value,
           Telefono: Telefono.value,
           Correo: Correo.value,
-          Contraseña: Contraseña.value
+          Contraseña: Contraseña.value,
+          Imagen: Imagen.value
 
         });
         btnagregar.value = true;
@@ -200,8 +248,6 @@ async function agregaryediperfil() {
     }
   }
 }
-
-
 
 
 
@@ -264,6 +310,13 @@ const showProfileDialog = () => {
 function closeProfileDialog() {
   profileDialog.value = false;
 }
+
+
+
+
+
+
+
 
 
 </script>
