@@ -4,10 +4,12 @@ import { ref } from "vue";
 
 export const useusuariostore = defineStore("usuario", () => {
   const usuario = ref([]);
+  const usuarios = ref([]);
+  const tokenRef = ref(localStorage.getItem("token") || null);
+
   const obtenerinfousuario = async () => {
     try {
       let responseusuario = await axios.get("usuario/usuariobusca");
-      console.log(responseusuario);
       usuario.value = responseusuario.data.usuarios;
     } catch (error) {
       throw error;
@@ -38,7 +40,6 @@ export const useusuariostore = defineStore("usuario", () => {
   const putInactivarusuario = async (id) => {
     try {
       let responseusuario = await axios.put(`/usuario/usuarioinac/${id}`);
-      console.log(responseusuario);
       return responseusuario;
     } catch (error) {
       console.log(error, "Error al cambiar el estado del usuario");
@@ -54,8 +55,6 @@ export const useusuariostore = defineStore("usuario", () => {
     }
   };
 
-  const tokenRef = ref(localStorage.getItem("token") || null);
-  const usuarios = ref([]);
   const login = async (data) => {
     try {
       let response = await axios.post(`usuario/login`, data);
@@ -64,8 +63,9 @@ export const useusuariostore = defineStore("usuario", () => {
         const token = response.data.token;
         localStorage.setItem("token", token);
         tokenRef.value = token;
-        const usuario = response.data.usuarios;
-        usuarios.value = usuario;
+        const usuarioData = response.data.usuarios;
+        usuarios.value = usuarioData;
+        console.log("Información del usuario:", usuarioData); // Log de la información del usuario
         return { status: response.status, token };
       } else {
         return { status: response.status, token: null };
@@ -78,7 +78,7 @@ export const useusuariostore = defineStore("usuario", () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    token.value = null; 
+    token.value = null;
   };
 
   return {
