@@ -12,7 +12,7 @@
 
           <div>
             <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
-            <q-btn @click="openFileExplorer" color="primary">Seleccionar Imagen</q-btn>
+            <q-btn @click="openFileExplorer" class="boton">Seleccionar Imagen</q-btn>
           </div>
         </q-card-section>
       </q-card>
@@ -34,9 +34,9 @@
     <div>
       <q-separator style="border: 1px solid rgba(0,173,0,255); margin-top: 20px; margin-bottom: 20px; height: 0;" />
       <div class="row justify-center">
-        <q-btn label="Atras" color="secondary" style="margin: 10px; " />
-        <q-btn label="¿Ayuda?" color="secondary" style="margin: 10px; " />
-        <q-btn label="Editar perfil" @click="showProfileDialog" color="secondary" style="margin: 10px;" />
+        <q-btn class="boton" label="Atras"  style="margin: 10px; " />
+        <q-btn class="boton" label="¿Ayuda?"  style="margin: 10px; " />
+        <q-btn class="boton" label="Editar perfil" @click="showProfileDialog"  style="margin: 10px;" />
 
         <q-dialog v-model="profileDialog">
           <q-card>
@@ -266,6 +266,11 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.boton{
+  background-color: #21ba45;
+  font-size: 14px;
+
+}
 img {
   border-radius: 50%;
   height: 400px;
