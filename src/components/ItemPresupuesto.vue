@@ -174,6 +174,7 @@ const columns = [
             fontSize: "15px",
         },
         align: "center",
+        format: (val) => formatearPrecio(val)
     },
     {
         name: "Estado",
@@ -387,6 +388,12 @@ const cancelShow = () => {
 onMounted(async () => {
     obtenerInfo();
 });
+
+const formatearPrecio = (precio) => {
+  const partes = precio.toString().split(/(?=(?:\d{3})+(?:\.|$))/);
+  return partes.join('.');
+};
+
 </script>
 
 <style scoped>

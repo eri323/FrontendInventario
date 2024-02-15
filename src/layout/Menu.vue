@@ -11,9 +11,9 @@
         </q-toolbar-title>
 
         <router-link to="./DistribucionPresupuesto">
-        <button class="btndispre">
-          Distribucion de presupuesto
-        </button>
+          <button class="btndispre">
+            Distribucion de presupuesto
+          </button>
         </router-link>
         <q-input filled v-model="searchQuery" dense placeholder="Buscar..." style="max-width: 250px">
           <template v-slot:prepend>
@@ -21,24 +21,7 @@
           </template>
         </q-input>
 
-        <!--  <q-btn
-          dense
-          flat
-          icon="picture_as_pdf"
-          @click="printToPDF"
-          class="q-ml-md"
-          text-color="white"
-          >Imprimir PDF</q-btn
-        >
-
-        <q-btn
-          dense
-          flat
-          icon="table_chart"
-          @click="exportToExcel"
-          class="q-ml-md"
-          >Imprimir Excel</q-btn
-        > -->
+        
 
         <button dense flat src="/" @click="confirm" class="btnlogout">
           <i class="fa-solid fa-right-from-bracket"></i>
@@ -188,12 +171,6 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <!--   <q-footer class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title> </q-toolbar-title>
-      </q-toolbar>
-    </q-footer> -->
   </q-layout>
 </template>
 
@@ -201,8 +178,27 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useQuasar } from 'quasar'
+import { useusuariostore } from "../stores/Usuario.js";
 
+const usuariostore = useusuariostore();
 const $q = useQuasar()
+
+let nombreUsuario = ref("");
+let rolUsuario = ref("");
+
+async function obtenerInfo() {
+  try {
+    cargando.value = true;
+    const response = await usuariostore.obtenerinfousuario();
+    console.log(response);
+    usuarios.value = usuariostore.usuario;
+    rows.value = usuariostore.usuario;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    cargando.value = false;
+  }
+}
 
 function confirm() {
   $q.dialog({
@@ -347,7 +343,8 @@ function goToHome() {
 .body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
-.btndispre{
+
+.btndispre {
   background: transparent;
   border: 0;
   color: white;
@@ -356,7 +353,8 @@ function goToHome() {
   padding: 5px;
   cursor: pointer;
 }
-.btndispre:hover{
+
+.btndispre:hover {
   background: rgba(255, 255, 255, 0.11);
   border-radius: 8px;
 }

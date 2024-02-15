@@ -66,11 +66,10 @@ export const useusuariostore = defineStore("usuario", () => {
 
       if (response.status === 200) {
         const token = response.data.token;
-        // Utiliza el método setToken para guardar el token
         setToken(token);
         const usuarioData = response.data.usuarios;
         usuarios.value = usuarioData;
-        console.log("Información del usuario:", usuarioData); // Log de la información del usuario
+        console.log("Información del usuario:", usuarioData);
         return { status: response.status, token };
       } else {
         return { status: response.status, token: null };
