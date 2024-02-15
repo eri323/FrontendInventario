@@ -462,8 +462,8 @@ body {
   border-radius: 15px;
   background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
   background-repeat: no-repeat;
-  background-position: 350px; 
-  background-size: auto 400px; 
+  background-position: 430px; 
+  background-size: auto ; 
 }
 
 .titulo-linea {
