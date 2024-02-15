@@ -35,8 +35,11 @@
           >Imprimir Excel</q-btn
         > -->
 
-        <button dense flat src="/" @click="goToHome" class="btnlogout"> <i
-            class="fa-solid fa-right-from-bracket"></i></button>
+        <button dense flat src="/" @click="confirm()" class="btnlogout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        
+        
+        </button>
       </q-toolbar>
     </q-header>
 
@@ -141,17 +144,17 @@
               </q-item-section>
             </div>
           </router-link>
-           <router-link to="./ItemPresupuesto">
-              <div class="div">
-                <q-item-section>
-                 <i class="fa-solid fa-money-check-dollar"></i>
-                </q-item-section>
+          <router-link to="./ItemPresupuesto">
+            <div class="div">
+              <q-item-section>
+                <i class="fa-solid fa-money-check-dollar"></i>
+              </q-item-section>
 
-                <q-item-section>
-                  <h6>Item Presupuesto</h6>
-                </q-item-section>
-              </div>
-            </router-link>
+              <q-item-section>
+                <h6>Item Presupuesto</h6>
+              </q-item-section>
+            </div>
+          </router-link>
           <router-link to="">
             <div class="div">
               <q-item-section>
@@ -189,29 +192,42 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import {useQuasar} from 'quasar'
 
-export default {
-  setup() {
-    const leftDrawerOpen = ref(false);
-    const router = useRouter();
+const $q = useQuasar()
 
-    return {
-      leftDrawerOpen,
-      router,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-      goToHome() {
-        localStorage.removeItem("token");
-        console.log("Sesión cerrada. Redirigiendo a la página de inicio...");
-        router.push("/");
-      },
-    };
-  },
-};
+function confirm() {
+    $q.dialog({
+      title: 'Confirm',
+      message: 'Would you like to turn on the wifi?',
+      cancel: true,
+      persistent: true
+    })/* .onOk(() => {
+      // console.log('>>>> OK')
+    }).onOk(() => {
+      // console.log('>>>> second OK catcher')
+    }).onCancel(() => {
+      // console.log('>>>> Cancel')
+    }).onDismiss(() => {
+      // console.log('I am triggered on both OK and Cancel')
+    }) */
+  }
+
+const leftDrawerOpen = ref(false);
+const router = useRouter();
+
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+
+function goToHome() {
+  localStorage.removeItem("token");
+  console.log("Sesión cerrada. Redirigiendo a la página de inicio...");
+  router.push("/");
+}
 </script>
 
 <style scoped>
@@ -304,4 +320,5 @@ export default {
 
 .body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
-}</style>
+}
+</style>
