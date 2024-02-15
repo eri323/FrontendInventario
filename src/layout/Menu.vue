@@ -10,6 +10,11 @@
           Inventario
         </q-toolbar-title>
 
+        <router-link to="./DistribucionPresupuesto">
+        <button class="btndispre">
+          Distribucion de presupuesto
+        </button>
+        </router-link>
         <q-input filled v-model="searchQuery" dense placeholder="Buscar..." style="max-width: 250px">
           <template v-slot:prepend>
             <q-icon name="search" />
@@ -35,10 +40,10 @@
           >Imprimir Excel</q-btn
         > -->
 
-        <button dense flat src="/" @click="confirm()" class="btnlogout">
+        <button dense flat src="/" @click="confirm" class="btnlogout">
           <i class="fa-solid fa-right-from-bracket"></i>
-        
-        
+
+
         </button>
       </q-toolbar>
     </q-header>
@@ -195,26 +200,47 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import {useQuasar} from 'quasar'
+import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
 
 function confirm() {
-    $q.dialog({
-      title: 'Confirm',
-      message: 'Would you like to turn on the wifi?',
-      cancel: true,
-      persistent: true
-    })/* .onOk(() => {
-      // console.log('>>>> OK')
-    }).onOk(() => {
-      // console.log('>>>> second OK catcher')
-    }).onCancel(() => {
-      // console.log('>>>> Cancel')
-    }).onDismiss(() => {
-      // console.log('I am triggered on both OK and Cancel')
-    }) */
-  }
+  $q.dialog({
+    title: 'Cerrar sesion',
+    message: '¿Deseas cerrar sesion?',
+    cancel: true,
+    persistent: true,
+    html: true,
+    style: {
+      width: '400px',
+      borderRadius: '6px',
+      padding: '10px',
+      boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+      backgroundColor: '#f9f9f9',
+      borderRadius: '8px',
+      fontSize: '18px',
+      fontFamily: 'save',
+    },
+    ok: {
+      label: 'Sí',
+      color: 'primary',
+      push: true
+    },
+    cancel: {
+      label: 'No',
+      color: 'negative',
+      push: true
+    }
+  }).onOk(() => {
+    goToHome();
+  }).onOk(() => {
+    // console.log('>>>> second OK catcher')
+  }).onCancel(() => {
+    // console.log('>>>> Cancel')
+  }).onDismiss(() => {
+    // console.log('I am triggered on both OK and Cancel')
+  })
+}
 
 const leftDrawerOpen = ref(false);
 const router = useRouter();
@@ -320,5 +346,18 @@ function goToHome() {
 
 .body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
+}
+.btndispre{
+  background: transparent;
+  border: 0;
+  color: white;
+  font-family: "save";
+  font-size: 20px;
+  padding: 5px;
+  cursor: pointer;
+}
+.btndispre:hover{
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
 }
 </style>

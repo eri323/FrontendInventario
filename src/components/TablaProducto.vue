@@ -61,7 +61,7 @@
 
               <q-card-section>
 
-                <q-form  class="q-gutter-md">
+                <q-form class="q-gutter-md">
 
                   <div class="container_input1">
                     <q-input color="green" filled v-model="Codigo" class="modal_input" type="number" label="Codigo *"
@@ -94,8 +94,9 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <q-input color="green" filled v-model="Descripcion" class="modal_input" type="text" label="Descripcion *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la descripcion del producto']">
+                    <q-input color="green" filled v-model="Descripcion" class="modal_input" type="text"
+                      label="Descripcion *" lazy-rules
+                      :rules="[(val) => !!val || 'Por favor ingrese la descripcion del producto']">
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 24 24">
@@ -109,8 +110,9 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <q-input color="green" filled v-model="UnidadMedida" class="modal_input" type="text" label="Unidad de medida *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una unidad de medida']">
+                    <q-input color="green" filled v-model="UnidadMedida" class="modal_input" type="text"
+                      label="Unidad de medida *" lazy-rules
+                      :rules="[(val) => !!val || 'Por favor ingrese una unidad de medida']">
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 100 100">
@@ -163,9 +165,10 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-      
-                    <q-input color="green" filled v-model="Tipo"  class="modal_input" type="text" label="Tipo *" 
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un tipo de producto']" hide-bottom-space>
+
+                    <q-input color="green" filled v-model="Consumible" class="modal_input" type="text"
+                      label="Consumible *" lazy-rules
+                      :rules="[(val) => !!val || 'Por favor ingrese un Consumible de producto']" hide-bottom-space>
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 24 24">
@@ -180,9 +183,28 @@
                   </div>
                   <br>
 
+                  <div class="container_input1">
+
+                    <q-select color="green" filled v-model="Lote_Id" class="modal_input" type="text" label="Lote *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor seleccione el lote al que pertenece']"
+                      hide-bottom-space>
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 24 24">
+                          <g fill="none" stroke="#999999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M15 3v18" />
+                            <rect width="18" height="18" x="3" y="3" rx="2" />
+                            <path d="M21 9H3m18 6H3" />
+                          </g>
+                        </svg>
+                      </template>
+                    </q-select>
+                  </div>
+                  <br>
+
 
                   <div class="contenedor_botones">
-                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar"  />
+                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
                     <q-btn label="Agregar" class="btnagregar2" @click="agregarProducto()" v-if="btnagregar"
                       type="submit" />
                     <q-btn label="Aceptar" class="btnagregar2" @click="agregarProducto()" v-if="btnaceptar"
@@ -203,9 +225,10 @@ import { ref } from "vue";
 import { onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { useproductostore } from "../stores/Producto.js";
-
+import { uselotestore } from "../stores/Lote.js";
 const $q = useQuasar();
 const productostore = useproductostore();
+const lotestore = uselotestore();
 
 
 let notification;
@@ -219,7 +242,8 @@ let Descripcion = ref("");
 let UnidadMedida = ref("");
 let PrecioUnitario = ref("");
 let Iva = ref("");
-let Tipo = ref("");
+let Consumible = ref("");
+let Lote_Id = ref("");
 const filter = ref("")
 let idProducto = ref("");
 let text = ref("Agregar producto");
@@ -305,10 +329,21 @@ const columns = [
     align: "center",
   },
   {
-    name: "Tipo",
-    label: "Tipo",
+    name: "Consumible",
+    label: "Consumible",
     align: "center",
-    field: "Tipo",
+    field: "Consumible",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Lote_Id",
+    label: "Lote_Id",
+    align: "center",
+    field: "Lote_Id",
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -366,7 +401,8 @@ async function agregarProducto() {
         UnidadMedida: UnidadMedida.value,
         PrecioUnitario: PrecioUnitario.value,
         Iva: Iva.value,
-        Tipo: Tipo.value,
+        Consumible: Consumible.value,
+        Lote_Id: Lote_Id.value,
       });
       obtenerInfo();
       if (notification) {
@@ -402,7 +438,8 @@ async function agregarProducto() {
           UnidadMedida: UnidadMedida.value,
           PrecioUnitario: PrecioUnitario.value,
           Iva: Iva.value,
-          Tipo: Tipo.value,
+          Consumible: Consumible.value,
+          Lote_Id: Lote_Id.value,
         });
         btnagregar.value = true;
         btnaceptar.value = false;
@@ -442,7 +479,8 @@ function limpiar() {
   UnidadMedida.value = "";
   PrecioUnitario.value = "";
   Iva.value = "";
-  Tipo.value = "";
+  Consumible.value = "";
+  Lote_Id.value = "";
 }
 
 async function editarProducto(id) {
@@ -462,7 +500,8 @@ async function editarProducto(id) {
     UnidadMedida.value = selecProducto.UnidadMedida;
     PrecioUnitario.value = selecProducto.PrecioUnitario;
     Iva.value = selecProducto.Iva;
-    Tipo.value = selecProducto.Tipo;
+    Consumible.value = selecProducto.Consumible;
+    Lote_Id.value = selecProducto.Lote_Id;
   }
 }
 
@@ -628,8 +667,8 @@ body {
   border-radius: 15px;
   background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
   background-repeat: no-repeat;
-  background-position: 280px; 
-  background-size: auto 560px; 
+  background-position: 280px;
+  background-size: auto 560px;
 }
 
 .titulo-linea {
@@ -772,4 +811,5 @@ body {
   .modal_input {
     width: 60%;
   }
-}</style>
+}
+</style>
