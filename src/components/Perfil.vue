@@ -117,6 +117,7 @@ const btnaceptar = ref(false); // Inicializa según tus necesidades
 const idusuario = ref("");
 const xd = ref(0);
 let notification;
+const fileInput = ref(null); // Add this line to define fileInput
 
 const openFileExplorer = () => {
   fileInput.value.click();
