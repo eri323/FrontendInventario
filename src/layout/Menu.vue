@@ -21,7 +21,7 @@
           </template>
         </q-input>
 
-        
+
 
         <button dense flat src="/" @click="confirm" class="btnlogout">
           <i class="fa-solid fa-right-from-bracket"></i>
@@ -162,8 +162,8 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
-          <div class="text-weight-bold">Razvan Stoenescu</div>
-          <div>@rstoenescu</div>
+          <div class="text-weight-bold">{{ nombreUsuario }}</div>
+          <div>{{ rolUsuario }}</div>
         </div>
       </q-img>
     </q-drawer>
@@ -183,22 +183,9 @@ import { useusuariostore } from "../stores/Usuario.js";
 const usuariostore = useusuariostore();
 const $q = useQuasar()
 
-let nombreUsuario = ref("");
-let rolUsuario = ref("");
 
-async function obtenerInfo() {
-  try {
-    cargando.value = true;
-    const response = await usuariostore.obtenerinfousuario();
-    console.log(response);
-    usuarios.value = usuariostore.usuario;
-    rows.value = usuariostore.usuario;
-  } catch (error) {
-    console.log(error);
-  } finally {
-    cargando.value = false;
-  }
-}
+
+
 
 function confirm() {
   $q.dialog({
@@ -244,6 +231,14 @@ const router = useRouter();
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+
+
+const usuarioData = usuariostore.usuarios;
+
+const nombreUsuario = usuarioData.Nombre;
+const rolUsuario = usuarioData.Rol;
+
 
 function goToHome() {
   localStorage.removeItem("token");
