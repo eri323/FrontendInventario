@@ -97,7 +97,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
-import { useusuariostore } from "../stores/Usuario.js";
+import { useusuariostore } from "../stores/Usuario";
 
 const $q = useQuasar();
 const usuariostore = useusuariostore();
@@ -229,34 +229,29 @@ const showDefault = () => {
   });
 };
 
-
-onMounted(() => {
-  obtenerInfoUsuario(); // Llama a la función sin pasar userId
-});
-
-const obtenerInfoUsuario = async () => {
+const obtenerInfo = async () => {
   try {
-    // Verifica si hay un token almacenado en el localStorage
     const token = localStorage.getItem("token");
+    console.log(token);
     if (!token) {
       console.error("No hay ningún token almacenado.");
-      return null;
+      return;
     }
-
-    if (response.status === 200) {
-      const usuarioData = response.data;
-      console.log("Información del usuario:", usuarioData);
-      return usuarioData;
+    const usuarioData = await usuariostore.obtenerinfousuario(token);
+    if (usuarioData) {
+      usuario.value = usuarioData;
+      console.log(usuarioData);
     } else {
-      console.error("Error al obtener la información del usuario:", response.status);
-      return null;
+      console.error("No se pudo obtener la información del usuario.");
     }
   } catch (error) {
     console.error("Error al obtener la información del usuario:", error);
-    return null;
   }
 };
 
+onMounted(() => {
+  obtenerInfo();
+});
 </script>
 
 <style scoped>

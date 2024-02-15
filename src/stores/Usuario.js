@@ -7,6 +7,11 @@ export const useusuariostore = defineStore("usuario", () => {
   const usuarios = ref([]);
   const tokenRef = ref(localStorage.getItem("token") || null);
 
+  const setToken = (token) => {
+    localStorage.setItem("token", token);
+    tokenRef.value = token;
+  };
+
   const obtenerinfousuario = async () => {
     try {
       let responseusuario = await axios.get("usuario/usuariobusca");
@@ -61,8 +66,8 @@ export const useusuariostore = defineStore("usuario", () => {
 
       if (response.status === 200) {
         const token = response.data.token;
-        localStorage.setItem("token", token);
-        tokenRef.value = token;
+        // Utiliza el método setToken para guardar el token
+        setToken(token);
         const usuarioData = response.data.usuarios;
         usuarios.value = usuarioData;
         console.log("Información del usuario:", usuarioData); // Log de la información del usuario
@@ -78,7 +83,7 @@ export const useusuariostore = defineStore("usuario", () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    token.value = null;
+    tokenRef.value = null;
   };
 
   return {
@@ -87,6 +92,8 @@ export const useusuariostore = defineStore("usuario", () => {
     obtenerinfousuario,
     login,
     logout,
+    tokenRef,
+    setToken,
     postinfousuario,
     puteditarusuario,
     putInactivarusuario,

@@ -12,25 +12,14 @@
           </div>
           <div class="containerData">
             <q-card-actions class="texto">
-              <q-input
-                color="green"
-                v-model="usuario.Identificacion"
-                label="Identificacion"
-                class="input"
-              >
+              <q-input color="green" v-model="usuario.Identificacion" label="Identificacion" class="input">
                 <template v-slot:prepend>
                   <i class="fa-solid fa-user-lock"></i>
                 </template>
               </q-input>
 
-              <q-input
-                color="green"
-                v-model="usuario.Contraseña"
-                label="Contraseña"
-                type="password"
-                id="inputpasswors"
-                class="input"
-              >
+              <q-input color="green" v-model="usuario.Contraseña" label="Contraseña" type="password" id="inputpasswors"
+                class="input">
                 <template v-slot:prepend>
                   <i class="fa-solid fa-file-signature"></i>
                 </template>
@@ -57,11 +46,13 @@
 import { ref } from "vue";
 import { useusuariostore } from "../stores/Usuario.js";
 import { useRouter } from "vue-router";
+import { useQuasar } from 'quasar';
 
 const loading = ref(false);
+const $q = useQuasar();
 const usuario = ref({
-  Identificacion: "",
-  Contraseña: "",
+  Identificacion: "1101622995",
+  Contraseña: "Erick#12",
 });
 let mostrarError = ref(false);
 let error2 = ref(false);
@@ -85,7 +76,7 @@ async function Login() {
       if (res.status === 200 && res.token) {
         await usuariostore.obtenerinfousuario();
         console.log(usuariostore.usuario);
-        router.push("./home");
+        router.push("./Home");
       } else {
         error2.value = true;
         msj.value = res.msg;
@@ -118,7 +109,8 @@ const showBad = () => {
 * {
   font-family: "save";
 }
-.conte{
+
+.conte {
   display: flex;
   gap: 150px;
 }
@@ -133,6 +125,7 @@ const showBad = () => {
   height: 100vh;
   gap: 20px;
 }
+
 .link {
   /*    color: blue; */
   margin: 0;
@@ -146,6 +139,7 @@ const showBad = () => {
   padding-top: 24px;
   padding-bottom: 8px;
 }
+
 .texto {
   display: flex;
   font-size: 20px;
@@ -154,6 +148,7 @@ const showBad = () => {
   text-align: center;
   position: relative;
 }
+
 .t .bg-teal text-white {
   background-color: transparent;
 }
@@ -170,6 +165,7 @@ const showBad = () => {
   align-items: center;
   gap: 25px;
 }
+
 .Container1 {
   width: 50vh;
   height: 50vh;
@@ -208,6 +204,7 @@ const showBad = () => {
   font-size: 65px;
   padding: 8px;
 }
+
 .reg {
   border-bottom: 3px solid rgb(45, 189, 110);
   margin: 0;
@@ -217,6 +214,7 @@ const showBad = () => {
   font-family: "save";
   padding: 8px;
 }
+
 #submit-btn:hover {
   box-shadow: 0px 1px 10px #24c64f;
 }
@@ -227,9 +225,11 @@ const showBad = () => {
   justify-content: center;
   align-items: center;
 }
+
 #icon {
   font-size: 150px;
 }
+
 #input {
   display: flex;
   text-align: center;
@@ -238,10 +238,12 @@ const showBad = () => {
 #img {
   font-size: 200px;
 }
+
 @font-face {
   font-family: "save";
   src: url("../fonts/Anta-Regular.ttf");
 }
+
 .btn {
   width: 100px;
   font-size: 18px;
@@ -256,5 +258,4 @@ const showBad = () => {
   transition: ease-in-out 0.5s;
   transform: scale(1.1);
 }
-
 </style>
