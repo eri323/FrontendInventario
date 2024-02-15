@@ -1,7 +1,7 @@
 import Login from "../components/Login.vue";
 /* import InfoPerfil from "../components/InfoPerfil.vue"; */
 import RecuContrasena from "../components/RecuContrasena.vue";
-import Registro from "../components/Registro.vue";
+/* import Registro from "../components/Registro.vue"; */
 import Perfil from "../components/Perfil.vue";
 import TablaProductos from "../components/TablaProducto.vue";
 import TablaFichas from "../components/TablasFichas.vue";
@@ -27,7 +27,7 @@ const routes = [
     children: [
       { path: "/Home", component: Home },
      /*  { path: "/InfoPerfil", component: InfoPerfil }, */
-      { path: "/Registro", component: Registro },
+      /* { path: "/Registro", component: Registro }, */
       { path: "/Perfil", component: Perfil },
       { path: "/TablaProductos", component: TablaProductos },
       { path: "/TablaFichas", component: TablaFichas },
