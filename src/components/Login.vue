@@ -16,6 +16,8 @@
                 color="green"
                 v-model="data.Identificacion"
                 label="Identificacion"
+                class="input"
+                
               >
                 <template v-slot:prepend>
                   <i class="fa-solid fa-user-lock"></i>
@@ -28,13 +30,14 @@
                 label="Contraseña"
                 type="password"
                 id="inputpasswors"
+                class="input"
               >
                 <template v-slot:prepend>
                   <i class="fa-solid fa-file-signature"></i>
                 </template>
               </q-input>
               <router-link to="./RecuContrasena" class="link">
-                <p>¿Olvidaste tu Contraseña?</p>
+                <p style="position: relative; top: 10px; ">¿Olvidaste tu Contraseña?</p>
               </router-link>
             </q-card-actions>
           </div>
@@ -188,16 +191,20 @@ const showDefault = () => {
   text-decoration: none;
   color: black;
 }
-#inputpasswors {
-  margin: 0;
-}
 
+.input {
+  font-size: 23px;
+  line-height: 24px;
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
 .texto {
   display: flex;
-
+  font-size: 20px;
   align-items: center;
   flex-direction: column;
   text-align: center;
+  position: relative;
 }
 .t .bg-teal text-white {
   background-color: transparent;
@@ -216,7 +223,8 @@ const showDefault = () => {
   gap: 25px;
 }
 .Container1 {
-  width: 250px;
+  width: 50vh;
+  height: 50vh;
   padding: 1.5rem;
   border-radius: 0.8rem;
   background-color: rgb(255, 255, 255);
@@ -225,21 +233,8 @@ const showDefault = () => {
   align-items: center;
   justify-content: center;
 }
-.Container2 {
-  width: 250px;
-  padding: 1.5rem;
-  border-radius: 0.8rem;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.q-card {
-  border-bottom: 0;
-  /* border-bottom-left-radius: inherit; */
-  /* border-bottom-right-radius: inherit; */
-}
+
+
 #submit-btn {
   background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
   border: none;
@@ -262,6 +257,7 @@ const showDefault = () => {
   display: flex;
   justify-content: center;
   font-family: "save";
+  font-size: 65px;
   padding: 8px;
 }
 .reg {
@@ -307,37 +303,10 @@ const showDefault = () => {
   cursor: pointer;
   background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
 }
-.btnr{
-  font-size: 18px;
-  border-radius: 5px;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
 
-}
 .btn:hover {
   transition: ease-in-out 0.5s;
   transform: scale(1.1);
 }
-.btnr:hover{
-  transition: ease-in-out 0.5s;
-  transform: scale(1.1);
-}
-.containerError {
-  background-color: rgba(255, 0, 0, 0.36);
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 8px;
-  border: 3px solid red;
-  margin-bottom: 15px;
-}
 
-.containerError h4 {
-  font-size: 15px;
-  margin: 0;
-}
 </style>
