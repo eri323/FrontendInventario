@@ -64,10 +64,8 @@
                 <q-form  class="q-gutter-md">
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Codigo del producto:</label>
                     <q-input color="green" filled v-model="Codigo" class="modal_input" type="number" label="Codigo *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un código']">
-
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 32 32">
@@ -82,7 +80,6 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Nombre del producto:</label>
                     <q-input color="green" filled v-model="Nombre" class="modal_input" type="text" label="Nombre *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
                       <template v-slot:prepend>
@@ -97,7 +94,6 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Descripcion del producto:</label>
                     <q-input color="green" filled v-model="Descripcion" class="modal_input" type="text" label="Descripcion *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la descripcion del producto']">
                       <template v-slot:prepend>
@@ -113,7 +109,6 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Medida del producto:</label>
                     <q-input color="green" filled v-model="UnidadMedida" class="modal_input" type="text" label="Unidad de medida *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una unidad de medida']">
                       <template v-slot:prepend>
@@ -130,7 +125,6 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Precio del producto:</label>
                     <q-input color="green" filled type="number" v-model="PrecioUnitario" class="modal_input"
                       label="Precio de unidad *" lazy-rules :rules="[
                         val => val !== null && val !== '' || 'Por favor ingresar el precio unitario',
@@ -149,7 +143,6 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Iva del producto:</label>
                     <q-input color="green" filled type="number" v-model="Iva" class="modal_input" label="Iva *" lazy-rules
                       :rules="[
                         val => val !== null && val !== '' || 'Por favor ingresar el IVA',
@@ -170,9 +163,9 @@
                   <!-- ----------------------------------------------- -->
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Tipo del producto:</label>
-                    <q-input color="green" filled v-model="Tipo" class="modal_input" type="text" label="Tipo *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un tipo de producto']">
+      
+                    <q-input color="green" filled v-model="Tipo"  class="modal_input" type="text" label="Tipo *" 
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un tipo de producto']" hide-bottom-space>
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 24 24">
@@ -189,7 +182,7 @@
 
 
                   <div class="contenedor_botones">
-                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" color="primary" />
+                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar"  />
                     <q-btn label="Agregar" class="btnagregar2" @click="agregarProducto()" v-if="btnagregar"
                       type="submit" />
                     <q-btn label="Aceptar" class="btnagregar2" @click="agregarProducto()" v-if="btnaceptar"
@@ -630,6 +623,15 @@ body {
   color: black;
 }
 
+.modal {
+  width: 100%;
+  border-radius: 15px;
+  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
+  background-repeat: no-repeat;
+  background-position: 280px; 
+  background-size: auto 560px; 
+}
+
 .titulo-linea {
   text-align: center;
   margin-bottom: 20px;
@@ -640,25 +642,16 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  margin: 30px;
+  margin: 20px;
 }
 
 .container_input1 {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  z-index: 1;
 }
 
-.label_input {
-  display: flex;
-  position: relative;
-  bottom: 10px;
-  width: 35%;
-  margin: 10px;
-  color: #21ba45;
-  font-weight: 800;
-  font-size: 14px;
-}
 
 .icono {
   width: 25px;
@@ -672,24 +665,19 @@ body {
 }
 
 .modal_input {
-  width: 60%;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  border: 2px solid #ccc;
+  z-index: 1;
 }
 
 .linea {
-  border-bottom: 2px solid #333;
+  border-bottom: 4px solid #21ba45;
   border-radius: 5px;
   width: 85%;
   margin: 0 auto;
 }
 
 
-.modal {
-  width: 100%;
-  border-radius: 15px;
-}
+
 
 /* Estilos de los botones de acción en la tabla */
 .opciones {
@@ -730,20 +718,22 @@ body {
 
 .btnagregar2 {
   border: 1px solid #cacecb;
-  background-color: #b3b2b28c;
+  background-color: #dfdbdb8c;
 }
 
 .btnagregar2:hover {
-  background-color: #21ba45;
+  border: 1px solid #acd6b6;
+  background-color: #b3b2b28c;
 }
 
 .btnagregar1:hover {
-  background-color: #ba2121;
+  border: 1px solid #d6acac;
+  background-color: #b3b2b28c;
 }
 
 .btnagregar1 {
   border: 1px solid #dfdfdf;
-  background-color: #b3b2b28c;
+  background-color: #dfdbdb8c;
 }
 
 .btnact {
@@ -770,10 +760,6 @@ body {
 @media only screen and (max-width: 768px) {
   .container2 {
     margin-top: 50px;
-  }
-
-  .modal_input {
-    width: 90%;
   }
 }
 

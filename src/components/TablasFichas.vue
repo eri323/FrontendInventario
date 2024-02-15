@@ -61,7 +61,6 @@
 
                 <q-form   class="q-gutter-md">
                 <div class="container_input1">
-                    <label class="label_input" for="">Codigo de la ficha:</label>
                     <q-input color="green" filled v-model="codigodeficha" class="modal_input" type="number" label="Codigo *"
                       lazy-rules :rules="[val => val && val.length > 0 || 'Por favor ingrese un codigo de ficha']">
                       <template v-slot:prepend>
@@ -73,7 +72,6 @@
 
 
                   <div class="container_input1">
-                    <label class="label_input" for="">Nombre de la ficha:</label>
                     <q-input color="green" filled v-model="nombre" class="modal_input" type="text" label="Nombre de ficha *"
                       lazy-rules :rules="[val => val && val.length > 0 || 'Por favor ingrese el nombre de la ficha']" >
                       <template v-slot:prepend>
@@ -84,7 +82,6 @@
 
 
                     <div class="container_input1">
-                    <label class="label_input" for="">Nivel de formacion:</label>
                     <q-input color="green" filled v-model="niveldeformacion" class="modal_input" type="text" label="Nivel de formacion *"
                       lazy-rules :rules="[val => val && val.length > 0 || 'Por favor ingrese el nivel de formacion']" >
                       <template v-slot:prepend>
@@ -95,7 +92,6 @@
 
 
                     <div class="container_input1">
-                    <label class="label_input" for="">Fecha de inicio:</label>
                     <q-input color="green" filled v-model="fechainicio" class="modal_input" type="date" label="Fecha de inicio *"
                       lazy-rules :rules="[val => val && val.length > 0 || 'Por favor ingrese la fecha de inicio']" >
                       <template v-slot:prepend>
@@ -106,7 +102,6 @@
 
 
                     <div class="container_input1">
-                    <label class="label_input" for="">Fecha de finalizacion:</label>
                     <q-input color="green" filled v-model="fechafin" class="modal_input" type="date" label="Fecha de fin *"
                       lazy-rules :rules="[val => val && val.length > 0 || 'Por favor ingrese la fecha de finalizacion']" >
                       <template v-slot:prepend>
@@ -116,7 +111,6 @@
                     </div>
 
                     <div class="container_input1">
-                    <label class="label_input" for="">Area de ficha:</label>
                     <q-select color="green" filled v-model="area_id" class="modal_input" :options="options" label="Area *"
                       lazy-rules :rules="[val => val && val.length > 0 || 'Por favor seleccione el area']" >
                       <template v-slot:prepend>
@@ -128,7 +122,7 @@
 
               
               <div class="contenedor_botones" >
-                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" color="primary" />
+                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar"  />
                     <q-btn label="Agregar" class="btnagregar2" @click="agregarficha()" v-if="btnagregar"
                       type="submit" />
                     <q-btn label="Aceptar" class="btnagregar2" @click="agregarficha()" v-if="btnaceptar"
@@ -560,9 +554,18 @@ body {
   color: black;
 }
 
+.modal {
+  width: 100%;
+  border-radius: 15px;
+  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
+  background-repeat: no-repeat;
+  background-position: 280px; 
+  background-size: auto 560px; 
+}
+
 .titulo-linea {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 
@@ -570,25 +573,16 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  margin: 30px;
+  margin: 20px;
 }
 
 .container_input1 {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  z-index: 1;
 }
 
-.label_input {
-  display: flex;
-  position: relative;
-  bottom: 10px;
-  width: 35%;
-  margin: 10px;
-  color: #21ba45;
-  font-weight: 800;
-  font-size: 14px;
-}
 
 .icono {
   width: 25px;
@@ -602,24 +596,19 @@ body {
 }
 
 .modal_input {
-  width: 60%;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  border: 2px solid #ccc;
+  z-index: 1;
 }
 
 .linea {
-  border-bottom: 2px solid #333;
+  border-bottom: 4px solid #21ba45;
   border-radius: 5px;
   width: 85%;
   margin: 0 auto;
 }
 
 
-.modal {
-  width: 100%;
-  border-radius: 15px;
-}
+
 
 /* Estilos de los botones de acción en la tabla */
 .opciones {
@@ -660,20 +649,22 @@ body {
 
 .btnagregar2 {
   border: 1px solid #cacecb;
-  background-color: #b3b2b28c;
+  background-color: #dfdbdb8c;
 }
 
 .btnagregar2:hover {
-  background-color: #21ba45;
+  border: 1px solid #acd6b6;
+  background-color: #b3b2b28c;
 }
 
 .btnagregar1:hover {
-  background-color: #ba2121;
+  border: 1px solid #d6acac;
+  background-color: #b3b2b28c;
 }
 
 .btnagregar1 {
   border: 1px solid #dfdfdf;
-  background-color: #b3b2b28c;
+  background-color: #dfdbdb8c;
 }
 
 .btnact {
@@ -701,10 +692,6 @@ body {
   .container2 {
     margin-top: 50px;
   }
-
-  .modal_input {
-    width: 90%;
-  }
 }
 
 /* Estilos específicos para pantallas más grandes */
@@ -716,5 +703,4 @@ body {
   .modal_input {
     width: 60%;
   }
-}
-</style>
+}</style>

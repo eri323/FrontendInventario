@@ -38,87 +38,128 @@
               </q-td>
             </template>
           </q-table>
+
+
+
+
           <q-dialog v-model="prompt" persistent class="containermodal">
+
             <q-card class="modal">
-              <q-card-section class="titledialog">
-                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">
-                  {{ text }}
-                </h5>
-              </q-card-section>
+
+              <div class="titulo-linea">
+                <h5 class="titulos">{{ text }} </h5>
+                <div class="linea"></div>
+              </div>
+
 
               <q-card-section>
-                <!--  <q-input filled v-model="Codigo" label="Codigo de ficha" type="number" lazy-rules :rules="[
-                    (val) =>
-                      (val && val.length > 0) || 'Por favor ingrese un codigo',
-                  ]" />
- -->
-                <!------------------------------->
+                <q-form class="q-gutter-md">
 
-                <q-input filled v-model="Nombre" label="Nombre completo" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el nombre del usuario',
-                ]" />
 
-                <!------------------------------->
 
-                <q-input filled v-model="Identificacion" label="Identificacion del usuario" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar la identificacion del usuario',
-                ]" />
+                  <!------------------------------->
 
-                <!------------------------------->
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="Nombre" class="modal_input" type="text" label="Nombre *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <q-input filled v-model="Telefono" label="Telefono" type="Number" :rules="[
-                  (val) =>
-                    (val && val.length > 0) ||
-                    'Por favor ingresar el telefono ',
-                ]" />
+                  <!------------------------------->
 
-                <!------------------------------->
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="Identificacion" class="modal_input" type="text" label="Identificacion de usuario *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una identificacion de usuario']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <q-input filled v-model="Correo" label="Correo " type="mail" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el correo',
-                ]" />
+                  <!------------------------------->
 
-                <!------------------------------->
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="Telefono" class="modal_input" type="number" label="Telefono *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un numero de telefono']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <q-select filled v-model="Rol" label="Rol" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el Rol',
-                ]" />
+                  <!------------------------------->
 
-                <!------------------------------->
-                <q-input filled v-model="Contraseña" label="Contraseña " type="password" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el correo',
-                ]" />
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="Correo" class="modal_input" type="mail" label="Correo*"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un correo']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
+                  <!------------------------------->
+
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="Rol" class="modal_input" type="text" label="Rol de usuario *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un rol']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <!------------------------------->
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="Contraseña" class="modal_input" type="passawor" label="contraseña *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una contraseña']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <div class="contenedor_botones">
+                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                    <q-btn label="Agregar" class="btnagregar2" @click="agregarusuario()" v-if="btnagregar"
+                      type="submit" />
+                    <q-btn label="Aceptar" class="btnagregar2" @click="agregarusuario()" v-if="btnaceptar"
+                      type="submit" />
+                  </div>
+                </q-form>
               </q-card-section>
-
-              <q-card-actions align="right" class="containerbtnmodal">
-                <button flat v-close-popup class="btnagregar">Cancelar</button>
-                <button class="btnagregar" @click="agregarusuario()" v-if="btnagregar">
-                  Agregar
-                </button>
-                <button class="btnagregar" @click="agregarusuario()" v-if="btnaceptar">
-                  Aceptar
-                </button>
-              </q-card-actions>
             </q-card>
           </q-dialog>
         </div>
       </div>
     </div>
-    <!-- <div class="btn">
-            <q-btn class="btns2" color="secondary" label="Ayuda" />
-            <q-btn class="btns2" color="secondary" label="Ver lotes" />
-        </div> -->
   </div>
 </template>
 
@@ -454,6 +495,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+/* Estilos generales */
 * {
   color: black;
 }
@@ -462,59 +504,26 @@ body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 
-.container {
+/* Estilos de la tabla */
+.container-table {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
 }
 
-.btnag {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  gap: 8px;
-  font-size: 25px;
-  height: 45px;
-  border: 0;
-  border-radius: 0px 7px 0px 0px;
-  cursor: pointer;
-  background-color: rgb(227, 227, 227);
-}
-
-.btnag h5 {
-  margin: 0;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.btnag:hover {
-  transition: ease-in-out 0.5s;
-  background-color: rgb(209, 209, 209);
+.container2 {
+  margin-top: 95px;
+  width: 80%;
 }
 
 .tabla {
   border-radius: 0px 15px 15px 15px;
-}
-
-.container2 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  width: 100%;
 }
 
 .header {
   display: flex;
   align-items: flex-end;
-}
-
-.titledialog {
-  border-bottom: 3px solid green;
-}
-
-.modal {
-  width: 550px;
-  border-radius: 15px;
-  text-align: center;
 }
 
 .title {
@@ -531,19 +540,96 @@ body {
   border-radius: 10px 10px 0px 0px;
 }
 
-.opciones {
+.btnag {
   display: flex;
-  gap: 6px;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+  font-size: 25px;
+  height: 45px;
+  border: 0;
+  border-radius: 0px 7px 0px 0px;
+  cursor: pointer;
+  background-color: rgb(227, 227, 227);
 }
 
-.btninac {
-  background-color: rgb(255, 186, 186);
-  font-size: 23px;
-  width: 40px;
-  padding: 0;
-  border: 0;
-  border-radius: 7px;
-  cursor: pointer;
+.btnag:hover {
+  background-color: rgb(209, 209, 209);
+}
+
+.btnag h5 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Estilos del formulario modal */
+.q-gutter-md {
+  color: black;
+}
+
+.modal {
+  width: 100%;
+  border-radius: 15px;
+  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
+  background-repeat: no-repeat;
+  background-position: 280px; 
+  background-size: auto 560px; 
+}
+
+.titulo-linea {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.titulos {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px;
+}
+
+.container_input1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+
+.icono {
+  width: 25px;
+  height: 35px;
+}
+
+.contenedor_botones {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.modal_input {
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.linea {
+  border-bottom: 4px solid #21ba45;
+  border-radius: 5px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+
+
+
+/* Estilos de los botones de acción en la tabla */
+.opciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btnedit {
@@ -555,9 +641,9 @@ body {
   cursor: pointer;
 }
 
+.btninac,
 .btnact {
-  background-color: rgb(167, 255, 167);
-  font-size: 20px;
+  font-size: 23px;
   width: 40px;
   padding: 0;
   border: 0;
@@ -565,10 +651,8 @@ body {
   cursor: pointer;
 }
 
-.btnact:hover {
-  transform: scale(1.1);
-  transition: ease-in-out 0.4s;
-  background-color: rgb(179, 239, 179);
+.btninac {
+  background-color: rgb(255, 186, 186);
 }
 
 .btninac:hover {
@@ -577,71 +661,60 @@ body {
   background-color: rgb(237, 179, 179);
 }
 
-.btnedit:hover {
+.btnagregar2 {
+  border: 1px solid #cacecb;
+  background-color: #dfdbdb8c;
+}
+
+.btnagregar2:hover {
+  border: 1px solid #acd6b6;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1:hover {
+  border: 1px solid #d6acac;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1 {
+  border: 1px solid #dfdfdf;
+  background-color: #dfdbdb8c;
+}
+
+.btnact {
+  background-color: rgb(167, 255, 167);
+}
+
+.btnact:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
-  background-color: rgb(209, 209, 209);
+  background-color: rgb(71, 243, 71);
 }
 
-.container-table {
-  display: flex;
-  justify-content: center;
+/* Otros estilos */
+.p-carga {
   text-align: center;
-  flex-direction: column;
-}
-.btnagregar {
-  border: 0;
-  cursor: pointer;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 15px;
-  background-color: transparent;
-  font-weight: bold;
-  width: 85px;
 }
 
-.containerbtnmodal {
-  display: flex;
-  border-top: 3px solid green;
-  padding: 0;
-}
-.container2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  gap: 25px;
-  margin-top: 95px;
+@media only screen and (max-width: 510px) {
+  .label_input {
+    width: 100%;
+  }
 }
 
-.container-table h1 {
-  font-family: "Gabarito", sans-serif;
-  padding: 0;
-  margin: 0;
+@media only screen and (max-width: 768px) {
+  .container2 {
+    margin-top: 50px;
+  }
 }
-</style>
-<style lang="sass">
-.my-sticky-virtscroll-table
-  /* height or max-height is important */
-  height: 410px
 
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th /* bg color is important for th; just specify one */
-    background-color: #00b4ff
+/* Estilos específicos para pantallas más grandes */
+@media only screen and (min-width: 1200px) {
+  .container2 {
+    margin-top: 120px;
+  }
 
-  thead tr th
-    position: sticky
-    z-index: 1
-  /* this will be the loading indicator */
-  thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-  thead tr:first-child th
-    top: 0
-
-  /* prevent scrolling behind sticky top row on focus */
-  tbody
-    /* height of all previous header rows */
-    scroll-margin-top: 48px
-</style>
+  .modal_input {
+    width: 60%;
+  }
+}</style>
