@@ -65,10 +65,11 @@
 
                 <q-form class="q-gutter-md">
 
-                  
+
                   <div class="container_input1">
-                    <q-input color="green" filled v-model="FechaCreacion" class="modal_input" type="date" label="Fecha de creacion *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de creacion']">
+                    <q-input color="green" filled v-model="FechaCreacion" class="modal_input" type="date"
+                      label="Fecha de creacion *" lazy-rules
+                      :rules="[(val) => !!val || 'Por favor ingrese la fecha de creacion']">
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 26 26">
@@ -79,11 +80,12 @@
                     </q-input>
                   </div>
 
-                    <!------------------------------->
+                  <!------------------------------->
 
-                    <div class="container_input1">
-                    <q-input color="green" filled v-model="FechaEntrega" class="modal_input" type="date" label="Fecha de entrega *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de entrega']">
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="FechaEntrega" class="modal_input" type="date"
+                      label="Fecha de entrega *" lazy-rules
+                      :rules="[(val) => !!val || 'Por favor ingrese la fecha de entrega']">
                       <template v-slot:prepend>
                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
                           viewBox="0 0 26 26">
@@ -94,40 +96,13 @@
                     </q-input>
                   </div>
 
-                    <!------------------------------->
+                 
 
-                    <div class="container_input1">
-                    <q-input color="green" filled v-model="DistribucionLoteFicha_id" class="modal_input" type="text" label="Distribucion de lote de ficha *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la distribucion de lote de ficha']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 24 24">
-                          <path fill="#999999"
-                            d="M8 18h8v-2H8zm0-4h8v-2H8zm-2 8q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h8l6 6v12q0 .825-.587 1.413T18 22zm7-13h5l-5-5z" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+               
 
-                    <!------------------------------->
+                  <!------------------------------->
 
-                    <div class="container_input1">
-                    <q-input color="green" filled v-model="Subtotal" class="modal_input" type="text" label="Subtotal *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese el subtotal']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 100 100">
-                          <path fill="#999999"
-                            d="M0 4.5v20h8.5V27h3v-2.5H20v-20zm5 5h10v10H5ZM22.5 13v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm3 6v6h3v-6zm0 9v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v2.5H80v20h20v-20h-8.5V73Zm-80 2v6h3v-6ZM85 80.5h10v10H85ZM8.5 84v3h6v-3H10zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3z"
-                            color="#999999" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
-
-                    <!------------------------------->
-
-                    <div class="container_input1">
+                  <div class="container_input1">
                     <q-input color="green" filled type="number" v-model="Total" class="modal_input"
                       label="Precio de unidad *" lazy-rules :rules="[
                         val => val !== null && val !== '' || 'Por favor ingresar el precio unitario',
@@ -143,16 +118,64 @@
                     </q-input>
                   </div>
 
-                    <!------------------------------->
+                  <!------------------------------->
 
+                  <div class="container_input1">
+                    <q-input color="green" filled  v-model="Entregado" class="modal_input"
+                      label="¿Entregado? *" lazy-rules :rules="[
+                        val => val !== null && val !== '' || 'Por favor confirmar ',
+                       
+                      ]">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 24 24">
+                          <path fill="#999999"
+                            d="M2 20V4h20v16zm6-3h2v-1h1q.425 0 .713-.288T12 15v-3q0-.425-.288-.712T11 11H8v-1h4V8h-2V7H8v1H7q-.425 0-.712.288T6 9v3q0 .425.288.713T7 13h3v1H6v2h2zm8-.75l2-2h-4zM14 10h4l-2-2z" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                    <div class="contenedor_botones">
-                      <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
-                      <q-btn label="Agregar" class="btnagregar2" @click="agregarpedido()" v-if="btnagregar"
-                        type="submit" />
-                      <q-btn label="Aceptar" class="btnagregar2" @click="agregarpedido()" v-if="btnaceptar"
-                        type="submit" />
-                    </div>
+                  <!------------------------------->
+                  <div class="container_input1">
+                    <q-input color="green" filled type="text" v-model="Usuario_Id" class="modal_input"
+                      label="Usuario *" lazy-rules :rules="[
+                        val => val !== null && val !== '' || 'Por favor selecciona el usuario',
+                       
+                      ]">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 24 24">
+                          <path fill="#999999"
+                            d="M2 20V4h20v16zm6-3h2v-1h1q.425 0 .713-.288T12 15v-3q0-.425-.288-.712T11 11H8v-1h4V8h-2V7H8v1H7q-.425 0-.712.288T6 9v3q0 .425.288.713T7 13h3v1H6v2h2zm8-.75l2-2h-4zM14 10h4l-2-2z" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <!------------------------------->
+                  <div class="container_input1">
+                    <q-select color="green" filled type="text" v-model="Ficha_Id" class="modal_input"
+                      label="Fciha *" lazy-rules :rules="[
+                        val => val !== null && val !== '' || 'Por favor seleccionar la ficha',
+                       
+                      ]">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 24 24">
+                          <path fill="#999999"
+                            d="M2 20V4h20v16zm6-3h2v-1h1q.425 0 .713-.288T12 15v-3q0-.425-.288-.712T11 11H8v-1h4V8h-2V7H8v1H7q-.425 0-.712.288T6 9v3q0 .425.288.713T7 13h3v1H6v2h2zm8-.75l2-2h-4zM14 10h4l-2-2z" />
+                        </svg>
+                      </template>
+                    </q-select>
+                  </div>
+
+                  <!------------------------------->
+                  <div class="contenedor_botones">
+                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                    <q-btn label="Agregar" class="btnagregar2" @click="agregarpedido()" v-if="btnagregar" type="submit" />
+                    <q-btn label="Aceptar" class="btnagregar2" @click="agregarpedido()" v-if="btnaceptar" type="submit" />
+                  </div>
                 </q-form>
               </q-card-section>
             </q-card>
@@ -169,8 +192,12 @@ import { onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { usepedidostore } from "../stores/Pedido.js";
 import { format } from "date-fns";
+import { useusuariostore } from "../stores/Usuario.js";
+import { usefichastore } from "../stores/Fichas.js";
 const $q = useQuasar();
 const pedidostore = usepedidostore();
+const usuariostore = useusuariostore();
+const fichastore = usefichastore();
 
 let notification;
 let rows = ref([]);
@@ -179,10 +206,10 @@ let prompt = ref(false);
 
 const filter = ref("")
 let FechaCreacion = ref("");
-let Subtotal = ref("");
+let Ficha_Id = ref("");
 let FechaEntrega = ref("");
-let DistribucionLoteFicha_id = ref("");
-let PrecioUnitario = ref("");
+let Usuario_Id = ref("");
+let Entregado = ref("");
 let Total = ref("");
 let idPedido = ref("");
 let text = ref("Agregar Pedidos");
@@ -225,10 +252,10 @@ const columns = [
     align: "center",
   },
   {
-    name: "DistribucionLoteFicha_id",
-    label: "DistribucionLoteFicha_id",
+    name: "Entregado",
+    label: "Entregado",
     align: "center",
-    field: "DistribucionLoteFicha_id",
+    field: "Entregado",
 
     headerStyle: {
       fontWeight: "bold",
@@ -237,10 +264,32 @@ const columns = [
     align: "center",
   },
   {
-    name: "Subtotal",
-    label: "Subtotal",
+    name: "Usuario_Id",
+    label: "Usuario_Id",
     align: "center",
-    field: "Subtotal",
+    field: "Usuario_Id",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+  {
+    name: "Ficha_Id",
+    label: "Ficha_Id",
+    align: "center",
+    field: "Ficha_Id",
+    headerStyle: {
+      fontWeight: "bold",
+      fontSize: "15px",
+    },
+    align: "center",
+  },
+   {
+    name: "Entregado",
+    label: "Entregado",
+    align: "center",
+    field: "Entregado",
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -306,8 +355,9 @@ async function agregarpedido() {
       await pedidostore.postinfopedido({
         FechaCreacion: FechaCreacion.value,
         FechaEntrega: FechaEntrega.value,
-        DistribucionLoteFicha_id: DistribucionLoteFicha_id.value,
-        Subtotal: Subtotal.value,
+        Usuario_Id: Usuario_Id.value,
+        Ficha_Id: Ficha_Id.value,
+         Entregado: Entregado.value,
         Total: Total.value,
       });
       obtenerInfo();
@@ -340,8 +390,9 @@ async function agregarpedido() {
         await pedidostore.puteditarpedido(id, {
           FechaCreacion: FechaCreacion.value,
           FechaEntrega: FechaEntrega.value,
-          DistribucionLoteFicha_id: DistribucionLoteFicha_id.value,
-          Subtotal: Subtotal.value,
+          Usuario_Id: Usuario_Id.value,
+          Ficha_Id: Ficha_Id.value,
+           Entregado: Entregado.value,
           Total: Total.value,
         });
         btnagregar.value = true;
@@ -378,9 +429,10 @@ async function agregarpedido() {
 function limpiar() {
   FechaCreacion.value = "";
   FechaEntrega.value = "";
-  DistribucionLoteFicha_id.value = "";
-  Subtotal.value = "";
+  Usuario_Id.value = "";
+  Ficha_Id.value = "";
   Total.value = "";
+  Entregado.value = "";
 }
 
 async function editarPedido(id) {
@@ -400,8 +452,9 @@ async function editarPedido(id) {
       new Date(selecpedido.FechaEntrega),
       "yyyy-MM-dd"
     );
-    DistribucionLoteFicha_id.value = selecpedido.DistribucionLoteFicha_id;
-    Subtotal.value = selecpedido.Subtotal;
+    Usuario_Id.value = selecpedido.Usuario_Id;
+    Ficha_Id.value = selecpedido.Ficha_Id;
+    Entregado.value = selecpedido.Entregado;
     Total.value = selecpedido.Total;
   }
 }
@@ -561,8 +614,8 @@ body {
   border-radius: 15px;
   background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
   background-repeat: no-repeat;
-  background-position: 310px; 
-  background-size: auto 500px; 
+  background-position: 310px;
+  background-size: auto 500px;
 }
 
 .titulo-linea {
@@ -705,5 +758,6 @@ body {
   .modal_input {
     width: 60%;
   }
-}</style>
+}
+</style>
 

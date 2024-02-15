@@ -73,7 +73,7 @@
                     </q-input>
                   </div>
 
-                  <div class="container_input1">
+                <!--   <div class="container_input1">
                     <q-input color="green" filled v-model="Presupuesto" class="modal_input" type="number" label="Presupuesto de lote *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese el presupuesto del lote']">
                       <template v-slot:prepend>
@@ -84,7 +84,7 @@
                         </svg>
                       </template>
                     </q-input>
-                  </div>
+                  </div> -->
 
                   <div class="contenedor_botones">
                     <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
@@ -133,7 +133,7 @@ function agregar() {
 }
 let notification;
 let Nombre = ref("");
-let Presupuesto = ref("");
+/* let Presupuesto = ref(""); */
 // Filtrar lotes
 /* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -158,16 +158,7 @@ const columns = [
     },
     align: "center",
   },
-  {
-    name: "Presupuesto",
-    label: "Presupuesto",
-    field: "Presupuesto",
-    headerStyle: {
-      fontWeight: "bold",
-      fontSize: "15px",
-    },
-    align: "center",
-  },
+ 
   {
     name: "Estado",
     label: "Estado",
@@ -194,7 +185,7 @@ const columns = [
 ];
 function limpiar() {
   Nombre.value = "";
-  Presupuesto.value = "";
+ /*  Presupuesto.value = ""; */
 }
 async function agregarlote() {
   if (xd.value == 0) {
@@ -202,7 +193,7 @@ async function agregarlote() {
       showDefault();
       await lotestore.postinfolote({
         Nombre: Nombre.value,
-        Presupuesto: Presupuesto.value,
+       
       });
       obtenerInfo();
       if (notification) {
@@ -233,7 +224,7 @@ async function agregarlote() {
         showDefault();
         await lotestore.puteditarlote(id, {
           Nombre: Nombre.value,
-          Presupuesto: Presupuesto.value,
+         
         });
         btnagregar.value = true;
         btnaceptar.value = false;
@@ -276,7 +267,7 @@ async function editarlote(id) {
     btnaceptar.value = true;
     text.value = "Editar lote";
     Nombre.value = loteseleccionada.Nombre;
-    Presupuesto.value = loteseleccionada.Presupuesto;
+   /*  Presupuesto.value = loteseleccionada.Presupuesto; */
     /*  nombre.value = loteseleccionada.Nombre;
     niveldeformacion.value = loteseleccionada.NivelFormacion;
     area_id.value = {
