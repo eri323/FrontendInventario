@@ -117,11 +117,21 @@ const btnaceptar = ref(false); // Inicializa según tus necesidades
 const idusuario = ref("");
 const xd = ref(0);
 let notification;
+const fileInput = ref(null); // Add this line to define fileInput
 
+
+//Abrir y cerrar modal
+const showProfileDialog = () => {
+  profileDialog.value = true;
+};
+const closeProfileDialog = () => {
+  profileDialog.value = false;
+};
+
+//Abrir explroador de archivos
 const openFileExplorer = () => {
   fileInput.value.click();
 };
-
 const handleFileChange = (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
@@ -134,6 +144,7 @@ const handleFileChange = (event) => {
     reader.readAsDataURL(file);
   }
 };
+
 
 function limpiar() {
   nombre.value = "";

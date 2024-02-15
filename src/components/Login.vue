@@ -1,8 +1,9 @@
 <template>
   <div class="body">
     <div class="contenedor">
-      <div>
+      <div class="arriba">
         <h2>Bienvenido</h2>
+        <img style="height: 100px; width: 100px;" src="/src/img/sena2.png" alt="">
       </div>
 
       <div class="conte">
@@ -121,9 +122,8 @@ const showBad = () => {
   background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
   background-repeat: no-repeat;
   align-items: center;
-  justify-content: center;
   height: 100vh;
-  gap: 20px;
+  gap: 10px;
 }
 
 .link {
@@ -183,11 +183,9 @@ const showBad = () => {
   background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
   border: none;
   border-radius: 10px;
-
   cursor: pointer;
   color: white;
   font-family: "Raleway SemiBold", sans-serif;
-
   margin: 0;
   font-family: "save";
   transition: 0.25s;
@@ -205,15 +203,6 @@ const showBad = () => {
   padding: 8px;
 }
 
-.reg {
-  border-bottom: 3px solid rgb(45, 189, 110);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  font-family: "save";
-  padding: 8px;
-}
 
 #submit-btn:hover {
   box-shadow: 0px 1px 10px #24c64f;
@@ -257,5 +246,12 @@ const showBad = () => {
 .btn:hover {
   transition: ease-in-out 0.5s;
   transform: scale(1.1);
+}
+
+.arriba{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5% ;
 }
 </style>

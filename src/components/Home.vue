@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div style="margin-top: 110px;">
     <h3 class="text-center">Presupuesto de programa</h3>
   </div>
 
-  <div class="q-pa-xl">
+  <div class="q-pa-xl" style="margin-top: 90px; margin-bottom: 110px;">
     <div class="q-d-flex row justify-around">
       <q-card class="q-mb-md">
         <q-card-section>
           <q-img
             src="../assets/transparencia.png"
             alt="Card image"
-            style="width: 180px; height: 180px"
+            style="width: 200px; height: 200px"
           />
         </q-card-section>
         <q-card-section>
@@ -23,7 +23,7 @@
           <q-img
             src="../assets/transparencia.png"
             alt="Card image"
-            style="width: 180px; height: 180px"
+            style="width: 200px; height: 200px"
           />
         </q-card-section>
         <q-card-section>
@@ -36,11 +36,11 @@
           <q-img
             src="../assets/transparencia.png"
             alt="Card image"
-            style="width: 180px; height: 180px"
+            style="width: 200px; height: 200px"
           />
         </q-card-section>
         <q-card-section>
-          <div class="text-h6 text-center">Card 3</div>
+          <div class="text-h6 text-center">Pecuario</div>
         </q-card-section>
       </q-card>
     </div>
