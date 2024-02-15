@@ -14,10 +14,9 @@
             <q-card-actions class="texto">
               <q-input
                 color="green"
-                v-model="data.Identificacion"
+                v-model="usuario.Identificacion"
                 label="Identificacion"
                 class="input"
-                
               >
                 <template v-slot:prepend>
                   <i class="fa-solid fa-user-lock"></i>
@@ -26,7 +25,7 @@
 
               <q-input
                 color="green"
-                v-model="data.Contraseña"
+                v-model="usuario.Contraseña"
                 label="Contraseña"
                 type="password"
                 id="inputpasswors"
@@ -49,51 +48,31 @@
             </span>
           </button>
         </div>
-<!-- 
-        <div class="Container2">
-          <div id="card-title">
-            <h2 class="reg">No tienes cuenta</h2>
-          </div>
-
-          <button @click="Login()" class="btnr" :disabled="loading">
-            <span v-if="!loading">Registarte</span>
-            <span v-else>
-              <i class="fas fa-spinner fa-spin"></i>
-            </span>
-          </button>
-        </div> -->
       </div>
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useusuariostore } from "../stores/Usuario.js";
 import { useRouter } from "vue-router";
 
 const loading = ref(false);
-
-const data = ref({
-  Identificacion: "1101622995",
-  Contraseña: "Erick#12",
+const usuario = ref({
+  Identificacion: "",
+  Contraseña: "",
 });
 let mostrarError = ref(false);
-let MostrarData = ref(true);
 let error2 = ref(false);
-let error = ref("melo");
 let msj = ref("");
 let usuariostore = useusuariostore();
 const router = useRouter();
 
-/* const data = ref({
-    Nombre: "",
-    Contraseña: "",
-});  */
-
 async function Login() {
   try {
     loading.value = true;
-    if (data.value.Identificacion == "" && data.value.Contraseña == "") {
+    if (!usuario.value.Identificacion || !usuario.value.Contraseña) {
       mostrarError.value = true;
       setTimeout(() => {
         mostrarError.value = false;
@@ -101,7 +80,7 @@ async function Login() {
       showBad();
       return;
     } else {
-      const res = await usuariostore.login(data.value);
+      const res = await usuariostore.login(usuario.value);
       console.log(res);
       if (res.status === 200 && res.token) {
         await usuariostore.obtenerinfousuario();
@@ -122,43 +101,12 @@ async function Login() {
   }
 }
 
-console.log(data.value);
-
-function validar() {
-  let validation = true;
-  if (data.Nombre.value.trim() == "") {
-    error.value = "paila";
-    validation = false;
-  }
-
-  return validation;
-}
-
-let greatMessage = ref("");
-let badMessage = ref("");
-
-const showGreat = () => {
-  notification = $q.notify({
-    spinner: false,
-    message: greatMessage,
-    timeout: 2000,
-    type: "positive",
-  });
-};
-
 const showBad = () => {
   notification = $q.notify({
     spinner: false,
-    message: badMessage,
+    message: "Error: Ingrese Identificacion y Contraseña",
     timeout: 2000,
     type: "negative",
-  });
-};
-const showDefault = () => {
-  notification = $q.notify({
-    spinner: true,
-    message: "Please wait...",
-    timeout: 0,
   });
 };
 </script>

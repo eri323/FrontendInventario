@@ -4,12 +4,11 @@
     <div class="row justify-center">
       <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
         <q-card-section>
-          <h4>Nombre</h4>
+          <h4>Nombre {{ usuario && usuario.Nombre }}</h4>
           <img v-if="usuario && usuario.Imagen && usuario.Imagen.contentType && usuario.Imagen.data"
             :src="`${usuario.Imagen.contentType};base64,${usuario.Imagen.data.toString('base64')}`"
             :alt="usuario.Imagen.nombre">
           <img v-else :src="imageUrl" alt="Imagen predeterminada">
-
 
           <div>
             <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
@@ -21,14 +20,15 @@
         <h1>Rol</h1>
         <q-card-section class="mitad">
           <q-card-section class="sepa" style="width: 200px;">
-            <li>edad</li>
-            <li>ciudad</li>
-            <li>telefono</li>
-            <li>email</li>
+            <ul v-if="usuario">
+              <li><strong>Nombre:</strong> {{ usuario.Nombre }}</li>
+              <li><strong>Identificación:</strong> {{ usuario.Identificacion }}</li>
+              <li><strong>Teléfono:</strong> {{ usuario.Telefono }}</li>
+              <li><strong>Email:</strong> {{ usuario.Correo }}</li>
+            </ul>
           </q-card-section>
         </q-card-section>
       </q-card>
-
 
     </div>
     <div>
@@ -98,32 +98,30 @@
 import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { useusuariostore } from "../stores/Usuario.js";
-let btnagregar = ref(true); // Inicializa según tus necesidades
-let btnaceptar = ref(false); // Inicializa según tus necesidades
+
 const $q = useQuasar();
-let idusuario = ref("");
-let xd = ref(0);
-let notification;
-let Perfil = ref([]);
-let nombre = ref("")
-let identificacion = ref("")
-let Telefono = ref("")
-let Correo = ref("")
-let Contraseña = ref("")
-let Imagen = ref("")
-const options = ref([]);
 const usuariostore = useusuariostore();
-const usuario = ref(null);
-const fileInput = ref(null);
+
 const imageUrl = ref("../assets/user.jpg");
-
-
-
-
+const profileDialog = ref(false);
+const usuario = ref(null);
+const nombre = ref("");
+const identificacion = ref("");
+const Telefono = ref("");
+const Correo = ref("");
+const Contraseña = ref("");
+const Imagen = ref("");
+const options = ref([]);
+const btnagregar = ref(true); // Inicializa según tus necesidades
+const btnaceptar = ref(false); // Inicializa según tus necesidades
+const idusuario = ref("");
+const xd = ref(0);
+let notification;
 
 const openFileExplorer = () => {
   fileInput.value.click();
 };
+
 const handleFileChange = (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
@@ -137,29 +135,6 @@ const handleFileChange = (event) => {
   }
 };
 
-onMounted(async () => {
-  try {
-    const response = await usuariostore.obtenerinfousuario();
-    console.log(response);
-    usuario.value = usuariostore.usuario;
-    // ... Otras lógicas relacionadas con la obtención de datos
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-
-
-async function obtenerInfo() {
-  try {
-    const response = await usuariostore.obtenerinfousuario();
-    console.log(response);
-    Perfil.value = usuariostore.usuario;
-    rows.value = usuariostore.usuario;
-  } catch (error) {
-    console.log(error);
-  }
-}
 function limpiar() {
   nombre.value = "";
   identificacion.value = "";
@@ -169,7 +144,7 @@ function limpiar() {
 }
 
 async function agregaryediperfil() {
-  if (xd.value == 0) {
+  if (xd.value === 0) {
     try {
       showDefault();
       await usuariostore.postinfousuario({
@@ -179,8 +154,6 @@ async function agregaryediperfil() {
         Correo: Correo.value,
         Contraseña: Contraseña.value,
         Imagen: Imagen.value,
-
-
       });
       obtenerInfo();
       if (notification) {
@@ -205,7 +178,7 @@ async function agregaryediperfil() {
       });
     }
   } else {
-    let id = idusuario.value;
+    const id = idusuario.value;
     if (id) {
       try {
         showDefault();
@@ -215,8 +188,7 @@ async function agregaryediperfil() {
           Telefono: Telefono.value,
           Correo: Correo.value,
           Contraseña: Contraseña.value,
-          Imagen: Imagen.value
-
+          Imagen: Imagen.value,
         });
         btnagregar.value = true;
         btnaceptar.value = false;
@@ -249,32 +221,6 @@ async function agregaryediperfil() {
   }
 }
 
-
-
-let greatMessage = ref("");
-let badMessage = ref("");
-
-// Notificacion Buena
-const showGreat = () => {
-  notification = $q.notify({
-    spinner: false,
-    message: greatMessage,
-    timeout: 2000,
-    type: "positive",
-  });
-};
-
-// Notificacion Mala
-const showBad = () => {
-  notification = $q.notify({
-    spinner: false,
-    message: badMessage,
-    timeout: 2000,
-    type: "negative",
-  });
-};
-
-// Notificacion de Carga
 const showDefault = () => {
   notification = $q.notify({
     spinner: true,
@@ -283,41 +229,33 @@ const showDefault = () => {
   });
 };
 
-// Cancelar Notificacion
-const cancelShow = () => {
-  if (notification) {
-    notification();
+
+onMounted(() => {
+  obtenerInfoUsuario(); // Llama a la función sin pasar userId
+});
+
+const obtenerInfoUsuario = async () => {
+  try {
+    // Verifica si hay un token almacenado en el localStorage
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No hay ningún token almacenado.");
+      return null;
+    }
+
+    if (response.status === 200) {
+      const usuarioData = response.data;
+      console.log("Información del usuario:", usuarioData);
+      return usuarioData;
+    } else {
+      console.error("Error al obtener la información del usuario:", response.status);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al obtener la información del usuario:", error);
+    return null;
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-//Abrir modal
-const profileDialog = ref(false);
-
-const showProfileDialog = () => {
-  profileDialog.value = true;
-};
-//Cerrar modal
-function closeProfileDialog() {
-  profileDialog.value = false;
-}
-
-
-
-
-
-
-
-
 
 </script>
 
