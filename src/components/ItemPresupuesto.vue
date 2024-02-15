@@ -41,46 +41,69 @@
                             </q-td>
                         </template>
                     </q-table>
+
+
+
                     <q-dialog v-model="prompt" persistent class="containermodal">
+
                         <q-card class="modal">
-                            <q-card-section class="titledialog">
-                                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">
-                                    {{ text }}
-                                </h5>
-                            </q-card-section>
+
+                            <div class="titulo-linea">
+                                <h5 class="titulos">{{ text }} </h5>
+                                <div class="linea"></div>
+                            </div>
 
                             <q-card-section>
 
+                                <q-form class="q-gutter-md">
+                                    <!------------------------------->
 
-                                <!------------------------------->
+                                    <div class="container_input1">
+                                        <q-input color="green" filled v-model="Nombre" class="modal_input" type="text"
+                                            label="Nombre del item de presupuesto *" lazy-rules
+                                            :rules="[(val) => !!val || 'Por favor ingrese el iten de presupuesto']">
+                                            <template v-slot:prepend>
+                                                <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128"
+                                                    height="128" viewBox="0 0 26 26">
+                                                    <path fill="#999999"
+                                                        d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                                                </svg>
+                                            </template>
+                                        </q-input>
+                                    </div>
 
-                                <q-input filled v-model="Nombre" label="Nombre del itempresupuesto" lazy-rules :rules="[
-                                    (val) =>
-                                        (val !== null && val !== '') ||
-                                        'Por favor ingresar el nombre del itempresupuesto',
-                                ]" />
-
-                                <!------------------------------->
+                                    <!------------------------------->
 
 
-                                <!------------------------------->
+                                    <!------------------------------->
 
-                                <q-input filled v-model="Presupuesto" label="Presupuesto" lazy-rules :rules="[
-                                    (val) =>
-                                        (val !== null && val !== '') ||
-                                        'Por favor ingresar el tipo de itempresupuesto ',
-                                ]" />
+                                    <div class="container_input1">
+                                        <q-input color="green" filled type="number" v-model="Presupuesto"
+                                            class="modal_input" label="Presupuesto *" lazy-rules :rules="[
+                                                val => val !== null && val !== '' || 'Por favor ingresar el presupuesto',
+                                                val => val > 0 || 'Por favor ingresar un número válido mayor a 0'
+                                            ]">
+                                            <template v-slot:prepend>
+                                                <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128"
+                                                    height="128" viewBox="0 0 48 48">
+                                                    <circle cx="24" cy="24" r="21.5" fill="none" stroke="#999999"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path fill="none" stroke="#999999" stroke-linecap="round"
+                                                        stroke-linejoin="round" d="M2.5 24h43" />
+                                                </svg>
+                                            </template>
+                                        </q-input>
+                                    </div>
+
+                                    <div class="contenedor_botones">
+                                        <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                                        <q-btn label="Agregar" class="btnagregar2" @click="agregaritempresupuesto()"
+                                            v-if="btnagregar" type="submit" />
+                                        <q-btn label="Aceptar" class="btnagregar2" @click="agregaritempresupuesto()"
+                                            v-if="btnaceptar" type="submit" />
+                                    </div>
+                                </q-form>
                             </q-card-section>
-
-                            <q-card-actions align="right" class="containerbtnmodal">
-                                <button flat v-close-popup class="btnagregar">Cancelar</button>
-                                <button class="btnagregar" @click="agregaritempresupuesto()" v-if="btnagregar">
-                                    Agregar
-                                </button>
-                                <button class="btnagregar" @click="agregaritempresupuesto()" v-if="btnaceptar">
-                                    Aceptar
-                                </button>
-                            </q-card-actions>
                         </q-card>
                     </q-dialog>
                 </div>
@@ -366,193 +389,228 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="sass">
-.my-sticky-virtscroll-table
-  /* height or max-height is important */
-  height: 410px
-
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th /* bg color is important for th; just specify one */
-    background-color: #00b4ff
-
-  thead tr th
-    position: sticky
-    z-index: 1
-  /* this will be the loading indicator */
-  thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-  thead tr:first-child th
-    top: 0
-
-  /* prevent scrolling behind sticky top row on focus */
-  tbody
-    /* height of all previous header rows */
-    scroll-margin-top: 48px
-</style>
-
 <style scoped>
+/* Estilos generales */
 * {
-    color: black;
+  color: black;
 }
 
 body {
-    background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
+  background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 
-.opciones {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.header {
-    display: flex;
-    align-items: flex-end;
-}
-
-.btnagregar {
-    border: 0;
-    cursor: pointer;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 15px;
-    background-color: transparent;
-    font-weight: bold;
-    width: 85px;
-}
-
-.containerbtnmodal {
-    display: flex;
-    border-top: 3px solid green;
-    padding: 0;
-}
-
-.title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: whitesmoke;
-    margin: 0;
-    padding: 16px 0px;
-    background-color: #21ba45;
-    font-weight: bold;
-    margin-left: 0px;
-    border-radius: 10px 10px 0px 0px;
-}
-
-.tabla {
-    border-radius: 0px 15px 15px 15px;
-}
-
-.btnag:hover {
-    transition: ease-in-out 0.5s;
-    background-color: rgb(209, 209, 209);
-}
-
-.titledialog {
-    border-bottom: 3px solid green;
-}
-
-.modal {
-    width: 550px;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.btnag {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 8px;
-    font-size: 25px;
-    height: 45px;
-    border: 0;
-    border-radius: 0px 7px 0px 0px;
-    cursor: pointer;
-    background-color: rgb(227, 227, 227);
-}
-
-.btninac:hover {
-    transform: scale(1.1);
-    transition: ease-in-out 0.4s;
-    background-color: rgb(237, 179, 179);
-}
-
-.btnag h5 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Estilos de la tabla */
+.container-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container2 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    gap: 25px;
-    margin-top: 95px;
+  margin-top: 95px;
+  width: 80%;
 }
 
-.container-table {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
+.tabla {
+  border-radius: 0px 15px 15px 15px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  margin: 0;
+  padding: 16px 0px;
+  background-color: #21ba45;
+  font-weight: bold;
+  width: 20%;
+  margin-left: 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.btnag {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+  font-size: 25px;
+  height: 45px;
+  border: 0;
+  border-radius: 0px 7px 0px 0px;
+  cursor: pointer;
+  background-color: rgb(227, 227, 227);
+}
+
+.btnag:hover {
+  background-color: rgb(209, 209, 209);
+}
+
+.btnag h5 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Estilos del formulario modal */
+.q-gutter-md {
+  color: black;
+}
+
+.modal {
+  width: 100%;
+  border-radius: 15px;
+  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
+  background-repeat: no-repeat;
+  background-position: 390px; 
+  background-size: auto 330px; 
+}
+
+.titulo-linea {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.titulos {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px;
+}
+
+.container_input1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+
+.icono {
+  width: 25px;
+  height: 35px;
+}
+
+.contenedor_botones {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.modal_input {
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.linea {
+  border-bottom: 4px solid #21ba45;
+  border-radius: 5px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+
+
+
+/* Estilos de los botones de acción en la tabla */
+.opciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btnedit {
-    font-size: 20px;
-    width: 40px;
-    padding: 0;
-    border: 0;
-    border-radius: 7px;
-    cursor: pointer;
+  font-size: 20px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.btninac,
+.btnact {
+  font-size: 23px;
+  width: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
 }
 
 .btninac {
-    background-color: rgb(255, 186, 186);
-    font-size: 23px;
-    width: 40px;
-    padding: 0;
-    border: 0;
-    border-radius: 7px;
-    cursor: pointer;
+  background-color: rgb(255, 186, 186);
 }
 
 .btninac:hover {
-    transform: scale(1.1);
-    transition: ease-in-out 0.4s;
-    background-color: rgb(237, 179, 179);
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(237, 179, 179);
+}
+
+.btnagregar2 {
+  border: 1px solid #cacecb;
+  background-color: #dfdbdb8c;
+}
+
+.btnagregar2:hover {
+  border: 1px solid #acd6b6;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1:hover {
+  border: 1px solid #d6acac;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1 {
+  border: 1px solid #dfdfdf;
+  background-color: #dfdbdb8c;
 }
 
 .btnact {
-    background-color: rgb(167, 255, 167);
-    font-size: 23px;
-    width: 40px;
-    padding: 0;
-    border: 0;
-    border-radius: 7px;
-    cursor: pointer;
+  background-color: rgb(167, 255, 167);
 }
 
 .btnact:hover {
-    transform: scale(1.1);
-    transition: ease-in-out 0.4s;
-    background-color: rgb(179, 239, 179);
+  transform: scale(1.1);
+  transition: ease-in-out 0.4s;
+  background-color: rgb(71, 243, 71);
 }
 
-.container-table h1 {
-    font-family: "Gabarito", sans-serif;
-    padding: 0;
-    margin: 0;
+/* Otros estilos */
+.p-carga {
+  text-align: center;
+}
+
+@media only screen and (max-width: 510px) {
+  .label_input {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container2 {
+    margin-top: 50px;
+  }
+}
+
+/* Estilos específicos para pantallas más grandes */
+@media only screen and (min-width: 1200px) {
+  .container2 {
+    margin-top: 120px;
+  }
+
+  .modal_input {
+    width: 60%;
+  }
 }
 </style>
