@@ -19,13 +19,13 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   { path: "/", component: Login },
+  { path: "/RecuContrasena", component: RecuContrasena },
   {
     path: "/Menu",
     component: Menu,
     children: [
       { path: "/Home", component: Home },
       { path: "/InfoPerfil", component: InfoPerfil },
-      { path: "/RecuContrasena", component: RecuContrasena },
       { path: "/Registro", component: Registro },
       { path: "/Perfil", component: Perfil },
       { path: "/TablaProductos", component: TablaProductos },

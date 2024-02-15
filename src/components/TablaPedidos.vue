@@ -17,8 +17,8 @@
             </button>
           </div>
 
-          <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter"  :columns="columns" row-key="index" virtual-scroll
-            :rows-per-page-options="[0]">
+          <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
+            virtual-scroll :rows-per-page-options="[0]">
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
                 <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
@@ -47,64 +47,114 @@
               </q-input>
             </template>
           </q-table>
+
+
+
+
           <q-dialog v-model="prompt" persistent class="containermodal">
+
+
             <q-card class="modal">
-              <q-card-section class="titledialog">
-                <h5 style="margin: 0; padding: 0px 0px 0px 0px; font-weight: bold">
-                  {{ text }}
-                </h5>
-              </q-card-section>
+              <div class="titulo-linea">
+                <h5 class="titulos">{{ text }} </h5>
+                <div class="linea"></div>
+              </div>
+
 
               <q-card-section>
-                <q-input filled v-model="FechaCreacion" label="Codigo de ficha" type="number" lazy-rules :rules="[
-                  (val) =>
-                    (val && val.length > 0) || 'Por favor ingrese un codigo',
-                ]" />
 
-                <!------------------------------->
+                <q-form class="q-gutter-md">
 
-                <q-input filled v-model="FechaEntrega" label="Nombre del Pedidos" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el nombre del Pedidos',
-                ]" />
+                  
+                  <div class="container_input1">
+                    <q-input color="green" filled v-model="FechaCreacion" class="modal_input" type="date" label="Fecha de creacion *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de creacion']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <!------------------------------->
+                    <!------------------------------->
 
-                <q-input filled v-model="DistribucionLoteFicha_id" label="Descripcion del Pedidos" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el Pedidos',
-                ]" />
+                    <div class="container_input1">
+                    <q-input color="green" filled v-model="FechaEntrega" class="modal_input" type="date" label="Fecha de entrega *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de entrega']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 26 26">
+                          <path fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <!------------------------------->
+                    <!------------------------------->
 
-                <q-input filled v-model="Subtotal" label="Unidad de medida" lazy-rules :rules="[
-                  (val) =>
-                    (val && val.length > 0) ||
-                    'Por favor ingresar la unidad de medida ',
-                ]" />
+                    <div class="container_input1">
+                    <q-input color="green" filled v-model="DistribucionLoteFicha_id" class="modal_input" type="text" label="Distribucion de lote de ficha *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la distribucion de lote de ficha']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 24 24">
+                          <path fill="#999999"
+                            d="M8 18h8v-2H8zm0-4h8v-2H8zm-2 8q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h8l6 6v12q0 .825-.587 1.413T18 22zm7-13h5l-5-5z" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <!------------------------------->
+                    <!------------------------------->
 
-                <q-input filled v-model="Total" label="Precio de unidad " type="number" lazy-rules :rules="[
-                  (val) =>
-                    (val !== null && val !== '') ||
-                    'Por favor ingresar el precio',
-                ]" />
+                    <div class="container_input1">
+                    <q-input color="green" filled v-model="Subtotal" class="modal_input" type="text" label="Subtotal *"
+                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese el subtotal']">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 100 100">
+                          <path fill="#999999"
+                            d="M0 4.5v20h8.5V27h3v-2.5H20v-20zm5 5h10v10H5ZM22.5 13v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm3 6v6h3v-6zm0 9v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v2.5H80v20h20v-20h-8.5V73Zm-80 2v6h3v-6ZM85 80.5h10v10H85ZM8.5 84v3h6v-3H10zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3z"
+                            color="#999999" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
 
-                <!------------------------------->
+                    <!------------------------------->
+
+                    <div class="container_input1">
+                    <q-input color="green" filled type="number" v-model="Total" class="modal_input"
+                      label="Precio de unidad *" lazy-rules :rules="[
+                        val => val !== null && val !== '' || 'Por favor ingresar el precio unitario',
+                        val => val > 0 || 'Por favor ingresar un número válido mayor a 0'
+                      ]">
+                      <template v-slot:prepend>
+                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+                          viewBox="0 0 24 24">
+                          <path fill="#999999"
+                            d="M2 20V4h20v16zm6-3h2v-1h1q.425 0 .713-.288T12 15v-3q0-.425-.288-.712T11 11H8v-1h4V8h-2V7H8v1H7q-.425 0-.712.288T6 9v3q0 .425.288.713T7 13h3v1H6v2h2zm8-.75l2-2h-4zM14 10h4l-2-2z" />
+                        </svg>
+                      </template>
+                    </q-input>
+                  </div>
+
+                    <!------------------------------->
+
+
+                    <div class="contenedor_botones">
+                      <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                      <q-btn label="Agregar" class="btnagregar2" @click="agregarpedido()" v-if="btnagregar"
+                        type="submit" />
+                      <q-btn label="Aceptar" class="btnagregar2" @click="agregarpedido()" v-if="btnaceptar"
+                        type="submit" />
+                    </div>
+                </q-form>
               </q-card-section>
-
-              <q-card-actions align="right" class="containerbtnmodal">
-                <button flat v-close-popup class="btnagregar">Cancelar</button>
-                <button class="btnagregar" @click="agregarpedido()" v-if="btnagregar">
-                  Agregar
-                </button>
-                <button class="btnagregar" @click="agregarpedido()" v-if="btnaceptar">
-                  Aceptar
-                </button>
-              </q-card-actions>
             </q-card>
           </q-dialog>
         </div>
@@ -432,33 +482,8 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="sass">
-.my-sticky-virtscroll-table
-  /* height or max-height is important */
-  height: 410px
-
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th /* bg color is important for th; just specify one */
-    background-color: #00b4ff
-
-  thead tr th
-    position: sticky
-    z-index: 1
-  /* this will be the loading indicator */
-  thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-  thead tr:first-child th
-    top: 0
-
-  /* prevent scrolling behind sticky top row on focus */
-  tbody
-    /* height of all previous header rows */
-    scroll-margin-top: 48px
-</style>
-
 <style scoped>
+/* Estilos generales */
 * {
   color: black;
 }
@@ -467,33 +492,26 @@ body {
   background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
 }
 
-.opciones {
+/* Estilos de la tabla */
+.container-table {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+}
+
+.container2 {
+  margin-top: 95px;
+  width: 80%;
+}
+
+.tabla {
+  border-radius: 0px 15px 15px 15px;
+  width: 100%;
 }
 
 .header {
   display: flex;
   align-items: flex-end;
-}
-
-.btnagregar {
-  border: 0;
-  cursor: pointer;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 15px;
-  background-color: transparent;
-  font-weight: bold;
-  width: 85px;
-}
-
-.containerbtnmodal {
-  display: flex;
-  border-top: 3px solid green;
-  padding: 0;
 }
 
 .title {
@@ -510,25 +528,6 @@ body {
   border-radius: 10px 10px 0px 0px;
 }
 
-.tabla {
-  border-radius: 0px 15px 15px 15px;
-}
-
-.btnag:hover {
-  transition: ease-in-out 0.5s;
-  background-color: rgb(209, 209, 209);
-}
-
-.titledialog {
-  border-bottom: 3px solid green;
-}
-
-.modal {
-  width: 550px;
-  border-radius: 15px;
-  text-align: center;
-}
-
 .btnag {
   display: flex;
   justify-content: left;
@@ -542,10 +541,8 @@ body {
   background-color: rgb(227, 227, 227);
 }
 
-.btninac:hover {
-  transform: scale(1.1);
-  transition: ease-in-out 0.4s;
-  background-color: rgb(237, 179, 179);
+.btnag:hover {
+  background-color: rgb(209, 209, 209);
 }
 
 .btnag h5 {
@@ -554,22 +551,73 @@ body {
   font-weight: bold;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Estilos del formulario modal */
+.q-gutter-md {
+  color: black;
 }
 
-.container2 {
-  margin-top: 95px;
+.modal {
   width: 100%;
+  border-radius: 15px;
+  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
+  background-repeat: no-repeat;
+  background-position: 310px; 
+  background-size: auto 500px; 
 }
 
-.container-table {
-  display: flex;
-  justify-content: center;
+.titulo-linea {
   text-align: center;
-  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+
+.titulos {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px;
+}
+
+.container_input1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+
+.icono {
+  width: 25px;
+  height: 35px;
+}
+
+.contenedor_botones {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.modal_input {
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.linea {
+  border-bottom: 4px solid #21ba45;
+  border-radius: 5px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+
+
+
+/* Estilos de los botones de acción en la tabla */
+.opciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btnedit {
@@ -581,14 +629,18 @@ body {
   cursor: pointer;
 }
 
-.btninac {
-  background-color: rgb(255, 186, 186);
+.btninac,
+.btnact {
   font-size: 23px;
   width: 40px;
   padding: 0;
   border: 0;
   border-radius: 7px;
   cursor: pointer;
+}
+
+.btninac {
+  background-color: rgb(255, 186, 186);
 }
 
 .btninac:hover {
@@ -597,25 +649,61 @@ body {
   background-color: rgb(237, 179, 179);
 }
 
+.btnagregar2 {
+  border: 1px solid #cacecb;
+  background-color: #dfdbdb8c;
+}
+
+.btnagregar2:hover {
+  border: 1px solid #acd6b6;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1:hover {
+  border: 1px solid #d6acac;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1 {
+  border: 1px solid #dfdfdf;
+  background-color: #dfdbdb8c;
+}
+
 .btnact {
   background-color: rgb(167, 255, 167);
-  font-size: 23px;
-  width: 40px;
-  padding: 0;
-  border: 0;
-  border-radius: 7px;
-  cursor: pointer;
 }
 
 .btnact:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.4s;
-  background-color: rgb(179, 239, 179);
+  background-color: rgb(71, 243, 71);
 }
 
-.container-table h1 {
-  font-family: "Gabarito", sans-serif;
-  padding: 0;
-  margin: 0;
+/* Otros estilos */
+.p-carga {
+  text-align: center;
 }
-</style>
+
+@media only screen and (max-width: 510px) {
+  .label_input {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container2 {
+    margin-top: 50px;
+  }
+}
+
+/* Estilos específicos para pantallas más grandes */
+@media only screen and (min-width: 1200px) {
+  .container2 {
+    margin-top: 120px;
+  }
+
+  .modal_input {
+    width: 60%;
+  }
+}</style>
+
