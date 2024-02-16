@@ -1,20 +1,23 @@
 <template>
     <div class="a">
-        <div class="title">
-            <h4>DistribucionPresupuesto</h4>
+        <div class="aa">
+            <div class="title">
+                <h4>DistribucionPresupuesto</h4>
+            </div>
+            <div class="data">
+                <h6>{{ Lote_Id }}</h6>
+                <h6>{{ item2 }}</h6>
+                <h6>{{ item3 }}</h6>
+            </div>
         </div>
-        <div class="data">
-            <h6>{{ Lote_Id }}</h6>
-            <h6>{{ item2 }}</h6>
-            <h6>{{ item3 }}</h6>
-        </div>
+       
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import { useitempresupuestostore } from "../stores/ItemPresupuesto.js"
-import { uselotestore } from "../stores/Lote";
+/* import { uselotestore } from "../stores/Lote.js"; */
 const itempresupuestostore = useitempresupuestostore();
 const lotestore = uselotestore();
 let Lote_Id = ref("");
@@ -35,6 +38,15 @@ async function fetchData() {
 
 <style scoped>
 .a {
+   
+    height: 100vh;
+}
+.aa{
     background-color: white;
 }
+.title{
+    display: flex;
+justify-content: center;
+}
+
 </style>

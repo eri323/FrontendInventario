@@ -28,6 +28,11 @@
             virtual-scroll
             :rows-per-page-options="[0]"
           >
+          <template v-slot:body-cell-NivelFormacion="props">
+            <q-td :props="props">
+              {{ JSON.stringify(props.row.NivelFormacion.label) }}
+            </q-td>
+          </template>
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
                 <label
@@ -159,7 +164,7 @@
                       filled
                       v-model="niveldeformacion"
                       class="modal_select"
-                      :options="opcionesNivelDeFormacion"
+                      :options="opcionesNivelDeFormacionArray"
                       type="text"
                       label="Nivel de formacion *"
                       lazy-rules
@@ -266,7 +271,7 @@
                     <q-select
                       color="green"
                       filled
-                      v-model="area_id"
+                      v-model="Area_Id"
                       class="modal_input"
                       :options="options"
                       label="Area *"
@@ -353,7 +358,7 @@ let nombre = ref("");
 let niveldeformacion = ref("");
 let fechainicio = ref("");
 let fechafin = ref("");
-let area_id = ref("");
+let Area_Id = ref("");
 const filter = ref("");
 let text = ref("Agregar Ficha");
 let btnaceptar = ref(false);
@@ -369,18 +374,22 @@ function agregar() {
   btnagregar.value = true;
 }
 /* const niveldeformacion = ref(null); */
-const opcionesNivelDeFormacion = ref([
-  { label: "Tecnico", value: "opcion1" },
-  { label: "Tecnologo", value: "opcion2" },
-  { label: "Auxiliar", value: "opcion3" },
-  { label: "Operario", value: "opcion4" },
-  { label: "Especialista", value: "opcion5" },
-]);
+const opcionesNivelDeFormacionArray = ref([
+  { label: "Tecnico", value:"opcion1"},
+  { label: "Tecnologo" , value:"opcion2"},
+  { label: "Auxiliar", value:"opcion3"},
+  { label: "Operario", value:"opcion4" },
+  { label: "Especialista", value:"opcion5" },
+]).value.map((opcion) => ({
+  label: opcion.label,
+  value: opcion.value,
+}));
+
 
 let rows = ref([]);
 let ficha = ref([]);
 let xd = ref(0);
-let Area_Id = ref("");
+/* let Area_Id = ref(""); */
 const columns = [
   {
     name: "CodigoFicha",
@@ -439,9 +448,9 @@ const columns = [
     align: "center",
   },
   {
-    name: "Area_id",
+    name: "Area_Id",
     label: "Area",
-    field: (row) => `${row.Area_Id.Nombre}`,
+    field: (row) => `${row.Area_Id?.Nombre}`,
     align: "center",
     headerStyle: {
       fontWeight: "bold",
@@ -477,7 +486,7 @@ function limpiar() {
   niveldeformacion.value = "";
   fechafin.value = "";
   fechainicio.value = "";
-  area_id.value = "";
+  Area_Id.value = "";
 }
 async function agregarficha() {
   if (xd.value == 0) {
@@ -489,9 +498,9 @@ async function agregarficha() {
         NivelFormacion: niveldeformacion.value,
         FechaInicio: fechainicio.value,
         FechaFin: fechafin.value,
-        Area_Id: area_id._rawValue.value,
+        Area_Id: Area_Id._rawValue.value,
       });
-      obtenerInfo();
+      
       if (notification) {
         notification();
       }
@@ -502,6 +511,7 @@ async function agregarficha() {
         timeout: 2000,
         type: "positive",
       });
+      obtenerInfo();
     } catch (error) {
       if (notification) {
         notification();
@@ -512,7 +522,9 @@ async function agregarficha() {
         timeout: 2000,
         type: "negative",
       });
+
     }
+    prompt.value = false
   } else {
     let id = idficha.value;
     if (id) {
@@ -524,7 +536,7 @@ async function agregarficha() {
           NivelFormacion: niveldeformacion.value,
           FechaInicio: fechainicio.value,
           FechaFin: fechafin.value,
-          Area_Id: area_id._rawValue.value,
+          Area_Id: Area_Id._rawValue.value,
         });
         btnagregar.value = true;
         btnaceptar.value = false;
@@ -553,6 +565,7 @@ async function agregarficha() {
         });
       }
     }
+    prompt.value = false;
   }
 }
 
@@ -572,7 +585,7 @@ async function editarficha(id) {
     codigodeficha.value = fichaseleccionada.CodigoFicha;
     nombre.value = fichaseleccionada.Nombre;
     niveldeformacion.value = fichaseleccionada.NivelFormacion;
-    area_id.value = {
+    Area_Id.value = {
       label: `${fichaseleccionada.Area_Id.Nombre}`,
       value: String(fichaseleccionada.Area_Id._id),
     };

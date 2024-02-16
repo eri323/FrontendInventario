@@ -529,7 +529,7 @@ const columns = [
     name: "Lote_Id",
     label: "Lote_Id",
     align: "center",
-    field: "Lote_Id",
+    field: (row) => `${row.Lote_Id?.Nombre}`,
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -687,7 +687,10 @@ async function editarProducto(id) {
     PrecioUnitario.value = selecProducto.PrecioUnitario;
     Iva.value = selecProducto.Iva;
     Consumible.value = selecProducto.Consumible;
-    Lote_Id.value = selecProducto.Lote_Id;
+    Lote_Id.value = {
+      label: `${selecProducto.Lote_Id.Nombre}`,
+      value: String(selecProducto.Lote_Id._id),
+    };
   }
 }
 async function obtenerlote() {
