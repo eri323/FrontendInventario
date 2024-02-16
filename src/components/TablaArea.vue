@@ -175,6 +175,8 @@ async function agregararea() {
         timeout: 2000,
         type: "positive",
       });
+      obtenerInfo();
+      prompt.value = false;
     } catch (error) {
       if (notification) {
         notification();
@@ -209,7 +211,7 @@ async function agregararea() {
           type: "positive",
         });
         obtenerInfo();
-        fixed.value = false;
+        prompt.value = false;
       } catch (error) {
         if (notification) {
           notification();

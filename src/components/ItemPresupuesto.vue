@@ -238,6 +238,8 @@ async function agregaritempresupuesto() {
                 timeout: 2000,
                 type: "positive",
             });
+            obtenerInfo();
+            prompt.value= false;
         } catch (error) {
             if (notification) {
                 notification();

@@ -133,7 +133,7 @@
                   </div>
 
                   <!------------------------------->
-                <!--   <div class="container_input1">
+                  <div class="container_input1">
                     <q-input color="green" filled v-model="Contraseña" class="modal_input" type="passawor" label="contraseña *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una contraseña']">
                       <template v-slot:prepend>
@@ -144,7 +144,7 @@
                         </svg>
                       </template>
                     </q-input>
-                  </div> -->
+                  </div>
 
                   <div class="contenedor_botones">
                     <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
@@ -334,6 +334,8 @@ async function agregarusuario() {
         timeout: 2000,
         type: "positive",
       });
+      obtenerInfo();
+      prompt.value = false
     } catch (error) {
       if (notification) {
         notification();

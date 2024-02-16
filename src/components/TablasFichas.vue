@@ -500,7 +500,7 @@ async function agregarficha() {
         FechaFin: fechafin.value,
         Area_Id: Area_Id._rawValue.value,
       });
-      
+      obtenerInfo();
       if (notification) {
         notification();
       }
@@ -565,7 +565,7 @@ async function agregarficha() {
         });
       }
     }
-    prompt.value = false;
+    
   }
 }
 
