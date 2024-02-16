@@ -278,14 +278,14 @@ export default {
 .cardcontent{
   display: flex;
   flex-wrap: wrap;
-  padding: 0px 95px;
-  gap: 100px;
+  padding: 0px 150px;
+  gap: 120px;
 }
 .tools {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius: 10px 0px 0px;
+  border-radius: 10px 0px 10px;
   background: #21ba45;
   margin-top: -2px;
 }
@@ -294,7 +294,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius: 0px 10px 0px 0px;
+  border-radius:10px 0px 10px 0px;
   background: #21ba45;
   margin-top: -2px;
 }
@@ -312,6 +312,7 @@ export default {
 
 .title {
   font-size: 25px;
+  text-align: center;
   margin: 0;
 }
 
