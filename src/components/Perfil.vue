@@ -91,20 +91,20 @@
                       :rules="[
                         (val) =>
                           (val !== null && val !== '') ||
-                          'Porfavor ingresa tu Nombre ',
+                          'Por favor ingresa tu Nombre ',
                       ]"
                     />
                     <!--  -->
                     <q-input
                       filled
                       v-model="identificacion"
-                      label="Numero deiidentificacion"
+                      label="Numero de identificacion"
                       type="number"
                       lazy-rules
                       :rules="[
                         (val) =>
                           (val && val.length > 0) ||
-                          'Porfavor escribe tu nuevo numero de identificacion',
+                          'Por favor escribe tu nuevo numero de identificacion',
                       ]"
                     />
                     <!--  -->
@@ -117,7 +117,7 @@
                       :rules="[
                         (val) =>
                           (val && val.length > 0) ||
-                          'Porfavor escribe tu nuevo numero de telefono',
+                          'Por favor escribe tu nuevo numero de telefono',
                       ]"
                     />
                     <!--  -->
@@ -130,7 +130,7 @@
                       :rules="[
                         (val) =>
                           (val !== null && val !== '') ||
-                          'Porfavor Ingrese su nuevo correo ',
+                          'Por favor Ingrese su nuevo correo ',
                       ]"
                     />
                     <!--  -->
@@ -143,7 +143,7 @@
                       :rules="[
                         (val) =>
                           (val !== null && val !== '') ||
-                          'Porfavor ingrese su nueva contraseña ',
+                          'Por favor ingrese su nueva contraseña ',
                       ]"
                     />
 
