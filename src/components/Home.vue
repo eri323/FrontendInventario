@@ -169,7 +169,7 @@
           <p class="title">Historial</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/historial.png" alt="">
           </p>
         </div>
       </div>
@@ -187,10 +187,10 @@
           </div>
         </div>
         <div class="card__content">
-          <p class="title">Item de Presupuesto</p>
+          <p class="title">Programa</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/programa.png" alt="">
           </p>
         </div>
       </div>
@@ -208,10 +208,10 @@
           </div>
         </div>
         <div class="card__content">
-          <p class="title">Item de Presupuesto</p>
+          <p class="title">Configuracion</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/configuracion.png" alt="">
           </p>
         </div>
       </div>
