@@ -3,21 +3,27 @@ import axios from "axios";
 import { ref } from "vue";
 
 export const useusuariostore = defineStore("usuario", () => {
-  const usuario = ref(null);
+  const usuario = ref([]);
   const usuarios = ref([]);
-  const tokenRef = ref('');
+  const tokenRef = ref(localStorage.getItem("token") || "");
+  const usuarioLogeado = ref(
+    JSON.parse(localStorage.getItem("usuarioLogeado")) || null
+  );
 
   const setToken = (token) => {
     tokenRef.value = token;
+    localStorage.setItem("token", token);
   };
-  const setUsuario = (userData) => {
-    usuario.value = userData;
+
+  const setUsuarioLogeado = (userData) => {
+    usuarioLogeado.value = userData;
+    localStorage.setItem("usuarioLogeado", JSON.stringify(userData));
   };
 
   const obtenerinfousuario = async () => {
     try {
       let responseusuario = await axios.get("usuario/usuariobusca");
-      setUsuario(responseusuario.data.usuarios);
+      usuario.value = responseusuario.data.usuarios;
     } catch (error) {
       throw error;
     }
@@ -68,10 +74,10 @@ export const useusuariostore = defineStore("usuario", () => {
 
       if (response.status === 200) {
         const token = response.data.token;
-        setToken(token);
         const usuarioData = response.data.usuarios;
-        usuario.value = usuarioData;
-        setUsuario(usuarioData);
+        setToken(token);
+        setUsuarioLogeado(usuarioData);
+        usuarios.value = usuarioData;
         console.log("Información del usuario:", usuarioData);
         return { status: response.status, token };
       } else {
@@ -85,8 +91,14 @@ export const useusuariostore = defineStore("usuario", () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("usuarioLogeado");
     tokenRef.value = null;
+    usuarioLogeado.value = null;
   };
+
+  if (tokenRef.value) {
+    obtenerinfousuario();
+  }
 
   return {
     usuario,
@@ -95,11 +107,13 @@ export const useusuariostore = defineStore("usuario", () => {
     login,
     logout,
     tokenRef,
+    usuarioLogeado,
     setToken,
+    setUsuarioLogeado,
     postinfousuario,
     puteditarusuario,
     putInactivarusuario,
     putActivarusuario,
-    persist: true  
+    persist: true 
   };
 });
