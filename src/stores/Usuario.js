@@ -3,7 +3,7 @@ import axios from "axios";
 import { ref } from "vue";
 
 export const useusuariostore = defineStore("usuario", () => {
-  const usuario = ref([]);
+  const usuario = ref(null);
   const usuarios = ref([]);
   const tokenRef = ref('');
 
@@ -67,7 +67,7 @@ export const useusuariostore = defineStore("usuario", () => {
         const token = response.data.token;
         setToken(token);
         const usuarioData = response.data.usuarios;
-        usuarios.value = usuarioData;
+        usuario.value = usuarioData;
         console.log("Información del usuario:", usuarioData);
         return { status: response.status, token };
       } else {
@@ -96,6 +96,6 @@ export const useusuariostore = defineStore("usuario", () => {
     puteditarusuario,
     putInactivarusuario,
     putActivarusuario,
+    persist: true  
   };
-  persist: true  
 });

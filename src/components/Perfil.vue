@@ -7,7 +7,7 @@
         style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0"
       >
         <q-card-section>
-          <h4>Nombre {{ usuario && usuario.Nombre }}</h4>
+          <h4>Nombre {{ usuario.Nombre }}</h4>
           <img
             v-if="
               usuario &&
@@ -180,7 +180,6 @@ const usuariostore = useusuariostore();
 
 const imageUrl = ref("../assets/user.jpg");
 const profileDialog = ref(false);
-const usuario = ref(null);
 const nombre = ref("");
 const identificacion = ref("");
 const Telefono = ref("");
@@ -314,12 +313,10 @@ const showDefault = () => {
   });
 };
 
-// Función para obtener la información del usuario
-const obtenerInfoUsuario = async () => {
+const obtenerInfo = async () => {
   try {
     await usuariostore.obtenerinfousuario();
-    usuario.value = usuariostore.usuario.value;
-    console.log(usuario.value);
+
   } catch (error) {
     console.error("Error al obtener la información del usuario:", error);
   }
@@ -328,6 +325,8 @@ const obtenerInfoUsuario = async () => {
 onMounted(() => {
   obtenerInfo();
 });
+
+const usuario = usuariostore.usuario;
 </script>
 
 <style scoped>

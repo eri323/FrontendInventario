@@ -76,7 +76,7 @@ async function Login() {
       console.log(res);
       if (res.status === 200 && res.token) {
         await usuariostore.obtenerinfousuario();
-        console.log(usuariostore.usuario);
+        // console.log(usuariostore.usuario);
         router.push("./Home");
       } else {
         error2.value = true;
