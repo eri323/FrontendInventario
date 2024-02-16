@@ -185,10 +185,6 @@ import { useusuariostore } from "../stores/Usuario.js";
 const usuariostore = useusuariostore();
 const $q = useQuasar()
 
-
-
-
-
 function confirm() {
   $q.dialog({
     title: 'Cerrar sesion',
@@ -238,9 +234,8 @@ function toggleLeftDrawer() {
 
 const usuarioData = usuariostore.usuarios;
 
-const nombreUsuario = usuarioData.Nombre;
-const rolUsuario = usuarioData.Rol;
-
+const nombreUsuario = usuariostore.usuarioLogeado.Nombre;
+const rolUsuario = usuariostore.usuarioLogeado.Rol;
 
 function goToHome() {
   localStorage.removeItem("token");
