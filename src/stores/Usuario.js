@@ -10,11 +10,14 @@ export const useusuariostore = defineStore("usuario", () => {
   const setToken = (token) => {
     tokenRef.value = token;
   };
+  const setUsuario = (userData) => {
+    usuario.value = userData;
+  };
 
   const obtenerinfousuario = async () => {
     try {
       let responseusuario = await axios.get("usuario/usuariobusca");
-      usuario.value = responseusuario.data.usuarios;
+      setUsuario(responseusuario.data.usuarios);
     } catch (error) {
       throw error;
     }
@@ -68,6 +71,7 @@ export const useusuariostore = defineStore("usuario", () => {
         setToken(token);
         const usuarioData = response.data.usuarios;
         usuario.value = usuarioData;
+        setUsuario(usuarioData);
         console.log("Información del usuario:", usuarioData);
         return { status: response.status, token };
       } else {
