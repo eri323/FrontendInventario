@@ -11,7 +11,7 @@ export const useproductostore = defineStore('producto', () => {
             let responseproducto = await axios.get('producto/productobusca');
             console.log(responseproducto);
             producto.value = responseproducto.data.productos;
-        } catch (error) {
+        } catch (error) {   
             throw error
         }
     };

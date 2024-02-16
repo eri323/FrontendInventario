@@ -15,12 +15,28 @@
               <i class="fa-regular fa-square-plus"></i>
             </button>
           </div>
-          <q-table flat bordered class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
-            virtual-scroll :rows-per-page-options="[0]">
+          <q-table
+            flat
+            bordered
+            class="tabla"
+            :rows="rows"
+            :filter="filter"
+            :columns="columns"
+            row-key="index"
+            virtual-scroll
+            :rows-per-page-options="[0]"
+          >
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
-                <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
-                <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
+                <label
+                  for=""
+                  v-if="props.row.Estado == 1"
+                  style="color: green; font-weight: bold"
+                  >Activo</label
+                >
+                <label for="" v-else style="color: red; font-weight: bold"
+                  >Inactivo</label
+                >
               </q-td>
             </template>
             <template v-slot:body-cell-opciones="props">
@@ -28,17 +44,33 @@
                 <button class="btnedit" @click="editarlote(props.row._id)">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button class="btninac" @click="inactivarlote(props.row._id)" v-if="props.row.Estado == 1">
+                <button
+                  class="btninac"
+                  @click="inactivarlote(props.row._id)"
+                  v-if="props.row.Estado == 1"
+                >
                   <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                 </button>
-                <button class="btnact" @click="activarlote(props.row._id)" v-else>
+                <button
+                  class="btnact"
+                  @click="activarlote(props.row._id)"
+                  v-else
+                >
                   <i class="fa-solid fa-check" style="color: #006110"></i>
                 </button>
               </q-td>
             </template>
             <template v-slot:top-right>
-              <q-input borderless dense debounce="300" color="primary" v-model="filter" class="buscar"
-                placeholder="Buscar cualquier campo" id="boxBuscar">
+              <q-input
+                borderless
+                dense
+                debounce="300"
+                color="primary"
+                v-model="filter"
+                class="buscar"
+                placeholder="Buscar cualquier campo"
+                id="boxBuscar"
+              >
                 <template v-slot:append>
                   <q-icon name="search" />
                 </template>
@@ -46,34 +78,47 @@
             </template>
           </q-table>
 
-
           <q-dialog v-model="prompt" persistent class="containermodal">
-
             <q-card class="modal">
-
               <div class="titulo-linea">
-                <h5 class="titulos">{{ text }} </h5>
+                <h5 class="titulos">{{ text }}</h5>
                 <div class="linea"></div>
               </div>
 
               <q-card-section>
-
                 <q-form class="q-gutter-md">
-
                   <div class="container_input1">
-                    <q-input color="green" filled v-model="Nombre" class="modal_input" type="text" label="Nombre del lote *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese el nombre del lote']">
+                    <q-input
+                      color="green"
+                      filled
+                      v-model="Nombre"
+                      class="modal_input"
+                      type="text"
+                      label="Nombre del lote *"
+                      lazy-rules
+                      :rules="[
+                        (val) =>
+                          !!val || 'Por favor ingrese el nombre del lote',
+                      ]"
+                    >
                       <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                        <svg
+                          class="icono"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="128"
+                          height="128"
+                          viewBox="0 0 26 26"
+                        >
+                          <path
+                            fill="#999999"
+                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557"
+                          />
                         </svg>
                       </template>
                     </q-input>
                   </div>
 
-                <!--   <div class="container_input1">
+                  <!--   <div class="container_input1">
                     <q-input color="green" filled v-model="Presupuesto" class="modal_input" type="number" label="Presupuesto de lote *"
                       lazy-rules :rules="[(val) => !!val || 'Por favor ingrese el presupuesto del lote']">
                       <template v-slot:prepend>
@@ -87,14 +132,29 @@
                   </div> -->
 
                   <div class="contenedor_botones">
-                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
-                    <q-btn label="Agregar" class="btnagregar2" @click="agregarlote()" v-if="btnagregar"
-                      type="submit" />
-                    <q-btn label="Aceptar" class="btnagregar2" @click="agregarlote()" v-if="btnaceptar"
-                      type="submit" />
+                    <q-btn
+                      flat
+                      v-close-popup
+                      class="btnagregar1"
+                      type="reset"
+                      label="Cancelar"
+                    />
+                    <q-btn
+                      label="Agregar"
+                      class="btnagregar2"
+                      @click="agregarlote()"
+                      v-if="btnagregar"
+                      type="submit"
+                    />
+                    <q-btn
+                      label="Aceptar"
+                      class="btnagregar2"
+                      @click="agregarlote()"
+                      v-if="btnaceptar"
+                      type="submit"
+                    />
                   </div>
                 </q-form>
-
               </q-card-section>
             </q-card>
           </q-dialog>
@@ -117,7 +177,7 @@ let prompt = ref(false);
 /* let fixed = ref(false); */
 const $q = useQuasar();
 let lotes = ref([]);
-const filter = ref("")
+const filter = ref("");
 let text = ref("Agregar Lote");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
@@ -158,7 +218,7 @@ const columns = [
     },
     align: "center",
   },
- 
+
   {
     name: "Estado",
     label: "Estado",
@@ -185,7 +245,7 @@ const columns = [
 ];
 function limpiar() {
   Nombre.value = "";
- /*  Presupuesto.value = ""; */
+  /*  Presupuesto.value = ""; */
 }
 async function agregarlote() {
   if (xd.value == 0) {
@@ -193,7 +253,6 @@ async function agregarlote() {
       showDefault();
       await lotestore.postinfolote({
         Nombre: Nombre.value,
-       
       });
       obtenerInfo();
       if (notification) {
@@ -217,6 +276,7 @@ async function agregarlote() {
         type: "negative",
       });
     }
+    prompt.value = false;
   } else {
     let id = idlote.value;
     if (id) {
@@ -224,7 +284,6 @@ async function agregarlote() {
         showDefault();
         await lotestore.puteditarlote(id, {
           Nombre: Nombre.value,
-         
         });
         btnagregar.value = true;
         btnaceptar.value = false;
@@ -253,6 +312,7 @@ async function agregarlote() {
         });
       }
     }
+    prompt.value = false;
   }
 }
 
@@ -267,7 +327,7 @@ async function editarlote(id) {
     btnaceptar.value = true;
     text.value = "Editar lote";
     Nombre.value = loteseleccionada.Nombre;
-   /*  Presupuesto.value = loteseleccionada.Presupuesto; */
+    /*  Presupuesto.value = loteseleccionada.Presupuesto; */
     /*  nombre.value = loteseleccionada.Nombre;
     niveldeformacion.value = loteseleccionada.NivelFormacion;
     area_id.value = {
@@ -453,15 +513,14 @@ body {
   border-radius: 15px;
   background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
   background-repeat: no-repeat;
-  background-position: 430px; 
-  background-size: auto ; 
+  background-position: 430px;
+  background-size: auto;
 }
 
 .titulo-linea {
   text-align: center;
   margin-bottom: 20px;
 }
-
 
 .titulos {
   font-size: 24px;
@@ -476,7 +535,6 @@ body {
   flex-wrap: wrap;
   z-index: 1;
 }
-
 
 .icono {
   width: 25px;
@@ -500,9 +558,6 @@ body {
   width: 85%;
   margin: 0 auto;
 }
-
-
-
 
 /* Estilos de los botones de acción en la tabla */
 .opciones {
@@ -597,4 +652,5 @@ body {
   .modal_input {
     width: 60%;
   }
-}</style>
+}
+</style>
