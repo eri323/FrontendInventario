@@ -8,7 +8,7 @@
                 <div class="tabladiv">
                     <div class="header">
                         <h5 class="title">
-                            Areas
+                            Dsitribucion presupuesto
                         </h5>
                         <button class="btnag" @click="prompt = true">
                             <h5>Agregar</h5>
@@ -170,7 +170,7 @@ const columns = [
     {
         name: "Lote_Id",
         label: "Lote",
-     field: (row) => `${row.Lote_Id?.Nombre}`,
+        field: (row) => `${row.Lote_Id?.Nombre}`,
         headerStyle: {
             fontWeight: "bold",
             fontSize: "15px",
@@ -236,7 +236,7 @@ async function agregaritempresupuesto() {
     if (xd.value == 0) {
         try {
             showDefault();
-            await itempresupuestostore.postinfoitempresupuesto({
+            await distribucionpresupuesto.postinfoitempresupuesto({
                 Presupuesto: Presupuesto.value,
                 Lote_Id: Lote_Id.value,
                 ItemPresupuesto_Id: ItemPresupuesto_Id.value,
@@ -317,9 +317,13 @@ async function editararea(id) {
         btnaceptar.value = true;
         text.value = "Editar Area";
         Presupuesto.value = dispeselect.Presupuesto;
-          Lote_Id.value = {
+        Lote_Id.value = {
             label: `${dispeselect.Lote_Id.Nombre}`,
             value: String(dispeselect.Lote_Id._id),
+        };
+         ItemPresupuesto_Id.value = {
+            label: `${dispeselect.ItemPresupuesto_Id.Presupuesto}-${dispeselect.ItemPresupuesto_Id.Nombre}`,
+            value: String(dispeselect.ItemPresupuesto_Id._id),
         };
         /* Presupuesto.value = areaseleccionada.Presupuesto;
             niveldeformacion.value = areaseleccionada.NivelFormacion;
