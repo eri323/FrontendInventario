@@ -5,10 +5,9 @@ import { ref } from "vue";
 export const useusuariostore = defineStore("usuario", () => {
   const usuario = ref([]);
   const usuarios = ref([]);
-  const tokenRef = ref(localStorage.getItem("token") || null);
+  const tokenRef = ref('');
 
   const setToken = (token) => {
-    localStorage.setItem("token", token);
     tokenRef.value = token;
   };
 
@@ -98,4 +97,5 @@ export const useusuariostore = defineStore("usuario", () => {
     putInactivarusuario,
     putActivarusuario,
   };
+  persist: true  
 });

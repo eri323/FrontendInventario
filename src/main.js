@@ -7,10 +7,13 @@ import { Quasar, Notify, Dialog } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 import axios from 'axios';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 
 
 const app = createApp(App)
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate);
 
 app.use(Quasar, {
     plugins: {
