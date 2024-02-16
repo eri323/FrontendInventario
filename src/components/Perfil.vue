@@ -4,7 +4,7 @@
     <div class="row justify-center">
       <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
         <q-card-section>
-          <h4>Nombre {{ usuarioLogeado && usuarioLogeado.Nombre }}</h4>
+          <h4>Nombre: <span class="nombre">{{ usuarioLogeado && usuarioLogeado.Nombre }}</span></h4>
           <img v-if="usuarioLogeado && usuarioLogeado.Imagen" :src="getImagenUrl(usuarioLogeado.Imagen)" :alt="usuarioLogeado.Nombre">
           <img v-else :src="imageUrl" alt="Imagen predeterminada">
 
@@ -118,6 +118,10 @@ const fileInput = ref(null); // Add this line to define fileInput
 
 //Abrir y cerrar modal
 const showProfileDialog = () => {
+  nombre.value = usuarioLogeado.Nombre;
+  identificacion.value = usuarioLogeado.Identificacion;
+  Telefono.value = usuarioLogeado.Telefono;
+  Correo.value = usuarioLogeado.Correo;
   profileDialog.value = true;
 };
 const closeProfileDialog = () => {
@@ -298,5 +302,10 @@ span {
 }
 .q-gutter-md {
   width: 335px;
+}
+
+.nombre{
+  color: #21ba45;
+  font-weight: bold;
 }
 </style>
