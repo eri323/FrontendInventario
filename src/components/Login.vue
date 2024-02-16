@@ -3,7 +3,7 @@
     <div class="contenedor">
       <div class="arriba">
         <h2>Bienvenido</h2>
-        <img style="height: 100px; width: 100px;" src="../img/sena2.png" alt="">
+        <img style="height: 100px; width: 100px;" src="/src/img/sena2.png" alt="">
       </div>
 
       <div class="conte">

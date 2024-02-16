@@ -43,7 +43,7 @@
           <p class="title">Productos</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/productos.png" alt="">
           </p>
         </div>
       </div>
@@ -64,7 +64,7 @@
           <p class="title">Usuarios</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/Usuario.png" alt="">
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@
           <p class="title">Areas</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/area.png" alt="">
           </p>
         </div>
       </div>
@@ -106,7 +106,7 @@
           <p class="title">Lotes</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/lotes.png" alt="">
           </p>
         </div>
       </div>
@@ -127,7 +127,7 @@
           <p class="title">Pedido</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/pedido.png" alt="">
           </p>
         </div>
       </div>
@@ -148,7 +148,7 @@
           <p class="title">Perfil</p>
           <hr>
           <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
+            <img class="imagenes_icon" src="../img/perfil.png" alt="">
           </p>
         </div>
       </div>
