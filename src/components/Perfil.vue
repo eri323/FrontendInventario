@@ -4,10 +4,8 @@
     <div class="row justify-center">
       <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
         <q-card-section>
-          <h4>Nombre {{ usuario && usuario.Nombre }}</h4>
-          <img v-if="usuario && usuario.Imagen && usuario.Imagen.contentType && usuario.Imagen.data"
-            :src="`${usuario.Imagen.contentType};base64,${usuario.Imagen.data.toString('base64')}`"
-            :alt="usuario.Imagen.nombre">
+          <h4>Nombre {{ usuarioLogeado && usuarioLogeado.Nombre }}</h4>
+          <img v-if="usuarioLogeado && usuarioLogeado.Imagen" :src="getImagenUrl(usuarioLogeado.Imagen)" :alt="usuarioLogeado.Nombre">
           <img v-else :src="imageUrl" alt="Imagen predeterminada">
 
           <div>
@@ -17,14 +15,14 @@
         </q-card-section>
       </q-card>
       <q-card class="Medio" style="max-width: 900px; border-radius: 0 ;">
-        <h1>Rol</h1>
+        <h1>Rol {{ usuarioLogeado && usuarioLogeado.Rol }}</h1>
         <q-card-section class="mitad">
           <q-card-section class="sepa" style="width: 200px;">
-            <ul v-if="usuario">
-              <li><strong>Nombre:</strong> {{ usuario.Nombre }}</li>
-              <li><strong>Identificación:</strong> {{ usuario.Identificacion }}</li>
-              <li><strong>Teléfono:</strong> {{ usuario.Telefono }}</li>
-              <li><strong>Email:</strong> {{ usuario.Correo }}</li>
+            <ul v-if="usuarioLogeado">
+              <li><strong>Nombre:</strong> {{ usuarioLogeado.Nombre }}</li>
+              <li><strong>Identificación:</strong> {{ usuarioLogeado.Identificacion }}</li>
+              <li><strong>Teléfono:</strong> {{ usuarioLogeado.Telefono }}</li>
+              <li><strong>Email:</strong> {{ usuarioLogeado.Correo }}</li>
             </ul>
           </q-card-section>
         </q-card-section>
@@ -104,21 +102,19 @@ const usuariostore = useusuariostore();
 
 const imageUrl = ref("../assets/user.jpg");
 const profileDialog = ref(false);
-const usuario = ref(null);
 const nombre = ref("");
 const identificacion = ref("");
 const Telefono = ref("");
 const Correo = ref("");
 const Contraseña = ref("");
-const Imagen = ref("");
 const options = ref([]);
 const btnagregar = ref(true); // Inicializa según tus necesidades
 const btnaceptar = ref(false); // Inicializa según tus necesidades
-const idusuario = ref("");
 const xd = ref(0);
+const usuarioLogeado = usuariostore.usuarioLogeado;
+
 let notification;
 const fileInput = ref(null); // Add this line to define fileInput
-
 
 //Abrir y cerrar modal
 const showProfileDialog = () => {
@@ -144,7 +140,6 @@ const handleFileChange = (event) => {
     reader.readAsDataURL(file);
   }
 };
-
 
 function limpiar() {
   nombre.value = "";
@@ -242,19 +237,14 @@ const showDefault = () => {
 
 const obtenerInfo = async () => {
   try {
-    const token = localStorage.getItem("token");
+    const token = usuariostore.tokenRef; 
     console.log(token);
     if (!token) {
       console.error("No hay ningún token almacenado.");
       return;
     }
-    const usuarioData = await usuariostore.obtenerinfousuario(token);
-    if (usuarioData) {
-      usuario.value = usuarioData;
-      console.log(usuarioData);
-    } else {
-      console.error("No se pudo obtener la información del usuario.");
-    }
+    usuariostore.setToken(token);
+    await usuariostore.obtenerinfousuario();
   } catch (error) {
     console.error("Error al obtener la información del usuario:", error);
   }
@@ -263,48 +253,49 @@ const obtenerInfo = async () => {
 onMounted(() => {
   obtenerInfo();
 });
+
+// Función para obtener la URL de la imagen del usuario
+const getImagenUrl = (imagen) => {
+  if (imagen && imagen.contentType && imagen.data) {
+    return `${imagen.contentType};base64,${imagen.data.toString('base64')}`;
+  } else {
+    return imageUrl.value;
+  }
+};
 </script>
 
 <style scoped>
 .boton{
   background-color: #21ba45;
   font-size: 14px;
-
 }
 img {
   border-radius: 50%;
   height: 400px;
   width: 400px;
 }
-
 h4 {
   margin: 28px;
 }
-
 h1 {
   font-size: 45px;
 }
-
 span {
   color: black;
 }
-
 .Medio {
   width: 500px;
   display: flex;
   justify-content: center;
 }
-
 .mitad {
   display: flex;
   align-items: center;
 }
-
 .form {
   height: 550px;
   width: 350px;
 }
-
 .q-gutter-md {
   width: 335px;
 }
