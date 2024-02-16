@@ -40,6 +40,7 @@
           <q-card>
             <q-card-section>
               <p style="font-size: 25px;">Editar datos</p>
+              <div class="linea"></div>
               <!-- Formulario -->
               <div class="form">
                 <div class="q-pa-md" style="max-width: 200px">
@@ -71,11 +72,11 @@
                           (val !== null && val !== '') || 'Porfavor ingrese su nueva contraseña ',
                       ]" />
 
-                    <div class="btn-agregar">
-                      <button class="btnagregar" @click="agregaryediperfil()" v-if="btnagregar">
+                    <div class="contenedor_botones">
+                      <button class="btnagregar1" @click="agregaryediperfil()" v-if="btnagregar">
                         Aceptar
                       </button>
-                      <button class="btnagregar" @click="closeProfileDialog">Cerrar</button>
+                      <button class="btnagregar2" @click="closeProfileDialog">Cerrar</button>
 
                     </div>
                   </q-form>
@@ -307,5 +308,37 @@ span {
 .nombre{
   color: #21ba45;
   font-weight: bold;
+}
+.linea {
+  border-bottom: 4px solid #21ba45;
+  border-radius: 5px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.contenedor_botones {
+  display: flex;
+  height: 35px;
+  justify-content: space-between;
+}
+
+.btnagregar2 {
+  border: 1px solid #cacecb;
+  background-color: #dfdbdb8c;
+}
+
+.btnagregar2:hover {
+  border: 1px solid #acd6b6;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1:hover {
+  border: 1px solid #d6acac;
+  background-color: #b3b2b28c;
+}
+
+.btnagregar1 {
+  border: 1px solid #dfdfdf;
+  background-color: #dfdbdb8c;
 }
 </style>
