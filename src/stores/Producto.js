@@ -19,6 +19,7 @@ export const useproductostore = defineStore('producto', () => {
     const postinfoproducto = async (data) => {
         try {
             let responseproducto = await axios.post('producto/productocrear', data);
+            console.log(responseproducto);
             return responseproducto
         } catch (error) {
             throw error

@@ -415,7 +415,7 @@ const columns = [
   {
     name: "NivelFormacion",
     label: "Nivel de formacion",
-    field: "NivelFormacion",
+    field: val=> eliminarComillas(val.NivelFormacion.label),
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -488,6 +488,15 @@ function limpiar() {
   fechainicio.value = "";
   Area_Id.value = "";
 }
+function eliminarComillas(cadena) {
+  if (cadena.startsWith('"') && cadena.endsWith('"')) {
+    return cadena.slice(1, -1);
+  } else {
+    console.log('a');
+    return cadena;
+  }
+}
+
 async function agregarficha() {
   if (xd.value == 0) {
     try {
