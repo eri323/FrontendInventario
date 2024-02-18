@@ -1,47 +1,261 @@
 <template>
   <div class="body">
     <div class="contenedor">
-      <div class="arriba">
-        <h2>Bienvenido</h2>
-        <img style="height: 100px; width: 100px;" src="../img/sena2.png" alt="">
-      </div>
+      <h4 class="titulo">Bienvenido</h4>
+      <div class="contenedor_doble">
 
-      <div class="conte">
-        <div class="Container1">
-          <div id="card-title">
-            <h2 class="log">Login</h2>
+        <div class="contenedor_izquierdo">
+          <div class="contenedor_logo">
+            <img class="logo" src="../img/sena2.png" alt="">
+            <!-- <img class="logo" src="../img/logo3d.gif" alt=""> -->
           </div>
-          <div class="containerData">
-            <q-card-actions class="texto">
-              <q-input color="green" v-model="usuario.Identificacion" label="Identificacion" class="input">
-                <template v-slot:prepend>
-                  <i class="fa-solid fa-user-lock"></i>
-                </template>
-              </q-input>
+        </div>
 
-              <q-input color="green" v-model="usuario.Contraseña" label="Contraseña" type="password" id="inputpasswors"
-                class="input">
-                <template v-slot:prepend>
-                  <i class="fa-solid fa-file-signature"></i>
-                </template>
-              </q-input>
-              <router-link to="./RecuContrasena" class="link">
-                <p style="position: relative; top: 10px; ">¿Olvidaste tu Contraseña?</p>
-              </router-link>
-            </q-card-actions>
+        <div class="contenedor_derecho">
+          <div class="container">
+            <div class="container2">
+              <div class="heading">Iniciar sesión</div>
+              <form action="" class="form">
+                <input required="" class="input" v-model="usuario.Identificacion" type="email" name="email" id="email"
+                  placeholder="Identificacion">
+                <input required="" class="input" v-model="usuario.Contraseña" type="password" name="password"
+                  id="password" placeholder="Password">
+                <router-link to="./RecuContrasena" class="forgot-password">
+                  <span class="forgot-password">Has olvidado tu contraseña ?</span>
+                </router-link>
+                <q-btn :loading="loading" class="login-button" @click="Login()" label="Aceptar" />
+              </form>
+            </div>
           </div>
-
-          <button @click="Login()" class="btn" :disabled="loading">
-            <span v-if="!loading">Aceptar</span>
-            <span v-else>
-              <i class="fas fa-spinner fa-spin"></i>
-            </span>
-          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+
+
+
+<style scoped>
+* {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://maestriasydiplomadostec.blob.core.windows.net/maestriasydiplomados/uploads/programaec/imagen/496/Administraci_n-de-Inventarios.jpg");
+  background-size: cover;
+  background-position: center;
+  /* background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b); */
+  height: 100vh;
+}
+
+.titulo {
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  font-size: 70px;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.671);
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+}
+
+.contenedor_doble {
+  display: flex;
+  margin: 10px;
+  border-radius: 15px;
+  flex-wrap: wrap;
+  background-color: rgb(226, 234, 255);
+  /*   background-color: rgb(226, 252, 235); */
+  max-width: 850px;
+  height: 85%;
+  box-shadow: rgba(160, 219, 149, 0.878) 0px 30px 30px -20px;
+}
+
+.contenedor_izquierdo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
+  background-size: cover;
+  border-radius: 35px;
+  background-position: center;
+  border: 20px solid white;
+}
+
+.contenedor_derecho {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+/* Estilos del login  */
+
+.container {
+  height: 100%;
+  border-radius: 15px;
+}
+
+.container2{
+  margin-top: 40px;
+  padding: 25px 35px;
+}
+
+.heading {
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+}
+
+.form {
+  margin-top: 5px;
+}
+
+.form .input {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-top: 30px;
+  box-shadow: #bbfdc8 0px 0px 10px 3px;
+  border-inline: 2px solid transparent;
+}
+
+.form .input::-moz-placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.form .input::placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.form .input:focus {
+  outline: none;
+  border-inline: 2px solid #12d152;
+}
+
+.form .forgot-password {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 25px;
+}
+
+.form .forgot-password span {
+  font-size: 13px;
+  color: #000000;
+}
+
+.form .login-button {
+  display: block;
+  width: 90%;
+  font-weight: bold;
+  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
+  color: white;
+  padding-block: 15px;
+  margin: 40px auto;
+  border-radius: 20px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.form .login-button:hover {
+  transform: scale(1.03);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+}
+
+.form .login-button:active {
+  transform: scale(0.95);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+}
+
+@media screen and (max-width: 615px) {
+
+  .contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
+    height: 100%;
+  }
+
+  .container2{
+    margin: 0;
+  }
+
+  .contenedor_doble {
+    flex-direction: column;
+    height: auto;
+    width: 95%;
+  }
+
+  .logo {
+    width: 100px;
+    height: 90px;
+  }
+
+  .contenedor_izquierdo {
+    flex: 1;
+    width: 90%;
+    margin-left: 25px;
+    border-radius: 0px 0px;
+    background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
+  }
+
+  .contenedor_derecho {
+    flex: 1;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .contenedor_izquierdo {
+    display: none;
+  }
+
+  .titulo {
+    font-size: 40px;
+  }
+
+  .contenedor_derecho {
+    flex: 1;
+  }
+
+  .container {
+    height: auto;
+    background: #F8F9FD;
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+    border-radius: 40px;
+    padding: 25px 35px;
+    border: 5px solid rgb(255, 255, 255);
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+    margin: 10px;
+  }
+
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../fonts/Anta-Regular.ttf");
+}
+</style>
+
+
 
 <script setup>
 import { ref } from "vue";
@@ -102,156 +316,3 @@ const showBad = () => {
   });
 };
 </script>
-<style scoped>
-* {
-  font-family: "Ubuntu", sans-serif;
-}
-
-* {
-  font-family: "save";
-}
-
-.conte {
-  display: flex;
-  gap: 150px;
-}
-
-.contenedor {
-  display: flex;
-  flex-direction: column;
-  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
-  background-repeat: no-repeat;
-  align-items: center;
-  height: 100vh;
-  gap: 10px;
-}
-
-.link {
-  /*    color: blue; */
-  margin: 0;
-  text-decoration: none;
-  color: black;
-}
-
-.input {
-  font-size: 23px;
-  line-height: 24px;
-  padding-top: 24px;
-  padding-bottom: 8px;
-}
-
-.texto {
-  display: flex;
-  font-size: 20px;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  position: relative;
-}
-
-.t .bg-teal text-white {
-  background-color: transparent;
-}
-
-#card-title {
-  font-family: "Raleway Thin", sans-serif;
-  letter-spacing: 4px;
-  padding-bottom: 23px;
-  padding-top: 13px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-}
-
-.Container1 {
-  width: 50vh;
-  height: 50vh;
-  padding: 1.5rem;
-  border-radius: 0.8rem;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-
-#submit-btn {
-  background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-  font-family: "Raleway SemiBold", sans-serif;
-  margin: 0;
-  font-family: "save";
-  transition: 0.25s;
-}
-
-.log {
-  border-bottom: 3px solid rgb(45, 189, 110);
-  margin: 0;
-  padding: 0;
-  width: 95px;
-  display: flex;
-  justify-content: center;
-  font-family: "save";
-  font-size: 65px;
-  padding: 8px;
-}
-
-
-#submit-btn:hover {
-  box-shadow: 0px 1px 10px #24c64f;
-}
-
-.containerData {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#icon {
-  font-size: 150px;
-}
-
-#input {
-  display: flex;
-  text-align: center;
-}
-
-#img {
-  font-size: 200px;
-}
-
-@font-face {
-  font-family: "save";
-  src: url("../fonts/Anta-Regular.ttf");
-}
-
-.btn {
-  width: 100px;
-  font-size: 18px;
-  border-radius: 5px;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
-}
-
-.btn:hover {
-  transition: ease-in-out 0.5s;
-  transform: scale(1.1);
-}
-
-.arriba{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 5% ;
-}
-</style>
