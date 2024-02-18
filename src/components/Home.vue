@@ -278,8 +278,8 @@ export default {
 .cardcontent{
   display: flex;
   flex-wrap: wrap;
-  padding: 0px 150px;
-  gap: 120px;
+  padding: 0px 100px;
+  gap: 100px;
 }
 .tools {
   display: flex;

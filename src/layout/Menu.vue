@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh LpR fFf" class="body">
-    <q-header class="custom-header">
+    <q-header elevated class="custom-header">
       <q-toolbar class="bg-positive">
         <button dense flat @click="toggleLeftDrawer" class="btnmenu"> <i class="fa-solid fa-bars"></i>
         </button>
@@ -31,7 +31,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay behavior="mobile">
+    <q-drawer v-model="leftDrawerOpen" show-if-above :width="300" :breakpoint="400">
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
         <q-list padding class="list">
           <router-link to="/Home">
@@ -233,7 +233,6 @@ function toggleLeftDrawer() {
 
 
 const usuarioData = usuariostore.usuarios;
-
 const nombreUsuario = usuariostore.usuarioLogeado.Nombre;
 const rolUsuario = usuariostore.usuarioLogeado.Rol;
 

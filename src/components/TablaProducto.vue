@@ -19,7 +19,7 @@
 
           <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
             virtual-scroll :rows-per-page-options="[0]">
-             <template v-slot:body-cell-Consumible="props">
+            <template v-slot:body-cell-Consumible="props">
               <q-td :props="props">
                 {{ JSON.stringify(props.row.Consumible.label) }}
               </q-td>
@@ -30,17 +30,35 @@
                 <label for="" v-else style="color: red; font-weight: bold">Inactivo</label>
               </q-td>
             </template>
+
+
             <template v-slot:body-cell-opciones="props">
               <q-td class="opciones" :props="props">
-                <button class="btnedit" @click="editarProducto(props.row._id)">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button class="btninac" @click="inactivarProducto(props.row._id)" v-if="props.row.Estado == 1">
-                  <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
-                </button>
-                <button class="btnact" @click="activarProducto(props.row._id)" v-else>
-                  <i class="fa-solid fa-check" style="color: #006110"></i>
-                </button>
+                <q-btn-dropdown class="acciones" label="Acciones">
+                  <q-list>
+                    <q-item class="acciones2" clickable v-close-popup @click="editarProducto(props.row._id, 'Editar')">
+                      <div class="acciones3">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <q-item-label>Editar</q-item-label>
+                      </div>
+                    </q-item>
+
+                    <q-item class="acciones2" clickable v-close-popup @click="inactivarProducto(props.row._id)"
+                      v-if="props.row.Estado == 1">
+                      <div class="acciones3">
+                        <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
+                        <q-item-label>Desactivar</q-item-label>
+                      </div>
+                    </q-item>
+
+                    <q-item class="acciones2" clickable v-close-popup @click="activarProducto(props.row._id)" v-else>
+                      <div class="acciones3">
+                        <i class="fa-solid fa-check" style="color: #13ec37"></i>
+                        <q-item-label>Activar</q-item-label>
+                      </div>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
               </q-td>
             </template>
 
@@ -57,164 +75,142 @@
           <q-dialog v-model="prompt" persistent class="containermodal">
             <q-card class="modal">
               <div class="titulo-linea">
+                <i class="fa-solid fa-pen-to-square" id="tta"></i>
                 <h5 class="titulos">{{ text }}</h5>
-                <div class="linea"></div>
               </div>
 
               <q-card-section>
+
                 <q-form class="q-gutter-md">
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Codigo" class="modal_input" type="number" label="Codigo *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un código']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 32 32">
-                          <circle cx="25" cy="20" r="1" fill="#999999" />
-                          <path fill="#999999"
-                            d="M19.414 30H15v-4.414l5.034-5.034A4.607 4.607 0 0 1 20 20a5 5 0 1 1 4.448 4.966zM17 28h1.586l5.206-5.206l.54.124a3.035 3.035 0 1 0-2.25-2.25l.124.54L17 26.414zM6 8h2v8H6zM2 8h2v8H2zm16 0h2v6h-2zm-4 8h-2a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2m-2-2h2v-4h-2zM2 18h2v8H2zm12 0h2v4h-2zm-4 8H8a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2m-2-2h2v-4H8zM2 2h2v4H2zm12 0h2v4h-2zm4 0h2v4h-2zm-8 4H8a2 2 0 0 1-2-2V2h2v2h2V2h2v2a2 2 0 0 1-2 2" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                  <div class="contenedor_modal">
 
-                  <!-- ----------------------------------------------- -->
+                    <div class="modal_izquierdo" :style="{ backgroundImage: `url(${imageUrl})` }">
+                      <i class="fa-solid fa-xmark" style="color: #ff0000"  @click="eliminarImagen" v-if="imageUrl !== ''" ></i>
+                    </div>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Nombre" class="modal_input" type="text" label="Nombre *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
-                  <!-- ----------------------------------------------- -->
+                    <div class="modal_derecho">
+                      <div class="rectangulo">Informacion de producto</div>
+                      <div class="container_input2">
+                        <div class="container_input3">
+                          <label class="label-input" for="">Codigo:</label>
+                          <q-input color="green" filled v-model="Codigo" class="modal_input2" type="number" lazy-rules
+                            :rules="[(val) => !!val || 'Por favor ingrese un código']">
+                            <template v-slot:prepend>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Descripcion" class="modal_input" type="text"
-                      label="Descripcion *" lazy-rules :rules="[
-                        (val) => !!val || 'Por favor ingrese la descripcion del producto',
-                      ]">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 24 24">
-                          <path fill="#999999"
-                            d="M8 18h8v-2H8zm0-4h8v-2H8zm-2 8q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h8l6 6v12q0 .825-.587 1.413T18 22zm7-13h5l-5-5z" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <!-- ----------------------------------------------- -->
+                        <div class="container_input3">
+                          <label class="label-input" for="">Nombre:</label>
+                          <q-input color="green" filled v-model="Nombre" class="modal_input2" type="text" lazy-rules
+                            :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
+                            <template v-slot:prepend>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="UnidadMedida" class="modal_input" type="text"
-                      label="Unidad de medida *" lazy-rules :rules="[
-                        (val) => !!val || 'Por favor ingrese una unidad de medida',
-                      ]">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 100 100">
-                          <path fill="#999999"
-                            d="M0 4.5v20h8.5V27h3v-2.5H20v-20zm5 5h10v10H5ZM22.5 13v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm3 6v6h3v-6zm0 9v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v6h3v-6zm-80 2v6h3v-6zm80 7v2.5H80v20h20v-20h-8.5V73Zm-80 2v6h3v-6ZM85 80.5h10v10H85ZM8.5 84v3h6v-3H10zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3zm9 0v3h6v-3z"
-                            color="#999999" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <!-- ----------------------------------------------- -->
+                        <div class="container_input3">
+                          <label class="label-input" for="">Unidad de Medida:</label>
+                          <q-input color="green" filled v-model="UnidadMedida" class="modal_input2" type="text" lazy-rules
+                            :rules="[
+                              (val) => !!val || 'Por favor ingrese una unidad de medida',
+                            ]">
+                            <template v-slot:prepend>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled type="number" v-model="PrecioUnitario" class="modal_input"
-                      label="Precio de unidad *" lazy-rules :rules="[
-                        (val) =>
-                          (val !== null && val !== '') ||
-                          'Por favor ingresar el precio unitario',
-                        (val) =>
-                          val > 0 || 'Por favor ingresar un número válido mayor a 0',
-                      ]">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 24 24">
-                          <path fill="#999999"
-                            d="M2 20V4h20v16zm6-3h2v-1h1q.425 0 .713-.288T12 15v-3q0-.425-.288-.712T11 11H8v-1h4V8h-2V7H8v1H7q-.425 0-.712.288T6 9v3q0 .425.288.713T7 13h3v1H6v2h2zm8-.75l2-2h-4zM14 10h4l-2-2z" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <!-- ----------------------------------------------- -->
+                        <div class="container_input3">
+                          <label class="label-input" for="">Precio de unidad:</label>
+                          <q-input color="green" filled type="number" v-model="PrecioUnitario" class="modal_input2"
+                            lazy-rules :rules="[
+                              (val) =>
+                                (val !== null && val !== '') ||
+                                'Por favor ingresar el precio unitario',
+                              (val) =>
+                                val > 0 || 'Por favor ingresar un número válido mayor a 0',
+                            ]">
+                            <template v-slot:prepend>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled type="number" v-model="Iva" class="modal_input" label="Iva *" lazy-rules
-                      :rules="[
-                        (val) =>
-                          (val !== null && val !== '') || 'Por favor ingresar el IVA',
-                        (val) =>
-                          val > 0 || 'Por favor ingresar un número válido mayor a 0',
-                      ]">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 48 48">
-                          <circle cx="24" cy="24" r="21.5" fill="none" stroke="#999999" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path fill="none" stroke="#999999" stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.5 24h43" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <!-- ----------------------------------------------- -->
+                      </div>
 
-                  <div class="container_input1">
-                    <q-select color="green" filled v-model="Consumible" :options="consumible" class="modal_input"
-                      type="text" label="Consumible *" lazy-rules :rules="[
-                        (val) => !!val || 'Por favor ingrese un Consumible de producto',
-                      ]" hide-bottom-space>
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 24 24">
-                          <g fill="none" stroke="#999999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                            <path d="M15 3v18" />
-                            <rect width="18" height="18" x="3" y="3" rx="2" />
-                            <path d="M21 9H3m18 6H3" />
-                          </g>
-                        </svg>
-                      </template>
-                    </q-select>
-                  </div>
-                  <br />
 
-                  <div class="container_input1">
-                    <q-select color="green" filled v-model="Lote_Id" class="modal_input" type="text" :options="options"
-                      label="Lote *" lazy-rules :rules="[
-                        (val) => !!val || 'Por favor seleccione el lote al que pertenece',
-                      ]" hide-bottom-space>
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 24 24">
-                          <g fill="none" stroke="#999999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                            <path d="M15 3v18" />
-                            <rect width="18" height="18" x="3" y="3" rx="2" />
-                            <path d="M21 9H3m18 6H3" />
-                          </g>
-                        </svg>
-                      </template>
-                    </q-select>
-                  </div>
-                  <br />
+                      <div class="container_input4">
+                        <label class="label-input2" for="">Descripcion:</label>
+                        <q-input color="green" filled v-model="Descripcion" class="modal_input3" type="textarea"
+                          label="Descripcion *" lazy-rules :rules="[
+                            (val) => !!val || 'Por favor ingrese la descripcion del producto',
+                          ]">
+                          <template v-slot:prepend>
 
-                  <div class="contenedor_botones">
-                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
-                    <q-btn label="Agregar" class="btnagregar2" @click="agregarProducto()" v-if="btnagregar"
-                      type="submit" />
-                    <q-btn label="Aceptar" class="btnagregar2" @click="agregarProducto()" v-if="btnaceptar"
-                      type="submit" />
+                          </template>
+                        </q-input>
+                      </div>
+
+                      <div class="container_input2">
+
+                        <div class="container_input3">
+                          <label class="label-input3" for="">Consumible:</label>
+                          <q-select color="green" filled v-model="Consumible" :options="consumible" class="modal_input2"
+                            type="text" lazy-rules :rules="[
+                              (val) => !!val || 'Por favor ingrese un Consumible de producto',
+                            ]" hide-bottom-space>
+                            <template v-slot:prepend>
+
+                            </template>
+                          </q-select>
+                        </div>
+
+                        <div class="container_input3">
+                          <label class="label-input3" for="">Lote:</label>
+                          <q-select color="green" filled v-model="Lote_Id" class="modal_input2" type="text"
+                            :options="options" lazy-rules :rules="[
+                              (val) => !!val || 'Por favor seleccione el lote al que pertenece',
+                            ]" hide-bottom-space>
+                            <template v-slot:prepend>
+
+                            </template>
+                          </q-select>
+                        </div>
+
+                        <div class="container_input3">
+                          <label class="label-input" for="">Iva:</label>
+                          <q-input color="green" filled v-model="Iva" class="modal_input2" type="text" lazy-rules :rules="[
+                            (val) => !!val || 'Por favor ingrese el iva del producto',
+                          ]">
+                            <template v-slot:prepend>
+
+                            </template>
+                          </q-input>
+                        </div>
+
+
+
+
+                        <div class="container_input3">
+                          <label class="label-input3" for="">Imagen:</label>
+                          <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
+                          <q-btn @click="openFileExplorer" class="modal_input2">Agregar Imagen</q-btn>
+                        </div>
+
+                      </div>
+
+                      <div class="contenedor_botones">
+                        <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                        <q-btn label="Agregar" class="btnagregar2" @click="agregarProducto()" v-if="btnagregar"
+                          type="submit" />
+                        <q-btn label="Aceptar" class="btnagregar2" @click="agregarProducto()" v-if="btnaceptar"
+                          type="submit" />
+                      </div>
+
+                    </div>
                   </div>
                 </q-form>
               </q-card-section>
@@ -230,12 +226,16 @@
 import { ref } from "vue";
 import { onMounted } from "vue";
 import { useQuasar } from "quasar";
+/* import { useRouter } from "vue-router"; */
 import { useproductostore } from "../stores/Producto.js";
 import { uselotestore } from "../stores/Lote.js";
 const $q = useQuasar();
 const productostore = useproductostore();
 const lotestore = uselotestore();
 const options = ref([]);
+const fileInput = ref(null);
+const imageUrl = ref("");
+
 let notification;
 let rows = ref([]);
 let productos = ref([]);
@@ -263,6 +263,7 @@ let xd = ref(0);
 function agregar() {
   prompt.value = true;
   xd.value = 0;
+  eliminarImagen();
   limpiar();
   text.value = "Agregar producto";
   btnaceptar.value = false;
@@ -607,6 +608,27 @@ const formatearPrecio = (precio) => {
   return partes.join(".");
 };
 
+const openFileExplorer = () => {
+  fileInput.value.click();
+};
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    imageUrl.value = e.target.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+};
+
+const eliminarImagen = () => {
+  imageUrl.value = "";
+};
+
+
 onMounted(async () => {
   obtenerInfo();
 });
@@ -686,38 +708,135 @@ body {
   color: black;
 }
 
+.contenedor_modal {
+  display: flex;
+}
+
+.modal_izquierdo {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-top: 2px solid #21ba45;
+  border-bottom: 2px solid #21ba45;
+  margin: 0px 60px 0px 0px;
+  width: 250px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.rectangulo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  flex-wrap: wrap;
+  bottom: 3px;
+  margin-left: auto;
+  margin-right: auto; 
+  height: 45px;
+  background-color: #21ba45;
+  width: 80%;
+  border-bottom: 4px solid #21ba45;
+  border-left: 3px solid #21ba45;
+}
+
+.modal_derecho {
+  display: grid;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.322);
+  border-radius: 3px;
+  width: 100%;
+}
+
+
+.container_input2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container_input3 {
+  display: flex;
+  width: 45%;
+  margin: 10px;
+}
+
+.container_input4 {
+  display: flex;
+}
+
+.modal_input2 {
+  display: flex;
+  margin: 0;
+  width: 100%;
+}
+
+
+.modal_input3 {
+  width: 80%;
+}
+
 .modal {
   width: 100%;
+  background-color: #ecf0f5;
+  max-width: 1200px;
+  margin: 0 auto;
   border-radius: 15px;
-  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
-  background-repeat: no-repeat;
-  background-position: 280px;
-  background-size: auto 560px;
 }
 
 .titulo-linea {
-  text-align: center;
   margin-bottom: 20px;
+  background-color: #21ba45;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
+  display: flex;
+  margin: 0;
+}
+
+#tta {
+  font-size: 24px;
+  color: #ffffff;
+  margin: 20px;
 }
 
 .titulos {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #ffffff;
   margin: 20px;
 }
 
-.container_input1 {
+.label-input {
   display: flex;
+  position: relative;
+  bottom: 15px;
   align-items: center;
-  flex-wrap: wrap;
-  z-index: 1;
+  font-weight: 700;
+  width: 30%;
+  margin: 10px;
 }
 
-.icono {
-  width: 25px;
-  height: 35px;
+.label-input2 {
+  display: flex;
+  position: relative;
+  bottom: 15px;
+  align-items: center;
+  font-weight: 700;
+  margin: 18px;
 }
+
+.label-input3 {
+  display: flex;
+  text-align: end;
+  align-items: center;
+  font-weight: 700;
+  width: 30%;
+  margin: 10px;
+}
+
 
 .contenedor_botones {
   display: flex;
@@ -725,17 +844,8 @@ body {
   justify-content: space-between;
 }
 
-.modal_input {
-  border-radius: 5px;
-  z-index: 1;
-}
 
-.linea {
-  border-bottom: 4px solid #21ba45;
-  border-radius: 5px;
-  width: 85%;
-  margin: 0 auto;
-}
+
 
 /* Estilos de los botones de acción en la tabla */
 .opciones {
@@ -743,6 +853,24 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.acciones {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px;
+}
+
+.acciones2 {
+  background-color: #8d8d8d28;
+}
+
+.acciones3 {
+  display: flex;
+}
+
+i {
+  margin-right: 10px;
 }
 
 .btnedit {
@@ -776,6 +904,7 @@ body {
 
 .btnagregar2 {
   border: 1px solid #cacecb;
+  margin: 10px;
   background-color: #dfdbdb8c;
 }
 
@@ -791,6 +920,7 @@ body {
 
 .btnagregar1 {
   border: 1px solid #dfdfdf;
+  margin: 10px;
   background-color: #dfdbdb8c;
 }
 
@@ -809,9 +939,25 @@ body {
   text-align: center;
 }
 
-@media only screen and (max-width: 510px) {
-  .label_input {
+@media only screen and (max-width: 900px) {
+  .container_input3 {
     width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .container_input4 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .modal_input3 {
+    width: 97%;
+  }
+
+  .contenedor_modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -819,7 +965,10 @@ body {
   .container2 {
     margin-top: 50px;
   }
+
+
 }
+
 
 /* Estilos específicos para pantallas más grandes */
 @media only screen and (min-width: 1200px) {
@@ -827,8 +976,8 @@ body {
     margin-top: 120px;
   }
 
-  .modal_input {
-    width: 60%;
+  .modal_input2 {
+    width: 100%;
   }
 }
 </style>

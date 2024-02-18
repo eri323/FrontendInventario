@@ -26,7 +26,7 @@ const routes = [
     component: Menu,
     children: [
       { path: "/Home", component: Home },
-     /*  { path: "/InfoPerfil", component: InfoPerfil }, */
+      /*  { path: "/InfoPerfil", component: InfoPerfil }, */
       /* { path: "/Registro", component: Registro }, */
       { path: "/Perfil", component: Perfil },
       { path: "/TablaProductos", component: TablaProductos },
@@ -35,7 +35,7 @@ const routes = [
       { path: "/TablaUsuarios", component: TablaUsuarios },
       { path: "/TablaLotes", component: TablaLotes },
       { path: "/TablaHistorial", component: TablaHistorial },
-  /*     { path: "/RolDeCuenta", component: RolDeCuenta }, */
+      /*     { path: "/RolDeCuenta", component: RolDeCuenta }, */
       { path: "/TablaPedidos", component: TablaPedidos },
       { path: "/ItemPresupuesto", component: ItemPresupuesto },
       { path: "/DistribucionPresupuesto", component: DistribucionPresupuesto }
