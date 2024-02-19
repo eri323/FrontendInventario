@@ -96,7 +96,7 @@
                           <q-input color="green" filled v-model="Codigo" class="modal_input2" type="number" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un código']">
                             <template v-slot:prepend>
-
+                              <i class="fa fa-code" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -106,7 +106,7 @@
                           <q-input color="green" filled v-model="Nombre" class="modal_input2" type="text" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
                             <template v-slot:prepend>
-
+                              <i class="fa fa-user-circle" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -118,7 +118,7 @@
                               (val) => !!val || 'Por favor ingrese una unidad de medida',
                             ]">
                             <template v-slot:prepend>
-
+                              <i class="fa fa-arrows-h" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -134,7 +134,7 @@
                                 val > 0 || 'Por favor ingresar un número válido mayor a 0',
                             ]">
                             <template v-slot:prepend>
-
+                              <i class="fa fa-usd" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -149,7 +149,7 @@
                             (val) => !!val || 'Por favor ingrese la descripcion del producto',
                           ]">
                           <template v-slot:prepend>
-
+                            <i class="fa fa-align-left" aria-hidden="true"></i>
                           </template>
                         </q-input>
                       </div>
@@ -163,7 +163,7 @@
                               (val) => !!val || 'Por favor ingrese un Consumible de producto',
                             ]" hide-bottom-space>
                             <template v-slot:prepend>
-
+                              <i class="fa fa-cogs" aria-hidden="true"></i>
                             </template>
                           </q-select>
                         </div>
@@ -175,7 +175,7 @@
                               (val) => !!val || 'Por favor seleccione el lote al que pertenece',
                             ]" hide-bottom-space>
                             <template v-slot:prepend>
-
+                              <i class="fa fa-th" aria-hidden="true"></i>
                             </template>
                           </q-select>
                         </div>
@@ -186,7 +186,7 @@
                             (val) => !!val || 'Por favor ingrese el iva del producto',
                           ]">
                             <template v-slot:prepend>
-
+                              <i class='fa fa-percent'></i>
                             </template>
                           </q-input>
                         </div>
@@ -197,7 +197,7 @@
                         <div class="container_input3">
                           <label class="label-input3" for="">Imagen:</label>
                           <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
-                          <q-btn @click="openFileExplorer" class="modal_input2">Agregar Imagen</q-btn>
+                          <q-btn @click="openFileExplorer" icon="image" class="modal_input2">Agregar Imagen</q-btn>
                         </div>
 
                       </div>
@@ -817,6 +817,11 @@ body {
   font-weight: 700;
   width: 30%;
   margin: 10px;
+}
+
+i{
+  font-size: 15px;
+  color: #4a4b4a;
 }
 
 .label-input2 {
