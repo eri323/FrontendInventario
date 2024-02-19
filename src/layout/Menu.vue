@@ -21,13 +21,28 @@
           </template>
         </q-input>
 
+      
 
 
-        <button dense flat src="/" @click="confirm" class="btnlogout">
-          <i class="fa-solid fa-right-from-bracket"></i>
+        <q-btn-dropdown class="btnlogout" icon="my_location" >
+          <div class="row no-wrap q-pa-md">
+            <div class="column">
+              <div class="text-h6 q-mb-md">Ajustes</div>
+            </div>
 
+            <q-separator vertical inset class="q-mx-lg" />
 
-        </button>
+            <div class="column items-center">
+              <q-avatar size="72px">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              </q-avatar>
+              <div class="text-subtitle1 q-mt-md q-mb-xs">{{ nombreUsuario }}</div>
+              <q-btn color="primary" dense flat src="/" @click="confirm" label="Cerrar sesión" push size="sm"
+                v-close-popup />
+            </div>
+          </div>
+        </q-btn-dropdown>
+
       </q-toolbar>
     </q-header>
 
@@ -249,11 +264,7 @@ function goToHome() {
 }
 
 .btnlogout {
-  background: transparent;
-  border: 0;
-  margin: 0;
-  padding: 0px 10px;
-  font-size: 25px;
+  margin-left: 10px;
   color: white;
   cursor: pointer;
 }

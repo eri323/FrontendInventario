@@ -60,7 +60,6 @@
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.671);
 }
 
-
 .logo {
   display: flex;
   align-items: center;
