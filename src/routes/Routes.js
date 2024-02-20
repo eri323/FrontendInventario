@@ -15,12 +15,14 @@ import Menu from "../layout/Menu.vue";
 import TablaPedidos from "../components/TablaPedidos.vue";
 import ItemPresupuesto from "../components/ItemPresupuesto.vue";
 import DistribucionPresupuesto from "../components/DistribucionPresupuesto.vue";
+import Nuevacontrasena from "../components/NuevaContrasena.vue"
 
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   { path: "/", component: Login },
   { path: "/RecuContrasena", component: RecuContrasena },
+  { path: "/NuevaContrasena", component: Nuevacontrasena},
   {
     path: "/Menu",
     component: Menu,
@@ -38,7 +40,8 @@ const routes = [
       /*     { path: "/RolDeCuenta", component: RolDeCuenta }, */
       { path: "/TablaPedidos", component: TablaPedidos },
       { path: "/ItemPresupuesto", component: ItemPresupuesto },
-      { path: "/DistribucionPresupuesto", component: DistribucionPresupuesto }
+      { path: "/DistribucionPresupuesto", component: DistribucionPresupuesto },
+    
     ],
   },
 ];

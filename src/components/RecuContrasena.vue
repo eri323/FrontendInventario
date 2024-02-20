@@ -1,29 +1,54 @@
 <template>
     <div class="body">
         <div class="container">
-            <h2>Restablecer la Contraseña</h2>
-            <p class="texto1" >Por favor, introduce la dirección de correo electrónico o numero de telefono asociada a tu cuenta. Te enviaremos un enlace seguro para restablecer tu contraseña.</p>
-            <form>
-                <div class="contenedor_input">
-                    <q-input class="input1" filled v-model="text" label="Escriba su numero telefonico o E-mail" />
-                    <br>
-                    <q-input class="input1" filled v-model="text" label="Digite el codigo de verificacion" />
-                </div>
-                <div class="contenedor_boton">
-                    <button type="submit">Restablecer</button>
-                    <button type="reset">Cancelar</button>
+            <h2>Recuperar contraseña</h2>
+            <p class="texto1">Por favor, introduce la dirección de correo electrónico asociada a tu
+                cuenta de Gmail. Te enviaremos un enlace seguro para restablecer tu
+                contraseña.</p>
+            <form @submit.prevent="enviarCorreo">
+                <div class="contenedor1">
+                    <h1 style="font-size: 20px; height: 50px;">Ingrese su correo electrónico</h1>
+                    <div class="contenedor_input">
+                        <input type="email" class="input1" placeholder="Correo electrónico" v-model="correoElectronico"
+                            required />
+                    </div>
+                    <div class="contenedor2">
+                        <p v-if="!correoValido" class="texto1">Por favor ingrese un correo </p>
+                        <button class="enviar" style="height: 40px; width:150px;" type="submit"
+                            :disabled="!correoValido">Enviar correo</button>
+                    </div>
                 </div>
             </form>
-            <p class="texto2" >¿Ayuda?</p>
         </div>
     </div>
 </template>
-    
-    
+
 <script setup>
+import { ref, computed } from 'vue';
+
+const correoElectronico = ref('');
+const codigoVerificacion = ref('');
+
+const enviarCorreo = () => {
+    // Realizar validación antes de enviar el correo
+    if (correoValido.value) {
+        // Lógica para enviar el correo
+        console.log('Correo válido, enviando...');
+    } else {
+        // Mostrar mensaje de error o tomar la acción correspondiente
+        console.error('Por favor ingrese un correo ');
+    }
+};
+
+const correoValido = computed(() => {
+    return !!correoElectronico.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoElectronico.value);
+});
+
+const codigoValido = computed(() => {
+    return !!codigoVerificacion.value;
+});
 </script>
-    
-    
+
 <style scoped>
 .body {
     font-family: Arial, sans-serif;
@@ -34,6 +59,8 @@
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -43,10 +70,19 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
+    height: 500px;
     box-sizing: border-box;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
+.contenedor1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 h2 {
     display: flex;
@@ -55,98 +91,34 @@ h2 {
     padding: 0;
 }
 
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-fieldset {
-    border: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-legend {
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
 .contenedor_input {
     padding: 10px;
 }
 
 .input1 {
-    border: 1px solid black;
+
     border-radius: 5px;
+    height: 40px;
+
 }
 
-.contenedor_boton {
+.contenedor2 {
     display: flex;
-    margin-top: 30px;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.enviar {
+    border-radius: 5px;
+    background-color: rgba(61, 255, 61, 0.932);
+    color: black;
+    font-weight: bold;
 }
 
 .texto1{
-    padding: 10px;
-    margin-top: 15%;
+    margin: 0 0 16px;
+    height: 30px;
+    width: auto;
+    font-size: 17px;
 }
-
-.texto2{
-    text-align: center;
-    padding: 15px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button[type="reset"] {
-    background-color: #6c757d;
-}
-
-button[type="reset"]:hover {
-    background-color: #5a6268;
-}
-
-@media screen and (max-width: 350px) {
-    .body {
-        justify-content: flex-start;
-        padding: 20px;
-    }
-
-    .container {
-        border-radius: 0;
-        max-width: 100%;
-    }
-
-    p {
-        padding: 15px;
-        margin-top: 10px;
-    }
-
-    h2 {
-        font-size: 3em;
-    }
-
-    .contenedor_boton {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    button {
-        margin-bottom: 10px;
-    }
-}</style>
+</style>
