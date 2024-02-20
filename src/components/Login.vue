@@ -21,7 +21,7 @@
                 <input required="" class="input" v-model="usuario.Contraseña" type="password" name="password"
                   id="password" placeholder="Password">
                 <router-link to="./RecuContrasena" class="forgot-password">
-                  <span class="forgot-password">Has olvidado tu contraseña ?</span>
+                  <span class="forgot-password">¿Olvidaste tu contraseña?</span>
                 </router-link>
                 <q-btn :loading="loading" class="login-button" @click="Login()" label="Aceptar" />
               </form>
@@ -87,7 +87,7 @@
   height: 100%;
   background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
   background-size: cover;
-  border-radius: 35px;
+  border-radius: 15px 0px 0px 15px;
   background-position: center;
   border: 20px solid white;
 }
@@ -104,6 +104,8 @@
 .container {
   height: 100%;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .container2{
