@@ -263,6 +263,7 @@ function goToHome() {
   background-color: rgba(0, 173, 0, 1);
 }
 
+
 .btnlogout {
   margin-left: 10px;
   color: white;
@@ -318,7 +319,8 @@ function goToHome() {
 }
 
 .div:hover {
-  background-color: rgba(61, 153, 61, 0.453);
+  background-color: rgba(61, 153, 61, 0.37);
+  border-left: 5px solid  rgba(33, 131, 33, 0.849);
 }
 
 .list a {

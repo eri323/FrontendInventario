@@ -192,8 +192,6 @@
                         </div>
 
 
-
-
                         <div class="container_input3">
                           <label class="label-input3" for="">Imagen:</label>
                           <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
@@ -940,6 +938,12 @@ i {
 }
 
 /* Otros estilos */
+
+.spinner-container{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
 .p-carga {
   text-align: center;
 }

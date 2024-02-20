@@ -1,226 +1,23 @@
 <template>
-  <div style="margin-top: 100px;">
-    <h3 class="text-center">Presupuesto de programa</h3>
-  </div>
-
-  <div class="" style="margin-top: 90px; margin-bottom: 110px;">
-    <div class="cardcontent">
-
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Fichas</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/fichas1.png" alt="">
-          </p>
-        </div>
+  <body>
+    <div class="contenedor_principal">
+      <div class="contenedor_titulos">
+        <p class="titulo" >Distribucion de Inventario</p>
+        <p class="titulo2">Version 1.0</p>
       </div>
+      <div class="contenedor">
+        <div class="contenedor2">
 
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Productos</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/productos.png" alt="">
-          </p>
-        </div>
-      </div>
+          
 
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
+          <div class="row justify-start q-pa-xl">
+            <q-btn label="¿Ayuda?" type="submit" color="secondary" />
           </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Usuarios</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/Usuario.png" alt="">
-          </p>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Areas</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/area.png" alt="">
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Lotes</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/lotes.png" alt="">
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Pedido</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/pedido.png" alt="">
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Perfil</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/perfil.png" alt="">
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Historial</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/historial.png" alt="">
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Programa</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/programa.png" alt="">
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tools2">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
-        <div class="card__content">
-          <p class="title">Configuracion</p>
-          <hr>
-          <p class="content">
-            <img class="imagenes_icon" src="../img/configuracion.png" alt="">
-          </p>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="row justify-start q-pa-xl">
-    <q-btn label="¿Ayuda?" type="submit" color="secondary" />
-  </div>
+  </body>
 </template>
 
 <script>
@@ -245,6 +42,45 @@ export default {
 <style scoped>
 * {
   font-family: "save";
+}
+
+body {
+  margin: 0;
+  background-color: #ecf0f5;
+}
+
+.contenedor_principal {
+  background-color: #ecf0f5;
+}
+
+.contenedor_titulos{
+  display: flex;
+}
+
+.titulo {
+  margin: 0;
+  font-size: 25px;
+  margin-left: 12px;
+}
+
+.titulo2 {
+  position: relative;
+  top: 13px;
+  color: #747272af;
+  margin-left: 12px;
+  font-size: 13px;
+}
+
+.contenedor {
+  height: 100%;
+}
+
+.contenedor2 {
+  margin: 14px;
+  background: #ffffff;
+  height: 100%;
+  border-radius: 2px;
+  border-top: 3px solid rgba(170, 168, 168, 0.575);
 }
 
 .card {
@@ -275,12 +111,8 @@ export default {
   border-radius: 8px;
 }
 
-.cardcontent{
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0px 100px;
-  gap: 100px;
-}
+
+
 .tools {
   display: flex;
   align-items: center;
@@ -294,7 +126,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius:10px 0px 10px 0px;
+  border-radius: 10px 0px 10px 0px;
   background: #21ba45;
   margin-top: -2px;
 }
