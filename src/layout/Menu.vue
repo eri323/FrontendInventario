@@ -21,10 +21,10 @@
           </template>
         </q-input>
 
-      
 
 
-        <q-btn-dropdown class="btnlogout" icon="my_location" >
+
+        <q-btn-dropdown class="btnlogout" icon="my_location">
           <div class="row no-wrap q-pa-md">
             <div class="column">
               <div class="text-h6 q-mb-md">Ajustes</div>
@@ -46,8 +46,8 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above :width="300" :breakpoint="400">
-      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
+    <q-drawer v-model="leftDrawerOpen" show-if-above :width="230" style=" background-color: #222d32;" :breakpoint="400">
+      <q-scroll-area style="height: calc(100% - 150px); margin-top: 85px;">
         <q-list padding class="list">
           <router-link to="/Home">
             <div class="div">
@@ -55,7 +55,7 @@
                 <i class="fa-solid fa-house"></i>
               </q-item-section>
               <q-item-section>
-                <h6>Inicio</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Inicio</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -66,7 +66,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Fichas</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Fichas</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -77,7 +77,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Productos</h6>
+                <h6 style="font-size: 15px; font-weight: 100;" >Productos</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -88,7 +88,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Usuarios</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Usuarios</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -99,7 +99,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Areas</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Areas</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -110,7 +110,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Lotes</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Lotes</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -121,7 +121,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Pedidos</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Pedidos</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -132,7 +132,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Perfil</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Perfil</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -143,7 +143,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Historial</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Historial</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -154,7 +154,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Item Presupuesto</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Presupuesto</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -165,22 +165,29 @@
               </q-item-section>
 
               <q-item-section>
-                <h6>Configuracion</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Configuracion</h6>
               </q-item-section>
             </div>
           </router-link>
         </q-list>
       </q-scroll-area>
 
-      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 70px">
         <div class="absolute-bottom bg-transparent">
-          <router-link to="/Perfil">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-          </router-link>
-          <div class="text-weight-bold">{{ nombreUsuario }}</div>
-          <div>{{ rolUsuario }}</div>
+          <div class="profile-container">
+            <router-link to="/Perfil">
+              <q-avatar size="56px" class="q-mb-sm">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              </q-avatar>
+            </router-link>
+            <div class="profile-info">
+              <div class="text-weight-bold">{{ nombreUsuario }}</div>
+              <div class="conten_rol">
+                <i class='fa fa-circle' style='color:#0a8f0f; font-size: 10px; '></i>
+                <div class="en_linea" >{{ rolUsuario }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </q-img>
     </q-drawer>
@@ -263,6 +270,27 @@ function goToHome() {
   background-color: rgba(0, 173, 0, 1);
 }
 
+.profile-container {
+  position: relative;
+  top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-info {
+  text-align: end;
+  margin-left: 20px;
+}
+.conten_rol{
+  display: flex;
+  align-items: center;
+}
+
+.en_linea{
+  margin-left: 5px;
+  font-size: 14px;
+}
+
 
 .btnlogout {
   margin-left: 10px;
@@ -290,6 +318,8 @@ function goToHome() {
   cursor: pointer;
 }
 
+
+
 .btnmenu i {
   margin: 0;
   padding: 0;
@@ -312,15 +342,15 @@ function goToHome() {
   grid-template-columns: 25% 75%;
   padding: 5px 0px;
   padding-left: 0;
-  color: #000;
+  color: #ffffff;
   /* Color de texto para los elementos del menú */
   transition: background-color 0.3s ease;
   align-items: center;
 }
 
 .div:hover {
-  background-color: rgba(61, 153, 61, 0.37);
-  border-left: 5px solid  rgba(33, 131, 33, 0.849);
+  background-color: #191e20;;
+  border-left: 5px solid rgba(33, 131, 33, 0.849);
 }
 
 .list a {

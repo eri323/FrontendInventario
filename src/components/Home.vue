@@ -2,13 +2,79 @@
   <body>
     <div class="contenedor_principal">
       <div class="contenedor_titulos">
-        <p class="titulo" >Distribucion de Inventario</p>
+        <p class="titulo">Distribucion de Inventario</p>
         <p class="titulo2">Version 1.0</p>
       </div>
       <div class="contenedor">
-        <div class="contenedor2">
+        <div class="q-pa-md" style="width: 100%;">
+          <q-list padding bordered class="rounded-borders" default-opened
+            style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(170, 168, 168, 0.575);">
+            <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded" label="Menu">
+              <q-card>
+                <q-card-section>
+                  <div class="contenedor_caja1" >
+                    <router-link to="./TablaFichas" style="text-decoration: none; color: black; " >
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/fichas1.png" alt="">
+                        <p class="nombre_img">Fichas</p>
+                      </div>
+                    </router-link>
+                    <!-- ---------- -->
+                    <router-link to="./TablaProductos" style="text-decoration: none; color: black; " >
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                  </router-link>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
+                    <!-- ---------- -->
+                    <div class="contenedor_caja2">
+                      <img class="caja_imagen" src="../img/productos.png" alt="">
+                      <p class="nombre_img">Productos</p>
+                    </div>
 
-          
+
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+          </q-list>
+        </div>
+        <div class="contenedor2">
 
           <div class="row justify-start q-pa-xl">
             <q-btn label="¿Ayuda?" type="submit" color="secondary" />
@@ -25,6 +91,7 @@ import { ref } from "vue";
 
 export default {
   setup() {
+    const isExpanded = ref(true);
     return {
       model: ref("one"),
       search1: ref(""),
@@ -33,10 +100,14 @@ export default {
         { label: "Descargar datos en pdf", value: "Descargarpdf" },
         { label: "Descargar datos CSV o EXEL", value: "two" },
       ],
+      isExpanded,
     };
 
   },
 };
+
+
+
 </script>
 
 <style scoped>
@@ -51,9 +122,10 @@ body {
 
 .contenedor_principal {
   background-color: #ecf0f5;
+  height: 100vh;
 }
 
-.contenedor_titulos{
+.contenedor_titulos {
   display: flex;
 }
 
@@ -75,10 +147,47 @@ body {
   height: 100%;
 }
 
+.contenedor_caja1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+
+.contenedor_caja2 {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  background-color: #efeff0;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.contenedor_caja2:hover {
+  transform: scale(1.1);
+  transition: all 700ms;
+  background-color: #dadada;
+  border: 1px solid rgb(138, 138, 138);
+}
+
+.caja_imagen {
+  margin-top: 5px;
+  height: 50px;
+  width: 50px;
+  background-size: contain;
+}
+
+.nombre_img {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
 .contenedor2 {
-  margin: 14px;
+  margin: 0px 16px 0px 16px;
   background: #ffffff;
-  height: 100%;
   border-radius: 2px;
   border-top: 3px solid rgba(170, 168, 168, 0.575);
 }
