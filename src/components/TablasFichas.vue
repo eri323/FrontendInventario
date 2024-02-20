@@ -368,9 +368,8 @@ async function agregarficha() {
         timeout: 2000,
         type: "negative",
       });
-
     }
-    
+
   } else {
     let id = idficha.value;
     if (id) {
@@ -668,7 +667,7 @@ body {
   flex-wrap: wrap;
   bottom: 3px;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   height: 45px;
   background-color: #21ba45;
   width: 80%;
@@ -751,7 +750,7 @@ body {
   margin: 10px;
 }
 
-i{
+i {
   font-size: 15px;
   color: #4a4b4a;
 }
@@ -871,11 +870,12 @@ i {
 
 /* Otros estilos */
 
-.spinner-container{
+.spinner-container {
   display: grid;
   align-items: center;
   justify-content: center;
 }
+
 .p-carga {
   text-align: center;
 }

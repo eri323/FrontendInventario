@@ -83,11 +83,37 @@
           </q-list>
         </div>
         <div class="contenedor2">
+          <div class="contenedor3">
+            <div class="q-pa-md" style="width: 100%;">
+              <q-list padding bordered class="rounded-borders"
+                style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(129, 175, 129, 0.575); padding: 0; ">
+                <q-expansion-item dense dense-toggle expand-separator icon="menu" label="Espacio disponible">
+                  <q-card>
+                    <q-card-section>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                      commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                      eveniet doloribus ullam aliquid.
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+              </q-list>
+            </div>
 
-          <div class="row justify-start q-pa-xl">
-            <q-btn label="¿Ayuda?" type="submit" color="secondary" />
+            <div class="q-pa-md" style="width: 100%;">
+              <q-list padding bordered class="rounded-borders"
+                style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(120, 118, 148, 0.575); padding: 0;">
+                <q-expansion-item dense dense-toggle expand-separator icon="menu" label="Espacio disponible">
+                  <q-card>
+                    <q-card-section>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                      commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                      eveniet doloribus ullam aliquid.
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+              </q-list>
+            </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -203,11 +229,17 @@ body {
 }
 
 .contenedor2 {
-  margin: 0px 16px 0px 16px;
-  background: #ffffff;
-  border-radius: 2px;
-  border-top: 3px solid rgba(170, 168, 168, 0.575);
+  margin: 0;
 }
+
+.contenedor3 {
+  display: flex;
+}
+
+.q-pa-md {
+    padding: 12px 12px;
+}
+
 
 .card {
   width: 200px;
@@ -302,5 +334,13 @@ body {
 .green {
   background-color: #ffffff;
 }
+
+@media only screen and (max-width: 750px){
+  .contenedor3{
+    display: grid;
+  }
+
+}
+
 </style>
 
