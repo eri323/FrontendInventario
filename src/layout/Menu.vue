@@ -24,7 +24,7 @@
 
 
 
-        <q-btn-dropdown class="btnlogout" icon="my_location">
+        <q-btn-dropdown class="btnlogout" icon="exit_to_app" flat src="/" @click="confirm" split dropdown-icon="">
           <div class="row no-wrap q-pa-md">
             <div class="column">
               <div class="text-h6 q-mb-md">Ajustes</div>
@@ -38,10 +38,12 @@
               </q-avatar>
               <div class="text-subtitle1 q-mt-md q-mb-xs">{{ nombreUsuario }}</div>
               <q-btn color="primary" dense flat src="/" @click="confirm" label="Cerrar sesión" push size="sm"
-                v-close-popup />
+                v-close-popup>
+              </q-btn>
             </div>
           </div>
         </q-btn-dropdown>
+
 
       </q-toolbar>
     </q-header>
@@ -49,6 +51,13 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above :width="230" style=" background-color: #222d32;" :breakpoint="400">
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 85px;">
         <q-list padding class="list">
+
+          <div class="div1">
+            <q-item-section>
+              <h6 class="text2">Menu</h6>
+            </q-item-section>
+          </div>
+
           <router-link to="/Home">
             <div class="div">
               <q-item-section>
@@ -77,7 +86,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6 style="font-size: 15px; font-weight: 100;" >Productos</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Productos</h6>
               </q-item-section>
             </div>
           </router-link>
@@ -172,7 +181,7 @@
         </q-list>
       </q-scroll-area>
 
-      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 70px">
+      <q-img class="absolute-top" src="" style="height: 75px">
         <div class="absolute-bottom bg-transparent">
           <div class="profile-container">
             <router-link to="/Perfil">
@@ -184,7 +193,7 @@
               <div class="text-weight-bold">{{ nombreUsuario }}</div>
               <div class="conten_rol">
                 <i class='fa fa-circle' style='color:#0a8f0f; font-size: 10px; '></i>
-                <div class="en_linea" >{{ rolUsuario }}</div>
+                <div class="en_linea">{{ rolUsuario }}</div>
               </div>
             </div>
           </div>
@@ -281,12 +290,13 @@ function goToHome() {
   text-align: end;
   margin-left: 20px;
 }
-.conten_rol{
+
+.conten_rol {
   display: flex;
   align-items: center;
 }
 
-.en_linea{
+.en_linea {
   margin-left: 5px;
   font-size: 14px;
 }
@@ -349,8 +359,22 @@ function goToHome() {
 }
 
 .div:hover {
-  background-color: #191e20;;
+  background-color: #191e20;
   border-left: 5px solid rgba(33, 131, 33, 0.849);
+}
+
+.div1{
+  height: 40px;
+  background-color: #2b3638;
+}
+
+.text2{
+  position: relative;
+  left: 20px;
+  bottom: 5px;
+  font-size: 10px; 
+  font-weight: 100; 
+  color: #788186;
 }
 
 .list a {
