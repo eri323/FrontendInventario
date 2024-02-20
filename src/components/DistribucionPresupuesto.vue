@@ -8,15 +8,20 @@
                 <div class="tabladiv">
                     <div class="header">
                         <h5 class="title">
-                            Dsitribucion presupuesto
+                            Distribucion presupuesto
                         </h5>
-                        <button class="btnag" @click="prompt = true">
+                        <button class="btnag" @click="agregar()">
                             <h5>Agregar</h5>
                             <i class="fa-regular fa-square-plus"></i>
                         </button>
                     </div>
                     <q-table flat bordered class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
                         virtual-scroll :rows-per-page-options="[0]">
+                        <!--   <template v-slot:body-cell-ItemPresupuesto_id="props">
+                            <q-td :props="props">
+                                {{ JSON.stringify(props.row.ItemPresupuesto_id.$numberDecimal) }}
+                            </q-td>
+                        </template> -->
                         <template v-slot:body-cell-Estado="props">
                             <q-td :props="props">
                                 <label for="" v-if="props.row.Estado == 1"
@@ -26,14 +31,14 @@
                         </template>
                         <template v-slot:body-cell-opciones="props">
                             <q-td :props="props" class="opciones">
-                                <button class="btnedit" @click="editararea(props.row._id)">
+                                <button class="btnedit" @click="editarpresupuesto(props.row._id)">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
-                                <button class="btninac" @click="inactivararea(props.row._id)" v-if="props.row.Estado == 1">
+                                <button class="btninac" @click="inactivarpresu(props.row._id)" v-if="props.row.Estado == 1">
                                     <i class="fa-solid fa-xmark" style="color: #ff0000"></i>
                                 </button>
 
-                                <button class="btnact" @click="activararea(props.row._id)" v-else>
+                                <button class="btnact" @click="activarpresupuesto(props.row._id)" v-else>
                                     <i class="fa-solid fa-check" style="color: #006110"></i>
                                 </button>
                             </q-td>
@@ -61,23 +66,11 @@
 
                                 <q-form class="q-gutter-md">
 
-                                    <div class="container_input1">
-                                        <q-input color="green" filled v-model="Presupuesto" class="modal_input" type="text"
-                                            label="Presuouesto para el lote *" lazy-rules
-                                            :rules="[(val) => !!val || 'Por favor ingrese un Presupuesto']">
-                                            <template v-slot:prepend>
-                                                <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128"
-                                                    height="128" viewBox="0 0 26 26">
-                                                    <path fill="#999999"
-                                                        d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                                                </svg>
-                                            </template>
-                                        </q-input>
-                                    </div>
+                                   
                                     <br>
                                     <div class="container_input1">
-                                        <q-select color="green" filled v-model="Itempresupuesto_Id" :options="optionsitem"
-                                            class="modal_input" label="Presupuesto para el lote *" lazy-rules
+                                        <q-select color="green" filled v-model="ItemPresupuesto_id" :options="optionsitem"
+                                            class="modal_input" label="Presupuesto general" lazy-rules
                                             :rules="[(val) => !!val || 'Por favor ingrese un Presupuesto']">
                                             <template v-slot:prepend>
                                                 <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128"
@@ -91,9 +84,9 @@
 
                                     <br>
                                     <div class="container_input1">
-                                        <q-select color="green" filled v-model="Lote_Id" :options="optionslote_id"
+                                        <q-select color="green" filled v-model="Lote_id" :options="optionsLote_id"
                                             class="modal_input" label="Lote *" lazy-rules
-                                            :rules="[(val) => !!val || 'Por favor ingrese un Presupuesto']">
+                                            :rules="[(val) => !!val || 'Por favor seleccione el nombre del lote']">
                                             <template v-slot:prepend>
                                                 <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128"
                                                     height="128" viewBox="0 0 26 26">
@@ -103,12 +96,26 @@
                                             </template>
                                         </q-select>
                                     </div>
+                                 <br>
+                                  <div class="container_input1">
+                                            <q-input color="green" filled v-model="Presupuesto" class="modal_input" type="text"
+                                                label="Presuouesto para el lote *" lazy-rules
+                                                :rules="[(val) => !!val || 'Por favor ingrese un Presupuesto']">
+                                                <template v-slot:prepend>
+                                                    <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128"
+                                                        height="128" viewBox="0 0 26 26">
+                                                        <path fill="#999999"
+                                                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
+                                                    </svg>
+                                                </template>
+                                            </q-input>
+                                        </div>
                                     <div class="contenedor_botones">
                                         <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
-                                        <q-btn label="Agregar" class="btnagregar2" @click="agregararea()" v-if="btnagregar"
-                                            type="submit" />
-                                        <q-btn label="Aceptar" class="btnagregar2" @click="agregararea()" v-if="btnaceptar"
-                                            type="submit" />
+                                        <q-btn label="Agregar" class="btnagregar2" @click="agregaritempresupuesto()"
+                                            v-if="btnagregar" type="submit" />
+                                        <q-btn label="Aceptar" class="btnagregar2" @click="agregaritempresupuesto()"
+                                            v-if="btnaceptar" type="submit" />
                                     </div>
                                 </q-form>
                             </q-card-section>
@@ -136,14 +143,26 @@ let xd = ref(0);
 /* let fixed = ref(false); */
 const $q = useQuasar();
 let Presupuesto = ref("");
-let Lote_Id = ref("")
-let ItemPresupuesto_Id = ref("")
+let Lote_id = ref("")
+let ItemPresupuesto_id = ref("")
 const filter = ref("")
-let areas = ref([]);
-let text = ref("Agregar area");
+let distribucionpresupuestos = ref([]);
+let text = ref("Editar distribucion");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
-let prompt = ref(false)
+const prompt = ref(false);
+let dispresupuesto = ref([]);
+const optionsLote_id = ref([]);
+const optionsitem = ref([]);
+function agregar() {
+    console.log("FDfsd");
+    prompt.value = true;
+    xd.value = 0;
+    limpiar();
+    text.value = "Agregar Distribucion";
+    btnaceptar.value = false;
+    btnagregar.value = true;
+}
 // Filtrar Areas
 /* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -168,9 +187,9 @@ const columns = [
         align: "center",
     },
     {
-        name: "Lote_Id",
+        name: "Lote_id",
         label: "Lote",
-        field: (row) => `${row.Lote_Id?.Nombre}`,
+        field: (row) => `${row.Lote_id?.Nombre}`,
         headerStyle: {
             fontWeight: "bold",
             fontSize: "15px",
@@ -178,9 +197,9 @@ const columns = [
         align: "center",
     },
     {
-        name: "ItemPresupuesto_Id",
+        name: "ItemPresupuesto_id",
         label: "Programa al que pertenece el presupuesto",
-        field: (row) => `${row.Itempresupuesto_Id?.Nombre}`,
+        field: (row) => `${row.ItemPresupuesto_id?.Nombre}`,
         headerStyle: {
             fontWeight: "bold",
             fontSize: "15px",
@@ -188,9 +207,9 @@ const columns = [
         align: "center",
     },
     {
-        name: "ItemPresupuesto_Id",
+        name: "ItemPresupuesto_id",
         label: "Presupuesto general",
-        field: (row) => `${row.Itempresupuesto_Id?.Presupuesto}`,
+        field: (row) => `${row.ItemPresupuesto_id?.Presupuesto}`,
         headerStyle: {
             fontWeight: "bold",
             fontSize: "15px",
@@ -226,20 +245,44 @@ const formatearPrecio = (precio) => {
     const partes = precio.toString().split(/(?=(?:\d{3})+(?:\.|$))/);
     return partes.join(".");
 };
+async function obtenerlote() {
+    try {
+        await lotestore.obtenerinfolote();
+        optionsLote_id.value = lotestore.lote.map((lote) => ({
+            label: `${lote.Nombre} `,
+            value: String(lote._id),
+        }));
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function obteneritempresu() {
+    try {
+        await itempresupuestostore.obtenerinfoitempresupuesto();
+        optionsitem.value = itempresupuestostore.itempresupuesto.map((itempresupuesto) => ({
+            label: `${itempresupuesto.Presupuesto} - ${itempresupuesto.Nombre}`,
+            value: String(itempresupuesto._id),
+        }));
+    } catch (error) {
+        console.log(error);
+    }
+}
 function limpiar() {
     Presupuesto.value = "";
-    Itempresupuesto_Id.value = "";
-    Lote_Id.value = "";
-    prompt.value = false;
+    ItemPresupuesto_id.value = "";
+    Lote_id.value = "";
+
 }
 async function agregaritempresupuesto() {
     if (xd.value == 0) {
+        console.log("va a agregar");
         try {
+
             showDefault();
-            await distribucionpresupuesto.postinfoitempresupuesto({
+            await distribucionpresupuestostore.postinfodistribucionpresupuesto({
                 Presupuesto: Presupuesto.value,
-                Lote_Id: Lote_Id.value,
-                ItemPresupuesto_Id: ItemPresupuesto_Id.value,
+                Lote_id: Lote_id._rawValue.value,
+                ItemPresupuesto_id: ItemPresupuesto_id._rawValue.value,
             });
             obtenerInfo();
             if (notification) {
@@ -248,7 +291,7 @@ async function agregaritempresupuesto() {
             limpiar();
             $q.notify({
                 spinner: false,
-                message: "Area Agregada",
+                message: "Distribucion Agregada",
                 timeout: 2000,
                 type: "positive",
             });
@@ -266,18 +309,20 @@ async function agregaritempresupuesto() {
             });
         }
     } else {
-        let id = iditempresupuesto.value;
+        console.log("va a editar");
+        let id = iddistribucionpresupuesto.value;
         if (id) {
+
             try {
                 showDefault();
-                await itempresupuestostore.puteditaritempresupuesto(id, {
+                await distribucionpresupuestostore.puteditardistribucionpresupuesto(id, {
                     Presupuesto: Presupuesto.value,
-                    Lote_Id: Lote_Id.value,
-                    ItemPresupuesto_Id: ItemPresupuesto_Id.value,
+                    Lote_id: Lote_id._rawValue.value,
+                    ItemPresupuesto_id: ItemPresupuesto_id._rawValue.value,
                 });
                 btnagregar.value = true;
                 btnaceptar.value = false;
-                text.value = "Agregar itempresupuesto";
+                text.value = "Agregar distribucion";
                 xd.value = 0;
                 if (notification) {
                     notification();
@@ -285,7 +330,7 @@ async function agregaritempresupuesto() {
                 limpiar();
                 $q.notify({
                     spinner: false,
-                    message: "Dsitribucion Actualizado",
+                    message: "Distribucion Actualizada",
                     timeout: 2000,
                     type: "positive",
                 });
@@ -306,25 +351,31 @@ async function agregaritempresupuesto() {
     }
 }
 
-let idarea = ref("");
-async function editararea(id) {
+let iddistribucionpresupuesto = ref("");
+async function editarpresupuesto(id) {
     prompt.value = true
+    obteneritempresu();
+    obtenerlote();
     xd.value = 1;
-    const dispeselect = areas.value.find((area) => area._id === id);
+    const dispeselect = dispresupuesto.value.find((distribucionpresupuesto) => distribucionpresupuesto._id === id);
     if (dispeselect) {
-        idarea.value = String(dispeselect._id);
+        iddistribucionpresupuesto.value = String(dispeselect._id);
         btnagregar.value = false;
         btnaceptar.value = true;
-        text.value = "Editar Area";
+        text.value = "Editar Distribucion presupuesto";
         Presupuesto.value = dispeselect.Presupuesto;
-        Lote_Id.value = {
-            label: `${dispeselect.Lote_Id.Nombre}`,
-            value: String(dispeselect.Lote_Id._id),
+
+
+
+        Lote_id.value = {
+            label: `${dispeselect.Lote_id.Nombre}`,
+            value: String(dispeselect.Lote_id._id),
         };
-         ItemPresupuesto_Id.value = {
-            label: `${dispeselect.ItemPresupuesto_Id.Presupuesto}-${dispeselect.ItemPresupuesto_Id.Nombre}`,
-            value: String(dispeselect.ItemPresupuesto_Id._id),
+        ItemPresupuesto_id.value = {
+            label: `${dispeselect.ItemPresupuesto_id.Presupuesto}-${dispeselect.ItemPresupuesto_id.Nombre}`,
+            value: String(dispeselect.ItemPresupuesto_id._id),
         };
+       
         /* Presupuesto.value = areaseleccionada.Presupuesto;
             niveldeformacion.value = areaseleccionada.NivelFormacion;
             area_id.value = {
@@ -340,20 +391,23 @@ async function editararea(id) {
 }
 async function obtenerInfo() {
     try {
-        const response = await areastore.obtenerinfoarea();
+        const response = await distribucionpresupuestostore.obtenerinfodistribucionpresupuesto();
         console.log(response);
-        areas.value = areastore.area;
-        rows.value = areastore.area;
+        distribucionpresupuestos.value = distribucionpresupuestostore.distribucionpresupuesto;
+        rows.value = distribucionpresupuestostore.distribucionpresupuesto;
+        dispresupuesto.value = distribucionpresupuestostore.distribucionpresupuesto;
+        obteneritempresu();
+        obtenerlote();
     } catch (error) {
         console.log(error);
     }
 }
-async function inactivararea(id) {
+async function inactivarpresu(id) {
     try {
         showDefault();
-        await areastore.putinactivararea(id);
+        await distribucionpresupuestostore.putInactivardistribucionpresupuesto(id);
         cancelShow();
-        greatMessage.value = "Area Inactiva";
+        greatMessage.value = "Presupuesto Inactiva";
         showGreat();
         obtenerInfo();
     } catch (error) {
@@ -363,12 +417,12 @@ async function inactivararea(id) {
     }
 }
 
-async function activararea(id) {
+async function activarpresupuesto(id) {
     try {
         showDefault();
-        await areastore.putactivararea(id);
+        await distribucionpresupuestostore.putActivardistribucionpresupuesto(id);
         cancelShow();
-        greatMessage.value = "Area Activa";
+        greatMessage.value = "Presupuesto Activo";
         showGreat();
         obtenerInfo();
     } catch (error) {

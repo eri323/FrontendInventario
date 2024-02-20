@@ -813,9 +813,12 @@ i {
   padding: 0;
   border: 0;
   border-radius: 7px;
+  font-weight: bold;
   cursor: pointer;
 }
-
+i{
+  margin: 0;
+}
 .btninac,
 .btnact {
   font-size: 23px;
