@@ -12,62 +12,70 @@
             <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded" label="Menu">
               <q-card>
                 <q-card-section>
-                  <div class="contenedor_caja1" >
-                    <router-link to="./TablaFichas" style="text-decoration: none; color: black; " >
+                  <div class="contenedor_caja1">
+                    <router-link to="./TablaFichas" style="text-decoration: none; color: black; ">
                       <div class="contenedor_caja2">
                         <img class="caja_imagen" src="../img/fichas1.png" alt="">
                         <p class="nombre_img">Fichas</p>
                       </div>
                     </router-link>
                     <!-- ---------- -->
-                    <router-link to="./TablaProductos" style="text-decoration: none; color: black; " >
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
-                  </router-link>
+                    <router-link to="./TablaProductos" style="text-decoration: none; color: black; ">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/productos.png" alt="">
+                        <p class="nombre_img">Productos</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="./TablaUsuarios" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/Usuario.png" alt="">
+                        <p class="nombre_img">Usuarios</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="./TablaArea" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/area.png" alt="">
+                        <p class="nombre_img">Areas</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="./TablaLotes" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/lotes.png" alt="">
+                        <p class="nombre_img">Lotes</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="./TablaPedidos" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/pedido.png" alt="">
+                        <p class="nombre_img">Pedidos</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="/Perfil" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/perfil.png" alt="">
+                        <p class="nombre_img">Perfil</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="./TablaHistorial" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/historial.png" alt="">
+                        <p class="nombre_img">Historial</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
+                    <router-link to="./ItemPresupuesto" style="text-decoration: none; color: black;">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen2" src="../img/programa.png" alt="">
+                        <p class="nombre_img">Presupuesto</p>
+                      </div>
+                    </router-link>
                     <!-- ---------- -->
-                    <div class="contenedor_caja2">
-                      <img class="caja_imagen" src="../img/productos.png" alt="">
-                      <p class="nombre_img">Productos</p>
-                    </div>
-
-
                   </div>
                 </q-card-section>
               </q-card>
@@ -174,6 +182,15 @@ body {
 }
 
 .caja_imagen {
+  margin-top: 5px;
+  height: 50px;
+  width: 50px;
+  background-size: contain;
+}
+
+.caja_imagen2 {
+  position: relative;
+  left: 15px;
   margin-top: 5px;
   height: 50px;
   width: 50px;
