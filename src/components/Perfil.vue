@@ -1,30 +1,31 @@
 <template>
   <div>
     <h3 style="text-align: center;">Perfil</h3>
-    <div class="row justify-center">
-      <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; border: 0;">
-        <q-card-section>
+    <div class="container">
+      <!-- display: flex; align-items: center; -->
+      <q-card class="col-4" style="max-width: 500px; border-radius: 20px 0 0 20px; height: 500px; ">
+        <q-card-section class="info1">
           <h4>Nombre: <span class="nombre">{{ usuarioLogeado && usuarioLogeado.Nombre }}</span></h4>
-          <img v-if="usuarioLogeado && usuarioLogeado.Imagen" :src="getImagenUrl(usuarioLogeado.Imagen)" :alt="usuarioLogeado.Nombre">
-          <img v-else :src="imageUrl" alt="Imagen predeterminada">
-
+          <img v-if="usuarioLogeado && usuarioLogeado.Imagen" :src="getImagenUrl(usuarioLogeado.Imagen)"
+            :alt="usuarioLogeado.Nombre">
+          <img v-else :src="imageUrl" alt="Imagen predeterminada" class="img"
+            style=" height: 220px; width: 220px; margin-bottom:  40px;">
           <div>
             <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
             <q-btn @click="openFileExplorer" class="boton">Seleccionar Imagen</q-btn>
           </div>
         </q-card-section>
       </q-card>
-      <q-card class="Medio" style="max-width: 900px; border-radius: 0 ;">
-        <h1>Rol {{ usuarioLogeado && usuarioLogeado.Rol }}</h1>
-        <q-card-section class="mitad">
-          <q-card-section class="sepa" style="width: 200px;">
-            <ul v-if="usuarioLogeado">
-              <li><strong>Nombre:</strong> {{ usuarioLogeado.Nombre }}</li>
-              <li><strong>Identificación:</strong> {{ usuarioLogeado.Identificacion }}</li>
-              <li><strong>Teléfono:</strong> {{ usuarioLogeado.Telefono }}</li>
-              <li><strong>Email:</strong> {{ usuarioLogeado.Correo }}</li>
-            </ul>
-          </q-card-section>
+      <q-card class="Medio" style="width: 500px; border-radius: 0; height: 500px">
+        <h1 style="position: relative; left: 30px; top:-10px font-size: 30px;">Rol {{ usuarioLogeado && usuarioLogeado.Rol
+        }} </h1>
+        <q-card-section class="sepa">
+          <ul v-if="usuarioLogeado">
+            <li><strong>Nombre:</strong> {{ usuarioLogeado.Nombre }}</li>
+            <li><strong>Identificación:</strong> {{ usuarioLogeado.Identificacion }}</li>
+            <li><strong>Teléfono:</strong> {{ usuarioLogeado.Telefono }}</li>
+            <li><strong>Email:</strong> {{ usuarioLogeado.Correo }}</li>
+          </ul>
         </q-card-section>
       </q-card>
 
@@ -32,9 +33,9 @@
     <div>
       <q-separator style="border: 1px solid rgba(0,173,0,255); margin-top: 20px; margin-bottom: 20px; height: 0;" />
       <div class="row justify-center">
-        <q-btn class="boton" label="Atras"  style="margin: 10px; " />
-        <q-btn class="boton" label="¿Ayuda?"  style="margin: 10px; " />
-        <q-btn class="boton" label="Editar perfil" @click="showProfileDialog"  style="margin: 10px;" />
+        <q-btn class="boton" label="Atras" style="margin: 10px; " />
+        <q-btn class="boton" label="¿Ayuda?" style="margin: 10px; " />
+        <q-btn class="boton" label="Editar perfil" @click="showProfileDialog" style="margin: 10px;" />
 
         <q-dialog v-model="profileDialog">
           <q-card>
@@ -100,7 +101,6 @@ import { useusuariostore } from "../stores/Usuario";
 
 const $q = useQuasar();
 const usuariostore = useusuariostore();
-
 const imageUrl = ref("../assets/user.jpg");
 const profileDialog = ref(false);
 const nombre = ref("");
@@ -242,7 +242,7 @@ const showDefault = () => {
 
 const obtenerInfo = async () => {
   try {
-    const token = usuariostore.tokenRef; 
+    const token = usuariostore.tokenRef;
     console.log(token);
     if (!token) {
       console.error("No hay ningún token almacenado.");
@@ -270,45 +270,71 @@ const getImagenUrl = (imagen) => {
 </script>
 
 <style scoped>
-.boton{
+.info1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 90px;
+}
+
+.boton {
   background-color: #21ba45;
   font-size: 14px;
 }
+
 img {
   border-radius: 50%;
   height: 400px;
   width: 400px;
 }
+
 h4 {
   margin: 28px;
 }
+
 h1 {
   font-size: 45px;
 }
+
 span {
   color: black;
 }
+
 .Medio {
   width: 500px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
-.mitad {
+
+.sepa {
+  width: 500px;
+  height: auto;
+  font-size: 20px;
   display: flex;
-  align-items: center;
 }
+
 .form {
   height: 550px;
   width: 350px;
 }
+
 .q-gutter-md {
   width: 335px;
 }
 
-.nombre{
+.nombre {
   color: #21ba45;
   font-weight: bold;
 }
+
 .linea {
   border-bottom: 4px solid #21ba45;
   border-radius: 5px;
@@ -340,5 +366,4 @@ span {
 .btnagregar1 {
   border: 1px solid #dfdfdf;
   background-color: #dfdbdb8c;
-}
-</style>
+}</style>
