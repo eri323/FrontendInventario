@@ -43,115 +43,106 @@
 
 
           <q-dialog v-model="prompt" persistent class="containermodal">
-
             <q-card class="modal">
-
               <div class="titulo-linea">
-                <h5 class="titulos">{{ text }} </h5>
-                <div class="linea"></div>
+                <i class="fa-solid fa-pen-to-square" id="tta"></i>
+                <h5 class="titulos">{{ text }}</h5>
               </div>
 
 
               <q-card-section>
                 <q-form class="q-gutter-md">
+                  <div class="contenedor_modal">
+
+                    <div class="modal_izquierdo" :style="{ backgroundImage: `url(${imageUrl})` }">
+                      <i class="fa-solid fa-xmark" style="color: #ff0000" @click="eliminarImagen"
+                        v-if="imageUrl !== ''"></i>
+                    </div>
+
+                    <div class="modal_derecho">
+                      <div class="rectangulo">Informacion de producto</div>
+                      <div class="container_input2">
+                        <div class="container_input3">
+                          <label class="label-input" for="">Nombre:</label>
+                          <q-input color="green" filled v-model="Nombre" class="modal_input2" type="text" lazy-rules
+                            :rules="[(val) => !!val || 'Por favor ingrese un nombre de usuario']">
+                            <template v-slot:prepend>
+                              <i class="fa fa-code" aria-hidden="true"></i>
+                            </template>
+                          </q-input>
+                        </div>
 
 
+                        <div class="container_input3">
+                          <label class="label-input" for="">Identificacion:</label>
+                          <q-input color="green" filled v-model="Identificacion" class="modal_input2" type="text"
+                            lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una identificacion']">
+                            <template v-slot:prepend>
 
-                  <!------------------------------->
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Nombre" class="modal_input" type="text" label="Nombre *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                        <div class="container_input3">
+                          <label class="label-input" for="">Telefono:</label>
+                          <q-input color="green" filled v-model="Telefono" class="modal_input2" type="number" lazy-rules
+                            :rules="[(val) => !!val || 'Por favor ingrese un numero de telefono']">
+                            <template v-slot:prepend>
 
-                  <!------------------------------->
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Identificacion" class="modal_input" type="text" label="Identificacion de usuario *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una identificacion de usuario']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                        <div class="container_input3">
+                          <label class="label-input" for="">Correo:</label>
+                          <q-input color="green" filled v-model="Correo" class="modal_input2" type="mail" lazy-rules
+                            :rules="[(val) => !!val || 'Por favor ingrese un correo']">
+                            <template v-slot:prepend>
 
-                  <!------------------------------->
+                            </template>
+                          </q-input>
+                        </div>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Telefono" class="modal_input" type="number" label="Telefono *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un numero de telefono']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                        <div class="container_input3">
+                          <label class="label-input" for="">Contraseña de usuario:</label>
+                          <q-input color="green" filled v-model="Contraseña" class="modal_input2" type="passawor"
+                            lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una contraseña de usuario']">
+                            <template v-slot:prepend>
 
-                  <!------------------------------->
+                            </template>
+                          </q-input>
+                        </div>
+                      </div>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Correo" class="modal_input" type="mail" label="Correo*"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un correo']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
+                      <div class="container_input4">
+                        <label class="label-input2" for="">Rol de usuario:</label>
+                        <q-input color="green" filled v-model="Rol" class="modal_input3" type="text"
+                          label="Descripcion *" lazy-rules :rules="[
+                            (val) => !!val || 'Por favor ingrese el rol del usuario',
+                          ]">
+                          <template v-slot:prepend>
+                            <i class="fa fa-align-left" aria-hidden="true"></i>
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="container_input2">
 
-                  <!------------------------------->
+                        <div class="container_input3">
+                          <label class="label-input3" for="">Imagen:</label>
+                          <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
+                          <q-btn @click="openFileExplorer" icon="image" class="modal_input2">Agregar Imagen</q-btn>
+                        </div>
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Rol" class="modal_input" type="text" label="Rol de usuario *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un rol']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
 
-                  <!------------------------------->
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Contraseña" class="modal_input" type="passawor" label="contraseña *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una contraseña']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
-                  </div>
-
-                  <div class="contenedor_botones">
-                    <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
-                    <q-btn label="Agregar" class="btnagregar2" @click="agregarusuario()" v-if="btnagregar"
-                      type="submit" />
-                    <q-btn label="Aceptar" class="btnagregar2" @click="agregarusuario()" v-if="btnaceptar"
-                      type="submit" />
+                      </div>
+                      <div class="contenedor_botones">
+                        <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                        <q-btn label="Agregar" class="btnagregar2" @click="agregarusuario()" v-if="btnagregar"
+                          type="submit" />
+                        <q-btn label="Aceptar" class="btnagregar2" @click="agregarusuario()" v-if="btnaceptar"
+                          type="submit" />
+                      </div>
+                    </div>
                   </div>
                 </q-form>
               </q-card-section>
@@ -250,16 +241,16 @@ const columns = [
     },
     align: "center",
   },
- /*  {
-    name: "Contraseña",
-    label: "Contraseña",
-    field: "Contraseña",
-    headerStyle: {
-      fontWeight: "bold",
-      fontSize: "15px",
-    },
-    align: "center",
-  }, */
+  /*  {
+     name: "Contraseña",
+     label: "Contraseña",
+     field: "Contraseña",
+     headerStyle: {
+       fontWeight: "bold",
+       fontSize: "15px",
+     },
+     align: "center",
+   }, */
   {
     name: "Rol",
     label: "Rol",
@@ -570,57 +561,145 @@ body {
   color: black;
 }
 
+.contenedor_modal {
+  display: flex;
+}
+
+.modal_izquierdo {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-top: 2px solid #21ba45;
+  border-bottom: 2px solid #21ba45;
+  margin: 0px 60px 0px 0px;
+  width: 250px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.rectangulo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  flex-wrap: wrap;
+  bottom: 3px;
+  margin-left: auto;
+  margin-right: auto; 
+  height: 45px;
+  background-color: #21ba45;
+  width: 80%;
+  border-bottom: 4px solid #21ba45;
+  border-left: 3px solid #21ba45;
+}
+
+.modal_derecho {
+  display: grid;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.322);
+  border-radius: 3px;
+  width: 100%;
+}
+
+
+.container_input2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container_input3 {
+  display: flex;
+  width: 45%;
+  margin: 10px;
+}
+
+.container_input4 {
+  display: flex;
+}
+
+.modal_input2 {
+  display: flex;
+  margin: 0;
+  width: 100%;
+}
+
+
+.modal_input3 {
+  width: 80%;
+}
+
 .modal {
   width: 100%;
+  background-color: #ecf0f5;
+  max-width: 1200px;
+  margin: 0 auto;
   border-radius: 15px;
-  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
-  background-repeat: no-repeat;
-  background-position: 280px; 
-  background-size: auto 560px; 
 }
 
 .titulo-linea {
-  text-align: center;
   margin-bottom: 20px;
+  background-color: #21ba45;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
+  display: flex;
+  margin: 0;
 }
 
+#tta {
+  font-size: 24px;
+  color: #ffffff;
+  margin: 20px;
+}
 
 .titulos {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #ffffff;
   margin: 20px;
 }
 
-.container_input1 {
+.label-input {
   display: flex;
+  position: relative;
+  bottom: 15px;
   align-items: center;
-  flex-wrap: wrap;
-  z-index: 1;
+  font-weight: 700;
+  width: 30%;
+  margin: 10px;
 }
 
-
-.icono {
-  width: 25px;
-  height: 35px;
+i{
+  font-size: 15px;
+  color: #4a4b4a;
 }
+
+.label-input2 {
+  display: flex;
+  position: relative;
+  bottom: 10px;
+  align-items: center;
+  font-weight: 700;
+  margin: 8px;
+}
+
+.label-input3 {
+  display: flex;
+  text-align: end;
+  align-items: center;
+  font-weight: 700;
+  width: 30%;
+  margin: 10px;
+}
+
 
 .contenedor_botones {
   display: flex;
   height: 50px;
   justify-content: space-between;
-}
-
-.modal_input {
-  border-radius: 5px;
-  z-index: 1;
-}
-
-.linea {
-  border-bottom: 4px solid #21ba45;
-  border-radius: 5px;
-  width: 85%;
-  margin: 0 auto;
 }
 
 
@@ -632,6 +711,24 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.acciones {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px;
+}
+
+.acciones2 {
+  background-color: #8d8d8d28;
+}
+
+.acciones3 {
+  display: flex;
+}
+
+i {
+  margin-right: 10px;
 }
 
 .btnedit {
@@ -665,6 +762,7 @@ body {
 
 .btnagregar2 {
   border: 1px solid #cacecb;
+  margin: 10px;
   background-color: #dfdbdb8c;
 }
 
@@ -680,6 +778,7 @@ body {
 
 .btnagregar1 {
   border: 1px solid #dfdfdf;
+  margin: 10px;
   background-color: #dfdbdb8c;
 }
 
@@ -694,13 +793,35 @@ body {
 }
 
 /* Otros estilos */
+
+.spinner-container{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
 .p-carga {
   text-align: center;
 }
 
-@media only screen and (max-width: 510px) {
-  .label_input {
+@media only screen and (max-width: 900px) {
+  .container_input3 {
     width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .container_input4 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .modal_input3 {
+    width: 97%;
+  }
+
+  .contenedor_modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -708,7 +829,10 @@ body {
   .container2 {
     margin-top: 50px;
   }
+
+
 }
+
 
 /* Estilos específicos para pantallas más grandes */
 @media only screen and (min-width: 1200px) {
@@ -716,7 +840,8 @@ body {
     margin-top: 120px;
   }
 
-  .modal_input {
-    width: 60%;
+  .modal_input2 {
+    width: 100%;
   }
-}</style>
+}
+</style>
