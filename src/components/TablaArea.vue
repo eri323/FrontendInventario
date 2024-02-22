@@ -10,7 +10,7 @@
             <h5 class="title">
               Areas
             </h5>
-            <button class="btnag" @click="prompt = true">
+            <button class="btnag" @click="agregar()">
               <h5>Agregar</h5>
               <i class="fa-regular fa-square-plus"></i>
             </button>
@@ -114,7 +114,16 @@ let areas = ref([]);
 let text = ref("Agregar area");
 let btnaceptar = ref(false);
 let btnagregar = ref(true);
-let prompt = ref(false)
+let prompt = ref(false);
+function agregar() {
+  console.log("FDfsd");
+  prompt.value = true;
+  xd.value = 0;
+  limpiar();
+  text.value = "Agregar Area";
+  btnaceptar.value = false;
+  btnagregar.value = true;
+}
 // Filtrar Areas
 /* function filtrarvendedores() {
     if (searchCedula.value.trim() === "") {
@@ -164,7 +173,7 @@ const columns = [
 ];
 function limpiar() {
   Nombre.value = "";
-  prompt.value = false;
+
 }
 async function agregararea() {
   if (xd.value == 0) {
@@ -222,6 +231,7 @@ async function agregararea() {
         obtenerInfo();
         prompt.value = false;
       } catch (error) {
+        console.log("paila");
         if (notification) {
           notification();
         }

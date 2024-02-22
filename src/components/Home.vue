@@ -2,14 +2,14 @@
   <body>
     <div class="contenedor_principal">
       <div class="contenedor_titulos">
-        <p class="titulo">Distribucion de Inventario</p>
-        <p class="titulo2">Version 1.0</p>
+        <p class="titulo">Manejo de Inventario</p>
+       <!--  <p class="titulo2">Version 1.0</p> -->
       </div>
       <div class="contenedor">
         <div class="q-pa-md" style="width: 100%;">
           <q-list padding bordered class="rounded-borders" default-opened
             style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(170, 168, 168, 0.575);">
-            <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded" label="Menu">
+            <q-expansion-item dense dense-toggle expand-separator icon="menu"  label="Menu">
               <q-card>
                 <q-card-section>
                   <div class="contenedor_caja1">
@@ -69,12 +69,46 @@
                       </div>
                     </router-link>
                     <!-- ---------- -->
-                    <router-link to="./ItemPresupuesto" style="text-decoration: none; color: black;">
+                  <!--   <router-link to="./ItemPresupuesto" style="text-decoration: none; color: black;">
                       <div class="contenedor_caja2">
                         <img class="caja_imagen2" src="../img/programa.png" alt="">
                         <p class="nombre_img">Presupuesto</p>
                       </div>
+                    </router-link> -->
+                    <!-- ---------- -->
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+          </q-list>
+        </div>
+        <div class="q-pa-md" style="width: 100%;">
+          <q-list padding bordered class="rounded-borders" default-opened
+            style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(170, 168, 168, 0.575);">
+            <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded" label="Distribucion de presupuesto">
+              <q-card>
+                <q-card-section>
+                  <div class="contenedor_caja1">
+                    <router-link to="./ItemPresupuesto" style="text-decoration: none; color: black; ">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/fichas1.png" alt="">
+                        <p class="nombre_img">Item Presupuesto</p>
+                      </div>
                     </router-link>
+                    <!-- ---------- -->
+                    <router-link to="./DistribucionPresupuesto" style="text-decoration: none; color: black; ">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/fichas1.png" alt="">
+                        <p class="nombre_img">Distribucion  Presupuesto</p>
+                      </div>
+                    </router-link>
+                    <!-- ---------- -->
+                    <!-- <router-link to="./TablaFichas" style="text-decoration: none; color: black; ">
+                      <div class="contenedor_caja2">
+                        <img class="caja_imagen" src="../img/fichas1.png" alt="">
+                        <p class="nombre_img">Fichas</p>
+                      </div>
+                    </router-link> -->
                     <!-- ---------- -->
                   </div>
                 </q-card-section>
@@ -161,11 +195,12 @@ body {
 
 .contenedor_titulos {
   display: flex;
+  justify-content: center;
 }
 
 .titulo {
   margin: 0;
-  font-size: 25px;
+  font-size: 45px;
   margin-left: 12px;
 }
 
@@ -190,7 +225,8 @@ body {
 
 
 .contenedor_caja2 {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 90px;
@@ -237,7 +273,7 @@ body {
 }
 
 .q-pa-md {
-    padding: 12px 12px;
+  padding: 12px 12px;
 }
 
 
@@ -335,12 +371,11 @@ body {
   background-color: #ffffff;
 }
 
-@media only screen and (max-width: 750px){
-  .contenedor3{
+@media only screen and (max-width: 750px) {
+  .contenedor3 {
     display: grid;
   }
 
 }
-
 </style>
 
