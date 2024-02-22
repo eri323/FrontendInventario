@@ -70,7 +70,7 @@
 
                         <div class="container_input3">
                           <label class="label-input" for="">Fecha de creacion:</label>
-                          <q-input color="green" filled v-model="FechaCreacion" class="modal_input2" type="Native date"
+                          <q-input color="green" filled v-model="FechaCreacion" class="modal_input2" type="date"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de creacion']">
                             <template v-slot:prepend>
                               <i class="fa fa-code" aria-hidden="true"></i>
@@ -80,7 +80,7 @@
 
                         <div class="container_input3">
                           <label class="label-input" for="">Fecha de entrega:</label>
-                          <q-input color="green" filled v-model="FechaEntrega" class="modal_input2" type="Native date"
+                          <q-input color="green" filled v-model="FechaEntrega" class="modal_input2" type="date"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de entrega']">
                             <template v-slot:prepend>
                               <i class="fa fa-code" aria-hidden="true"></i>
