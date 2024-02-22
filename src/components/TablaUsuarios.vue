@@ -649,8 +649,7 @@ body {
 }
 
 i{
-  font-size: 15px;
-  color: #4a4b4a;
+  font-size: 20px;
 }
 
 .label-input2 {
@@ -689,23 +688,6 @@ i{
   gap: 10px;
 }
 
-.acciones {
-  font-size: 10px;
-  font-weight: 500;
-  padding: 2px;
-}
-
-.acciones2 {
-  background-color: #8d8d8d28;
-}
-
-.acciones3 {
-  display: flex;
-}
-
-i {
-  margin-right: 10px;
-}
 
 .btnedit {
   font-size: 20px;

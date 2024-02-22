@@ -502,8 +502,7 @@ body {
 
 
 i {
-  font-size: 15px;
-  color: #4a4b4a;
+  font-size: 20px;
 }
 
 .label-input2 {
