@@ -6,7 +6,7 @@ export const useusuariostore = defineStore("usuario", () => {
   const usuario = ref([]);
   const usuarios = ref([]);
   const tokenRef = ref("");
-  const usuarioLogeado = ref(null);
+  const usuarioLogeado = ref();
 
   const setToken = (token) => {
     tokenRef.value = token;
