@@ -15,14 +15,17 @@ import Menu from "../layout/Menu.vue";
 import TablaPedidos from "../components/TablaPedidos.vue";
 import ItemPresupuesto from "../components/ItemPresupuesto.vue";
 import DistribucionPresupuesto from "../components/DistribucionPresupuesto.vue";
-import Nuevacontrasena from "../components/NuevaContrasena.vue"
+import CodigoRecuperar from "../components/CodigoRecuperar.vue";
+import Nuevacontrasena from "../components/NuevaContrasena.vue";
 
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   { path: "/", component: Login },
-  { path: "/RecuContrasena", component: RecuContrasena },
+  { path: "/RecuContrasena", component: RecuContrasena},
+  { path: "/CodigoRecuperar", component: CodigoRecuperar},
   { path: "/NuevaContrasena", component: Nuevacontrasena},
+  
   {
     path: "/Menu",
     component: Menu,
