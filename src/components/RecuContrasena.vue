@@ -1,11 +1,11 @@
 <template>
-    <div class="body">
+    <div class="body" v-if="!activar">
         <div class="container">
             <h2>Recuperar contraseña</h2>
             <p class="texto1">Por favor, introduce la dirección de correo electrónico asociada a tu
                 cuenta de Gmail. Te enviaremos un enlace seguro para restablecer tu
                 contraseña.</p>
-            <form @submit.prevent="enviarCorreo">
+            <form @submit="enviarCorreo">
                 <div class="contenedor1">
                     <h1 style="font-size: 20px; height: 50px;">Ingrese su correo electrónico</h1>
                     <div class="contenedor_input">
@@ -14,32 +14,42 @@
                     </div>
                     <div class="contenedor2">
                         <p v-if="!correoValido" class="texto1">Por favor ingrese un correo </p>
-                        <router-link to="/CodigoRecuperar"><button class="enviar" style="height: 40px; width:150px;" type="submit"
-                            :disabled="!correoValido">Enviar correo</button></router-link>
+                     <button class="enviar" style="height: 40px; width:150px;" type="submit"
+                            :disabled="!correoValido">Enviar correo</button>
                         <router-link to="/"><button>Volver</button></router-link>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <Codigo v-if="activar"></Codigo>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useusuariostore } from "../stores/Usuario.js";
+import Codigo from './CodigoRecuperar.vue'
 
 const correoElectronico = ref('');
 const codigoVerificacion = ref('');
 
-const enviarCorreo = () => {
-    // Realizar validación antes de enviar el correo
-    if (correoValido.value) {
-        // Lógica para enviar el correo
-        console.log('Correo válido, enviando...');
-    } else {
-        // Mostrar mensaje de error o tomar la acción correspondiente
-        console.error('Por favor ingrese un correo ');
+const useUsuario = useusuariostore();
+
+const activar = ref(false)
+
+const router = useRouter()
+async function enviarCorreo(){
+    try {
+        const r = await useUsuario.sendemail({Correo: correoElectronico.value})
+        console.log(r);
+
+        if(r.status===200) activar.value = true
+    } catch (error) {
+        console.log(error);
     }
-};
+}
 
 const correoValido = computed(() => {
     return !!correoElectronico.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoElectronico.value);

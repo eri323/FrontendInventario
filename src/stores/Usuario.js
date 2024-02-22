@@ -85,6 +85,15 @@ export const useusuariostore = defineStore("usuario", () => {
     }
   };
 
+  const sendemail = async (correo) => {
+    try {
+      let response = await axios.post(`usuario/recuperar-password`, correo);
+      return response;
+    } catch (error) {
+      console.log("Nokas pelotas", error);
+    }
+  }
+
   const logout = () => {
     tokenRef.value = null;
     usuarioLogeado.value = null;
@@ -103,11 +112,12 @@ export const useusuariostore = defineStore("usuario", () => {
     tokenRef,
     usuarioLogeado,
     setToken,
+    sendemail,
     setUsuarioLogeado,
     postinfousuario,
     puteditarusuario,
     putInactivarusuario,
     putActivarusuario,
-    persist: true,
+    persist: true 
   };
 });
