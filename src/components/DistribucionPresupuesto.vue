@@ -134,13 +134,17 @@ import { useQuasar } from "quasar";
 import { uselotestore } from "../stores/Lote.js";
 import { useitempresupuestostore } from "../stores/ItemPresupuesto.js";
 import { usedistribucionpresupuestostore } from "../stores/DistribucionPreupuesto.js"
+
 /* const $q = useQuasar(); */
+
 const lotestore = uselotestore();
 const itempresupuestostore = useitempresupuestostore();
 const distribucionpresupuestostore = usedistribucionpresupuestostore();
 let rows = ref([]);
 let xd = ref(0);
+
 /* let fixed = ref(false); */
+
 const $q = useQuasar();
 let Presupuesto = ref("");
 let Lote_id = ref("")
@@ -508,12 +512,10 @@ body {
 }
 
 .title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: whitesmoke;
     margin: 0;
-    padding: 16px 0px;
+    text-align: center;
+    padding:10px 0px;
     background-color: #21ba45;
     font-weight: bold;
     width: 20%;

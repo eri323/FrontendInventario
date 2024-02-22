@@ -58,26 +58,35 @@
 
               <q-card-section>
 
-                <q-form  class="q-gutter-md">
+                <q-form class="q-gutter-md">
+                  <div class="contenedor_modal">
 
-                  <div class="container_input1">
-                    <q-input color="green" filled v-model="Nombre" class="modal_input" type="text" label="Nombre de area *"
-                      lazy-rules :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
-                      <template v-slot:prepend>
-                        <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="128" height="128"
-                          viewBox="0 0 26 26">
-                          <path fill="#999999"
-                            d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557" />
-                        </svg>
-                      </template>
-                    </q-input>
+                    <div class="modal_izquierdo"></div>
+                    <div class="modal_derecho">
+                      <div class="rectangulo">Informacion de area</div>
+                      <div class="container_input2">
+                        <div class="container_input4">
+                          <label class="label-input2" for="">Nombre:</label>
+                          <q-input color="green" filled v-model="Nombre" class="modal_input3" type="text" label="Nombre *"
+                            lazy-rules :rules="[
+                              (val) => !!val || 'Por favor ingrese un nombre de area',
+                            ]">
+                            <template v-slot:prepend>
+                              <i class="fa fa-align-left" aria-hidden="true"></i>
+                            </template>
+                          </q-input>
+                        </div>
+
+                      </div>
+                      <div class="contenedor_botones">
+                        <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
+                        <q-btn label="Agregar" class="btnagregar2" @click="agregararea()" v-if="btnagregar"
+                          type="submit" />
+                        <q-btn label="Aceptar" class="btnagregar2" @click="agregararea()" v-if="btnaceptar"
+                          type="submit" />
+                      </div>
+                    </div>
                   </div>
-
-                <div class="contenedor_botones">
-                  <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
-                  <q-btn label="Agregar" class="btnagregar2" @click="agregararea()" v-if="btnagregar" type="submit" />
-                  <q-btn label="Aceptar" class="btnagregar2" @click="agregararea()" v-if="btnaceptar" type="submit" />
-                </div>
                 </q-form>
               </q-card-section>
             </q-card>
@@ -408,57 +417,109 @@ body {
   color: black;
 }
 
+.contenedor_modal {
+  display: flex;
+}
+
+.modal_izquierdo {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-top: 2px solid #21ba45;
+  border-bottom: 2px solid #21ba45;
+  margin: 0px 60px 0px 0px;
+  width: 250px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.rectangulo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  flex-wrap: wrap;
+  bottom: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 45px;
+  background-color: #21ba45;
+  width: 80%;
+  border-bottom: 4px solid #21ba45;
+  border-left: 3px solid #21ba45;
+}
+
+.modal_derecho {
+  display: grid;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.322);
+  border-radius: 3px;
+  width: 100%;
+}
+
+.container_input4 {
+  display: flex;
+}
+
+.modal_input3 {
+  width: 80%;
+}
+
 .modal {
   width: 100%;
+  background-color: #ecf0f5;
+  max-width: 1200px;
+  margin: 0 auto;
   border-radius: 15px;
-  background-image: url("https://seeklogo.com/images/S/sena-logo-DEA81361FA-seeklogo.com.png");
-  background-repeat: no-repeat;
-  background-position: 430px; 
-  background-size: auto 260px; 
 }
 
 .titulo-linea {
-  text-align: center;
   margin-bottom: 20px;
+  background-color: #21ba45;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
+  display: flex;
+  margin: 0;
 }
 
+#tta {
+  font-size: 24px;
+  color: #ffffff;
+  margin: 20px;
+}
 
 .titulos {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #ffffff;
   margin: 20px;
 }
 
-.container_input1 {
+
+
+i {
+  font-size: 15px;
+  color: #4a4b4a;
+}
+
+.label-input2 {
   display: flex;
+  position: relative;
+  bottom: 15px;
   align-items: center;
-  flex-wrap: wrap;
-  z-index: 1;
+  font-weight: 700;
+  margin: 18px;
 }
 
-
-.icono {
-  width: 25px;
-  height: 35px;
-}
 
 .contenedor_botones {
   display: flex;
   height: 50px;
   justify-content: space-between;
-}
-
-.modal_input {
-  border-radius: 5px;
-  z-index: 1;
-}
-
-.linea {
-  border-bottom: 4px solid #21ba45;
-  border-radius: 5px;
-  width: 85%;
-  margin: 0 auto;
 }
 
 
@@ -503,6 +564,7 @@ body {
 
 .btnagregar2 {
   border: 1px solid #cacecb;
+  margin: 10px;
   background-color: #dfdbdb8c;
 }
 
@@ -518,6 +580,7 @@ body {
 
 .btnagregar1 {
   border: 1px solid #dfdfdf;
+  margin: 10px;
   background-color: #dfdbdb8c;
 }
 
@@ -532,13 +595,36 @@ body {
 }
 
 /* Otros estilos */
+
+.spinner-container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
 .p-carga {
   text-align: center;
 }
 
-@media only screen and (max-width: 510px) {
-  .label_input {
+@media only screen and (max-width: 900px) {
+  .container_input3 {
     width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .container_input4 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .modal_input3 {
+    width: 97%;
+  }
+
+  .contenedor_modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -546,7 +632,10 @@ body {
   .container2 {
     margin-top: 50px;
   }
+
+
 }
+
 
 /* Estilos específicos para pantallas más grandes */
 @media only screen and (min-width: 1200px) {
@@ -554,7 +643,8 @@ body {
     margin-top: 120px;
   }
 
-  .modal_input {
-    width: 60%;
+  .modal_input2 {
+    width: 100%;
   }
-}</style>
+}
+</style>

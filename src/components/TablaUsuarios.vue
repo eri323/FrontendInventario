@@ -54,9 +54,7 @@
                 <q-form class="q-gutter-md">
                   <div class="contenedor_modal">
 
-                    <div class="modal_izquierdo" :style="{ backgroundImage: `url(${imageUrl})` }">
-                      <i class="fa-solid fa-xmark" style="color: #ff0000" @click="eliminarImagen"
-                        v-if="imageUrl !== ''"></i>
+                    <div class="modal_izquierdo" >
                     </div>
 
                     <div class="modal_derecho">
@@ -126,14 +124,6 @@
                         </q-input>
                       </div>
                       <div class="container_input2">
-
-                        <div class="container_input3">
-                          <label class="label-input3" for="">Imagen:</label>
-                          <input type="file" ref="fileInput" style="display:none" @change="handleFileChange">
-                          <q-btn @click="openFileExplorer" icon="image" class="modal_input2">Agregar Imagen</q-btn>
-                        </div>
-
-
                       </div>
                       <div class="contenedor_botones">
                         <q-btn flat v-close-popup class="btnagregar1" type="reset" label="Cancelar" />
@@ -564,20 +554,6 @@ body {
 .contenedor_modal {
   display: flex;
 }
-
-.modal_izquierdo {
-  background-color: #ffffff;
-  border-radius: 10px;
-  border-top: 2px solid #21ba45;
-  border-bottom: 2px solid #21ba45;
-  margin: 0px 60px 0px 0px;
-  width: 250px;
-  height: 200px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 
 .rectangulo {
   position: relative;

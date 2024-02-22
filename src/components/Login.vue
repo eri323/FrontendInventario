@@ -118,6 +118,7 @@
   font-weight: 900;
   font-size: 30px;
   color: rgb(0, 0, 0);
+  text-shadow: 4px 4px 4px rgb(255, 255, 255);
 }
 
 .form {
