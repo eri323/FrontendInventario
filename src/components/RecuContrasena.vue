@@ -16,7 +16,7 @@
                         <p v-if="!correoValido" class="texto1">Por favor ingrese un correo </p>
                      <button class="enviar" style="height: 40px; width:150px;" type="submit"
                             :disabled="!correoValido">Enviar correo</button>
-                        <router-link to="/"><button>Volver</button></router-link>
+                        <router-link to="/"><button class="volver">Volver</button></router-link>
                     </div>
                 </div>
             </form>
@@ -30,7 +30,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useusuariostore } from "../stores/Usuario.js";
-import Codigo from './CodigoRecuperar.vue'
+import Codigo from './CodigoRecuperar.vue';
 
 const correoElectronico = ref('');
 const codigoVerificacion = ref('');
@@ -69,10 +69,12 @@ const codigoValido = computed(() => {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background: linear-gradient(to top, rgba(162, 211, 162, 0.774), white);
     display: flex;
     flex-direction: column;
 }
+
+
 
 .container {
     background-color: #fff;
@@ -117,6 +119,20 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+.volver{
+  display: block;
+  font-weight: bold;
+  background: -webkit-linear-gradient(bottom, #2a9cdf, #0077ff);
+  color: white;
+  border-radius: 20px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  height: 35px;
+width: 150px;
 }
 
 .enviar {
