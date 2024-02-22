@@ -5,7 +5,7 @@ import { ref } from "vue";
 export const useusuariostore = defineStore("usuario", () => {
   const usuario = ref([]);
   const usuarios = ref([]);
-  const tokenRef = ref(localStorage.getItem("token") || "");
+  const tokenRef = ref("");
   const usuarioLogeado = ref(null);
 
   const setToken = (token) => {
