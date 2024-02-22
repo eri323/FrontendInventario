@@ -10,11 +10,11 @@
           Inventario
         </q-toolbar-title>
 
-        <router-link to="./DistribucionPresupuesto">
+       <!--  <router-link to="./DistribucionPresupuesto">
           <button class="btndispre">
             Distribucion de presupuesto
           </button>
-        </router-link>
+        </router-link> -->
         <q-input filled v-model="searchQuery" dense placeholder="Buscar..." style="max-width: 250px">
           <template v-slot:prepend>
             <q-icon name="search" />
@@ -156,7 +156,7 @@
               </q-item-section>
             </div>
           </router-link>
-          <router-link to="./ItemPresupuesto">
+          <!-- <router-link to="./ItemPresupuesto">
             <div class="div">
               <q-item-section>
                 <i class="fa-solid fa-money-check-dollar"></i>
@@ -166,7 +166,7 @@
                 <h6 style="font-size: 15px; font-weight: 100;">Presupuesto</h6>
               </q-item-section>
             </div>
-          </router-link>
+          </router-link> -->
           <router-link to="">
             <div class="div">
               <q-item-section>

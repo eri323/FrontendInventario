@@ -350,7 +350,7 @@ const columns = [
   },
   {
     name: "Lote_Id",
-    label: "Lote_Id",
+    label: "Lote",
     align: "center",
     field: (row) => `${row.Lote_Id?.Nombre}`,
     headerStyle: {
