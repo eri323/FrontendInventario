@@ -6,18 +6,14 @@ export const useusuariostore = defineStore("usuario", () => {
   const usuario = ref([]);
   const usuarios = ref([]);
   const tokenRef = ref(localStorage.getItem("token") || "");
-  const usuarioLogeado = ref(
-    JSON.parse(localStorage.getItem("usuarioLogeado")) || null
-  );
+  const usuarioLogeado = ref(null);
 
   const setToken = (token) => {
     tokenRef.value = token;
-    localStorage.setItem("token", token);
   };
 
   const setUsuarioLogeado = (userData) => {
     usuarioLogeado.value = userData;
-    localStorage.setItem("usuarioLogeado", JSON.stringify(userData));
   };
 
   const obtenerinfousuario = async () => {
@@ -90,8 +86,6 @@ export const useusuariostore = defineStore("usuario", () => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usuarioLogeado");
     tokenRef.value = null;
     usuarioLogeado.value = null;
   };
@@ -114,6 +108,6 @@ export const useusuariostore = defineStore("usuario", () => {
     puteditarusuario,
     putInactivarusuario,
     putActivarusuario,
-    persist: true 
+    persist: true,
   };
 });
