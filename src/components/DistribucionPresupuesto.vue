@@ -98,7 +98,7 @@
                                     </div>
                                     <br>
                                     <div class="container_input1">
-                                        <q-input color="green" filled v-model="Presupuesto" class="modal_input" type="text"
+                                        <q-input color="green" filled v-model="Presupuesto" class="modal_input" mask="#################"
                                             label="Presuouesto para el lote *" lazy-rules
                                             :rules="[(val) => !!val || 'Por favor ingrese un Presupuesto']">
                                             <template v-slot:prepend>
@@ -146,7 +146,7 @@ let xd = ref(0);
 /* let fixed = ref(false); */
 
 const $q = useQuasar();
-let Presupuesto = ref("");
+let Presupuesto = ref();
 let Lote_id = ref("")
 let ItemPresupuesto_id = ref("")
 const filter = ref("")

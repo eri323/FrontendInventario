@@ -18,6 +18,7 @@ export const usedistribucionpresupuestostore = defineStore('distribucionpresupue
 
     const postinfodistribucionpresupuesto = async (data) => {
         try {
+            console.log("data:", data);
             let responsedistribucionpresupuesto = await axios.post('dispresupuesto/dispresupuestocrear', data);
             return responsedistribucionpresupuesto
         } catch (error) {

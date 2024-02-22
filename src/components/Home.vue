@@ -9,7 +9,7 @@
         <div class="q-pa-md" style="width: 100%;">
           <q-list padding bordered class="rounded-borders" default-opened
             style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(170, 168, 168, 0.575);">
-            <q-expansion-item dense dense-toggle expand-separator icon="menu"  label="Menu">
+            <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded" label="Menu">
               <q-card>
                 <q-card-section>
                   <div class="contenedor_caja1">
@@ -85,7 +85,7 @@
         <div class="q-pa-md" style="width: 100%;">
           <q-list padding bordered class="rounded-borders" default-opened
             style="background-color: rgba(255, 255, 255, 0.575); border-top: 3px solid rgba(170, 168, 168, 0.575);">
-            <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded" label="Distribucion de presupuesto">
+            <q-expansion-item dense dense-toggle expand-separator icon="menu" v-model="isExpanded2" label="Distribucion de presupuesto">
               <q-card>
                 <q-card-section>
                   <div class="contenedor_caja1">
@@ -153,27 +153,12 @@
     </div>
   </body>
 </template>
-
-<script>
+ 
+<script setup>
 import { ref } from "vue";
 
-export default {
-  setup() {
-    const isExpanded = ref(true);
-    return {
-      model: ref("one"),
-      search1: ref(""),
-      search2: ref(""),
-      options: [
-        { label: "Descargar datos en pdf", value: "Descargarpdf" },
-        { label: "Descargar datos CSV o EXEL", value: "two" },
-      ],
-      isExpanded,
-    };
-
-  },
-};
-
+const isExpanded =ref(true);
+const isExpanded2 = ref(true);
 
 
 </script>
