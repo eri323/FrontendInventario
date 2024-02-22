@@ -14,8 +14,9 @@
                     </div>
                     <div class="contenedor2">
                         <p v-if="!correoValido" class="texto1">Por favor ingrese un correo </p>
-                        <button class="enviar" style="height: 40px; width:150px;" type="submit"
-                            :disabled="!correoValido">Enviar correo</button>
+                        <router-link to="/CodigoRecuperar"><button class="enviar" style="height: 40px; width:150px;" type="submit"
+                            :disabled="!correoValido">Enviar correo</button></router-link>
+                        <router-link to="/"><button>Volver</button></router-link>
                     </div>
                 </div>
             </form>
@@ -109,13 +110,19 @@ h2 {
 }
 
 .enviar {
-    border-radius: 5px;
-    background-color: rgba(61, 255, 61, 0.932);
-    color: black;
-    font-weight: bold;
+  display: block;
+  width: 90%;
+  font-weight: bold;
+  background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
+  color: white;
+  border-radius: 20px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 30px;
 }
 
-.texto1{
+.texto1 {
     margin: 0 0 16px;
     height: 30px;
     width: auto;
