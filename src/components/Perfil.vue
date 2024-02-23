@@ -112,7 +112,7 @@ const options = ref([]);
 const btnagregar = ref(true); // Inicializa según tus necesidades
 const btnaceptar = ref(false); // Inicializa según tus necesidades
 const xd = ref(0);
-const usuarioLogeado = usuariostore.usuarioLogeado;
+const usuarioLogeado = ref(null);
 
 let notification;
 const fileInput = ref(null); // Add this line to define fileInput
@@ -242,7 +242,7 @@ const showDefault = () => {
 
 const obtenerInfo = async () => {
   try {
-    const token = usuariostore.tokenRef;
+    const token = sessionStorage.getItem("token");
     console.log(token);
     if (!token) {
       console.error("No hay ningún token almacenado.");
@@ -250,6 +250,7 @@ const obtenerInfo = async () => {
     }
     usuariostore.setToken(token);
     await usuariostore.obtenerinfousuario();
+    usuarioLogeado.value = usuariostore.usuarioLogeado;
   } catch (error) {
     console.error("Error al obtener la información del usuario:", error);
   }
@@ -366,4 +367,5 @@ span {
 .btnagregar1 {
   border: 1px solid #dfdfdf;
   background-color: #dfdbdb8c;
-}</style>
+}
+</style>

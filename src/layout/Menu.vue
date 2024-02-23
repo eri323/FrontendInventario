@@ -10,7 +10,7 @@
           Inventario
         </q-toolbar-title>
 
-       <!--  <router-link to="./DistribucionPresupuesto">
+        <!--  <router-link to="./DistribucionPresupuesto">
           <button class="btndispre">
             Distribucion de presupuesto
           </button>
@@ -244,7 +244,8 @@ function confirm() {
       push: true
     }
   }).onOk(() => {
-    goToHome();
+    logoutUser();
+    // goToHome();
   }).onOk(() => {
     // console.log('>>>> second OK catcher')
   }).onCancel(() => {
@@ -263,14 +264,19 @@ function toggleLeftDrawer() {
 
 
 
-const usuarioData = usuariostore.usuarios;
-const nombreUsuario = usuariostore.usuarioLogeado.Nombre;
-const rolUsuario = usuariostore.usuarioLogeado.Rol;
+const usuarioLogeado = usuariostore.usuarioLogeado;
+
+const nombreUsuario = usuarioLogeado ? usuarioLogeado.Nombre : '';
+const rolUsuario = usuarioLogeado ? usuarioLogeado.Rol : '';
 
 function goToHome() {
-  localStorage.removeItem("token");
   console.log("Sesión cerrada. Redirigiendo a la página de inicio...");
   router.push("/");
+}
+
+function logoutUser() {
+  usuariostore.logout(); // Llama a la función logout del store para cerrar sesión
+  goToHome(); // Redirige a la página de inicio después de cerrar sesión
 }
 </script>
 
@@ -363,17 +369,17 @@ function goToHome() {
   border-left: 5px solid rgba(33, 131, 33, 0.849);
 }
 
-.div1{
+.div1 {
   height: 40px;
   background-color: #2b3638;
 }
 
-.text2{
+.text2 {
   position: relative;
   left: 20px;
   bottom: 5px;
-  font-size: 10px; 
-  font-weight: 100; 
+  font-size: 10px;
+  font-weight: 100;
   color: #788186;
 }
 

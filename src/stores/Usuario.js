@@ -16,14 +16,26 @@ export const useusuariostore = defineStore("usuario", () => {
     usuarioLogeado.value = userData;
   };
 
+  // En el método obtenerinfousuario de tu store Vuex
   const obtenerinfousuario = async () => {
     try {
-      let responseusuario = await axios.get("usuario/usuariobusca");
-      usuario.value = responseusuario.data.usuarios;
+      const token = sessionStorage.getItem("token");
+      const usuarioData = JSON.parse(sessionStorage.getItem("usuarioData"));
+      console.log(token, usuarioData);
+
+      if (!token || !usuarioData) {
+        console.error("No hay ningún token o usuario almacenado en sessionStorage.");
+        return;
+      }
+
+      setToken(token);
+      setUsuarioLogeado(usuarioData);
+      usuarios.value = usuarioData;
     } catch (error) {
-      throw error;
+      console.error("Error al obtener la información del usuario:", error);
     }
   };
+
 
   const postinfousuario = async (data) => {
     try {
@@ -73,6 +85,8 @@ export const useusuariostore = defineStore("usuario", () => {
         const usuarioData = response.data.usuarios;
         setToken(token);
         setUsuarioLogeado(usuarioData);
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('usuarioData', JSON.stringify(usuarioData));
         usuarios.value = usuarioData;
         console.log("Información del usuario:", usuarioData);
         return { status: response.status, token };
@@ -95,6 +109,8 @@ export const useusuariostore = defineStore("usuario", () => {
   }
 
   const logout = () => {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuarioData');
     tokenRef.value = null;
     usuarioLogeado.value = null;
   };
@@ -118,6 +134,6 @@ export const useusuariostore = defineStore("usuario", () => {
     puteditarusuario,
     putInactivarusuario,
     putActivarusuario,
-    persist: true 
+    persist: true
   };
 });
