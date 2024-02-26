@@ -5,7 +5,7 @@ import { ref } from "vue";
 export const useusuariostore = defineStore("usuario", () => {
   const usuario = ref([]);
   const usuarios = ref([]);
-  const tokenRef = ref("");
+  const tokenRef = ref(sessionStorage.getItem("token") || "");
   const usuarioLogeado = ref();
 
   const setToken = (token) => {
@@ -16,27 +16,16 @@ export const useusuariostore = defineStore("usuario", () => {
     usuarioLogeado.value = userData;
   };
 
-  // En el método obtenerinfousuario de tu store Vuex
   const obtenerinfousuario = async () => {
     try {
-      const token = sessionStorage.getItem("token");
-      const usuarioData = JSON.parse(sessionStorage.getItem("usuarioData"));
-      console.log(token, usuarioData);
-
-      if (!token || !usuarioData) {
-        console.error("No hay ningún token o usuario almacenado en sessionStorage.");
-        return;
-      }
-
-      setToken(token);
-      setUsuarioLogeado(usuarioData);
-      usuarios.value = usuarioData;
+      const response = await axios.get('usuario/usuariobusca');
+      console.log(response );
+      return response.data;
     } catch (error) {
-      console.error("Error al obtener la información del usuario:", error);
+      console.error('Error al obtener la información del usuario:', error);
+      throw error; 
     }
   };
-
-
   const postinfousuario = async (data) => {
     try {
       let responseusuario = await axios.post("usuario/usuariocrear", data);

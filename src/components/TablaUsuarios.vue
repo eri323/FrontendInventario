@@ -54,7 +54,7 @@
                 <q-form class="q-gutter-md">
                   <div class="contenedor_modal">
 
-                    <div class="modal_izquierdo" >
+                    <div class="modal_izquierdo">
                     </div>
 
                     <div class="modal_derecho">
@@ -96,7 +96,7 @@
                           <q-input color="green" filled v-model="Correo" class="modal_input2" type="mail" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un correo']">
                             <template v-slot:prepend>
-                            <i class='fa fa-envelope'></i>
+                              <i class='fa fa-envelope'></i>
                             </template>
                           </q-input>
                         </div>
@@ -106,7 +106,7 @@
                           <q-input color="green" filled v-model="Contraseña" class="modal_input2" type="passawor"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una contraseña de usuario']">
                             <template v-slot:prepend>
-                            <i class='fa fa-lock'></i>
+                              <i class='fa fa-lock'></i>
                             </template>
                           </q-input>
                         </div>
@@ -114,8 +114,8 @@
 
                       <div class="container_input4">
                         <label class="label-input2" for="">Rol de usuario:</label>
-                        <q-input color="green" filled v-model="Rol" class="modal_input3" type="text"
-                          label="Descripcion *" lazy-rules :rules="[
+                        <q-input color="green" filled v-model="Rol" class="modal_input3" type="text" label="Descripcion *"
+                          lazy-rules :rules="[
                             (val) => !!val || 'Por favor ingrese el rol del usuario',
                           ]">
                           <template v-slot:prepend>
@@ -280,8 +280,9 @@ async function obtenerInfo() {
     cargando.value = true;
     const response = await usuariostore.obtenerinfousuario();
     console.log(response);
-    usuarios.value = usuariostore.usuario;
-    rows.value = usuariostore.usuario;
+    usuarios.value = response.usuarios;
+    rows.value = response.usuarios; 
+    console.log('row info ',rows.value);
   } catch (error) {
     console.log(error);
   } finally {
@@ -566,7 +567,7 @@ body {
   flex-wrap: wrap;
   bottom: 3px;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   height: 45px;
   background-color: #21ba45;
   width: 80%;
@@ -648,7 +649,7 @@ body {
   margin: 10px;
 }
 
-i{
+i {
   font-size: 20px;
 }
 
@@ -752,11 +753,12 @@ i{
 
 /* Otros estilos */
 
-.spinner-container{
+.spinner-container {
   display: grid;
   align-items: center;
   justify-content: center;
 }
+
 .p-carga {
   text-align: center;
 }
