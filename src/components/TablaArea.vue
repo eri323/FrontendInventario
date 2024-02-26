@@ -72,7 +72,7 @@
                               (val) => !!val || 'Por favor ingrese un nombre de area',
                             ]">
                             <template v-slot:prepend>
-                              <i class="fa fa-align-left" aria-hidden="true"></i>
+                              <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>

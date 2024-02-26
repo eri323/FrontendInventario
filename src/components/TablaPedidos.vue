@@ -73,7 +73,7 @@
                           <q-input color="green" filled v-model="FechaCreacion" class="modal_input2" type="date"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de creacion']">
                             <template v-slot:prepend>
-                              <i class="fa fa-code" aria-hidden="true"></i>
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -83,7 +83,7 @@
                           <q-input color="green" filled v-model="FechaEntrega" class="modal_input2" type="date"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese la fecha de entrega']">
                             <template v-slot:prepend>
-                              <i class="fa fa-code" aria-hidden="true"></i>
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -111,7 +111,7 @@
                               (val) => !!val || 'Por favor ingrese la confirmacion',
                             ]" hide-bottom-space>
                             <template v-slot:prepend>
-                              <i class="fa fa-cogs" aria-hidden="true"></i>
+                              <i class="fa fa-truck" aria-hidden="true"></i>
                             </template>
                           </q-select>
                         </div>
@@ -124,7 +124,7 @@
                             (val) => !!val || 'Por favor ingrese el usuario',
                           ]">
                           <template v-slot:prepend>
-                            <i class="fa fa-align-left" aria-hidden="true"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i>
                           </template>
                         </q-input>
                       </div>

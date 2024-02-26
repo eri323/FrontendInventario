@@ -102,7 +102,7 @@
                           <q-input color="green" filled v-model="Nombre" class="modal_input2" type="text" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
                             <template v-slot:prepend>
-                              <i class="fa fa-user-circle" aria-hidden="true"></i>
+                              <i class="fa-solid fa-boxes-packing" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>

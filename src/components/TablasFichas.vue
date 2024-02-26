@@ -93,7 +93,7 @@
                           <q-input color="green" filled v-model="nombre" class="modal_input2" type="text" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese el nombre de la ficha']">
                             <template v-slot:prepend>
-                              <i class="fa fa-user-circle" aria-hidden="true"></i>
+                              <i class="fa-solid fa-users-line" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -105,7 +105,7 @@
                               (val) => !!val || 'Por favor ingrese el nivel de formacion.',
                             ]" hide-bottom-space>
                             <template v-slot:prepend>
-                              <i class="fa fa-cogs" aria-hidden="true"></i>
+                              <i class="fa fa-list" aria-hidden="true"></i>
                             </template>
                           </q-select>
                         </div>
@@ -115,7 +115,7 @@
                           <q-input color="green" filled v-model="fechainicio" class="modal_input2" type="date" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese la fecha de inicio']">
                             <template v-slot:prepend>
-                              <i class="fa fa-user-circle" aria-hidden="true"></i>
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -128,7 +128,7 @@
                             (val) => !!val || 'Por favor ingrese el area de ficha',
                           ]" hide-bottom-space>
                           <template v-slot:prepend>
-                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            <i class="fa fa-list" aria-hidden="true"></i>
                           </template>
                         </q-select>
                       </div>
@@ -141,7 +141,7 @@
                           <q-input color="green" filled v-model="fechafin" class="modal_input2" type="date" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese la fecha de finalizacion.']">
                             <template v-slot:prepend>
-                              <i class="fa fa-user-circle" aria-hidden="true"></i>
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>

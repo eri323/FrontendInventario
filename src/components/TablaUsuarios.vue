@@ -65,7 +65,7 @@
                           <q-input color="green" filled v-model="Nombre" class="modal_input2" type="text" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un nombre de usuario']">
                             <template v-slot:prepend>
-                              <i class="fa fa-code" aria-hidden="true"></i>
+                              <i class="fa fa-user" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -76,7 +76,7 @@
                           <q-input color="green" filled v-model="Identificacion" class="modal_input2" type="text"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una identificacion']">
                             <template v-slot:prepend>
-
+                              <i class='fa-solid fa-address-card'></i>
                             </template>
                           </q-input>
                         </div>
@@ -86,7 +86,7 @@
                           <q-input color="green" filled v-model="Telefono" class="modal_input2" type="number" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un numero de telefono']">
                             <template v-slot:prepend>
-
+                              <i class='fa fa-phone'></i>
                             </template>
                           </q-input>
                         </div>
@@ -96,7 +96,7 @@
                           <q-input color="green" filled v-model="Correo" class="modal_input2" type="mail" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un correo']">
                             <template v-slot:prepend>
-
+                            <i class='fa fa-envelope'></i>
                             </template>
                           </q-input>
                         </div>
@@ -106,7 +106,7 @@
                           <q-input color="green" filled v-model="Contraseña" class="modal_input2" type="passawor"
                             lazy-rules :rules="[(val) => !!val || 'Por favor ingrese una contraseña de usuario']">
                             <template v-slot:prepend>
-
+                            <i class='fa fa-lock'></i>
                             </template>
                           </q-input>
                         </div>

@@ -70,7 +70,7 @@
                               (val) => !!val || 'Por favor ingrese un nombre de lote',
                             ]">
                             <template v-slot:prepend>
-                              <i class="fa fa-align-left" aria-hidden="true"></i>
+                              <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
