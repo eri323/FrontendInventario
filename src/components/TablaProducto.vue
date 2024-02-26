@@ -19,7 +19,7 @@
 
           <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
             virtual-scroll :rows-per-page-options="[0]">
-            
+
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
                 <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
@@ -81,7 +81,8 @@
                   <div class="contenedor_modal">
 
                     <div class="modal_izquierdo" :style="{ backgroundImage: `url(${imageUrl})` }">
-                      <i class="fa-solid fa-xmark" style="color: #ff0000"  @click="eliminarImagen" v-if="imageUrl !== ''" ></i>
+                      <i class="fa-solid fa-xmark" style="color: #ff0000" @click="eliminarImagen"
+                        v-if="imageUrl !== ''"></i>
                     </div>
 
                     <div class="modal_derecho">
@@ -102,7 +103,7 @@
                           <q-input color="green" filled v-model="Nombre" class="modal_input2" type="text" lazy-rules
                             :rules="[(val) => !!val || 'Por favor ingrese un nombre']">
                             <template v-slot:prepend>
-                              <i class="fa-solid fa-boxes-packing" aria-hidden="true"></i>
+                              <i class="fa fa-user-circle" aria-hidden="true"></i>
                             </template>
                           </q-input>
                         </div>
@@ -336,7 +337,7 @@ const columns = [
     name: "Consumible",
     label: "Consumible",
     align: "center",
-    field: val=>val.Consumible==true ? 'Sí' : 'No',
+    field: val => val.Consumible == true ? 'Sí' : 'No',
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -410,7 +411,7 @@ async function agregarProducto() {
         UnidadMedida: UnidadMedida.value,
         PrecioUnitario: PrecioUnitario.value,
         Iva: Iva.value,
-        Consumible: Consumible.value.label=='Sí',
+        Consumible: Consumible.value.label == 'Si',
         Lote_Id: Lote_Id._rawValue.value,
       });
       obtenerInfo();
@@ -448,7 +449,7 @@ async function agregarProducto() {
           UnidadMedida: UnidadMedida.value,
           PrecioUnitario: PrecioUnitario.value,
           Iva: Iva.value,
-          Consumible: Consumible.value,
+          Consumible: Consumible.value.label == 'Si',
           Lote_Id: Lote_Id._rawValue.value,
         });
         btnagregar.value = true;
@@ -509,7 +510,7 @@ async function editarProducto(id) {
     UnidadMedida.value = selecProducto.UnidadMedida;
     PrecioUnitario.value = selecProducto.PrecioUnitario;
     Iva.value = selecProducto.Iva;
-    Consumible.value = selecProducto.Consumible;
+    Consumible.value = selecProducto.Consumible ? 'Si' : 'No';
     Lote_Id.value = {
       label: `${selecProducto.Lote_Id.Nombre}`,
       value: String(selecProducto.Lote_Id._id),
@@ -627,6 +628,7 @@ const eliminarImagen = () => {
 onMounted(async () => {
   obtenerInfo();
 });
+
 </script>
 
 <style scoped>
@@ -732,7 +734,7 @@ body {
   flex-wrap: wrap;
   bottom: 3px;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   height: 45px;
   background-color: #21ba45;
   width: 80%;
@@ -814,7 +816,7 @@ body {
   margin: 10px;
 }
 
-i{
+i {
   font-size: 15px;
   color: #4a4b4a;
 }
@@ -936,11 +938,12 @@ i {
 
 /* Otros estilos */
 
-.spinner-container{
+.spinner-container {
   display: grid;
   align-items: center;
   justify-content: center;
 }
+
 .p-carga {
   text-align: center;
 }

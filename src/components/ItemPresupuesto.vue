@@ -38,6 +38,9 @@
                                 <button class="btnact" @click="activaritempresupuesto(props.row._id)" v-else>
                                     <i class="fa-solid fa-check" style="color: #006110"></i>
                                 </button>
+                                <button class="btnenv">
+                                    <i class="fa-solid fa-share"></i>
+                                </button>
                             </q-td>
                         </template>
                     </q-table>
