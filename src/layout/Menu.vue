@@ -208,7 +208,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useQuasar } from 'quasar'
 import { useusuariostore } from "../stores/Usuario.js";
@@ -255,6 +255,8 @@ function confirm() {
   })
 }
 
+const nombreUsuario = ref('');
+const rolUsuario = ref('');
 const leftDrawerOpen = ref(false);
 const router = useRouter();
 
@@ -264,10 +266,35 @@ function toggleLeftDrawer() {
 
 
 
-const usuarioLogeado = usuariostore.usuarioLogeado;
+const obtenerInfo = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    // console.log(token);
+    if (!token) {
+      console.error("No hay ningún token almacenado.");
+      return;
+    }
+    usuariostore.setToken(token);
+    const usuarioDataString = localStorage.getItem("usuarioData");
+    if (usuarioDataString) {
+      const usuarioData = JSON.parse(usuarioDataString);
+      usuariostore.setUsuarioLogeado(usuarioData);
+      if (usuarioData && usuarioData.Nombre) {
+        nombreUsuario.value = usuarioData.Nombre;
+      }
+      if (usuarioData && usuarioData.Rol) {
+        rolUsuario.value = usuarioData.Rol;
+      }
+    }
+  } catch (error) {
+    console.error("Error al obtener la información del usuario:", error);
+  }
+};
 
-const nombreUsuario = usuarioLogeado ? usuarioLogeado.Nombre : '';
-const rolUsuario = usuarioLogeado ? usuarioLogeado.Rol : '';
+// Llamar a la función obtenerInfo al cargar el componente
+onMounted(() => {
+  obtenerInfo();
+});
 
 function goToHome() {
   console.log("Sesión cerrada. Redirigiendo a la página de inicio...");

@@ -242,15 +242,19 @@ const showDefault = () => {
 
 const obtenerInfo = async () => {
   try {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     console.log(token);
     if (!token) {
       console.error("No hay ningún token almacenado.");
       return;
     }
     usuariostore.setToken(token);
-    await usuariostore.obtenerinfousuario();
-    usuarioLogeado.value = usuariostore.usuarioLogeado;
+    const usuarioDataString = localStorage.getItem("usuarioData");
+    if (usuarioDataString) {
+      const usuarioData = JSON.parse(usuarioDataString);
+      usuariostore.setUsuarioLogeado(usuarioData);
+      usuarioLogeado.value = usuarioData;
+    }
   } catch (error) {
     console.error("Error al obtener la información del usuario:", error);
   }
