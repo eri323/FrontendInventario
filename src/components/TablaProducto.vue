@@ -19,11 +19,7 @@
 
           <q-table flat bordered title="" class="tabla" :rows="rows" :filter="filter" :columns="columns" row-key="index"
             virtual-scroll :rows-per-page-options="[0]">
-            <template v-slot:body-cell-Consumible="props">
-              <q-td :props="props">
-                {{ JSON.stringify(props.row.Consumible.label) }}
-              </q-td>
-            </template>
+            
             <template v-slot:body-cell-Estado="props">
               <q-td :props="props">
                 <label for="" v-if="props.row.Estado == 1" style="color: green; font-weight: bold">Activo</label>
@@ -240,8 +236,7 @@ let productos = ref([]);
 let prompt = ref(false);
 const consumible = ref([
   { label: "Si" },
-  { label: "No" }
-  ,
+  { label: "No" },
 
 ])
 let Nombre = ref("");
@@ -341,7 +336,7 @@ const columns = [
     name: "Consumible",
     label: "Consumible",
     align: "center",
-    field: "Consumible",
+    field: val=>val.Consumible==true ? 'Sí' : 'No',
     headerStyle: {
       fontWeight: "bold",
       fontSize: "15px",
@@ -390,6 +385,7 @@ async function obtenerInfo() {
   try {
     cargando.value = true;
     const response = await productostore.obtenerinfoproducto();
+    console.log(productostore.producto);
     productos.value = productostore.producto;
     rows.value = productostore.producto;
     console.log(response);
@@ -406,6 +402,7 @@ async function agregarProducto() {
     try {
       console.log('a');
       showDefault();
+      console.log(Consumible.value);
       await productostore.postinfoproducto({
         Codigo: Codigo.value,
         Nombre: Nombre.value,
@@ -413,7 +410,7 @@ async function agregarProducto() {
         UnidadMedida: UnidadMedida.value,
         PrecioUnitario: PrecioUnitario.value,
         Iva: Iva.value,
-        Consumible: Consumible.value,
+        Consumible: Consumible.value.label=='Sí',
         Lote_Id: Lote_Id._rawValue.value,
       });
       obtenerInfo();

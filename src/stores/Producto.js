@@ -24,6 +24,7 @@ export const useproductostore = defineStore('producto', () => {
             console.log(producto);
             return responseproducto
         } catch (error) {
+            console.log(error);
             throw error
         }
     };
