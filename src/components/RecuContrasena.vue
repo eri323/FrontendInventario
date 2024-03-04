@@ -31,6 +31,7 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useusuariostore } from "../stores/Usuario.js";
 import Codigo from './CodigoRecuperar.vue';
+import { Cookies } from 'quasar';
 
 const correoElectronico = ref('');
 const codigoVerificacion = ref('');
@@ -45,7 +46,11 @@ async function enviarCorreo(){
         const r = await useUsuario.sendemail({Correo: correoElectronico.value})
         console.log(r);
 
-        if(r.status===200) activar.value = true
+        if(r.status===200) {
+            activar.value = true
+            Cookies.set('correo', correoElectronico, {expires: 1})
+            // const correo = Cookies.get('correo')
+        }
     } catch (error) {
         console.log(error);
     }

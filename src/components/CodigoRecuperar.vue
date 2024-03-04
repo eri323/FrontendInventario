@@ -2,14 +2,19 @@
     <div class="body">
         <div class="container">
             <h2>Codigo de verificacion</h2>
-            <p class="texto1" >Por favor ingresar el codigo</p>
-            <form>
-                <div class="contenedor_input">
-                    <q-input class="input1" filled v-model="text" label="Ingresa el codigo que te fue enviado" />
-                </div>
-                <div class="contenedor_boton">
-                    <button type="submit">Confirmar</button>
-                    <button type="reset">Cancelar</button>
+            <p v-if="!correoValido" class="texto1">Por favor ingrese un correo</p>
+            <form @submit="enviarCorreo">
+                <div class="contenedor1">
+                    <div class="contenedor_input">
+                        <input type="email" class="input1" placeholder="Correo electrónico" v-model="correoElectronico"
+                            required />
+                    </div>
+                    <div class="contenedor2">
+                        <p v-if="!correoValido" class="texto1">Por favor ingrese un correo </p>
+                     <button class="enviar" style="height: 40px; width:150px;" type="submit"
+                            :disabled="!correoValido">Enviar correo</button>
+                        <router-link to="/"><button class="volver">Volver</button></router-link>
+                    </div>
                 </div>
             </form>
             <router-link to="" class="forgot-password">
@@ -19,7 +24,32 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useusuariostore } from "../stores/Usuario.js";
+import Codigo from './CodigoRecuperar.vue';
+import { Cookies } from 'quasar';
+
+const correoElectronico = ref('');
+const activar = ref(false);
+const router = useRouter();
+
+async function enviarCorreo() {
+    try {
+        const response = await useUsuario.sendemail({ Correo: correoElectronico.value });
+
+        if (response.status === 200) {
+            Cookies.set('correo', correoElectronico.value, { expires: 1 });
+            activar.value = true;
+            router.push('/codigo-recuperacion');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+</script>
 
 <style scoped>
 
