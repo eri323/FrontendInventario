@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh LpR fFf" class="body">
     <q-header elevated class="custom-header">
-      <q-toolbar class="bg-positive">
+      <q-toolbar class="bg-positive" style="background: #2e7d32!important;" >
         <button dense flat @click="toggleLeftDrawer" class="btnmenu"> <i class="fa-solid fa-bars"></i>
         </button>
 
@@ -108,7 +108,7 @@
               </q-item-section>
 
               <q-item-section>
-                <h6 style="font-size: 15px; font-weight: 100;">Areas</h6>
+                <h6 style="font-size: 15px; font-weight: 100;">Dependencias</h6>
               </q-item-section>
             </div>
           </router-link>

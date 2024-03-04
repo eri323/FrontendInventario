@@ -37,7 +37,7 @@
                     <router-link to="./TablaArea" style="text-decoration: none; color: black;">
                       <div class="contenedor_caja2">
                         <img class="caja_imagen" src="../img/area.png" alt="">
-                        <p class="nombre_img">Areas</p>
+                        <p class="nombre_img">Dependencias</p>
                       </div>
                     </router-link>
                     <!-- ---------- -->
