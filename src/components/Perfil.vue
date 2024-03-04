@@ -17,7 +17,7 @@
         </q-card-section>
       </q-card>
       <q-card class="Medio" style="width: 500px; border-radius: 0; height: 500px">
-        <h1 style="position: relative; left: 30px; top:-10px font-size: 30px;">Rol {{ usuarioLogeado && usuarioLogeado.Rol
+        <h1 style="position: relative; left: 30px; top:-10px; font-size: 30px;">Rol {{ usuarioLogeado && usuarioLogeado.Rol
         }} </h1>
         <q-card-section class="sepa">
           <ul v-if="usuarioLogeado">

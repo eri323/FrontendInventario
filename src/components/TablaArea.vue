@@ -7,9 +7,7 @@
       <div class="container2">
         <div class="tabladiv">
           <div class="header">
-            <h5 class="title">
-              Areas
-            </h5>
+            <h5 class="title">Dependencias</h5>
             <button class="btnag" @click="agregar()">
               <h5>Agregar</h5>
               <i class="fa-regular fa-square-plus"></i>
@@ -63,7 +61,7 @@
 
                     <div class="modal_izquierdo"></div>
                     <div class="modal_derecho">
-                      <div class="rectangulo">Informacion de area</div>
+                      <div class="rectangulo">Informacion de dependencia</div>
                       <div class="container_input2">
                         <div class="container_input4">
                           <label class="label-input2" for="">Nombre:</label>
@@ -392,7 +390,7 @@ body {
   color: whitesmoke;
   margin: 0;
   padding: 16px 0px;
-  background-color: #21ba45;
+  background: #2e7d32!important;
   font-weight: bold;
   width: 20%;
   margin-left: 0px;
@@ -434,8 +432,8 @@ body {
 .modal_izquierdo {
   background-color: #ffffff;
   border-radius: 10px;
-  border-top: 2px solid #21ba45;
-  border-bottom: 2px solid #21ba45;
+  border-top: 2px solid #2e7d32!important;
+  border-bottom: 2px solid #2e7d32!important;
   margin: 0px 60px 0px 0px;
   width: 250px;
   height: 200px;
@@ -458,10 +456,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   height: 45px;
-  background-color: #21ba45;
+  background-color: #2e7d32!important;
   width: 80%;
-  border-bottom: 4px solid #21ba45;
-  border-left: 3px solid #21ba45;
+  border-bottom: 4px solid #2e7d32!important;
+  border-left: 3px solid #2e7d32!important;
 }
 
 .modal_derecho {
@@ -490,7 +488,7 @@ body {
 
 .titulo-linea {
   margin-bottom: 20px;
-  background-color: #21ba45;
+  background-color: #2e7d32!important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
   display: flex;
   margin: 0;

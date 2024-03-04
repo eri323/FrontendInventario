@@ -309,7 +309,7 @@ function logoutUser() {
 
 <style scoped>
 .custom-header {
-  background-color: rgba(0, 173, 0, 1);
+  background-color: #2e7d32!important;
 }
 
 .profile-container {
@@ -393,7 +393,7 @@ function logoutUser() {
 
 .div:hover {
   background-color: #191e20;
-  border-left: 5px solid rgba(33, 131, 33, 0.849);
+  border-left: 5px solid #2e7d32!important;
 }
 
 .div1 {

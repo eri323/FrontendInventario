@@ -283,7 +283,7 @@ body {
 .card::after {
   position: absolute;
   content: '';
-  background-color: #21ba45;
+  background-color: #2e7d32!important;
   width: 50px;
   height: 100px;
   z-index: -1;
@@ -297,7 +297,7 @@ body {
   align-items: center;
   padding: 10px;
   border-radius: 10px 0px 10px;
-  background: #21ba45;
+  background: #2e7d32!important;
   margin-top: -2px;
 }
 
@@ -306,7 +306,7 @@ body {
   align-items: center;
   padding: 10px;
   border-radius: 10px 0px 10px 0px;
-  background: #21ba45;
+  background: #2e7d32!important;
   margin-top: -2px;
 }
 

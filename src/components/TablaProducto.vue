@@ -141,7 +141,7 @@
 
                       <div class="container_input4">
                         <label class="label-input2" for="">Descripcion:</label>
-                        <q-input color="green" filled v-model="Descripcion" class="modal_input3" type="textarea"
+                        <q-input color="green" filled v-model="Descripcion"  class="modal_input3" type="textarea"
                           label="Descripcion *" lazy-rules :rules="[
                             (val) => !!val || 'Por favor ingrese la descripcion del producto',
                           ]">
@@ -389,7 +389,6 @@ async function obtenerInfo() {
     console.log(productostore.producto);
     productos.value = productostore.producto;
     rows.value = productostore.producto;
-    console.log(response);
     obtenerlote();
   } catch (error) {
     console.log(error);
@@ -714,7 +713,6 @@ body {
   border-radius: 10px;
   border-top: 2px solid #21ba45;
   border-bottom: 2px solid #21ba45;
-  margin: 0px 60px 0px 0px;
   width: 250px;
   height: 200px;
   background-size: contain;
@@ -775,6 +773,7 @@ body {
 
 .modal_input3 {
   width: 80%;
+  margin: 0 10px 0 10px;
 }
 
 .modal {

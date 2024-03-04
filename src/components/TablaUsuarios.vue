@@ -517,7 +517,7 @@ body {
   color: whitesmoke;
   margin: 0;
   padding: 16px 0px;
-  background-color: #21ba45;
+  background-color: #2e7d32!important;
   font-weight: bold;
   width: 20%;
   margin-left: 0px;
@@ -569,10 +569,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   height: 45px;
-  background-color: #21ba45;
+  background-color: #2e7d32!important;
   width: 80%;
-  border-bottom: 4px solid #21ba45;
-  border-left: 3px solid #21ba45;
+  border-bottom: 4px solid #2e7d32!important;
+  border-left: 3px solid #2e7d32!important;
 }
 
 .modal_derecho {
@@ -620,7 +620,7 @@ body {
 
 .titulo-linea {
   margin-bottom: 20px;
-  background-color: #21ba45;
+  background-color: #2e7d32!important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
   display: flex;
   margin: 0;
