@@ -5,7 +5,7 @@
   export const useusuariostore = defineStore("usuario", () => {
     const usuario = ref([]);
     const usuarios = ref([]);
-    const tokenRef = ref(localStorage.getItem("token") || ""); // Cambiar a localStorage
+    const tokenRef = ref(localStorage.getItem("token") || ""); 
     const usuarioLogeado = ref();
 
     const setToken = (token) => {
@@ -19,7 +19,7 @@
     const obtenerinfousuario = async () => {
       try {
         const response = await axios.get('usuario/usuariobusca');
-        console.log(response);
+        // console.log(response);
         return response.data;
       } catch (error) {
         console.error('Error al obtener la información del usuario:', error);
