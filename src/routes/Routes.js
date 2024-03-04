@@ -5,7 +5,7 @@ import RecuContrasena from "../components/RecuContrasena.vue";
 import Perfil from "../components/Perfil.vue";
 import TablaProductos from "../components/TablaProducto.vue";
 import TablaFichas from "../components/TablasFichas.vue";
-import TablaArea from "../components/TablaArea.vue";
+import TablaArea from "../components/TablaDependencia.vue";
 import TablaLotes from "../components/TablaLote.vue";
 import TablaUsuarios from "../components/TablaUsuarios.vue";
 /* import RolDeCuenta from "../components/RolDeCuenta.vue"; */

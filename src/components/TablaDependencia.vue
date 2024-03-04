@@ -271,7 +271,6 @@ async function editararea(id) {
 async function obtenerInfo() {
   try {
     const response = await areastore.obtenerinfoarea();
-    console.log(response);
     areas.value = areastore.area;
     rows.value = areastore.area;
   } catch (error) {
