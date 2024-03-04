@@ -3,10 +3,9 @@
     <div class="contenedor">
       <h4 class="titulo">Bienvenido</h4>
       <div class="contenedor_doble">
-
         <div class="contenedor_izquierdo">
           <div class="contenedor_logo">
-            <img class="logo" src="../img/sena2.png" alt="">
+            <img class="logo" src="../img/sena2.png" alt="" />
             <!-- <img class="logo" src="../img/logo3d.gif" alt=""> -->
           </div>
         </div>
@@ -16,14 +15,33 @@
             <div class="container2">
               <div class="heading">Iniciar sesión</div>
               <form action="" class="form">
-                <input required="" class="input" v-model="usuario.Identificacion" type="email" name="email" id="email"
-                  placeholder="Identificacion">
-                <input required="" class="input" v-model="usuario.Contraseña" type="password" name="password"
-                  id="password" placeholder="Password">
+                <input
+                  required=""
+                  class="input"
+                  v-model="usuario.Identificacion"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Identificacion"
+                />
+                <input
+                  required=""
+                  class="input"
+                  v-model="usuario.Contraseña"
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
                 <router-link to="./RecuContrasena" class="forgot-password">
                   <span class="forgot-password">¿Olvidaste tu contraseña?</span>
                 </router-link>
-                <q-btn :loading="loading" class="login-button" @click="Login()" label="Aceptar" />
+                <q-btn
+                  :loading="loading"
+                  class="login-button"
+                  @click="Login()"
+                  label="Aceptar"
+                />
               </form>
             </div>
           </div>
@@ -108,7 +126,7 @@
   align-items: center;
 }
 
-.container2{
+.container2 {
   margin-top: 40px;
   padding: 25px 35px;
 }
@@ -186,7 +204,6 @@
 }
 
 @media screen and (max-width: 615px) {
-
   .contenedor {
     display: flex;
     flex-direction: column;
@@ -196,7 +213,7 @@
     height: 100%;
   }
 
-  .container2{
+  .container2 {
     margin: 0;
   }
 
@@ -222,7 +239,6 @@
   .contenedor_derecho {
     flex: 1;
   }
-
 }
 
 @media screen and (max-width: 400px) {
@@ -240,15 +256,18 @@
 
   .container {
     height: auto;
-    background: #F8F9FD;
-    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+    background: #f8f9fd;
+    background: linear-gradient(
+      0deg,
+      rgb(255, 255, 255) 0%,
+      rgb(244, 247, 251) 100%
+    );
     border-radius: 40px;
     padding: 25px 35px;
     border: 5px solid rgb(255, 255, 255);
     box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
     margin: 10px;
   }
-
 }
 
 @font-face {
@@ -263,7 +282,7 @@
 import { ref } from "vue";
 import { useusuariostore } from "../stores/Usuario.js";
 import { useRouter } from "vue-router";
-import { useQuasar } from 'quasar';
+import { useQuasar } from "quasar";
 
 const loading = ref(false);
 const $q = useQuasar();
@@ -280,6 +299,7 @@ const router = useRouter();
 async function Login() {
   try {
     loading.value = true;
+    console.log("Iniciando sesión...");
     if (!usuario.value.Identificacion || !usuario.value.Contraseña) {
       mostrarError.value = true;
       setTimeout(() => {
@@ -292,8 +312,8 @@ async function Login() {
       console.log(res);
       if (res.status === 200 && res.token) {
         await usuariostore.obtenerinfousuario();
-        // console.log(usuariostore.usuario);
-        router.push("./Home");
+        console.log("Inicio de sesión exitoso. Redirigiendo a Home...");
+        router.push("/Home");
       } else {
         error2.value = true;
         msj.value = res.msg;
