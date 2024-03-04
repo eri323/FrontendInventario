@@ -243,7 +243,7 @@ const showDefault = () => {
 const obtenerInfo = async () => {
   try {
     const token = localStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
     if (!token) {
       console.error("No hay ningún token almacenado.");
       return;
