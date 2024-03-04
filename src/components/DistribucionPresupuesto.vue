@@ -143,6 +143,25 @@ const distribucionpresupuestostore = usedistribucionpresupuestostore();
 let rows = ref([]);
 let xd = ref(0);
 
+import { useRouter, useRoute } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
+
+const idDistribucion = ref([]);
+
+const distribucionItemLote = async () => {
+  idDistribucion.value = route.params.idDistribucion;
+};
+
+function goLoteFicha(idDistribucionPresupuesto){
+    router.push(`/distribucion-lote-ficha/${idDistribucionPresupuesto}`);
+}
+
+function goToItem(){
+    router.push(`/item`);
+}
+onMounted(distribucionItemLote);
 /* let fixed = ref(false); */
 
 const $q = useQuasar();

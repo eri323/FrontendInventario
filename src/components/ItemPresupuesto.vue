@@ -38,7 +38,7 @@
                                 <button class="btnact" @click="activaritempresupuesto(props.row._id)" v-else>
                                     <i class="fa-solid fa-check" style="color: #006110"></i>
                                 </button>
-                                <button class="btnenv">
+                                <button class="btnenv" @click="goItemLote(props.row._id)">
                                     <i class="fa-solid fa-share"></i>
                                 </button>
                             </q-td>
@@ -120,7 +120,9 @@ import { ref } from "vue";
 import { onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { useitempresupuestostore } from "../stores/ItemPresupuesto.js";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const $q = useQuasar();
 const itempresupuestostore = useitempresupuestostore();
 
@@ -150,7 +152,9 @@ function agregar() {
     btnagregar.value = true;
 }
 const cargando = ref(false);
-
+function goItemLote(idDistribucion){
+  router.push(`/DistribucionPresupuesto/${idDistribucion}`);
+}
 const columns = [
 
     {
