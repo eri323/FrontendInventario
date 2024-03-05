@@ -17,34 +17,112 @@ import ItemPresupuesto from "../components/ItemPresupuesto.vue";
 import DistribucionPresupuesto from "../components/DistribucionPresupuesto.vue";
 import CodigoRecuperar from "../components/CodigoRecuperar.vue";
 import Nuevacontrasena from "../components/NuevaContrasena.vue";
+import { useusuariostore } from "../stores/Usuario";
 
 import { createRouter, createWebHashHistory } from "vue-router";
 
+const auth = async (to, from, next) => {
+  const usuariostore = useusuariostore();
+
+  console.log("Verificando autenticación y roles...");
+
+  await usuariostore.obtenerinfousuario();
+
+  if (usuariostore.tokenRef && usuariostore.usuarioLogeado) {
+    const rol = usuariostore.usuarioLogeado.Rol;
+    if (!to.meta.rol.includes(rol)) {
+      console.warn("Usuario no autorizado para acceder a esta ruta: ", to.path);
+      return next({ name: "login" });
+    }
+    console.log(
+      "Autenticación y roles verificados. Permitiendo acceso a la ruta:",
+      to.path
+    );
+    return next();
+  }
+  console.warn("Usuario no autenticado. Redirigiendo al inicio de sesión...");
+  return next({ name: "login" });
+};
+
 const routes = [
-  { path: "/", component: Login },
-  { path: "/RecuContrasena", component: RecuContrasena},
-  { path: "/CodigoRecuperar", component: CodigoRecuperar},
-  { path: "/NuevaContrasena", component: Nuevacontrasena},
-  
+  { path: "/", component: Login, name: "login" },
+  { path: "/RecuContrasena", component: RecuContrasena },
+  { path: "/CodigoRecuperar", component: CodigoRecuperar },
+  { path: "/NuevaContrasena", component: Nuevacontrasena },
+
   {
     path: "/Menu",
     component: Menu,
     children: [
-      { path: "/Home", component: Home },
+      {
+        path: "/Home",
+        component: Home,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "bodega", "instructor"] },
+      },
       /*  { path: "/InfoPerfil", component: InfoPerfil }, */
       /* { path: "/Registro", component: Registro }, */
-      { path: "/Perfil", component: Perfil },
-      { path: "/TablaProductos", component: TablaProductos },
-      { path: "/TablaFichas", component: TablaFichas },
-      { path: "/TablaArea", component: TablaArea },
-      { path: "/TablaUsuarios", component: TablaUsuarios },
-      { path: "/TablaLotes", component: TablaLotes },
-      { path: "/TablaHistorial", component: TablaHistorial },
+      {
+        path: "/Perfil",
+        component: Perfil,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "bodega", "instructor"] },
+      },
+      {
+        path: "/TablaProductos",
+        component: TablaProductos,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "instructor"] },
+      },
+      {
+        path: "/TablaFichas",
+        component: TablaFichas,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "instructor"] },
+      },
+      {
+        path: "/TablaArea",
+        component: TablaArea,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "bodega", "instructor"] },
+      },
+      {
+        path: "/TablaUsuarios",
+        component: TablaUsuarios,
+        beforeEnter: auth,
+        meta: { rol: ["admin"] },
+      },
+      {
+        path: "/TablaLotes",
+        component: TablaLotes,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "bodega", "instructor"] },
+      },
+      {
+        path: "/TablaHistorial",
+        component: TablaHistorial,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "bodega", "instructor"] },
+      },
       /*     { path: "/RolDeCuenta", component: RolDeCuenta }, */
-      { path: "/TablaPedidos", component: TablaPedidos },
-      { path: "/ItemPresupuesto", component: ItemPresupuesto },
-      { path: "/DistribucionPresupuesto", component: DistribucionPresupuesto },
-    
+      {
+        path: "/TablaPedidos",
+        component: TablaPedidos,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "bodega", "instructor"] },
+      },
+      {
+        path: "/ItemPresupuesto",
+        component: ItemPresupuesto,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "instructor"] },
+      },
+      {
+        path: "/DistribucionPresupuesto",
+        component: DistribucionPresupuesto,
+        beforeEnter: auth,
+        meta: { rol: ["admin", "instructor"] },
+      },
     ],
   },
 ];

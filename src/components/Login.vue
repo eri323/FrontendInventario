@@ -313,6 +313,7 @@ async function Login() {
       if (res.status === 200 && res.token) {
         await usuariostore.obtenerinfousuario();
         console.log("Inicio de sesión exitoso. Redirigiendo a Home...");
+        usuariostore.setToken(res.token);
         router.push("/Home");
       } else {
         error2.value = true;
@@ -323,7 +324,7 @@ async function Login() {
       }
     }
   } catch (error) {
-    console.error("Error in login:", error);
+    console.error("Error en el inicio de sesión:", error);
   } finally {
     loading.value = false;
   }
