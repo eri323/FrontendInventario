@@ -29,6 +29,27 @@ export const useusuariostore = defineStore("usuario", () => {
       throw error;
     }
   };
+  const verificarCodigo = async (codigo) => {
+    try {
+      let response = await axios.post(`usuario/confirmarcodigo/${codigo}`);
+      console.log("Hola soy enviar codigo", response)
+      return response;
+    } catch (error) {
+      console.log("Nokas pelotas v2", error);
+    }
+  }
+
+
+
+  const sendemail = async (correo) => {
+    try {
+      let response = await axios.post("usuario/recuperar-password", correo);
+      console.log("Hola soy enviar email", response)
+      return response;
+    } catch (error) {
+      console.log("Nokas pelotas", error);
+    }
+  }
 
   const login = async (data) => {
     try {
@@ -65,6 +86,8 @@ export const useusuariostore = defineStore("usuario", () => {
   return {
     usuario,
     usuarios,
+    sendemail,
+    verificarCodigo,
     obtenerinfousuario,
     login,
     logout,
