@@ -1,28 +1,54 @@
 <template>
     <div class="body">
-        <div class="container">
-            <h2>Nueva contraseña</h2>
-            <p class="texto1" >Por favor ingresar la constraseña nueva y confirma esta misma. </p>
-            <form>
-                <div class="contenedor_input">
-                    <q-input class="input1" filled v-model="text" label="Escribe la contraseña nueva" />
-                    <br>
-                    <q-input class="input1" filled v-model="text" label="Confirmar contraseña" />
-                </div>
-                <div class="contenedor_boton">
-                    <button type="submit">Restablecer</button>
-                    <button type="reset">Cancelar</button>
-                </div>
-            </form>
-            <p class="texto2" >¿Ayuda?</p>
-        </div>
+      <div class="container">
+        <h2>Nueva contraseña</h2>
+        <p class="texto1">Por favor ingresa la nueva contraseña y confirma la misma.</p>
+        <form @submit.prevent="restablecerContraseña">
+          <div class="contenedor_input">
+            <q-input class="input1" filled v-model="Contraseña" label="Escribe la contraseña nueva" type="password" />
+            <br />
+            <q-input class="input1" filled v-model="confirmarContraseña" label="Confirmar contraseña" type="password" />
+          </div>
+          <div class="contenedor_boton">
+            <q-btn type="submit" color="primary" label="Restablecer" :disable="!contraseñasCoinciden" />
+            <q-btn type="reset" color="negative" label="Cancelar" />
+          </div>
+        </form>
+        <p class="texto2">¿Ayuda?</p>
+      </div>
     </div>
-</template>
-
-<script setup></script>
-
+  </template>
+  
+  <script setup>
+  import { ref, computed } from 'vue';
+import { useusuariostore } from '../stores/Usuario';
+  import NuevaContrasena from './CodigoRecuperar.vue';
+import { Cookies } from 'quasar';
+  
+  const Contraseña = ref('');
+  const confirmarContraseña = ref('');
+  
+  const contraseñasCoinciden = computed(() => Contraseña.value === confirmarContraseña.value);
+  const useUsuario = useusuariostore()
+  const Correo = Cookies.get('correo')
+  const codigo = Cookies.get('codigo')
+  const restablecerContraseña = async () => {
+    if (contraseñasCoinciden.value) {
+      try {
+        // Hacer la llamada al backend para cambiar la contraseña
+        const response = await useUsuario.newpassword({Correo, codigo, Contraseña: Contraseña.value})
+  
+        console.log('Contraseña restablecida con éxito', response);
+      } catch (error) {
+        console.log('Error al restablecer la contraseña', error);
+      }
+    } else {
+      console.log('Las contraseñas no coinciden');
+    }
+  };
+  </script>
+  
 <style scoped>
-
 .body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -88,12 +114,12 @@ legend {
     flex-wrap: wrap;
 }
 
-.texto1{
+.texto1 {
     padding: 10px;
     margin-top: 15%;
 }
 
-.texto2{
+.texto2 {
     text-align: center;
     padding: 15px;
 }
@@ -149,4 +175,5 @@ button[type="reset"]:hover {
     button {
         margin-bottom: 10px;
     }
-}</style>
+}
+</style>

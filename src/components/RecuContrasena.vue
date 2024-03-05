@@ -48,7 +48,7 @@ async function enviarCorreo(){
 
         if(r.status===200) {
             activar.value = true
-            Cookies.set('correo', correoElectronico, {expires: 1})
+            Cookies.set('correo', correoElectronico.value, {expires: 1})
             // const correo = Cookies.get('correo')
         }
     } catch (error) {

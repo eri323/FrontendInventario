@@ -47,6 +47,7 @@
       const response = await useUsuario.verificarCodigo(codigoVerificacion.value);
   
       if (response.status === 200) {
+        Cookies.set('codigo', codigoVerificacion.value, {expires: 1})
         router.push('/NuevaContrasena');
       } else {
         // Manejar el caso en el que el código no es válido
