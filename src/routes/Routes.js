@@ -17,7 +17,9 @@ import ItemPresupuesto from "../components/ItemPresupuesto.vue";
 import DistribucionPresupuesto from "../components/DistribucionPresupuesto.vue";
 import CodigoRecuperar from "../components/CodigoRecuperar.vue";
 import Nuevacontrasena from "../components/NuevaContrasena.vue";
+import Contrato from "../components/Contrato.vue";
 import { useusuariostore } from "../stores/Usuario";
+
 
 import { createRouter, createWebHashHistory } from "vue-router";
 
@@ -122,6 +124,12 @@ const routes = [
         component: DistribucionPresupuesto,
         beforeEnter: auth,
         meta: { rol: ["admin", "instructor"] },
+      },
+      {
+        path: "/Contrato",
+        component: Contrato,
+        beforeEnter: auth,
+        meta: { rol: ["admin"] },
       },
     ],
   },
